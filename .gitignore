@@ -3,13 +3,9 @@
 #################
 .idea
 out
-*.xml
 *.iml
 reports
-sounds
 jar
-*.sh
-
 *.pydevproject
 .project
 .metadata
