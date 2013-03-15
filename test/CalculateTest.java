@@ -32,8 +32,8 @@ public class CalculateTest {
 
     @Test
     public void zero_plus_ero_s_ero() {
-        Calculate calculate = new Calculate(0, 0);
-        Assert.assertEquals(0, calculate.sum());
+        Calculate calculate = new Calculate(1, 1);
+        Assert.assertEquals(2, calculate.sum());
     }
 }
 
