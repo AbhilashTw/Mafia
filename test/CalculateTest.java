@@ -29,5 +29,11 @@ public class CalculateTest {
         Calculate calculate = new Calculate(0, 0);
         Assert.assertEquals(0, calculate.sum());
     }
+
+    @Test
+    public void zero_plus_ero_s_ero() {
+        Calculate calculate = new Calculate(0, 0);
+        Assert.assertEquals(0, calculate.sum());
+    }
 }
 
