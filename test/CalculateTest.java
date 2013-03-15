@@ -32,7 +32,7 @@ public class CalculateTest {
 
     @Test
     public void zero_plus_ero_s_ero() {
-        Calculate calculate = new Calculate(1, 1);
+        Calculate calculate = new Calculate(1,0);
         Assert.assertEquals(2, calculate.sum());
     }
 }
