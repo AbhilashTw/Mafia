@@ -8,7 +8,6 @@ public class Calculate {
     }
 
     public int sum() {
-        return firstNumber+secondNumber;
+        return firstNumber + secondNumber;
     }
-
 }
