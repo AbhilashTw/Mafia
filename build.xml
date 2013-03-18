@@ -33,7 +33,7 @@
 
     <target name="compileTest" depends="jar">
         <mkdir dir="${testOutput}"/>
-        <javac srcdir="test"  destdir="${testOutput}" classpath="${sourceOutput}"/>
+        <javac srcdir="test" destdir="${testOutput}" classpath="${sourceOutput}"/>
     </target>
 
 
