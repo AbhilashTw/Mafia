@@ -6,7 +6,7 @@
     <property name="reportsDir" value="./reports"/>
     <property name="archiveDir" value="//blrfs02/STEP/MafiaArchives/Mafians/"/>
     <property name="Mockito" value="lib/mockito-all-1.9.5.jar"/>
-
+    <property name="Junit4" value="lib/junit-4.0.jar"/>
 
     <target name="ci-setup">
         <sound>
@@ -22,7 +22,7 @@
 
     <target name="compileSrc" depends="clean">
         <mkdir dir="${sourceOutput}"/>
-        <javac srcdir="src" destdir="${sourceOutput}"/>
+        <javac srcdir="src" destdir="${sourceOutput}" includeantruntime="yes"/>
     </target>
 
     <target name="jar" depends="compileSrc">
@@ -35,7 +35,7 @@
 
     <target name="compileTest" depends="jar">
         <mkdir dir="${testOutput}"/>
-        <javac srcdir="test" destdir="${testOutput}" classpath="${sourceOutput}"/>
+        <javac srcdir="test" destdir="${testOutput}" classpath="${sourceOutput}" includeantruntime="yes"/>
     </target>
 
 
@@ -46,10 +46,10 @@
     <target name="runTest" depends="compileTest">
         <junit printsummary="yes" haltonfailure="yes" showoutput="yes" fork="yes">
             <classpath>
-                <pathelement path="${jarName}:${testOutput}:${Mockito}"/>
+                <pathelement path="${Junit4}:${jarName}:${testOutput}:${Mockito}"/>
             </classpath>
             <batchtest fork="yes" haltonfailure="yes" todir="${reportsDir}">
-                <formatter type="brief"/>
+                <formatter type="plain"/>
                 <fileset dir="${testOutput}">
                     <include name="**/*Test*.class"/>
                 </fileset>

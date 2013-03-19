@@ -4,22 +4,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HomeScreen {
+
     public void display() {
-        JFrame HomeFrame = new JFrame("Mafia");
-        HomeFrame.setLayout(null);
+        JFrame homeFrame = new JFrame("HomePage");
+        homeFrame.setLayout(null);
 
         JButton startServer = createStartServerButton();
         JButton joinServer = createJoinServerButton();
         JButton quit = createQuitButton();
 
-        HomeFrame.setBounds(100, 100, 600, 600);
-        HomeFrame.setVisible(true);
+        homeFrame.setBounds(100, 100, 600, 600);
+        homeFrame.setVisible(true);
 
-        addButtonsToHomepage(HomeFrame, startServer, joinServer, quit);
+        addButtonsToHomepage(homeFrame, startServer, joinServer, quit);
 
         joiningServer(joinServer);
-        quitHomePage(HomeFrame, quit);
-        startingServer(HomeFrame, startServer);
+        quitHomePage(homeFrame, quit);
+        startingServer(homeFrame, startServer);
     }
 
     private void addButtonsToHomepage(JFrame joinServerFrame, JButton createServer, JButton joinServer, JButton quit) {

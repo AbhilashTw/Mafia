@@ -12,7 +12,6 @@ public class Server {
     private static int portNumber = 1234;
     private final int backlog;
     ServerSocket server;
-    Socket client;
     List<Socket> clients;
 
     private Server(int backlog) throws IOException {
@@ -29,7 +28,7 @@ public class Server {
     private void listenToClient() throws IOException {
         int count = 0;
         while (count < backlog) {
-            client = server.accept();
+            Socket client = server.accept();
             clients.add(client);
             count++;
         }

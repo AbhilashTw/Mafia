@@ -7,13 +7,14 @@ import java.net.Socket;
 
 public class Client {
     private static int portNumber = 1234;
-    private String serverName = "localhost";
     Socket client;
+    private String serverName = "localhost";
 
     private Client() throws IOException {
         client = new Socket(serverName, portNumber);
     }
-    public static Client createClient()throws IOException{
+
+    public static Client createClient() throws IOException {
         return new Client();
     }
 
