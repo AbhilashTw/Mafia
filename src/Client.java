@@ -6,10 +6,12 @@ import java.io.InputStream;
 import java.net.Socket;
 
 public class Client {
+    private static int portNumber = 1234;
+    private static String serverName = "localhost";
     Socket client;
 
     public Client() throws IOException {
-        client = new Socket("localhost", 1234);
+        client = new Socket(serverName, portNumber);
     }
 
     public String getServerMessage() throws IOException {

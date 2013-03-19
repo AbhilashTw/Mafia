@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-//Job:- Ensures correctness of behaviour of client
+//Job:- Ensures correctness of behaviour of clientOne
 public class ClientTest {
     Server server;
     Client client;
@@ -23,7 +23,7 @@ public class ClientTest {
 
     @Test
     public void connect_to_server_in_the_localHost_and_get_a_connected_message() throws IOException {
-        server.runServer();
+        server.start();
         Assert.assertEquals("Connected",client.getServerMessage());
     }
 }

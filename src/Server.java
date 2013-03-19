@@ -7,21 +7,23 @@ import java.net.Socket;
 //Job:- Understands to manage group of connections on a request to connect.
 
 public class Server {
+    private static int portNumber = 1234;
     ServerSocket server;
     Socket client;
 
     public Server() throws IOException {
-        server = new ServerSocket(1234);
+        server = new ServerSocket(portNumber);
     }
 
-    private void sendMessage(Socket client) throws IOException {
+    public void sendMessage() throws IOException {
         OutputStream s1out = client.getOutputStream();
         DataOutputStream dos = new DataOutputStream(s1out);
         dos.writeUTF("Connected");
         dos.close();
+        closeClient();
     }
 
-    private void closeClient() throws IOException {
+    public void closeClient() throws IOException {
         client.close();
     }
 
@@ -34,10 +36,9 @@ public class Server {
         server.close();
     }
 
-    public void runServer() throws IOException {
+    public void start() throws IOException {
         listenToClient();
-        sendMessage(client);
-        closeClient();
+
     }
 
 }
