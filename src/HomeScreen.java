@@ -5,20 +5,21 @@ import java.awt.event.ActionListener;
 
 public class HomeScreen {
     public void display() {
-        JFrame joinServerFrame = new JFrame("Mafia");
-        joinServerFrame.setLayout(null);
-        JButton startServer = createStartServerButton();
+        JFrame HomeFrame = new JFrame("Mafia");
+        HomeFrame.setLayout(null);
 
+        JButton startServer = createStartServerButton();
         JButton joinServer = createJoinServerButton();
         JButton quit = createQuitButton();
 
-        joinServerFrame.setBounds(100, 100, 600, 600);
-        joinServerFrame.setVisible(true);
+        HomeFrame.setBounds(100, 100, 600, 600);
+        HomeFrame.setVisible(true);
 
-        addButtonsToHomepage(joinServerFrame, startServer, joinServer, quit);
+        addButtonsToHomepage(HomeFrame, startServer, joinServer, quit);
+
         joiningServer(joinServer);
-        quitHomePage(joinServerFrame, quit);
-        startingServer(joinServerFrame, startServer);
+        quitHomePage(HomeFrame, quit);
+        startingServer(HomeFrame, startServer);
     }
 
     private void addButtonsToHomepage(JFrame joinServerFrame, JButton createServer, JButton joinServer, JButton quit) {
@@ -53,14 +54,14 @@ public class HomeScreen {
     }
 
     private JButton createStartServerButton() {
-        JButton createServer = new JButton("Start Server");
-        createServer.setSize(145, 50);
-        createServer.setLocation(100, 300);
+        JButton createServerButton = new JButton("Start Server");
+        createServerButton.setSize(145, 50);
+        createServerButton.setLocation(100, 300);
         Font font = new Font("Verdana", Font.BOLD, 14);
-        createServer.setFont(font);
-        createServer.setForeground(Color.WHITE);
-        createServer.setBackground(Color.BLACK);
-        return createServer;
+        createServerButton.setFont(font);
+        createServerButton.setForeground(Color.WHITE);
+        createServerButton.setBackground(Color.BLACK);
+        return createServerButton;
     }
 
     private void joiningServer(JButton joinServer) {
@@ -75,8 +76,7 @@ public class HomeScreen {
             }
 
             private void connectToServer(String serverName) {
-                Client newPlayer = new Client(serverName);
-                newPlayer.joinServer();
+
             }
         });
     }
@@ -100,7 +100,7 @@ public class HomeScreen {
                 JFrame startingServer = new JFrame("Starting Server");
                 JLabel playersList = new JLabel("Players Joined");
                 playersList.setForeground(Color.BLACK);
-                Font font = new Font("Verdana",Font.ITALIC,12);
+                Font font = new Font("Verdana", Font.ITALIC, 12);
                 playersList.setFont(font);
                 JButton startGame = new JButton("Start Game");
                 setColor(startGame);
