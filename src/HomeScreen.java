@@ -67,10 +67,11 @@ public class HomeScreen {
     private void joiningServer(JButton joinServer) {
         joinServer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                enterIpAddress();
+                enterServerName();
             }
 
-            private void enterIpAddress() {
+            private void enterServerName() {
+                String playerName = JOptionPane.showInputDialog("Enter your name");
                 String serverName = JOptionPane.showInputDialog("Enter the server name");
                 connectToServer(serverName);
             }
