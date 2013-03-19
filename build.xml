@@ -47,7 +47,7 @@
                 <pathelement path="${jarName}:${testOutput}"/>
             </classpath>
             <batchtest fork="yes" haltonfailure="yes" todir="${reportsDir}">
-                <formatter type="xml"/>
+                <formatter type="plain"/>
                 <fileset dir="${testOutput}">
                     <include name="**/*Test*.class"/>
                 </fileset>

@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+
 //Job:- Ensures correctness of behaviour of clientOne
 public class ClientTest {
     Server server;
@@ -11,8 +12,8 @@ public class ClientTest {
 
     @Before
     public void setUp() throws Exception {
-        server = new Server();
-        client = new Client();
+        server = Server.createServer(1);
+        client = Client.createClient();
     }
 
     @After
@@ -23,7 +24,7 @@ public class ClientTest {
 
     @Test
     public void connect_to_server_in_the_localHost_and_get_a_connected_message() throws IOException {
-        server.start();
-        Assert.assertEquals("Connected",client.getServerMessage());
+        server.startEvents();
+        Assert.assertEquals("Connected", client.getServerMessage());
     }
 }
