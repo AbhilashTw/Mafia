@@ -1,10 +1,12 @@
-<project name="Mafia" default="run">
+<project name="Mafia" default="jar">
 
     <property name="jarName" value="jar/Mafia.jar"/>
     <property name="sourceOutput" value="out/src"/>
     <property name="testOutput" value="out/test"/>
     <property name="reportsDir" value="./reports"/>
     <property name="archiveDir" value="//blrfs02/STEP/MafiaArchives/Mafians/"/>
+    <property name="Mockito" value="lib/mockito-all-1.9.5.jar"/>
+
 
     <target name="ci-setup">
         <sound>
@@ -44,10 +46,10 @@
     <target name="runTest" depends="compileTest">
         <junit printsummary="yes" haltonfailure="yes" showoutput="yes" fork="yes">
             <classpath>
-                <pathelement path="${jarName}:${testOutput}"/>
+                <pathelement path="${jarName}:${testOutput}:${Mockito}"/>
             </classpath>
             <batchtest fork="yes" haltonfailure="yes" todir="${reportsDir}">
-                <formatter type="plain"/>
+                <formatter type="brief"/>
                 <fileset dir="${testOutput}">
                     <include name="**/*Test*.class"/>
                 </fileset>

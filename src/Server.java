@@ -9,7 +9,7 @@ import java.util.List;
 //Job:- Understands to manage group of connections on a request to connect.
 
 public class Server {
-    private static int  portNumber = 1234;
+    private static int portNumber = 1234;
     private final int backlog;
     ServerSocket server;
     Socket client;
@@ -20,8 +20,9 @@ public class Server {
         server = new ServerSocket(portNumber);
         clients = new ArrayList<Socket>();
     }
+
     public static Server createServer(int backlog) throws IOException {
-        if(backlog <= 0)throw new IllegalArgumentException("Invalid number of clients" + backlog);
+        if (backlog <= 0) throw new IllegalArgumentException("Invalid number of clients" + backlog);
         return new Server(backlog);
     }
 
