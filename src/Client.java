@@ -26,11 +26,9 @@ public class Client {
         clientInputStream.close();
 
         return message;
-
     }
 
     public void close() throws IOException {
         client.close();
-
     }
 }
