@@ -17,7 +17,7 @@ public class HomeScreen {
 
         startServerButton = createButton(100, 300, "Start Server");
         joinServerButton = createButton(100, 400, "Join Server");
-        quitButton = createButton(100,500, "Quit");
+        quitButton = createButton(100, 500, "Quit");
 
         homeScreenFrame.add(startServerButton);
         homeScreenFrame.add(joinServerButton);
