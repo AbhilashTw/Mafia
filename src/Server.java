@@ -11,8 +11,8 @@ import java.util.List;
 public class Server {
     private static int portNumber = 1234;
     private final int backlog;
+    public List<Socket> clients;
     ServerSocket server;
-    List<Socket> clients;
 
     private Server(int backlog) throws IOException {
         this.backlog = backlog;

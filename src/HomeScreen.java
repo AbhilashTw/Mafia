@@ -2,15 +2,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 //Job:- Understands to display the initial window of the application
 public class HomeScreen {
+    public final int totalPlayers = 1;
+    Server server;
     JFrame homeScreenFrame;
     JPanel homeScreenPanel;
     JButton startServerButton;
     JButton joinServerButton;
     JButton quitButton;
+    JPanel displayMessage;
 
     public HomeScreen() {
+
         homeScreenFrame = new JFrame("Mafia");
         homeScreenFrame.setBounds(100, 100, 600, 600);
         homeScreenFrame.setVisible(true);
@@ -46,9 +52,17 @@ public class HomeScreen {
 
         startServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                StartServerScreen startServerScreen = new StartServerScreen();
-                startServerScreen.display();
-                hide();
+                try {
+                    server = Server.createServer(totalPlayers);
+                    StartServerScreen startServerScreen = new StartServerScreen();
+                    startServerScreen.display();
+                    //startServerScreen.displayPlayers();
+                    hide();
+                } catch (IOException e1) {
+                    displayMessage = new JPanel();
+                    JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to Start Server", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         });
 

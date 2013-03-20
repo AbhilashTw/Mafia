@@ -1,8 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
 
 //Job:- Understands to display a window to connect to a server
 
@@ -10,9 +7,7 @@ public class StartServerScreen {
     JFrame startServerFrame;
     JLabel playersJoinedLabel;
     JButton startGameButton;
-    JList playersList;
-    DefaultListModel model;
-
+    JList<String> playersList;
 
 
     public StartServerScreen() {
@@ -41,23 +36,10 @@ public class StartServerScreen {
 
     public void display() {
         startServerFrame.setVisible(true);
-        startGameButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Server server = Server.createServer(1);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public void displayPlayers(String playerName) {
-        JScrollPane pane = new JScrollPane(playersList);
-        model = new DefaultListModel();
-        playersList = new JList(model);
-        pane.setVisible(true);
-        model.addElement(playerName);
-        startServerFrame.add(pane, BorderLayout.NORTH);
+        String subject[] = {"Math", "Computer", "Phisics", "Chemestry"};
+        playersList = new JList<String>(subject); //
+        JPanel panel = new JPanel();
+        panel.add(playersList);
+        startServerFrame.add(panel);
     }
 }
