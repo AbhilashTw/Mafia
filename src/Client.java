@@ -6,16 +6,18 @@ import java.io.InputStream;
 import java.net.Socket;
 
 public class Client {
-    private static int portNumber = 1234;
     Socket client;
-    private String serverName = "localhost";
+    private int portNumber;
+    private String serverName;
 
-    private Client() throws IOException {
-        client = new Socket(serverName, portNumber);
+    private Client(String serverName, int portNumber) throws IOException {
+        this.serverName = serverName;
+        this.portNumber = portNumber;
+        client = new Socket(this.serverName, this.portNumber);
     }
 
-    public static Client createClient() throws IOException {
-        return new Client();
+    public static Client createClient(String serverName, int portNumber) throws IOException {
+        return new Client(serverName, portNumber);
     }
 
     public String getServerMessage() throws IOException {
