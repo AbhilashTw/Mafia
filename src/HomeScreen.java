@@ -4,72 +4,70 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HomeScreen {
-    JFrame homeScreen;
-    JButton startServer;
-    JButton joinServer;
-    JButton quit;
+    JFrame homeScreenFrame;
+    JButton startServerButton;
+    JButton joinServerButton;
+    JButton quitButton;
 
     public HomeScreen() {
-        homeScreen = new JFrame("Mafia");
-        homeScreen.setLayout(null);
-        homeScreen.setBounds(100, 100, 600, 600);
-        homeScreen.setVisible(true);
+        homeScreenFrame = new JFrame("Mafia");
+        homeScreenFrame.setLayout(null);
+        homeScreenFrame.setBounds(100, 100, 600, 600);
+        homeScreenFrame.setVisible(true);
 
+        startServerButton = createButton(100, 300, "Start Server");
+        joinServerButton = createButton(100, 400, "Join Server");
+        quitButton = createButton(100,500, "Quit");
 
-        startServer = customizeButton(100, 300, "Start Server");
-        joinServer = customizeButton(100, 400, "Join Server");
-        quit = customizeButton(100, 500, "Quit");
-
-        homeScreen.add(startServer);
-        homeScreen.add(joinServer);
-        homeScreen.add(quit);
-
+        homeScreenFrame.add(startServerButton);
+        homeScreenFrame.add(joinServerButton);
+        homeScreenFrame.add(quitButton);
     }
 
     public void display() {
 
-        joinServer.addActionListener(new ActionListener() {
+        joinServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JoinServer joinServerScreen = new JoinServer();
                 joinServerScreen.enterServerName();
             }
         });
 
-        startServer.addActionListener(new ActionListener() {
+        startServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                close(HomeScreen.this.homeScreen);
-                new StartServer();
+                StartServerScreen startServerScreen = new StartServerScreen();
+                startServerScreen.display();
+                hide();
             }
         });
 
-        quitHomeScreen(quit);
+        addHandlerForQuitButton();
     }
 
-    private JButton customizeButton(int x_axis, int y_axis, String buttonName) {
+    private JButton createButton(int x_axis, int y_axis, String buttonName) {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
-        Font font = new Font("Verdana", Font.BOLD, 14);
-        button.setFont(font);
+        button.setFont(new Font("Verdana", Font.BOLD, 14));
         button.setForeground(Color.WHITE);
         button.setBackground(Color.BLACK);
         return button;
     }
 
-    private void quitHomeScreen(JButton quit) {
-        quit.addActionListener(new ActionListener() {
+    private void addHandlerForQuitButton() {
+        quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int selectedOption = JOptionPane.showConfirmDialog(null, "Do you really want to quit?",
                         "", JOptionPane.YES_NO_OPTION);
                 if (selectedOption == JOptionPane.YES_OPTION) {
-                    close(homeScreen);
+                    hide();
+                    System.exit(0); // TODO : its not closing the application.. close it cleanly...
                 }
             }
         });
     }
 
-    private void close(JFrame homeFrame) {
-        homeFrame.setVisible(false);
+    private void hide() {
+        homeScreenFrame.setVisible(false);
     }
-
 }
