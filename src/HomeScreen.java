@@ -5,31 +5,39 @@ import java.awt.event.ActionListener;
 
 public class HomeScreen {
     JFrame homeScreenFrame;
+    JPanel homeScreenPanel;
     JButton startServerButton;
     JButton joinServerButton;
     JButton quitButton;
 
     public HomeScreen() {
         homeScreenFrame = new JFrame("Mafia");
-        homeScreenFrame.setLayout(null);
         homeScreenFrame.setBounds(100, 100, 600, 600);
         homeScreenFrame.setVisible(true);
 
-        startServerButton = createButton(100, 300, "Start Server");
-        joinServerButton = createButton(100, 400, "Join Server");
-        quitButton = createButton(100,500, "Quit");
+        homeScreenPanel = new JPanel();
+        homeScreenPanel.setLayout(new BoxLayout(homeScreenPanel, BoxLayout.Y_AXIS));
 
-        homeScreenFrame.add(startServerButton);
-        homeScreenFrame.add(joinServerButton);
-        homeScreenFrame.add(quitButton);
+        homeScreenFrame.add(homeScreenPanel, BorderLayout.SOUTH);
+
+        startServerButton = createButton("Start Server");
+        joinServerButton = createButton("Join Server");
+        quitButton = createButton("Quit");
+
+        homeScreenPanel.add(startServerButton);
+        homeScreenPanel.add(Box.createVerticalStrut(30));
+        homeScreenPanel.add(joinServerButton);
+        homeScreenPanel.add(Box.createVerticalStrut(30));
+        homeScreenPanel.add(quitButton);
+        homeScreenPanel.add(Box.createVerticalStrut(30));
     }
 
     public void display() {
 
         joinServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JoinServer joinServerScreen = new JoinServer();
-                joinServerScreen.enterServerName();
+                JoinServerScreen joinServerScreenScreen = new JoinServerScreen();
+                joinServerScreenScreen.enterServerName();
             }
         });
 
@@ -44,10 +52,9 @@ public class HomeScreen {
         addHandlerForQuitButton();
     }
 
-    private JButton createButton(int x_axis, int y_axis, String buttonName) {
+    private JButton createButton(String buttonName) {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
-        button.setLocation(x_axis, y_axis);
         button.setFont(new Font("Verdana", Font.BOLD, 14));
         button.setForeground(Color.WHITE);
         button.setBackground(Color.BLACK);
@@ -60,8 +67,7 @@ public class HomeScreen {
                 int selectedOption = JOptionPane.showConfirmDialog(null, "Do you really want to quit?",
                         "", JOptionPane.YES_NO_OPTION);
                 if (selectedOption == JOptionPane.YES_OPTION) {
-                    hide();
-                    System.exit(0); // TODO : its not closing the application.. close it cleanly...
+                    System.exit(0);
                 }
             }
         });

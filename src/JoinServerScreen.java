@@ -1,6 +1,5 @@
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.*;
 
 public class JoinServerScreen {
     String serverName;
@@ -9,6 +8,8 @@ public class JoinServerScreen {
     public JoinServerScreen() {
         serverName = JOptionPane.showInputDialog("Enter the server name");
         playerName = JOptionPane.showInputDialog("Enter your name");
+        StartServerScreen j = new StartServerScreen();
+        j.displayPlayers(playerName);
     }
 
     public void enterServerName() {
