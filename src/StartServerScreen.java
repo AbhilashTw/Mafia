@@ -8,8 +8,8 @@ public class StartServerScreen {
     JFrame startServerFrame;
     JLabel playersJoinedLabel;
     JButton startGameButton;
-    JList playersList;
-    DefaultListModel model;
+    DefaultListModel<String> players = new DefaultListModel<String>();
+    JList playersList = new JList(players);
 
     public StartServerScreen() {
         startServerFrame = new JFrame("Starting Server");
@@ -30,6 +30,16 @@ public class StartServerScreen {
         startGameButton.setSize(100, 50);
         startGameButton.setLocation(400, 500);
 
+        players.addElement("Melanie");
+        players.addElement("Abhi");
+        players.addElement("Mani");
+        players.addElement("Sneha");
+
+        startServerFrame.add(playersList);
+        playersList.setSize(100,100);
+        playersList.setLocation(100,100);
+        Font f = new Font("Comic Sans MS", Font.PLAIN, 15);
+        playersList.setFont(f);
         startServerFrame.add(playersJoinedLabel);
         startServerFrame.add(startGameButton);
     }
@@ -41,18 +51,13 @@ public class StartServerScreen {
                 try {
                     Server server = Server.createServer(1);
                 } catch (IOException e1) {
-                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e1.printStackTrace();
                 }
             }
         });
     }
 
     public void displayPlayers(String playerName) {
-        JScrollPane pane = new JScrollPane(playersList);
-        model = new DefaultListModel();
-        playersList = new JList(model);
-        pane.setVisible(true);
-        model.addElement(playerName);
-        startServerFrame.add(pane, BorderLayout.NORTH);
+
     }
 }
