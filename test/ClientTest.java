@@ -10,11 +10,12 @@ import java.io.IOException;
 public class ClientTest {
     Server server;
     Client client;
-
+    public static String serverName = "localhost";
+    public static int portNumber = 1234;
     @Before
     public void setUp() throws Exception {
         server = Server.createServer(1);
-        client = Client.createClient();
+        client = Client.createClient(serverName, portNumber);
     }
 
     @After

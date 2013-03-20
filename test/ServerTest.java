@@ -8,6 +8,8 @@ import java.io.IOException;
 
 public class ServerTest {
 
+    public static String serverName = "localhost";
+    public static int portNumber = 1234;
     Server server;
     Client clientOne;
     Client clientTwo;
@@ -15,7 +17,7 @@ public class ServerTest {
     @Test
     public void connecting_one_client_to_server_of_localHost_gets_connected_message() throws IOException {
         server = Server.createServer(1);
-        clientOne = Client.createClient();
+        clientOne = Client.createClient(serverName, portNumber);
 
         server.startEvents();
         String answer = clientOne.getServerMessage();
@@ -29,8 +31,8 @@ public class ServerTest {
     @Test
     public void connecting_two_client_to_server_of_localHost_gets_connected_message() throws IOException {
         server = Server.createServer(2);
-        clientOne = Client.createClient();
-        clientTwo = Client.createClient();
+        clientOne = Client.createClient(serverName, portNumber);
+        clientTwo = Client.createClient(serverName, portNumber);
 
         server.startEvents();
         String answer = clientOne.getServerMessage();
