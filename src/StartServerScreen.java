@@ -10,11 +10,12 @@ public class StartServerScreen {
     JFrame startServerFrame;
     JLabel playersJoinedLabel;
     JButton startGameButton;
+    JList playersList;
+    DefaultListModel model;
 
 
 
     public StartServerScreen() {
-
         startServerFrame = new JFrame("Starting Server");
         startServerFrame.setBounds(100, 100, 600, 600);
         startServerFrame.setLayout(null);
@@ -49,5 +50,14 @@ public class StartServerScreen {
                 }
             }
         });
+    }
+
+    public void displayPlayers(String playerName) {
+        JScrollPane pane = new JScrollPane(playersList);
+        model = new DefaultListModel();
+        playersList = new JList(model);
+        pane.setVisible(true);
+        model.addElement(playerName);
+        startServerFrame.add(pane, BorderLayout.NORTH);
     }
 }
