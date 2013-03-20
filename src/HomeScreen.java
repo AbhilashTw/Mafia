@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//Job:- Understands to display the initial window of the application
 public class HomeScreen {
     JFrame homeScreenFrame;
     JButton startServerButton;

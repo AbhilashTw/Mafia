@@ -4,10 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+//Job:- Understands to display a window to connect to a server
+
 public class StartServerScreen {
     JFrame startServerFrame;
     JLabel playersJoinedLabel;
     JButton startGameButton;
+
+
 
     public StartServerScreen() {
 
@@ -29,6 +33,7 @@ public class StartServerScreen {
         startGameButton.setSize(100, 50);
         startGameButton.setLocation(400, 500);
 
+
         startServerFrame.add(playersJoinedLabel);
         startServerFrame.add(startGameButton);
     }
@@ -40,7 +45,7 @@ public class StartServerScreen {
                 try {
                     Server server = Server.createServer(1);
                 } catch (IOException e1) {
-                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e1.printStackTrace();
                 }
             }
         });
