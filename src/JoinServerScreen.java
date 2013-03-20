@@ -13,18 +13,22 @@ public class JoinServerScreen {
         playerName = JOptionPane.showInputDialog("Enter your name");
         StartServerScreen j = new StartServerScreen();
 
+        StartServerScreen s = new StartServerScreen();
+        s.displayPlayers(playerName);
     }
 
     public void enterServerName() {
         connectToServer(serverName);
-
     }
 
     private void connectToServer(String serverName) {
         try {
             client = Client.createClient(serverName, 1234);
             displayMessage = new JPanel();
-            JOptionPane.showMessageDialog(displayMessage, "Connected to" + serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
+
+
+            JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
             displayMessage = new JPanel();
             JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to connect", "Error", JOptionPane.ERROR_MESSAGE);
