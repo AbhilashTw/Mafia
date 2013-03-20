@@ -1,7 +1,10 @@
 import javax.swing.*;
-import java.awt.*;
+import java.io.IOException;
+
 
 public class JoinServerScreen {
+
+    JPanel displayMessage;
     String serverName;
     String playerName;
 
@@ -18,7 +21,15 @@ public class JoinServerScreen {
     }
 
     private void connectToServer(String serverName) {
+        try {
+            Client client = Client.createClient(serverName, 1234);
+            displayMessage = new JPanel();
 
+            JOptionPane.showMessageDialog(displayMessage, "Connected to"+ serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+           displayMessage = new JPanel();
+           JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to connect", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
 

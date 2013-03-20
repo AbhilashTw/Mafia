@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class StartServerScreen {
     JFrame startServerFrame;
@@ -33,6 +36,15 @@ public class StartServerScreen {
 
     public void display() {
         startServerFrame.setVisible(true);
+        startGameButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Server server = Server.createServer(1);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
     }
 
     public void displayPlayers(String playerName) {

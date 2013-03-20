@@ -17,6 +17,9 @@ public class HomeScreen {
 
         homeScreenPanel = new JPanel();
         homeScreenPanel.setLayout(new BoxLayout(homeScreenPanel, BoxLayout.Y_AXIS));
+        startServerButton = createButton("Start Server");
+        joinServerButton = createButton( "Join Server");
+        quitButton = createButton( "Quit");
 
         homeScreenFrame.add(homeScreenPanel, BorderLayout.SOUTH);
 

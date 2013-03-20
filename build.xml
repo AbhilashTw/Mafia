@@ -18,6 +18,9 @@
     <target name="clean">
         <delete dir="out"/>
         <delete dir="jar"/>
+        <delete dir="reports"/>
+
+        <mkdir dir="reports"/>
     </target>
 
     <target name="compileSrc" depends="clean">
