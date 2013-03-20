@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.io.IOException;
 
-
+//Job:- Understands connecting a server to client based on the serverName
 public class JoinServerScreen {
-
+    Client client;
     JPanel displayMessage;
     String serverName;
     String playerName;
@@ -21,9 +21,11 @@ public class JoinServerScreen {
 
     private void connectToServer(String serverName) {
         try {
-            Client client = Client.createClient(serverName, 1234);
+            client = Client.createClient(serverName, 1234);
             displayMessage = new JPanel();
 
+
+            JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
             JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
             displayMessage = new JPanel();

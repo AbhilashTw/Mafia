@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//Job:- Understands to display the initial window of the application
 public class HomeScreen {
     JFrame homeScreenFrame;
     JPanel homeScreenPanel;
@@ -18,8 +18,8 @@ public class HomeScreen {
         homeScreenPanel = new JPanel();
         homeScreenPanel.setLayout(new BoxLayout(homeScreenPanel, BoxLayout.Y_AXIS));
         startServerButton = createButton("Start Server");
-        joinServerButton = createButton( "Join Server");
-        quitButton = createButton( "Quit");
+        joinServerButton = createButton("Join Server");
+        quitButton = createButton("Quit");
 
         homeScreenFrame.add(homeScreenPanel, BorderLayout.SOUTH);
 
