@@ -8,14 +8,15 @@ import java.io.IOException;
 //Job:- Ensures correctness of behaviour of clientOne
 
 public class ClientTest {
-    Server server;
-    Client client;
     public static String serverName = "localhost";
     public static int portNumber = 1234;
+    Server server;
+    Client client;
+
     @Before
     public void setUp() throws Exception {
         server = Server.createServer(1);
-        client = Client.createClient(serverName, portNumber);
+        client = Client.createClient(serverName, portNumber, "Abhilash");
     }
 
     @After

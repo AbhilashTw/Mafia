@@ -20,6 +20,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="JGoodies Forms" level="project" />
   </component>
 </module>
 

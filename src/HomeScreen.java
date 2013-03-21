@@ -2,18 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
-//Job:- Understands to display the initial window of the application
+/*
+    Job:- Understands to display the start window of the application
+*/
 public class HomeScreen {
-    public final int totalPlayers = 1;
-    Server server;
     JFrame homeScreenFrame;
     JPanel homeScreenPanel;
     JButton startServerButton;
     JButton joinServerButton;
     JButton quitButton;
-    JPanel displayMessage;
+
 
     public HomeScreen() {
 
@@ -39,6 +38,11 @@ public class HomeScreen {
         homeScreenPanel.add(Box.createVerticalStrut(30));
         homeScreenPanel.add(quitButton);
         homeScreenPanel.add(Box.createVerticalStrut(30));
+
+        homeScreenFrame.getContentPane().setBackground(Color.ORANGE);
+        homeScreenPanel.setBackground(Color.ORANGE);
+
+
     }
 
     public void display() {
@@ -46,23 +50,16 @@ public class HomeScreen {
         joinServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JoinServerScreen joinServerScreenScreen = new JoinServerScreen();
-                joinServerScreenScreen.enterServerName();
+                joinServerScreenScreen.connectToServer();
+                hide();
             }
         });
 
         startServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    server = Server.createServer(totalPlayers);
-                    StartServerScreen startServerScreen = new StartServerScreen();
-                    startServerScreen.display();
-                    //startServerScreen.displayPlayers();
-                    hide();
-                } catch (IOException e1) {
-                    displayMessage = new JPanel();
-                    JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to Start Server", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-
+                StartServerScreen startServerScreen = new StartServerScreen();
+                startServerScreen.display();
+                hide();
             }
         });
 
@@ -73,7 +70,7 @@ public class HomeScreen {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setFont(new Font("Verdana", Font.BOLD, 14));
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.ORANGE);
         button.setBackground(Color.BLACK);
         return button;
     }
