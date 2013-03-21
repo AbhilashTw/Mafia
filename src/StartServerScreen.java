@@ -12,7 +12,6 @@ public class StartServerScreen {
     JLabel playersJoinedLabel;
     JButton startGameButton;
     DefaultListModel<String> players = new DefaultListModel<String>();
-
     JList<String> playersList;
     JPanel displayMessage;
 

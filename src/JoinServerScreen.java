@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 //Job:- Understands connecting a server to client based on the serverName
+
 public class JoinServerScreen {
     JFrame joinServerFrame;
     JPanel joinServerPanel;
@@ -53,15 +54,14 @@ public class JoinServerScreen {
         joinServerPanel.add(nameText);
         joinServerPanel.add(connectButton);
 
-
-        joinServerPanel.setBackground(Color.orange);
+        joinServerPanel.setBackground(Color.ORANGE);
         joinServerFrame.add(joinServerPanel);
         joinServerFrame.setVisible(true);
-        joinServerFrame.getContentPane().setBackground(Color.ORANGE);
 
         joinServerFrame.setBounds(100, 100, 600, 600);
 
     }
+
     public void connectToServer() {
         connectButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
