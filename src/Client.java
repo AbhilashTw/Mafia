@@ -16,7 +16,7 @@ public class Client {
     }
 
     public static Client createClient(String serverName, int portNumber, String clientName) throws IOException {
-        if (serverName == null) throw new IllegalArgumentException("Improper Arguments serverName is null");
+        if (serverName == null) throw new IllegalArgumentException("Improper Arguments serverNameLabel is null");
         return new Client(serverName, portNumber, clientName);
     }
 
