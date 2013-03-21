@@ -73,7 +73,7 @@ public class JoinServerScreen {
                     client = Client.createClient(serverNameText.getText(), 1234, playerNameTextField.getText());
                     if (client.getServerMessage().equals("Connected")) {
                         displayMessage = new JPanel();
-                        JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverNameLabel, "Connected", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverNameLabel.getText(), "Connected", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } catch (IOException f) {
                     displayMessage = new JPanel();
