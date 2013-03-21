@@ -33,7 +33,7 @@ public class JoinServerScreen {
         serverNameText.setSize(100, 30);
         serverNameText.setLocation(200, 200);
 
-        serverNameLabel = new JLabel("ServerClient.Server Name");
+        serverNameLabel = new JLabel("Server Name");
         serverNameLabel.setForeground(Color.white);
         serverNameLabel.setSize(100, 100);
         serverNameLabel.setLocation(50, 100);
@@ -45,7 +45,7 @@ public class JoinServerScreen {
         serverNameText.setSize(100, 30);
         serverNameText.setLocation(150, 140);
 
-        playerNameLabel = new JLabel("ServerClient.Player Name");
+        playerNameLabel = new JLabel("Player Name");
         playerNameLabel.setForeground(Color.white);
         playerNameLabel.setSize(100, 100);
         playerNameLabel.setLocation(50, 200);
