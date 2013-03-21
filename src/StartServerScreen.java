@@ -64,7 +64,8 @@ public class StartServerScreen {
             server.startEvents();
         } catch (IOException e) {
             displayMessage = new JPanel();
-            JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to Start Server.  Try Again", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to Start Server.  Try Again", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
