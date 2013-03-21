@@ -6,13 +6,14 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-//Job:- Understands to manage group of connections on a request to connect.
-
+/*
+    Job:- Understands to run one or more services.
+*/
 public class Server {
     private static int portNumber = 1234;
+    public final List<Socket> clients;
     private final int backlog;
-    ServerSocket server;
-    List<Socket> clients;
+    private final ServerSocket server;
 
     private Server(int backlog) throws IOException {
         this.backlog = backlog;
@@ -43,6 +44,10 @@ public class Server {
         }
     }
 
+    public List<Socket> getClients() {
+        return clients;
+    }
+
     public void close() throws IOException {
         server.close();
     }
@@ -56,8 +61,8 @@ public class Server {
     public void startEvents() throws IOException {
         listenToClient();
         sendMessage();
-        closeClient();
     }
+
 }
 
 

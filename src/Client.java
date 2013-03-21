@@ -6,19 +6,18 @@ import java.io.InputStream;
 import java.net.Socket;
 
 public class Client {
-    Socket client;
-    private int portNumber;
-    private String serverName;
+    private final String clientName;
+    private final Socket client;
 
-    private Client(String serverName, int portNumber) throws IOException {
-        this.serverName = serverName;
-        this.portNumber = portNumber;
-        client = new Socket(this.serverName, this.portNumber);
+    private Client(String serverName, int portNumber, String clientName) throws IOException {
+        this.clientName = clientName;
+        client = new Socket(serverName, portNumber);
+
     }
 
-    public static Client createClient(String serverName, int portNumber) throws IOException {
+    public static Client createClient(String serverName, int portNumber, String clientName) throws IOException {
         if (serverName == null) throw new IllegalArgumentException("Improper Arguments serverName is null");
-        return new Client(serverName, portNumber);
+        return new Client(serverName, portNumber, clientName);
     }
 
     public String getServerMessage() throws IOException {

@@ -1,50 +1,82 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 //Job:- Understands connecting a server to client based on the serverName
 public class JoinServerScreen {
+    JFrame joinServerFrame;
+    JPanel joinServerPanel;
+    JLabel serverName;
+    JLabel name;
+    JTextField serverNameText;
+    JTextField nameText;
+    JButton connectButton;
     Client client;
-    JFrame JoinServerFrame;
-    JPanel JoinServerPanel;
-    JTextField serverName;
-    JTextField playerName;
     JPanel displayMessage;
 
     public JoinServerScreen() {
-        JoinServerFrame = new JFrame("Join Server");
-        JoinServerFrame.setBounds(100, 100, 600, 600);
-        JoinServerFrame.setVisible(true);
 
-        JoinServerPanel = new JPanel();
+        joinServerFrame = new JFrame("JoinServer");
+        joinServerPanel = new JPanel();
 
-        JoinServerFrame.add(JoinServerPanel);
-        JoinServerPanel.add(serverName);
-        JoinServerPanel.add(playerName);
+        joinServerPanel.setLayout(null);
 
-        JoinServerPanel.setLayout(new BoxLayout(JoinServerPanel, BoxLayout.PAGE_AXIS));
+        serverName = new JLabel("Server Name");
+        serverName.setForeground(Color.white);
+        serverName.setSize(100, 100);
+        serverName.setLocation(50, 100);
 
-        serverName = new JTextField("Enter Server Name");
-        playerName = new JTextField("Enter your Name");
+        serverNameText = new JTextField();
+        serverNameText.setSize(100, 30);
+        serverNameText.setLocation(150, 200);
 
-        StartServerScreen s = new StartServerScreen();
-        s.displayPlayers(playerName.getText());
+        name = new JLabel("Player Name");
+        name.setForeground(Color.white);
+        name.setSize(100, 100);
+        name.setLocation(100, 200);
+
+        nameText = new JTextField();
+        nameText.setSize(100, 30);
+        nameText.setLocation(150, 300);
+
+        connectButton = new JButton("Connect");
+        connectButton.setBackground(Color.black);
+        connectButton.setForeground(Color.white);
+        connectButton.setSize(100, 50);
+        connectButton.setLocation(350, 450);
+
+        joinServerPanel.add(serverName);
+        joinServerPanel.add(name);
+        joinServerPanel.add(serverNameText);
+        joinServerPanel.add(nameText);
+        joinServerPanel.add(connectButton);
+
+
+        joinServerPanel.setBackground(Color.orange);
+        joinServerFrame.add(joinServerPanel);
+        joinServerFrame.setVisible(true);
+        joinServerFrame.getContentPane().setBackground(Color.ORANGE);
+
+        joinServerFrame.setBounds(100, 100, 600, 600);
+
     }
-
-    public void enterServerName() {
-        connectToServer(serverName.getText());
-    }
-
-    private void connectToServer(String serverName) {
-        try {
-            client = Client.createClient(serverName, 1234);
-            displayMessage = new JPanel();
-
-            JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (IOException e) {
-            displayMessage = new JPanel();
-            JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to connect", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+    public void connectToServer() {
+        connectButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    client = Client.createClient(serverNameText.getText(), 1234, nameText.getText());
+                    if (client.getServerMessage().equals("Connected")) {
+                        displayMessage = new JPanel();
+                        JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } catch (IOException f) {
+                    displayMessage = new JPanel();
+                    JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to connect", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 }
 
