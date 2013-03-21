@@ -1,4 +1,4 @@
-//Job:- Understands to request a server for accepting its connection
+package ServerClient;//Job:- Understands to request a server for accepting its connection
 
 import java.io.*;
 import java.net.Socket;

@@ -1,3 +1,5 @@
+package Userscreens;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,12 +30,12 @@ public class HomeScreen {
 
         homeScreenFrame.add(homeScreenImage);
 
-        startServerButton = createButton(100, 300, "Start Server");
-        joinServerButton = createButton(100, 400, "Join Server");
+        startServerButton = createButton(100, 300, "Start ServerClient.Server");
+        joinServerButton = createButton(100, 400, "Join ServerClient.Server");
         quitButton = createButton(100, 500, "Quit");
 
-        startServerButton = createButton(100, 300, "Start Server");
-        joinServerButton = createButton(100, 400, "Join Server");
+        startServerButton = createButton(100, 300, "Start ServerClient.Server");
+        joinServerButton = createButton(100, 400, "Join ServerClient.Server");
         quitButton = createButton(100, 500, "Quit");
 
         homeScreenImage.add(startServerButton);
