@@ -33,8 +33,8 @@ public class ServerTest {
     @Test
     public void connecting_two_client_to_server_of_localHost_gets_connected_message() throws IOException {
         server = Server.createServer(2);
-        clientOne = Client.createClient(serverName, portNumber,"Abhilash");
-        clientTwo = Client.createClient(serverName, portNumber,"Abhilash");
+        clientOne = Client.createClient(serverName, portNumber, "Abhilash");
+        clientTwo = Client.createClient(serverName, portNumber, "Abhilash");
 
         server.startEvents();
         String answer = clientOne.getServerMessage();

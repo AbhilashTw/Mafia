@@ -3,7 +3,7 @@ package Userscreens;
 import javax.swing.*;
 import java.awt.*;
 
- public class ImagePanel extends JPanel {
+public class ImagePanel extends JPanel {
     private Image img;
 
     public ImagePanel(String img) {

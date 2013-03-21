@@ -1,3 +1,7 @@
+package Userscreens;
+
+import ServerClient.Client;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
