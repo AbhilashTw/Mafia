@@ -1,4 +1,6 @@
-package userscreens;
+package Userscreens;
+
+import ServerClient.Server;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,6 +8,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 //Job:- Understands to display a window to connect to a server
+
 public class StartServerScreen {
     public final int totalPlayers = 1;
     public Server server;
