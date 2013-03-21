@@ -58,6 +58,10 @@ public class Server {
         }
     }
 
+    public String getServerName() {
+        return server.getLocalSocketAddress().toString();
+    }
+
     public void startEvents() throws IOException {
         listenToClient();
         sendMessage();

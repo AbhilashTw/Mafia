@@ -63,6 +63,7 @@ public class StartServerScreen {
 
     public void display() {
         startServerFrame.setVisible(true);
+        players.addElement(server.getServerName());
         for (Socket client : server.getClients()) {
             players.addElement(client.getLocalAddress().getHostName());
         }

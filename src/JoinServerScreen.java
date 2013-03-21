@@ -25,11 +25,11 @@ public class JoinServerScreen {
         serverName = new JLabel("Server Name");
         serverName.setForeground(Color.white);
         serverName.setSize(100, 100);
-        serverName.setLocation(50, 100);
+        serverName.setLocation(100, 100);
 
         serverNameText = new JTextField();
         serverNameText.setSize(100, 30);
-        serverNameText.setLocation(150, 200);
+        serverNameText.setLocation(200, 200);
 
         name = new JLabel("Player Name");
         name.setForeground(Color.white);
@@ -38,7 +38,7 @@ public class JoinServerScreen {
 
         nameText = new JTextField();
         nameText.setSize(100, 30);
-        nameText.setLocation(150, 300);
+        nameText.setLocation(200, 300);
 
         connectButton = new JButton("Connect");
         connectButton.setBackground(Color.black);
