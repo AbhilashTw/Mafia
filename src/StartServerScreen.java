@@ -1,52 +1,61 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.net.Socket;
 
 //Job:- Understands to display a window to connect to a server
-
 public class StartServerScreen {
     public final int totalPlayers = 1;
     public Server server;
     JFrame startServerFrame;
     JLabel playersJoinedLabel;
     JButton startGameButton;
+    ImagePanel startServerScreenImage;
     DefaultListModel<String> players = new DefaultListModel<String>();
     JList<String> playersList;
     JPanel displayMessage;
 
     public StartServerScreen() {
         startServer();
+
         startServerFrame = new JFrame("Starting Server");
+        startServerFrame.setBackground(Color.BLACK);
         startServerFrame.setBounds(100, 100, 600, 600);
-        startServerFrame.setLayout(null);
-        startServerFrame.getContentPane().setBackground(Color.ORANGE);
+        startServerFrame.setVisible(true);
+
+        startServerScreenImage = new ImagePanel(new ImageIcon("images/joinServerScreen.jpg").getImage());
+        startServerFrame.getContentPane().add(startServerScreenImage);
+        startServerFrame.pack();
 
         //JLabel
-        playersJoinedLabel = new JLabel("Player Joined");
-        Font font = new Font("Monospaced", Font.BOLD, 25);
+
+        playersJoinedLabel = new JLabel("Players Joined");
+        Font font = new Font("Monospaced", Font.BOLD, 20);
         playersJoinedLabel.setFont(font);
         playersJoinedLabel.setForeground(Color.WHITE);
         playersJoinedLabel.setBackground(Color.BLACK);
-        playersJoinedLabel.setSize(100, 100);
+        playersJoinedLabel.setSize(200, 200);
         playersJoinedLabel.setLocation(100, -50);
 
-        //StartButton
-        startGameButton = new JButton("Start Game");
-        startGameButton.setForeground(Color.WHITE);
-        startGameButton.setBackground(Color.BLACK);
-        startGameButton.setSize(100, 50);
-        startGameButton.setLocation(400, 500);
         //JList
         playersList = new JList<String>(players);
         playersList.setSize(200, 200);
-        playersList.setLocation(150, 100);
-        Font f = new Font("Monospaced", Font.PLAIN, 15);
+        playersList.setLocation(100, 80);
+        Font f = new Font("Monospaced", Font.BOLD, 15);
         playersList.setFont(f);
 
+        //StartButton
+        startGameButton = new JButton("Start Game");
+        startGameButton.setSize(145, 50);
+        startGameButton.setLocation(800, 800);
+        startGameButton.setFont(new Font("Verdana", Font.BOLD, 14));
+        startGameButton.setForeground(Color.ORANGE);
+        startGameButton.setBackground(Color.BLACK);
+
         //Frame Contents
-        startServerFrame.add(playersList);
-        startServerFrame.add(playersJoinedLabel);
-        startServerFrame.add(startGameButton);
+        startServerScreenImage.add(playersList);
+        startServerScreenImage.add(playersJoinedLabel);
+        startServerScreenImage.add(startGameButton);
     }
 
     public void startServer() {
@@ -62,9 +71,10 @@ public class StartServerScreen {
     public void display() throws IOException {
         startServerFrame.setVisible(true);
         players.addElement(server.getServerName());
-        for (Player client : server.getPlayers()) {
-            players.addElement(client.getName());
+        for (Socket client : server.getClients()) {
+            players.addElement(client.getLocalAddress().getHostName().toString());
         }
+
         String result = server.getClientsListToString();
         server.sendMessage(result);
     }

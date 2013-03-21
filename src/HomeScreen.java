@@ -5,46 +5,41 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /*
-    Job:- Understands to display the start window of the application
+   Job:- Understands to display the start window of the application
 */
+
 public class HomeScreen {
     JFrame homeScreenFrame;
-    JPanel homeScreenPanel;
     JButton startServerButton;
     JButton joinServerButton;
     JButton quitButton;
-
+    ImagePanel homeScreenImage;
 
     public HomeScreen() {
         homeScreenFrame = new JFrame("MAFIA");
-
-
         homeScreenFrame.setBounds(100, 100, 600, 600);
         homeScreenFrame.setVisible(true);
-        homeScreenFrame.getContentPane().setBackground(Color.BLACK);
+        homeScreenFrame.setBackground(Color.BLACK);
 
-        homeScreenPanel = new JPanel();
-        homeScreenPanel.setLayout(new BoxLayout(homeScreenPanel, BoxLayout.PAGE_AXIS));
-        homeScreenPanel.setBackground(Color.BLACK);
+        homeScreenImage = new ImagePanel(new ImageIcon("images/homepage.jpg").getImage());
 
-        startServerButton = createButton("Start Server");
-        joinServerButton = createButton("Join Server");
-        quitButton = createButton("Quit");
+        homeScreenFrame.getContentPane().add(homeScreenImage);
+        homeScreenFrame.pack();
 
-        homeScreenFrame.add(homeScreenPanel, BorderLayout.SOUTH);
+        homeScreenFrame.add(homeScreenImage);
 
-        startServerButton = createButton("Start Server");
-        joinServerButton = createButton("Join Server");
-        quitButton = createButton("Quit");
+        startServerButton = createButton(100, 300, "Start Server");
+        joinServerButton = createButton(100, 400, "Join Server");
+        quitButton = createButton(100, 500, "Quit");
 
-        homeScreenPanel.add(startServerButton);
-        homeScreenPanel.add(Box.createVerticalStrut(35));
-        homeScreenPanel.add(joinServerButton);
-        homeScreenPanel.add(Box.createVerticalStrut(35));
-        homeScreenPanel.add(quitButton);
-        homeScreenPanel.add(Box.createVerticalStrut(100));
+        startServerButton = createButton(100, 300, "Start Server");
+        joinServerButton = createButton(100, 400, "Join Server");
+        quitButton = createButton(100, 500, "Quit");
+
+        homeScreenImage.add(startServerButton);
+        homeScreenImage.add(joinServerButton);
+        homeScreenImage.add(quitButton);
     }
-
 
     public void display() {
 
@@ -73,9 +68,10 @@ public class HomeScreen {
         addHandlerForQuitButton();
     }
 
-    private JButton createButton(String buttonName) {
+    private JButton createButton(int x_axis, int y_axis, String buttonName) {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
+        button.setLocation(x_axis, y_axis);
         button.setFont(new Font("Verdana", Font.BOLD, 14));
         button.setForeground(Color.ORANGE);
         button.setBackground(Color.BLACK);

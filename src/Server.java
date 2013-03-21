@@ -12,7 +12,7 @@ public class Server {
     public final List<Socket> clients;
     private final int backlog;
     private final ServerSocket server;
-    public List<Player> players;
+
 
     private Server(int backlog) throws IOException {
         this.backlog = backlog;
@@ -73,31 +73,18 @@ public class Server {
     public void startEvents() throws IOException {
         listenToClient();
         sendMessage("Connected");
-        createPlayersList();
 
-    }
-
-    public List<Player> getPlayers() {
-        return players;
     }
 
     public String getClientsListToString() {
         String result = null;
-        for (Player player : players) {
-            System.out.println(player.getName());
-            result += player.getName() + "\n";
+        for (Socket player : clients) {
+            result += player.getLocalAddress().getHostName() + "\n";
 
         }
         return result;
     }
 
-    public void createPlayersList() throws IOException {
-        String message;
-        for (Socket client : clients) {
-            message = getClientMessage(client);
-            players.add(new Player(client, message));
-        }
-    }
 
 }
 
