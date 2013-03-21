@@ -1,15 +1,30 @@
+package Userscreens;
+
+import ServerClient.Client;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class PlayersConnectedScreen {
+
     JFrame playersConnectedFrame;
     JPanel playersConnectedPanel;
     JLabel playersConnectedLabel;
     DefaultListModel<String> players = new DefaultListModel<String>();
     JList playersList = new JList(players);
+    Client client;
+    String message;
 
-    public PlayersConnectedScreen() {
-        playersConnectedFrame = new JFrame("Players Joined");
+    public PlayersConnectedScreen(Client client) {
+        this.client = client;
+        try {
+
+            message = client.getServerMessage();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        playersConnectedFrame = new JFrame("ServerClient.Player Joined");
         playersConnectedFrame.setBounds(100, 100, 600, 600);
         playersConnectedFrame.setVisible(true);
 
@@ -17,17 +32,13 @@ public class PlayersConnectedScreen {
         playersConnectedPanel.setLayout(null);
         playersConnectedPanel.setBackground(Color.BLACK);
 
-        playersConnectedLabel = new JLabel("Players Joined");
+        playersConnectedLabel = new JLabel("ServerClient.Player Joined");
         Font font = new Font("Comic Sans MS", Font.PLAIN, 28);
         playersConnectedLabel.setFont(font);
         playersConnectedLabel.setForeground(Color.RED);
         playersConnectedLabel.setSize(200, 250);
         playersConnectedLabel.setLocation(50,-50);
 
-        players.addElement("Melanie");
-        players.addElement("Abhi");
-        players.addElement("Mani");
-        players.addElement("Sneha");
 
         playersList.setSize(200,150);
         playersList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
@@ -38,5 +49,15 @@ public class PlayersConnectedScreen {
         playersConnectedPanel.add(playersList);
         playersConnectedPanel.add(playersConnectedLabel);
         playersConnectedFrame.add(playersConnectedPanel);
+    }
+
+    public void display() {
+        String[] clients = message.split("\n");
+
+        for (String client : clients) {
+            players.addElement(client);
+        }
+
+
     }
 }
