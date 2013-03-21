@@ -12,6 +12,7 @@ public class StartServerScreen {
     JLabel playersJoinedLabel;
     JButton startGameButton;
     DefaultListModel<String> players = new DefaultListModel<String>();
+
     JList<String> playersList;
     JPanel displayMessage;
 
@@ -37,7 +38,6 @@ public class StartServerScreen {
         startGameButton.setBackground(Color.BLACK);
         startGameButton.setSize(100, 50);
         startGameButton.setLocation(400, 500);
-
         //JList
         playersList = new JList<String>(players);
         playersList.setSize(200, 200);

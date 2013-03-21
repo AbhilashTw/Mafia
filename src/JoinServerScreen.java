@@ -17,6 +17,7 @@ public class JoinServerScreen {
     JPanel displayMessage;
 
     public JoinServerScreen() {
+
         joinServerFrame = new JFrame("JoinServer");
         joinServerPanel = new JPanel();
 
@@ -46,7 +47,6 @@ public class JoinServerScreen {
         connectButton.setSize(100, 50);
         connectButton.setLocation(350, 450);
 
-
         joinServerPanel.add(serverName);
         joinServerPanel.add(name);
         joinServerPanel.add(serverNameText);
@@ -62,7 +62,6 @@ public class JoinServerScreen {
         joinServerFrame.setBounds(100, 100, 600, 600);
 
     }
-
     public void connectToServer() {
         connectButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

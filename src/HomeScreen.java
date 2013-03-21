@@ -15,13 +15,17 @@ public class HomeScreen {
 
 
     public HomeScreen() {
+        homeScreenFrame = new JFrame("MAFIA");
 
-        homeScreenFrame = new JFrame("Mafia");
+
         homeScreenFrame.setBounds(100, 100, 600, 600);
         homeScreenFrame.setVisible(true);
+        homeScreenFrame.getContentPane().setBackground(Color.BLACK);
 
         homeScreenPanel = new JPanel();
-        homeScreenPanel.setLayout(new BoxLayout(homeScreenPanel, BoxLayout.Y_AXIS));
+        homeScreenPanel.setLayout(new BoxLayout(homeScreenPanel, BoxLayout.PAGE_AXIS));
+        homeScreenPanel.setBackground(Color.BLACK);
+
         startServerButton = createButton("Start Server");
         joinServerButton = createButton("Join Server");
         quitButton = createButton("Quit");
@@ -33,32 +37,31 @@ public class HomeScreen {
         quitButton = createButton("Quit");
 
         homeScreenPanel.add(startServerButton);
-        homeScreenPanel.add(Box.createVerticalStrut(30));
+        homeScreenPanel.add(Box.createVerticalStrut(35));
         homeScreenPanel.add(joinServerButton);
-        homeScreenPanel.add(Box.createVerticalStrut(30));
+        homeScreenPanel.add(Box.createVerticalStrut(35));
         homeScreenPanel.add(quitButton);
-        homeScreenPanel.add(Box.createVerticalStrut(30));
-
-        homeScreenFrame.getContentPane().setBackground(Color.ORANGE);
-        homeScreenPanel.setBackground(Color.ORANGE);
-
-
+        homeScreenPanel.add(Box.createVerticalStrut(100));
     }
+
 
     public void display() {
 
-        joinServerButton.addActionListener(new ActionListener() {
+        startServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+                StartServerScreen startServerScreen = new StartServerScreen();
+                startServerScreen.display();
                 JoinServerScreen joinServerScreenScreen = new JoinServerScreen();
                 joinServerScreenScreen.connectToServer();
                 hide();
             }
         });
 
-        startServerButton.addActionListener(new ActionListener() {
+        joinServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                StartServerScreen startServerScreen = new StartServerScreen();
-                startServerScreen.display();
+                JoinServerScreen joinServerScreenScreen = new JoinServerScreen();
+                joinServerScreenScreen.connectToServer();
                 hide();
             }
         });
