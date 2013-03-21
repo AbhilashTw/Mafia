@@ -2,7 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 //Job:- Understands to display the initial window of the application
+
 public class HomeScreen {
     JFrame homeScreenFrame;
     JPanel homeScreenPanel;
@@ -11,12 +13,15 @@ public class HomeScreen {
     JButton quitButton;
 
     public HomeScreen() {
-        homeScreenFrame = new JFrame("Mafia");
+        homeScreenFrame = new JFrame("MAFIA");
         homeScreenFrame.setBounds(100, 100, 600, 600);
         homeScreenFrame.setVisible(true);
+        homeScreenFrame.getContentPane().setBackground(Color.BLACK);
 
         homeScreenPanel = new JPanel();
-        homeScreenPanel.setLayout(new BoxLayout(homeScreenPanel, BoxLayout.Y_AXIS));
+        homeScreenPanel.setLayout(new BoxLayout(homeScreenPanel, BoxLayout.PAGE_AXIS));
+        homeScreenPanel.setBackground(Color.BLACK);
+
         startServerButton = createButton("Start Server");
         joinServerButton = createButton("Join Server");
         quitButton = createButton("Quit");
@@ -28,21 +33,23 @@ public class HomeScreen {
         quitButton = createButton("Quit");
 
         homeScreenPanel.add(startServerButton);
-        homeScreenPanel.add(Box.createVerticalStrut(30));
+        homeScreenPanel.add(Box.createVerticalStrut(35));
         homeScreenPanel.add(joinServerButton);
-        homeScreenPanel.add(Box.createVerticalStrut(30));
+        homeScreenPanel.add(Box.createVerticalStrut(35));
         homeScreenPanel.add(quitButton);
-        homeScreenPanel.add(Box.createVerticalStrut(30));
+        homeScreenPanel.add(Box.createVerticalStrut(100));
+    }
+
+    private JButton createButton(String buttonName) {
+        JButton button = new JButton(buttonName);
+        button.setSize(new Dimension(145, 50));
+        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setForeground(Color.ORANGE);
+        button.setBackground(Color.BLACK);
+        return button;
     }
 
     public void display() {
-
-        joinServerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JoinServerScreen joinServerScreenScreen = new JoinServerScreen();
-                joinServerScreenScreen.enterServerName();
-            }
-        });
 
         startServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -52,16 +59,15 @@ public class HomeScreen {
             }
         });
 
-        addHandlerForQuitButton();
-    }
+        joinServerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JoinServerScreen joinServerScreenScreen = new JoinServerScreen();
+                joinServerScreenScreen.enterServerName();
+                hide();
+            }
+        });
 
-    private JButton createButton(String buttonName) {
-        JButton button = new JButton(buttonName);
-        button.setSize(145, 50);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
-        button.setForeground(Color.WHITE);
-        button.setBackground(Color.BLACK);
-        return button;
+        addHandlerForQuitButton();
     }
 
     private void addHandlerForQuitButton() {

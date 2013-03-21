@@ -13,8 +13,6 @@ public class StartServerScreen {
     DefaultListModel<String> players = new DefaultListModel<String>();
     JList playersList = new JList(players);
 
-
-
     public StartServerScreen() {
         startServerFrame = new JFrame("Starting Server");
         startServerFrame.setBounds(100, 100, 600, 600);
@@ -34,7 +32,6 @@ public class StartServerScreen {
         startGameButton.setSize(100, 50);
         startGameButton.setLocation(400, 500);
 
-
         players.addElement("Melanie");
         players.addElement("Abhi");
         players.addElement("Mani");
@@ -45,7 +42,6 @@ public class StartServerScreen {
         playersList.setLocation(100,100);
         Font f = new Font("Comic Sans MS", Font.PLAIN, 15);
         playersList.setFont(f);
-
 
         startServerFrame.add(playersJoinedLabel);
         startServerFrame.add(startGameButton);
@@ -65,6 +61,6 @@ public class StartServerScreen {
     }
 
     public void displayPlayers(String playerName) {
-
+        JOptionPane.showMessageDialog(null,playerName);
     }
 }

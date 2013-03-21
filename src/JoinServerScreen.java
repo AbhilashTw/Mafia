@@ -4,19 +4,34 @@ import java.io.IOException;
 //Job:- Understands connecting a server to client based on the serverName
 public class JoinServerScreen {
     Client client;
+    JFrame JoinServerFrame;
+    JPanel JoinServerPanel;
+    JTextField serverName;
+    JTextField playerName;
     JPanel displayMessage;
-    String serverName;
-    String playerName;
 
     public JoinServerScreen() {
-        serverName = JOptionPane.showInputDialog("Enter the server name");
-        playerName = JOptionPane.showInputDialog("Enter your name");
+        JoinServerFrame = new JFrame("Join Server");
+        JoinServerFrame.setBounds(100, 100, 600, 600);
+        JoinServerFrame.setVisible(true);
+
+        JoinServerPanel = new JPanel();
+
+        JoinServerFrame.add(JoinServerPanel);
+        JoinServerPanel.add(serverName);
+        JoinServerPanel.add(playerName);
+
+        JoinServerPanel.setLayout(new BoxLayout(JoinServerPanel, BoxLayout.PAGE_AXIS));
+
+        serverName = new JTextField("Enter Server Name");
+        playerName = new JTextField("Enter your Name");
+
         StartServerScreen s = new StartServerScreen();
-        s.displayPlayers(playerName);
+        s.displayPlayers(playerName.getText());
     }
 
     public void enterServerName() {
-        connectToServer(serverName);
+        connectToServer(serverName.getText());
     }
 
     private void connectToServer(String serverName) {
@@ -24,9 +39,8 @@ public class JoinServerScreen {
             client = Client.createClient(serverName, 1234);
             displayMessage = new JPanel();
 
+            JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
 
-            JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
-            JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
             displayMessage = new JPanel();
             JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to connect", "Error", JOptionPane.ERROR_MESSAGE);
