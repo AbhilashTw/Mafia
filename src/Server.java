@@ -77,15 +77,12 @@ public class Server {
     }
 
     public String getClientsListToString() {
-        String result = null;
+        String result = server.getLocalSocketAddress() + "\n";
         for (Socket player : clients) {
-            result += player.getLocalAddress().getHostName() + "\n";
-
+            result += player.getRemoteSocketAddress() + "\n";
         }
         return result;
     }
-
-
 }
 
 
