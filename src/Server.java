@@ -1,6 +1,4 @@
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -14,6 +12,7 @@ public class Server {
     public final List<Socket> clients;
     private final int backlog;
     private final ServerSocket server;
+    public List<Player> players;
 
     private Server(int backlog) throws IOException {
         this.backlog = backlog;
@@ -35,13 +34,22 @@ public class Server {
         }
     }
 
-    public void sendMessage() throws IOException {
+    public void sendMessage(String message) throws IOException {
         for (Socket client : clients) {
             OutputStream s1out = client.getOutputStream();
             DataOutputStream dos = new DataOutputStream(s1out);
-            dos.writeUTF("Connected");
-            dos.close();
+            dos.writeUTF(message);
+            // dos.close();
         }
+    }
+
+    public String getClientMessage(Socket client) throws IOException {
+        InputStream clientInputStream = client.getInputStream();
+        DataInputStream dataInputStream = new DataInputStream(clientInputStream);
+        String message = dataInputStream.readUTF();
+//      dataInputStream.close();
+//      clientInputStream.close();
+        return message;
     }
 
     public List<Socket> getClients() {
@@ -64,7 +72,31 @@ public class Server {
 
     public void startEvents() throws IOException {
         listenToClient();
-        sendMessage();
+        sendMessage("Connected");
+        createPlayersList();
+
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public String getClientsListToString() {
+        String result = null;
+        for (Player player : players) {
+            System.out.println(player.getName());
+            result += player.getName() + "\n";
+
+        }
+        return result;
+    }
+
+    public void createPlayersList() throws IOException {
+        String message;
+        for (Socket client : clients) {
+            message = getClientMessage(client);
+            players.add(new Player(client, message));
+        }
     }
 
 }

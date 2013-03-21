@@ -1,8 +1,6 @@
 //Job:- Understands to request a server for accepting its connection
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class Client {
@@ -24,10 +22,16 @@ public class Client {
         InputStream clientInputStream = client.getInputStream();
         DataInputStream dataInputStream = new DataInputStream(clientInputStream);
         String message = dataInputStream.readUTF();
-        dataInputStream.close();
-        clientInputStream.close();
 
         return message;
+    }
+
+    public void sendMessageToServer(String message) throws IOException {
+        OutputStream s1out = client.getOutputStream();
+        DataOutputStream dos = new DataOutputStream(s1out);
+        dos.writeUTF(message);
+
+
     }
 
     public void close() throws IOException {

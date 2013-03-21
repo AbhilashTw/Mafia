@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /*
     Job:- Understands to display the start window of the application
@@ -51,9 +52,12 @@ public class HomeScreen {
             public void actionPerformed(ActionEvent e) {
 
                 StartServerScreen startServerScreen = new StartServerScreen();
-                startServerScreen.display();
-                JoinServerScreen joinServerScreenScreen = new JoinServerScreen();
-                joinServerScreenScreen.connectToServer();
+                try {
+                    startServerScreen.display();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
                 hide();
             }
         });

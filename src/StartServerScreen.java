@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.net.Socket;
 
 //Job:- Understands to display a window to connect to a server
 
@@ -12,7 +11,6 @@ public class StartServerScreen {
     JLabel playersJoinedLabel;
     JButton startGameButton;
     DefaultListModel<String> players = new DefaultListModel<String>();
-
     JList<String> playersList;
     JPanel displayMessage;
 
@@ -24,7 +22,7 @@ public class StartServerScreen {
         startServerFrame.getContentPane().setBackground(Color.ORANGE);
 
         //JLabel
-        playersJoinedLabel = new JLabel("Players Joined");
+        playersJoinedLabel = new JLabel("Player Joined");
         Font font = new Font("Monospaced", Font.BOLD, 25);
         playersJoinedLabel.setFont(font);
         playersJoinedLabel.setForeground(Color.WHITE);
@@ -61,11 +59,13 @@ public class StartServerScreen {
         }
     }
 
-    public void display() {
+    public void display() throws IOException {
         startServerFrame.setVisible(true);
         players.addElement(server.getServerName());
-        for (Socket client : server.getClients()) {
-            players.addElement(client.getLocalAddress().getHostName());
+        for (Player client : server.getPlayers()) {
+            players.addElement(client.getName());
         }
+        String result = server.getClientsListToString();
+        server.sendMessage(result);
     }
 }

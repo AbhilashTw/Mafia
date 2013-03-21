@@ -62,14 +62,17 @@ public class JoinServerScreen {
         joinServerFrame.setBounds(100, 100, 600, 600);
 
     }
+
     public void connectToServer() {
         connectButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
                     client = Client.createClient(serverNameText.getText(), 1234, nameText.getText());
                     if (client.getServerMessage().equals("Connected")) {
-                        displayMessage = new JPanel();
-                        JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverName, "Connected", JOptionPane.INFORMATION_MESSAGE);
+                        client.sendMessageToServer(nameText.getText());
+                        PlayersConnectedScreen screen = new PlayersConnectedScreen(client);
+                        screen.display();
+                        joinServerFrame.setVisible(false);
                     }
                 } catch (IOException f) {
                     displayMessage = new JPanel();
