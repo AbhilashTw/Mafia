@@ -31,7 +31,7 @@
     <target name="jar" depends="compileSrc">
         <jar destfile="${jarName}" basedir="${sourceOutput}">
             <manifest>
-                <attribute name="Userscreens.Main-Class" value="Runner.Main"/>
+                <attribute name="Main-Class" value="Runner.Main"/>
             </manifest>
         </jar>
     </target>
@@ -40,10 +40,11 @@
         <mkdir dir="${testOutput}"/>
         <javac srcdir="test" destdir="${testOutput}" classpath="${sourceOutput}:lib/junit-4.0.jar"
                includeantruntime="yes"/>
+
     </target>
 
 
-    <target name="run" depends="jar">
+    <target name="run">
         <java jar="${jarName}" fork="true"/>
     </target>
 

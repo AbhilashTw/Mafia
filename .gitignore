@@ -120,10 +120,10 @@ UpgradeLog*.XML
 
 
 ############
-## Windows
+## Screens
 ############
 
-# Windows image file caches
+# Screens image file caches
 Thumbs.db
 
 # Folder config file

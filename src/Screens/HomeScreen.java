@@ -1,6 +1,6 @@
-package Windows;
+package Screens;
 
-import Windows.Controls.ImagePanel;
+import Screens.Controls.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,32 +12,23 @@ import java.io.IOException;
    Job:- Understands to display the start window of the application
 */
 
-public class HomeWindow {
-    JFrame homeScreenFrame;
+public class HomeScreen {
+    private static final String BG_IMAGE = "images/homepage.jpg";
+    JFrame homeWindow;
     JButton startServerButton;
     JButton joinServerButton;
     JButton quitButton;
     ImagePanel homeScreenImage;
 
-    public HomeWindow() {
-        homeScreenFrame = new JFrame("MAFIA");
-        homeScreenFrame.setBounds(100, 100, 600, 600);
-        homeScreenFrame.setVisible(true);
-        homeScreenFrame.setBackground(Color.BLACK);
+    public HomeScreen(JFrame gameFrame) {
+        homeWindow = gameFrame;
+        homeScreenImage = new ImagePanel(new ImageIcon(BG_IMAGE).getImage());
+        homeWindow.getContentPane().add(homeScreenImage);
+        homeWindow.pack();
+        homeWindow.add(homeScreenImage);
 
-        homeScreenImage = new ImagePanel(new ImageIcon("images/homepage.jpg").getImage());
-
-        homeScreenFrame.getContentPane().add(homeScreenImage);
-        homeScreenFrame.pack();
-
-        homeScreenFrame.add(homeScreenImage);
-
-        startServerButton = createButton(100, 300, "Start ServerClient.Server");
-        joinServerButton = createButton(100, 400, "Join ServerClient.Server");
-        quitButton = createButton(100, 500, "Quit");
-
-        startServerButton = createButton(100, 300, "Start ServerClient.Server");
-        joinServerButton = createButton(100, 400, "Join ServerClient.Server");
+        startServerButton = createButton(100, 300, "StartServer");
+        joinServerButton = createButton(100, 400, "JoinServer");
         quitButton = createButton(100, 500, "Quit");
 
         homeScreenImage.add(startServerButton);
@@ -49,23 +40,21 @@ public class HomeWindow {
 
         startServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                StartServerWindow startServerScreen = new StartServerWindow();
+                homeScreenImage.setVisible(false);
+                StartServerScreen startServerScreen = new StartServerScreen(homeWindow);
                 try {
                     startServerScreen.display();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-
-                hide();
             }
         });
 
         joinServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JoinServerWindow joinServerScreenScreen = new JoinServerWindow();
+                JoinServerScreen joinServerScreenScreen = new JoinServerScreen(homeWindow);
                 joinServerScreenScreen.connectToServer();
-                hide();
+                homeScreenImage.setVisible(false);
             }
         });
 
@@ -92,9 +81,5 @@ public class HomeWindow {
                 }
             }
         });
-    }
-
-    private void hide() {
-        homeScreenFrame.setVisible(false);
     }
 }

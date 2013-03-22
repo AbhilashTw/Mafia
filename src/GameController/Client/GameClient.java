@@ -3,17 +3,17 @@ package GameController.Client;
 import Channels.Messages.ChannelMessage;
 import Channels.SocketChannel;
 import Channels.SocketChannelListener;
-import Screens.JoinServerScreen;
-import Screens.PlayersConnectedScreen;
+import Views.JoinServerView;
+import Views.PlayersConnectedView;
 
 import java.io.IOException;
 
 public class GameClient implements SocketChannelListener {
     private final int serverPort;
-    private final JoinServerScreen joinServerScreen;
-    private PlayersConnectedScreen playersConnectedScreen;
+    private final JoinServerView joinServerScreen;
+    private PlayersConnectedView playersConnectedScreen;
 
-    public GameClient(int serverPort, JoinServerScreen joinServerScreen) {
+    public GameClient(int serverPort, JoinServerView joinServerScreen) {
 
         this.serverPort = serverPort;
         this.joinServerScreen = joinServerScreen;
@@ -53,7 +53,7 @@ public class GameClient implements SocketChannelListener {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public void register(PlayersConnectedScreen playersConnectedScreen) {
+    public void register(PlayersConnectedView playersConnectedScreen) {
 
         this.playersConnectedScreen = playersConnectedScreen;
     }

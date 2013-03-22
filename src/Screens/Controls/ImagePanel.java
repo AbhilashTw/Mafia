@@ -1,4 +1,4 @@
-package Windows.Controls;
+package Screens.Controls;
 
 import javax.swing.*;
 import java.awt.*;
