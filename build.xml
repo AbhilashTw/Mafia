@@ -31,14 +31,15 @@
     <target name="jar" depends="compileSrc">
         <jar destfile="${jarName}" basedir="${sourceOutput}">
             <manifest>
-                <attribute name="Userscreens.Main-Class" value="Userscreens.Main"/>
+                <attribute name="Userscreens.Main-Class" value="Runner.Main"/>
             </manifest>
         </jar>
     </target>
 
     <target name="compileTest" depends="jar">
         <mkdir dir="${testOutput}"/>
-        <javac srcdir="test" destdir="${testOutput}" classpath="${sourceOutput}:lib/junit-4.0.jar" includeantruntime="yes"/>
+        <javac srcdir="test" destdir="${testOutput}" classpath="${sourceOutput}:lib/junit-4.0.jar"
+               includeantruntime="yes"/>
     </target>
 
 

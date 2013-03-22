@@ -1,4 +1,6 @@
-package Userscreens;
+package Windows;
+
+import Windows.Controls.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,14 +12,14 @@ import java.io.IOException;
    Job:- Understands to display the start window of the application
 */
 
-public class HomeScreen {
+public class HomeWindow {
     JFrame homeScreenFrame;
     JButton startServerButton;
     JButton joinServerButton;
     JButton quitButton;
     ImagePanel homeScreenImage;
 
-    public HomeScreen() {
+    public HomeWindow() {
         homeScreenFrame = new JFrame("MAFIA");
         homeScreenFrame.setBounds(100, 100, 600, 600);
         homeScreenFrame.setVisible(true);
@@ -48,7 +50,7 @@ public class HomeScreen {
         startServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                StartServerScreen startServerScreen = new StartServerScreen();
+                StartServerWindow startServerScreen = new StartServerWindow();
                 try {
                     startServerScreen.display();
                 } catch (IOException e1) {
@@ -61,7 +63,7 @@ public class HomeScreen {
 
         joinServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JoinServerScreen joinServerScreenScreen = new JoinServerScreen();
+                JoinServerWindow joinServerScreenScreen = new JoinServerWindow();
                 joinServerScreenScreen.connectToServer();
                 hide();
             }

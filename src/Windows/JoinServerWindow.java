@@ -1,16 +1,18 @@
-package Userscreens;
+package Windows;
 
-import ServerClient.Client;
+
+import GameController.Client.GameClient;
+import Screens.JoinServerScreen;
+import Windows.Controls.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 //Job:- Understands connecting a server to client based on the serverNameLabel
 
-public class JoinServerScreen {
+public class JoinServerWindow implements JoinServerScreen {
     JFrame joinServerFrame;
     ImagePanel joinServerScreenImage;
     JLabel serverNameLabel;
@@ -19,9 +21,9 @@ public class JoinServerScreen {
     JTextField playerNameTextField;
     JButton connectButton;
     JPanel displayMessage;
-    Client client;
+    GameClient client = new GameClient(1234, this);
 
-    public JoinServerScreen() {
+    public JoinServerWindow() {
         joinServerFrame = new JFrame("JoinServer");
         joinServerFrame.setBackground(Color.BLACK);
         joinServerFrame.setBounds(100, 100, 600, 600);
@@ -45,7 +47,7 @@ public class JoinServerScreen {
         serverNameText.setSize(100, 30);
         serverNameText.setLocation(150, 140);
 
-        playerNameLabel = new JLabel("Player Name");
+        playerNameLabel = new JLabel("GameServer Name");
         playerNameLabel.setForeground(Color.white);
         playerNameLabel.setSize(100, 100);
         playerNameLabel.setLocation(50, 200);
@@ -79,22 +81,29 @@ public class JoinServerScreen {
 
     public void connectToServer() {
         connectButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    client = Client.createClient(serverNameText.getText(), 1234, playerNameTextField.getText());
-                    if (client.getServerMessage().equals("Connected")) {
-                        PlayersConnectedScreen screen = new PlayersConnectedScreen(client);
-                        screen.display();
-                        joinServerFrame.setVisible(false);
-                        displayMessage = new JPanel();
-                        JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverNameLabel.getText(), "Connected", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                } catch (IOException f) {
-                    displayMessage = new JPanel();
-                    JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to connect", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                client.connectToServer(serverNameText.getText());
             }
         });
+
+    }
+
+    @Override
+    public void connectedToServer() {
+        PlayersConnectedWindow screen = new PlayersConnectedWindow(client);
+        client.register(screen);
+        screen.display();
+        joinServerFrame.setVisible(false);
+        displayMessage = new JPanel();
+        JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverNameLabel.getText(), "Connected", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    @Override
+    public void connectionToServerFailed() {
+        displayMessage = new JPanel();
+        JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to connect", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
 

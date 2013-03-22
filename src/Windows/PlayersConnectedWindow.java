@@ -1,27 +1,27 @@
-package Userscreens;
+package Windows;
 
-import ServerClient.Client;
+import GameController.Client.GameClient;
+import Screens.PlayersConnectedScreen;
+import Windows.Controls.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
-public class PlayersConnectedScreen {
+public class PlayersConnectedWindow implements PlayersConnectedScreen {
     JFrame playersConnectedFrame;
     ImagePanel playersConnectedScreenImage;
     JLabel playersConnectedLabel;
     DefaultListModel<String> players = new DefaultListModel<String>();
     JList playersList = new JList(players);
-    Client client;
-    String message;
+    GameClient client;
 
-    public PlayersConnectedScreen(Client client) {
+    public PlayersConnectedWindow(GameClient client) {
         this.client = client;
-        try {
-            message = client.getServerMessage();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            message = client.getServerMessage();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         playersConnectedFrame = new JFrame("Players Joined");
         playersConnectedFrame.setBounds(100, 100, 600, 600);
@@ -52,7 +52,7 @@ public class PlayersConnectedScreen {
     }
 
     public void display() {
-        String[] clients = message.split("\n");
+        String[] clients = "".split("\n");
         for (String s : clients) {
             players.addElement(s);
         }
