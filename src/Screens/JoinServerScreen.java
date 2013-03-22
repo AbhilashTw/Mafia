@@ -1,6 +1,5 @@
 package Screens;
 
-
 import GameController.Client.GameClient;
 import Screens.Controls.ImagePanel;
 import Views.JoinServerView;
@@ -13,6 +12,7 @@ import java.awt.event.ActionListener;
 //Job:- Understands connecting a server to client based on the serverNameLabel
 
 public class JoinServerScreen implements JoinServerView {
+    private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     JFrame joinServerFrame;
     ImagePanel joinServerScreenImage;
     JLabel serverNameLabel;
@@ -22,7 +22,6 @@ public class JoinServerScreen implements JoinServerView {
     JButton connectButton;
     JPanel displayMessage;
     GameClient client = new GameClient(1234, this);
-    private static final String BG_IMAGE = "images/joinServerScreen.jpg";
 
     public JoinServerScreen(JFrame gameFrame) {
         joinServerFrame = gameFrame;

@@ -14,6 +14,7 @@ public class PlayersConnectedScreen implements PlayersConnectedView {
     DefaultListModel<String> players = new DefaultListModel<String>();
     JList playersList = new JList(players);
     GameClient client;
+    private static final String BG_IMAGE = "images/playersConnectedScreen.jpg";
 
     public PlayersConnectedScreen(GameClient client, JFrame gameFrame) {
         this.client = client;
@@ -28,7 +29,7 @@ public class PlayersConnectedScreen implements PlayersConnectedView {
         playersConnectedFrame.setVisible(true);
         playersConnectedFrame.setBackground(Color.BLACK);
 
-        playersConnectedScreenImage = new ImagePanel(new ImageIcon("images/playersConnectedScreen.jpg").getImage());
+        playersConnectedScreenImage = new ImagePanel(new ImageIcon(BG_IMAGE).getImage());
 
         playersConnectedFrame.getContentPane().add(playersConnectedScreenImage);
         playersConnectedFrame.pack();

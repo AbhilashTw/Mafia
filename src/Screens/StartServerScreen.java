@@ -7,6 +7,7 @@ import Channels.SocketChannel;
 import GameController.Server.GameServer;
 import Screens.Controls.ImagePanel;
 import Views.StartServerView;
+import com.sun.xml.internal.org.jvnet.mimepull.MIMEMessage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,49 +17,28 @@ import java.util.ArrayList;
 //Job:- Understands to display a window to connect to a server
 
 public class StartServerScreen implements SocketServerListener, StartServerView {
+    private static final String BG_COLOR = "images/joinServerScreen.jpg";
     public SocketServer server;
     JFrame startServerFrame;
     JLabel playersJoinedLabel;
-    JButton startGameButton;
+    JButton startServerButton;
     ImagePanel startServerScreenImage;
     JPanel displayMessage;
     private ArrayList<GameServer> players = new ArrayList<GameServer>();
 
     public StartServerScreen(JFrame gameFrame) {
         startServer();
-
         startServerFrame = gameFrame;
-
-        startServerScreenImage = new ImagePanel(new ImageIcon("images/joinServerScreen.jpg").getImage());
+        startServerScreenImage = new ImagePanel(new ImageIcon(BG_COLOR).getImage());
         startServerFrame.getContentPane().add(startServerScreenImage);
         startServerFrame.pack();
 
-        //JLabel
+        playersJoinedLabel = createLabel("Players Joined", 100, -50);
 
-        playersJoinedLabel = createLabel("Players Joined");
+        startServerButton = createButton("Start Server", 800, 800);
 
-        //StartButton
-        startGameButton = new JButton("Start Game");
-        startGameButton.setSize(145, 50);
-        startGameButton.setLocation(800, 800);
-        startGameButton.setFont(new Font("Verdana", Font.BOLD, 14));
-        startGameButton.setForeground(Color.ORANGE);
-        startGameButton.setBackground(Color.BLACK);
-
-        //Frame Contents
         startServerScreenImage.add(playersJoinedLabel);
-        startServerScreenImage.add(startGameButton);
-    }
-
-    private JLabel createLabel(String labelName) {
-        JLabel label = new JLabel(labelName);
-        Font font = new Font("Monospaced", Font.BOLD, 20);
-        label.setFont(font);
-        label.setForeground(Color.WHITE);
-        label.setBackground(Color.BLACK);
-        label.setSize(200, 200);
-        label.setLocation(100, -50);
-        return label;
+        startServerScreenImage.add(startServerButton);
     }
 
     public void startServer() {
@@ -67,20 +47,33 @@ public class StartServerScreen implements SocketServerListener, StartServerView 
             server.start();
         } catch (Exception e) {
             displayMessage = new JPanel();
-            JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to Start Server.  Try Again", "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to Start Server.  Try Again", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private JButton createButton(String buttonName, int x_bound, int y_bound) {
+        JButton button = new JButton(buttonName);
+        button.setSize(145, 50);
+        button.setLocation(x_bound, y_bound);
+        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setForeground(Color.ORANGE);
+        button.setBackground(Color.BLACK);
+        return button;
+    }
+
+    private JLabel createLabel(String labelName, int x_bound, int y_bound) {
+        JLabel label = new JLabel(labelName);
+        Font font = new Font("Monospaced", Font.BOLD, 20);
+        label.setFont(font);
+        label.setForeground(Color.WHITE);
+        label.setBackground(Color.BLACK);
+        label.setSize(200, 200);
+        label.setLocation(x_bound, y_bound);
+        return label;
     }
 
     public void display() throws IOException {
         startServerFrame.setVisible(true);
-//        players.addElement(server.getServerName());
-//        for (Socket client : server.getClients()) {
-//            players.addElement(client.getLocalAddress().getHostName().toString());
-//        }
-//
-//        String result = server.getClientsListToString();
-//        server.sendMessage(result);
     }
 
     @Override
