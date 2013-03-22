@@ -2,9 +2,9 @@ package Screens;
 
 
 import Channels.Server.SocketServer;
-import Channels.Server.SocketServerListener;
 import Channels.SocketChannel;
-import GameController.Server.GameServer;
+import Controllers.Server.GameServerController;
+import Controllers.Server.Player;
 import Screens.Controls.ImagePanel;
 import Views.StartServerView;
 
@@ -15,19 +15,22 @@ import java.util.ArrayList;
 
 //Job:- Understands to display a window to connect to a server
 
-public class StartServerScreen implements SocketServerListener, StartServerView {
-    public SocketServer server;
+public class StartServerScreen implements StartServerView {
+
     JFrame startServerFrame;
+    private final GameServerController controller;
     JLabel playersJoinedLabel;
     JButton startGameButton;
     ImagePanel startServerScreenImage;
     JPanel displayMessage;
-    private ArrayList<GameServer> players = new ArrayList<GameServer>();
 
-    public StartServerScreen(JFrame gameFrame) {
-        startServer();
+    DefaultListModel<String> allPlayers = new DefaultListModel<String>();
+    JList<String> playersList = new JList<String>(allPlayers);
 
+    public StartServerScreen(JFrame gameFrame, GameServerController controller) {
         startServerFrame = gameFrame;
+        this.controller = controller;
+        controller.bind(this);
 
         startServerScreenImage = new ImagePanel(new ImageIcon("images/joinServerScreen.jpg").getImage());
         startServerFrame.getContentPane().add(startServerScreenImage);
@@ -45,6 +48,14 @@ public class StartServerScreen implements SocketServerListener, StartServerView 
         startGameButton.setForeground(Color.ORANGE);
         startGameButton.setBackground(Color.BLACK);
 
+        //List of players
+
+        playersList.setSize(200, 150);
+        playersList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
+        playersList.setLocation(50, 100);
+        Font f = new Font("Comic Sans MS", Font.PLAIN, 15);
+        playersList.setFont(f);
+
         //Frame Contents
         startServerScreenImage.add(playersJoinedLabel);
         startServerScreenImage.add(startGameButton);
@@ -60,19 +71,13 @@ public class StartServerScreen implements SocketServerListener, StartServerView 
         label.setLocation(100, -50);
         return label;
     }
-
-    public void startServer() {
-        try {
-            server = new SocketServer(1234, this);
-            server.start();
-        } catch (Exception e) {
-            displayMessage = new JPanel();
+    /*
+    * displayMessage = new JPanel();
             JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to Start Server.  Try Again", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        }
-    }
+    * */
 
-    public void display() throws IOException {
+    public void display() {
         startServerFrame.setVisible(true);
 //        players.addElement(server.getServerName());
 //        for (Socket client : server.getClients()) {
@@ -84,15 +89,11 @@ public class StartServerScreen implements SocketServerListener, StartServerView 
     }
 
     @Override
-    public void onError(Exception e) {
-        throw new RuntimeException("Server Socket Error", e);
-    }
+    public void updatePlayers(ArrayList<Player> players) {
+        for (Player player : players) {
+            allPlayers.addElement(player.getName());
+        }
 
-    @Override
-    public void onConnectionEstablished(SocketChannel channel) {
-        GameServer player = new GameServer(channel);
-        players.add(player);
-        channel.bind(player);
     }
 }
 

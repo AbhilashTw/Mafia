@@ -1,5 +1,6 @@
 package Screens;
 
+import Controllers.Server.GameServerController;
 import Screens.Controls.ImagePanel;
 
 import javax.swing.*;
@@ -39,15 +40,7 @@ public class HomeScreen {
     public void display() {
 
         startServerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                homeScreenImage.setVisible(false);
-                StartServerScreen startServerScreen = new StartServerScreen(homeWindow);
-                try {
-                    startServerScreen.display();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
+            public void actionPerformed(ActionEvent e) {startGameServer();}
         });
 
         joinServerButton.addActionListener(new ActionListener() {
@@ -59,6 +52,14 @@ public class HomeScreen {
         });
 
         addHandlerForQuitButton();
+    }
+
+    private void startGameServer() {
+        GameServerController controller = new GameServerController();
+        controller.start();
+        StartServerScreen startServerScreen = new StartServerScreen(homeWindow, controller);
+        homeScreenImage.setVisible(false);
+        startServerScreen.display();
     }
 
     private JButton createButton(int x_axis, int y_axis, String buttonName) {
