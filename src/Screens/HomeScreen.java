@@ -9,9 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-/*
-   Job:- Understands to display the start window of the application
-*/
+/**
+ * Job:- Understands to display the start window of the application.
+ */
 
 public class HomeScreen {
     private static final String BG_IMAGE = "images/homepage.jpg";
@@ -38,7 +38,6 @@ public class HomeScreen {
     }
 
     public void display() {
-
         startServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -81,8 +80,7 @@ public class HomeScreen {
     private void addHandlerForQuitButton() {
         quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int selectedOption = JOptionPane.showConfirmDialog(null, "Do you really want to quit?",
-                        "", JOptionPane.YES_NO_OPTION);
+                int selectedOption = JOptionPane.showConfirmDialog(null, "Do you really want to quit?", "", JOptionPane.YES_NO_OPTION);
                 if (selectedOption == JOptionPane.YES_OPTION) {
                     System.exit(0);
                 }

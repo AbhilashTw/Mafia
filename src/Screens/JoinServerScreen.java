@@ -9,7 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//Job:- Understands connecting a server to client based on the serverNameLabel
+/**
+ * Job:- Understands connecting client to remote connection.
+ */
 
 public class JoinServerScreen implements JoinServerView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
@@ -25,46 +27,13 @@ public class JoinServerScreen implements JoinServerView {
 
     public JoinServerScreen(JFrame gameFrame) {
         joinServerFrame = gameFrame;
-
         joinServerScreenImage = new ImagePanel(new ImageIcon(BG_IMAGE).getImage());
 
-
-        serverNameText = new JTextField();
-        serverNameText.setSize(100, 30);
-        serverNameText.setLocation(200, 200);
-
-        serverNameLabel = new JLabel("Server Name");
-        serverNameLabel.setForeground(Color.white);
-        serverNameLabel.setSize(100, 100);
-        serverNameLabel.setLocation(50, 100);
-        Font font = new Font("Monospaced", Font.BOLD, 14);
-        serverNameLabel.setFont(font);
-        serverNameLabel.setForeground(Color.ORANGE);
-
-        serverNameText = new JTextField();
-        serverNameText.setSize(100, 30);
-        serverNameText.setLocation(150, 140);
-
-        playerNameLabel = new JLabel("Player Name");
-        playerNameLabel.setForeground(Color.white);
-        playerNameLabel.setSize(100, 100);
-        playerNameLabel.setLocation(50, 200);
-        Font playerFont = new Font("Monospaced", Font.BOLD, 14);
-        playerNameLabel.setFont(playerFont);
-        playerNameLabel.setForeground(Color.ORANGE);
-
-
-        playerNameTextField = new JTextField();
-        playerNameTextField.setSize(100, 30);
-        playerNameTextField.setLocation(150, 240);
-
-
-        connectButton = new JButton("Connect");
-        connectButton.setSize(145, 50);
-        connectButton.setLocation(800, 800);
-        connectButton.setFont(new Font("Verdana", Font.BOLD, 14));
-        connectButton.setForeground(Color.ORANGE);
-        connectButton.setBackground(Color.BLACK);
+        serverNameText = createTextField(200, 150);
+        serverNameLabel = createLabel("Server Name", 50, 100);
+        playerNameTextField = createTextField(150, 240);
+        playerNameLabel = createLabel("Player Name", 50, 200);
+        connectButton = createButton("Connect", 800, 800);
 
         joinServerScreenImage.add(serverNameLabel);
         joinServerScreenImage.add(playerNameLabel);
@@ -77,6 +46,21 @@ public class JoinServerScreen implements JoinServerView {
 
     }
 
+    @Override
+    public void connectedToServer() {
+        PlayersConnectedScreen screen = new PlayersConnectedScreen(client, joinServerFrame);
+        client.register(screen);
+        joinServerScreenImage.setVisible(false);
+        displayMessage = new JPanel();
+        JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverNameText.getText(), "Connected", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    @Override
+    public String getPlayerName() {
+        return playerNameTextField.getText();
+    }
+
     public void connectToServer() {
         connectButton.addActionListener(new ActionListener() {
             @Override
@@ -87,15 +71,14 @@ public class JoinServerScreen implements JoinServerView {
 
     }
 
-    @Override
-    public void connectedToServer() {
-        PlayersConnectedScreen screen = new PlayersConnectedScreen(client, joinServerFrame);
-        client.register(screen);
-        screen.display();
-        joinServerFrame.setVisible(false);
-        displayMessage = new JPanel();
-        JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverNameLabel.getText(), "Connected", JOptionPane.INFORMATION_MESSAGE);
-
+    private JButton createButton(String buttonLabel, int x_bound, int y_bound) {
+        JButton button = new JButton(buttonLabel);
+        button.setSize(145, 50);
+        button.setLocation(x_bound, y_bound);
+        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setForeground(Color.ORANGE);
+        button.setBackground(Color.BLACK);
+        return button;
     }
 
     @Override
@@ -104,9 +87,22 @@ public class JoinServerScreen implements JoinServerView {
         JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to connect", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    @Override
-    public String getPlayerName() {
-        return playerNameTextField.getText();
+    private JLabel createLabel(String labelName, int x_bound, int y_bound) {
+        JLabel label = new JLabel(labelName);
+        label.setForeground(Color.white);
+        label.setSize(100, 100);
+        label.setLocation(x_bound, y_bound);
+        Font font = new Font("Monospaced", Font.BOLD, 14);
+        label.setFont(font);
+        label.setForeground(Color.ORANGE);
+        return label;
+    }
+
+    private JTextField createTextField(int x_bound, int y_Bound) {
+        JTextField JTextField = new JTextField();
+        JTextField.setSize(100, 30);
+        JTextField.setLocation(x_bound, y_Bound);
+        return JTextField;
     }
 }
 
