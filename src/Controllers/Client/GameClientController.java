@@ -4,6 +4,7 @@ import Channels.Messages.ChannelMessage;
 import Channels.SocketChannel;
 import Channels.SocketChannelListener;
 import GameMessages.PlayerDetailsMessage;
+import GameMessages.PlayersConnectedMessage;
 import Views.JoinServerView;
 import Views.PlayersConnectedView;
 
@@ -29,7 +30,7 @@ public class GameClientController implements SocketChannelListener {
     public void onConnectionEstablished(SocketChannel channel) {
         this.channel = channel;
         joinServerView.connectedToServer();
-        channel.send(new PlayerDetailsMessage(joinServerView.getPlayerName()));
+        this.channel.send(new PlayerDetailsMessage(joinServerView.getPlayerName()));
     }
 
     @Override
@@ -39,22 +40,24 @@ public class GameClientController implements SocketChannelListener {
 
     @Override
     public void onClose(SocketChannel channel, Exception e) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void onSendFailed(SocketChannel channel, IOException e, ChannelMessage message) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        System.out.println("Unable to send Message");
     }
 
     @Override
     public void onNewMessageArrived(SocketChannel channel, ChannelMessage message) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        if (message instanceof PlayersConnectedMessage) {
+            PlayersConnectedMessage pCm = (PlayersConnectedMessage) message;
+            playersConnectedView.displayConnectedPlayers(pCm);
+        }
     }
 
     @Override
     public void onMessageReadError(SocketChannel channel, Exception e) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     public void register(PlayersConnectedView playersConnectedScreen) {

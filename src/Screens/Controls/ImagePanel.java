@@ -3,12 +3,11 @@ package Screens.Controls;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Job : Understands to display the picture as background of panel.
+ */
 public class ImagePanel extends JPanel {
     private Image img;
-
-    public ImagePanel(String img) {
-        this(new ImageIcon(img).getImage());
-    }
 
     public ImagePanel(Image img) {
         this.img = img;
