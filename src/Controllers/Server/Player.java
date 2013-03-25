@@ -27,19 +27,12 @@ public class Player implements SocketChannelListener {
     }
 
     @Override
-    public void onConnectionEstablished(SocketChannel channel) {
-    }
-
-    @Override
-    public void onConnectionFailed(String serverAddress, int serverPort, Exception e) {
-    }
-
-    @Override
     public void onClose(SocketChannel channel, Exception e) {
     }
 
     @Override
     public void onSendFailed(SocketChannel channel, IOException e, ChannelMessage message) {
+        System.out.println("Unable to send in Server ");
     }
 
     @Override

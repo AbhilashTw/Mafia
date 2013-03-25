@@ -1,5 +1,6 @@
 package Channels.Server;
 
+import Channels.ConnectionListener;
 import Channels.SocketChannel;
 
 import java.io.IOException;
@@ -13,12 +14,12 @@ import java.net.SocketTimeoutException;
 public class SocketServer {
     final private int SOCKET_TIMEOUT = 1000;
     private int port;
-    private SocketServerListener listener;
+    private ConnectionListener listener;
     private ServerSocket serverSocket;
     private Thread thread;
     private boolean stopWaiting;
 
-    public SocketServer(int port, SocketServerListener listener) {
+    public SocketServer(int port, ConnectionListener listener) {
 
         this.port = port;
         this.listener = listener;
@@ -34,12 +35,12 @@ public class SocketServer {
                     try {
                         serverSocket.close();
                     } catch (IOException e1) {
-                        listener.onError(e1);
+                        listener.onConnectionFailed(null, port, e1);
                     }
                     return;
                 }
             } catch (IOException e) {
-                listener.onError(e);
+                listener.onConnectionFailed(null, port, e);
             }
         }
     }
@@ -54,7 +55,7 @@ public class SocketServer {
             serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(SOCKET_TIMEOUT);
         } catch (IOException e) {
-            listener.onError(e);
+            listener.onConnectionFailed(null, port, e);
         }
     }
 

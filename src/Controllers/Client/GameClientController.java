@@ -1,5 +1,6 @@
 package Controllers.Client;
 
+import Channels.ConnectionListener;
 import Channels.Messages.ChannelMessage;
 import Channels.SocketChannel;
 import Channels.SocketChannelListener;
@@ -10,7 +11,7 @@ import Views.PlayersConnectedView;
 
 import java.io.IOException;
 
-public class GameClientController implements SocketChannelListener {
+public class GameClientController implements SocketChannelListener,ConnectionListener {
     private final int serverPort;
     private final JoinServerView joinServerView;
     private PlayersConnectedView playersConnectedView;
@@ -28,6 +29,7 @@ public class GameClientController implements SocketChannelListener {
     @Override
     public void onConnectionEstablished(SocketChannel channel) {
         this.channel = channel;
+        this.channel.bind(this);
         joinServerView.connectedToServer();
         this.channel.send(new PlayerDetailsMessage(joinServerView.getPlayerName()));
     }
@@ -56,7 +58,7 @@ public class GameClientController implements SocketChannelListener {
 
     @Override
     public void onMessageReadError(SocketChannel channel, Exception e) {
-
+        System.out.println("Unable to read message");
     }
 
     public void register(PlayersConnectedView playersConnectedScreen) {

@@ -1,15 +1,16 @@
 package Controllers.Server;
 
 import Channels.Messages.ChannelMessage;
+import Channels.ConnectionListener;
 import Channels.Server.SocketServer;
-import Channels.Server.SocketServerListener;
 import Channels.SocketChannel;
 import GameMessages.PlayersConnectedMessage;
 import Views.StartServerView;
+import org.omg.CORBA.portable.ApplicationException;
 
 import java.util.ArrayList;
 
-public class GameServerController implements SocketServerListener, GameGod {
+public class GameServerController implements ConnectionListener, GameGod {
 
     SocketServer server = new SocketServer(1234, this);
     ArrayList<Player> players = new ArrayList<Player>();
@@ -23,13 +24,15 @@ public class GameServerController implements SocketServerListener, GameGod {
         this.startServerView = startServerView;
     }
 
-    @Override
-    public void onError(Exception e) {
-    }
 
     @Override
     public void onConnectionEstablished(SocketChannel channel) {
         players.add(new Player(channel, this));
+    }
+
+    @Override
+    public void onConnectionFailed(String serverAddress, int serverPort, Exception e) {
+        throw new RuntimeException("Could not start server",e);
     }
 
     public void sendMessageToClients(ChannelMessage message) {
@@ -48,7 +51,7 @@ public class GameServerController implements SocketServerListener, GameGod {
 
     @Override
     public void playersUpdated(Player player) {
-        sendMessageToClients(new PlayersConnectedMessage(getPlayersListName()));
         startServerView.updatePlayers(players);
+        sendMessageToClients(new PlayersConnectedMessage(getPlayersListName()));
     }
 }
