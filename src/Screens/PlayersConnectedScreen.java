@@ -32,6 +32,7 @@ public class PlayersConnectedScreen implements PlayersConnectedView {
         playersConnectedFrame.add(playersConnectedScreenImage);
         playersConnectedScreenImage.setVisible(true);
         playersConnectedFrame.setVisible(true);
+        playersConnectedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void createList(int x_bound, int y_bound) {

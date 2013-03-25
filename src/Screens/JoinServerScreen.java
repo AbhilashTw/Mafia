@@ -43,6 +43,7 @@ public class JoinServerScreen implements JoinServerView {
 
         joinServerFrame.getContentPane().add(joinServerScreenImage);
         joinServerFrame.setVisible(true);
+        joinServerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
 

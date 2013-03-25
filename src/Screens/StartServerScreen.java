@@ -42,6 +42,7 @@ public class StartServerScreen implements StartServerView {
         startServerScreenImage.add(playersJoinedLabel);
         startServerScreenImage.add(startServerButton);
         startServerScreenImage.add(playersList);
+        startServerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void display() throws IOException {

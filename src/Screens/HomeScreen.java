@@ -35,6 +35,7 @@ public class HomeScreen {
         homeScreenImage.add(startServerButton);
         homeScreenImage.add(joinServerButton);
         homeScreenImage.add(quitButton);
+        homeWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void display() {
