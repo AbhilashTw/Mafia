@@ -1,9 +1,7 @@
-package Views;
+package views.client;
 
 public interface JoinServerView {
-    void connectedToServer();
-
     void connectionToServerFailed();
-
     String getPlayerName();
+    String getServerName();
 }

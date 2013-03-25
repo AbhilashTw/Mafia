@@ -1,7 +1,7 @@
-package Channels;
+package channels;
 
-import Channels.Messages.ByeMessage;
-import Channels.Messages.ChannelMessage;
+import channels.Messages.ByeMessage;
+import channels.Messages.ChannelMessage;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -99,7 +99,6 @@ public class SocketChannel {
             ChannelMessage message = (ChannelMessage) o;
             if (message instanceof ByeMessage) return false;
             channelListener.onNewMessageArrived(this, message);
-
         } catch (SocketTimeoutException e) {
             if (stopWaiting) {
                 return false;

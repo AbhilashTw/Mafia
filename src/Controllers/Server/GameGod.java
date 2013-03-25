@@ -1,4 +1,4 @@
-package Controllers.Server;
+package controllers.server;
 
 public interface GameGod {
 

@@ -1,4 +1,4 @@
-package Channels;
+package channels;
 
 public interface ConnectionListener {
     void onConnectionEstablished(SocketChannel channel);
