@@ -1,28 +1,40 @@
-package GameController.Server;
+package Controllers.Client;
 
 import Channels.Messages.ChannelMessage;
 import Channels.SocketChannel;
 import Channels.SocketChannelListener;
+import GameMessages.PlayerDetailsMessage;
+import Views.JoinServerView;
+import Views.PlayersConnectedView;
 
 import java.io.IOException;
 
-public class GameServer implements SocketChannelListener {
-    SocketChannel channel;
+public class GameClientController implements SocketChannelListener {
+    private final int serverPort;
+    private final JoinServerView joinServerView;
+    private PlayersConnectedView playersConnectedView;
+    private SocketChannel channel;
 
+    public GameClientController(int serverPort, JoinServerView joinServerView) {
 
-    public GameServer(SocketChannel channel) {
+        this.serverPort = serverPort;
+        this.joinServerView = joinServerView;
+    }
 
-        this.channel = channel;
+    public void connectToServer(String serverName) {
+        SocketChannel.connectTo(serverName, serverPort, this);
     }
 
     @Override
     public void onConnectionEstablished(SocketChannel channel) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        this.channel = channel;
+        joinServerView.connectedToServer();
+        channel.send(new PlayerDetailsMessage(joinServerView.getPlayerName()));
     }
 
     @Override
     public void onConnectionFailed(String serverAddress, int serverPort, Exception e) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        joinServerView.connectionToServerFailed();
     }
 
     @Override
@@ -43,5 +55,10 @@ public class GameServer implements SocketChannelListener {
     @Override
     public void onMessageReadError(SocketChannel channel, Exception e) {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public void register(PlayersConnectedView playersConnectedScreen) {
+
+        this.playersConnectedView = playersConnectedScreen;
     }
 }

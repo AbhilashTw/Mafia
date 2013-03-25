@@ -1,36 +1,32 @@
-package GameController.Client;
+package Controllers.Server;
 
 import Channels.Messages.ChannelMessage;
 import Channels.SocketChannel;
 import Channels.SocketChannelListener;
-import Views.JoinServerView;
-import Views.PlayersConnectedView;
+import GameMessages.PlayerDetailsMessage;
 
 import java.io.IOException;
 
-public class GameClient implements SocketChannelListener {
-    private final int serverPort;
-    private final JoinServerView joinServerScreen;
-    private PlayersConnectedView playersConnectedScreen;
+public class Player implements SocketChannelListener {
+    SocketChannel channel;
+    private final GameGod god;
+    private String name;
 
-    public GameClient(int serverPort, JoinServerView joinServerScreen) {
+    public Player(SocketChannel channel, GameGod god) {
+        this.channel = channel;
+        this.god = god;
 
-        this.serverPort = serverPort;
-        this.joinServerScreen = joinServerScreen;
-    }
-
-    public void connectToServer(String serverName) {
-        SocketChannel.connectTo(serverName, serverPort, this);
+        channel.bind(this);
     }
 
     @Override
     public void onConnectionEstablished(SocketChannel channel) {
-        joinServerScreen.connectedToServer();
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void onConnectionFailed(String serverAddress, int serverPort, Exception e) {
-        joinServerScreen.connectionToServerFailed();
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -45,7 +41,12 @@ public class GameClient implements SocketChannelListener {
 
     @Override
     public void onNewMessageArrived(SocketChannel channel, ChannelMessage message) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        if (message instanceof PlayerDetailsMessage) {
+            PlayerDetailsMessage pdM = (PlayerDetailsMessage) message;
+            name = pdM.getPlayerName();
+            god.playersUpdated(this);
+        }
+
     }
 
     @Override
@@ -53,8 +54,7 @@ public class GameClient implements SocketChannelListener {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public void register(PlayersConnectedView playersConnectedScreen) {
-
-        this.playersConnectedScreen = playersConnectedScreen;
+    public String getName() {
+        return name;
     }
 }

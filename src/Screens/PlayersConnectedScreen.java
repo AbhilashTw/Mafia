@@ -1,6 +1,6 @@
 package Screens;
 
-import GameController.Client.GameClient;
+import Controllers.Client.GameClientController;
 import Screens.Controls.ImagePanel;
 import Views.PlayersConnectedView;
 
@@ -13,10 +13,11 @@ public class PlayersConnectedScreen implements PlayersConnectedView {
     JLabel playersConnectedLabel;
     DefaultListModel<String> players = new DefaultListModel<String>();
     JList playersList = new JList(players);
-    GameClient client;
-    private static final String BG_IMAGE = "images/playersConnectedScreen.jpg";
 
-    public PlayersConnectedScreen(GameClient client, JFrame gameFrame) {
+    private static final String BG_IMAGE = "images/playersConnectedScreen.jpg";
+    GameClientController client;
+
+    public PlayersConnectedScreen(GameClientController client, JFrame gameFrame) {
         this.client = client;
 //        try {
 //            message = client.getServerMessage();

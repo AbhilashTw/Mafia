@@ -1,6 +1,6 @@
 package Screens;
 
-import GameController.Client.GameClient;
+import Controllers.Client.GameClientController;
 import Screens.Controls.ImagePanel;
 import Views.JoinServerView;
 
@@ -21,7 +21,7 @@ public class JoinServerScreen implements JoinServerView {
     JTextField playerNameTextField;
     JButton connectButton;
     JPanel displayMessage;
-    GameClient client = new GameClient(1234, this);
+    GameClientController client = new GameClientController(1234, this);
 
     public JoinServerScreen(JFrame gameFrame) {
         joinServerFrame = gameFrame;
@@ -102,6 +102,11 @@ public class JoinServerScreen implements JoinServerView {
     public void connectionToServerFailed() {
         displayMessage = new JPanel();
         JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to connect", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public String getPlayerName() {
+        return playerNameTextField.getText();
     }
 }
 
