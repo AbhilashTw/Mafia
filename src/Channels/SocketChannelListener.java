@@ -4,10 +4,8 @@ import Channels.Messages.ChannelMessage;
 
 import java.io.IOException;
 
-public interface SocketChannelListener {
-    void onConnectionEstablished(SocketChannel channel);
 
-    void onConnectionFailed(String serverAddress, int serverPort, Exception e);
+public interface SocketChannelListener {
 
     void onClose(SocketChannel channel, Exception e);
 
