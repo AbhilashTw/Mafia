@@ -1,8 +1,8 @@
 package screens.client;
 
 import controllers.client.JoinServerController;
-import screens.controls.MainFrame;
 import screens.controls.ImagePanel;
+import screens.controls.MainFrame;
 import views.client.JoinServerView;
 
 import javax.swing.*;
@@ -16,8 +16,8 @@ import java.awt.event.ActionListener;
 
 public class JoinServerScreen implements JoinServerView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
-    MainFrame mainFrame;
     private final JoinServerController controller;
+    MainFrame mainFrame;
     ImagePanel panel;
     JLabel serverNameLabel;
     JLabel playerNameLabel;

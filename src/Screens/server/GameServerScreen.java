@@ -3,9 +3,9 @@ package screens.server;
 import channels.Server.SocketServer;
 import controllers.server.GameServerController;
 import controllers.server.Player;
-import screens.controls.MainFrame;
 import screens.controls.ImagePanel;
-import views.server.StartServerView;
+import screens.controls.MainFrame;
+import views.server.GameServerView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Job:- Understands to display a window to connect to a server
  */
 
-public class GameServerScreen implements StartServerView {
+public class GameServerScreen implements GameServerView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     private final GameServerController controller;
     public SocketServer server;

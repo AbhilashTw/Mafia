@@ -4,9 +4,9 @@ import channels.ConnectionListener;
 import channels.Messages.ChannelMessage;
 import channels.Server.SocketServer;
 import channels.SocketChannel;
-import gameMessages.PlayersConnectedMessage;
 import controllers.Workflow;
-import views.server.StartServerView;
+import gameMessages.PlayersConnectedMessage;
+import views.server.GameServerView;
 
 import java.util.ArrayList;
 
@@ -15,17 +15,16 @@ public class GameServerController implements ConnectionListener, GameGod {
     private final Workflow workflow;
     SocketServer server = new SocketServer(1234, this);
     ArrayList<Player> players = new ArrayList<Player>();
-    private StartServerView view;
+    private GameServerView view;
 
     public GameServerController(Workflow workflow) {
 
         this.workflow = workflow;
     }
 
-    public void bind(StartServerView view) {
+    public void bind(GameServerView view) {
         this.view = view;
     }
-
 
     @Override
     public void onConnectionEstablished(SocketChannel channel) {
@@ -34,7 +33,7 @@ public class GameServerController implements ConnectionListener, GameGod {
 
     @Override
     public void onConnectionFailed(String serverAddress, int serverPort, Exception e) {
-        throw new RuntimeException("Could not start server",e);
+        throw new RuntimeException("Could not start server", e);
     }
 
     public void sendMessageToClients(ChannelMessage message) {

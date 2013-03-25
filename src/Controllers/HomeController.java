@@ -7,7 +7,6 @@ public class HomeController {
     private HomeView view;
 
     public HomeController(Workflow workflow) {
-
         this.workflow = workflow;
     }
 

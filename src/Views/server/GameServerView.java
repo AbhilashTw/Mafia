@@ -4,6 +4,6 @@ import controllers.server.Player;
 
 import java.util.ArrayList;
 
-public interface StartServerView {
+public interface GameServerView {
     void updatePlayers(ArrayList<Player> players);
 }

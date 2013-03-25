@@ -15,7 +15,6 @@ public class SocketChannel {
     Socket socket;
     private SocketChannelListener channelListener;
     private Thread thread;
-
     private boolean stopWaiting;
 
 
@@ -49,7 +48,8 @@ public class SocketChannel {
                 pollForIncomingData();
             }
         });
-        thread.start();                                     }
+        thread.start();
+    }
 
     private void pollForIncomingData() {
         try {

@@ -1,8 +1,8 @@
 package screens;
 
 import controllers.HomeController;
-import screens.controls.MainFrame;
 import screens.controls.ImagePanel;
+import screens.controls.MainFrame;
 import views.HomeView;
 
 import javax.swing.*;
@@ -16,8 +16,8 @@ import java.awt.event.ActionListener;
 
 public class HomeScreen implements HomeView {
     private static final String BG_IMAGE = "images/homepage.jpg";
-    MainFrame mainFrame;
     private final HomeController controller;
+    MainFrame mainFrame;
     JButton startServerButton;
     JButton joinServerButton;
     JButton quitButton;
@@ -73,7 +73,4 @@ public class HomeScreen implements HomeView {
         return button;
     }
 
-    private void addHandlerForQuitButton() {
-
-    }
 }
