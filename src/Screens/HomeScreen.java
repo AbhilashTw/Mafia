@@ -40,7 +40,13 @@ public class HomeScreen {
     public void display() {
 
         startServerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {startGameServer();}
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    startGameServer();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
         });
 
         joinServerButton.addActionListener(new ActionListener() {
@@ -54,7 +60,7 @@ public class HomeScreen {
         addHandlerForQuitButton();
     }
 
-    private void startGameServer() {
+    private void startGameServer() throws IOException {
         GameServerController controller = new GameServerController();
         controller.start();
         StartServerScreen startServerScreen = new StartServerScreen(homeWindow, controller);
