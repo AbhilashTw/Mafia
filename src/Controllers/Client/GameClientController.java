@@ -17,7 +17,6 @@ public class GameClientController implements SocketChannelListener {
     private SocketChannel channel;
 
     public GameClientController(int serverPort, JoinServerView joinServerView) {
-
         this.serverPort = serverPort;
         this.joinServerView = joinServerView;
     }

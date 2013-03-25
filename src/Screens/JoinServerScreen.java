@@ -29,10 +29,12 @@ public class JoinServerScreen implements JoinServerView {
         joinServerFrame = gameFrame;
         joinServerScreenImage = new ImagePanel(new ImageIcon(BG_IMAGE).getImage());
 
-        serverNameText = createTextField(200, 150);
         serverNameLabel = createLabel("Server Name", 50, 100);
-        playerNameTextField = createTextField(150, 240);
         playerNameLabel = createLabel("Player Name", 50, 200);
+
+        serverNameText = createTextField(150, 140);
+        playerNameTextField = createTextField(150, 240);
+
         connectButton = createButton("Connect", 800, 800);
 
         joinServerScreenImage.add(serverNameLabel);
@@ -42,6 +44,7 @@ public class JoinServerScreen implements JoinServerView {
         joinServerScreenImage.add(connectButton);
 
         joinServerFrame.getContentPane().add(joinServerScreenImage);
+        joinServerFrame.pack();
         joinServerFrame.setVisible(true);
         joinServerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

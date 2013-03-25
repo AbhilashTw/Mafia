@@ -99,7 +99,6 @@ public class SocketChannel {
             ChannelMessage message = (ChannelMessage) o;
             if (message instanceof ByeMessage) return false;
             channelListener.onNewMessageArrived(this, message);
-
         } catch (SocketTimeoutException e) {
             if (stopWaiting) {
                 return false;

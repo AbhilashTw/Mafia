@@ -26,7 +26,6 @@ public class HomeScreen {
         homeScreenImage = new ImagePanel(new ImageIcon(BG_IMAGE).getImage());
         homeWindow.getContentPane().add(homeScreenImage);
         homeWindow.pack();
-        homeWindow.add(homeScreenImage);
 
         startServerButton = createButton(100, 300, "StartServer");
         joinServerButton = createButton(100, 400, "JoinServer");
