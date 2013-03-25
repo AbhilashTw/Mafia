@@ -1,52 +1,47 @@
-package Screens;
+package screens.server;
 
-import Channels.Server.SocketServer;
-import Controllers.Server.GameServerController;
-import Controllers.Server.Player;
-import Screens.Controls.ImagePanel;
-import Views.StartServerView;
+import channels.Server.SocketServer;
+import controllers.server.GameServerController;
+import controllers.server.Player;
+import screens.controls.MainFrame;
+import screens.controls.ImagePanel;
+import views.server.StartServerView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Job:- Understands to display a window to connect to a server
  */
 
-public class StartServerScreen implements StartServerView {
-    private static final String BG_COLOR = "images/joinServerScreen.jpg";
+public class GameServerScreen implements StartServerView {
+    private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     private final GameServerController controller;
     public SocketServer server;
-    JFrame startServerFrame;
+    MainFrame startServerFrame;
     JLabel playersJoinedLabel;
     JButton startServerButton;
-    ImagePanel startServerScreenImage;
+    JButton stopServerButton;
+    ImagePanel panel;
     DefaultListModel<String> allPlayers = new DefaultListModel<String>();
     JList<String> playersList = new JList<String>(allPlayers);
 
-    public StartServerScreen(JFrame gameFrame, GameServerController controller) {
-        startServerFrame = gameFrame;
+    public GameServerScreen(MainFrame mainFrame, GameServerController controller) {
+        startServerFrame = mainFrame;
         this.controller = controller;
         this.controller.bind(this);
-
-        startServerScreenImage = new ImagePanel(new ImageIcon(BG_COLOR).getImage());
-        startServerFrame.getContentPane().add(startServerScreenImage);
-        startServerFrame.pack();
+        panel = mainFrame.createImagePanel(BG_IMAGE);
 
         playersJoinedLabel = createLabel("Players Joined", 100, -50);
         startServerButton = createButton("Start Game", 800, 800);
+        stopServerButton = createButton("Stop Server", 800, 900);
         createList();
 
-        startServerScreenImage.add(playersJoinedLabel);
-        startServerScreenImage.add(startServerButton);
-        startServerScreenImage.add(playersList);
-        startServerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    public void display() throws IOException {
-        startServerFrame.setVisible(true);
+        panel.add(playersJoinedLabel);
+        panel.add(startServerButton);
+        panel.add(stopServerButton);
+        panel.add(playersList);
     }
 
     @Override
@@ -86,5 +81,7 @@ public class StartServerScreen implements StartServerView {
         label.setLocation(x_bound, y_bound);
         return label;
     }
+
+
 }
 

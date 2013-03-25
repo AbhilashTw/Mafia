@@ -1,6 +1,6 @@
-package GameMessages;
+package gameMessages;
 
-import Channels.Messages.ChannelMessage;
+import channels.Messages.ChannelMessage;
 
 import java.io.Serializable;
 

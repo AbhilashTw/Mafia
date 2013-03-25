@@ -1,9 +1,9 @@
-package Controllers.Server;
+package controllers.server;
 
-import Channels.Messages.ChannelMessage;
-import Channels.SocketChannel;
-import Channels.SocketChannelListener;
-import GameMessages.PlayerDetailsMessage;
+import channels.Messages.ChannelMessage;
+import channels.SocketChannel;
+import channels.SocketChannelListener;
+import gameMessages.PlayerDetailsMessage;
 
 import java.io.IOException;
 

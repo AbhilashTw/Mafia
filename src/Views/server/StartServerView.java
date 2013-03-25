@@ -1,6 +1,6 @@
-package Views;
+package views.server;
 
-import Controllers.Server.Player;
+import controllers.server.Player;
 
 import java.util.ArrayList;
 

@@ -1,38 +1,34 @@
-package Screens;
+package screens.client;
 
-import Controllers.Client.GameClientController;
-import GameMessages.PlayersConnectedMessage;
-import Screens.Controls.ImagePanel;
-import Views.PlayersConnectedView;
+import controllers.client.PlayersListController;
+import screens.controls.MainFrame;
+import screens.controls.ImagePanel;
+import views.client.PlayersConnectedView;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class PlayersConnectedScreen implements PlayersConnectedView {
+public class PlayersListScreen implements PlayersConnectedView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
-    JFrame playersConnectedFrame;
+    MainFrame mainFrame;
+    private final PlayersListController controller;
     ImagePanel playersConnectedScreenImage;
     JLabel playersConnectedLabel;
     DefaultListModel<String> playersDefaultList = new DefaultListModel<String>();
     JList playersList = new JList(playersDefaultList);
-    GameClientController client;
 
-    public PlayersConnectedScreen(GameClientController client, JFrame gameFrame) {
-        this.client = client;
-        playersConnectedFrame = gameFrame;
-        playersConnectedScreenImage = new ImagePanel(new ImageIcon(BG_IMAGE).getImage());
-        playersConnectedFrame.getContentPane().add(playersConnectedScreenImage);
-        playersConnectedFrame.pack();
+    public PlayersListScreen(MainFrame mainFrame, PlayersListController controller) {
+
+        this.mainFrame = mainFrame;
+        this.controller = controller;
+        playersConnectedScreenImage = mainFrame.createImagePanel(BG_IMAGE);
+
 
         playersConnectedLabel = createLabel("Players Joined", 50, -50);
         createList(50, 100);
 
         playersConnectedScreenImage.add(playersList);
         playersConnectedScreenImage.add(playersConnectedLabel);
-        playersConnectedFrame.add(playersConnectedScreenImage);
-        playersConnectedScreenImage.setVisible(true);
-        playersConnectedFrame.setVisible(true);
-        playersConnectedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void createList(int x_bound, int y_bound) {
@@ -54,10 +50,15 @@ public class PlayersConnectedScreen implements PlayersConnectedView {
     }
 
     @Override
-    public void displayConnectedPlayers(PlayersConnectedMessage message) {
+    public void displayConnectedPlayers(String[] players) {
         playersDefaultList.removeAllElements();
-        for (String player : message.getPlayersConnected()) {
+        for (String player : players) {
             playersDefaultList.addElement(player);
         }
+    }
+
+    @Override
+    public void connectedToServer(String serverName, String playerName) {
+        //Show those two fields on the screen
     }
 }

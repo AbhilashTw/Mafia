@@ -1,27 +1,29 @@
-package Controllers.Server;
+package controllers.server;
 
-import Channels.Messages.ChannelMessage;
-import Channels.ConnectionListener;
-import Channels.Server.SocketServer;
-import Channels.SocketChannel;
-import GameMessages.PlayersConnectedMessage;
-import Views.StartServerView;
-import org.omg.CORBA.portable.ApplicationException;
+import channels.ConnectionListener;
+import channels.Messages.ChannelMessage;
+import channels.Server.SocketServer;
+import channels.SocketChannel;
+import gameMessages.PlayersConnectedMessage;
+import controllers.Workflow;
+import views.server.StartServerView;
 
 import java.util.ArrayList;
 
 public class GameServerController implements ConnectionListener, GameGod {
 
+    private final Workflow workflow;
     SocketServer server = new SocketServer(1234, this);
     ArrayList<Player> players = new ArrayList<Player>();
-    private StartServerView startServerView;
+    private StartServerView view;
 
-    public void start() {
-        server.start();
+    public GameServerController(Workflow workflow) {
+
+        this.workflow = workflow;
     }
 
-    public void bind(StartServerView startServerView) {
-        this.startServerView = startServerView;
+    public void bind(StartServerView view) {
+        this.view = view;
     }
 
 
@@ -51,7 +53,11 @@ public class GameServerController implements ConnectionListener, GameGod {
 
     @Override
     public void playersUpdated(Player player) {
-        startServerView.updatePlayers(players);
+        view.updatePlayers(players);
         sendMessageToClients(new PlayersConnectedMessage(getPlayersListName()));
+    }
+
+    public void start() {
+        server.start();
     }
 }

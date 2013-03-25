@@ -1,70 +1,66 @@
-package Screens;
+package screens;
 
-import Controllers.Server.GameServerController;
-import Screens.Controls.ImagePanel;
+import controllers.HomeController;
+import screens.controls.MainFrame;
+import screens.controls.ImagePanel;
+import views.HomeView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 /**
  * Job:- Understands to display the start window of the application.
  */
 
-public class HomeScreen {
+public class HomeScreen implements HomeView {
     private static final String BG_IMAGE = "images/homepage.jpg";
-    JFrame homeWindow;
+    MainFrame mainFrame;
+    private final HomeController controller;
     JButton startServerButton;
     JButton joinServerButton;
     JButton quitButton;
-    ImagePanel homeScreenImage;
 
-    public HomeScreen(JFrame gameFrame) {
-        homeWindow = gameFrame;
-        homeScreenImage = new ImagePanel(new ImageIcon(BG_IMAGE).getImage());
-        homeWindow.getContentPane().add(homeScreenImage);
-        homeWindow.pack();
+    public HomeScreen(MainFrame mainFrame, HomeController controller) {
+        this.mainFrame = mainFrame;
+        this.controller = controller;
+        ImagePanel panel = mainFrame.createImagePanel(BG_IMAGE);
 
         startServerButton = createButton(100, 300, "StartServer");
         joinServerButton = createButton(100, 400, "JoinServer");
         quitButton = createButton(100, 500, "Quit");
 
-        homeScreenImage.add(startServerButton);
-        homeScreenImage.add(joinServerButton);
-        homeScreenImage.add(quitButton);
-        homeWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        panel.add(startServerButton);
+        panel.add(joinServerButton);
+        panel.add(quitButton);
+        addButtonHandlers();
     }
 
-    public void display() {
+    private void addButtonHandlers() {
         startServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    startGameServer();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                controller.startServer();
             }
         });
 
         joinServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JoinServerScreen joinServerScreenScreen = new JoinServerScreen(homeWindow);
-                joinServerScreenScreen.connectToServer();
-                homeScreenImage.setVisible(false);
+                controller.joinServer();
             }
         });
-
-        addHandlerForQuitButton();
+        quitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedOption = JOptionPane.showConfirmDialog(null, "Do you really want to quit?", "", JOptionPane.YES_NO_OPTION);
+                if (selectedOption == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
     }
 
-    private void startGameServer() throws IOException {
-        GameServerController controller = new GameServerController();
-        controller.start();
-        StartServerScreen startServerScreen = new StartServerScreen(homeWindow, controller);
-        homeScreenImage.setVisible(false);
-        startServerScreen.display();
+    @Override
+    public void display() {
     }
 
     private JButton createButton(int x_axis, int y_axis, String buttonName) {
@@ -78,13 +74,6 @@ public class HomeScreen {
     }
 
     private void addHandlerForQuitButton() {
-        quitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int selectedOption = JOptionPane.showConfirmDialog(null, "Do you really want to quit?", "", JOptionPane.YES_NO_OPTION);
-                if (selectedOption == JOptionPane.YES_OPTION) {
-                    System.exit(0);
-                }
-            }
-        });
+
     }
 }

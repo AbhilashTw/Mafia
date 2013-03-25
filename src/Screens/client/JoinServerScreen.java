@@ -1,8 +1,9 @@
-package Screens;
+package screens.client;
 
-import Controllers.Client.GameClientController;
-import Screens.Controls.ImagePanel;
-import Views.JoinServerView;
+import controllers.client.JoinServerController;
+import screens.controls.MainFrame;
+import screens.controls.ImagePanel;
+import views.client.JoinServerView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,19 +16,22 @@ import java.awt.event.ActionListener;
 
 public class JoinServerScreen implements JoinServerView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
-    JFrame joinServerFrame;
-    ImagePanel joinServerScreenImage;
+    MainFrame mainFrame;
+    private final JoinServerController controller;
+    ImagePanel panel;
     JLabel serverNameLabel;
     JLabel playerNameLabel;
     JTextField serverNameText;
     JTextField playerNameTextField;
     JButton connectButton;
     JPanel displayMessage;
-    GameClientController client = new GameClientController(1234, this);
 
-    public JoinServerScreen(JFrame gameFrame) {
-        joinServerFrame = gameFrame;
-        joinServerScreenImage = new ImagePanel(new ImageIcon(BG_IMAGE).getImage());
+
+    public JoinServerScreen(MainFrame mainFrame, JoinServerController controller) {
+        this.mainFrame = mainFrame;
+        this.controller = controller;
+
+        panel = mainFrame.createImagePanel(BG_IMAGE);
 
         serverNameLabel = createLabel("Server Name", 50, 100);
         playerNameLabel = createLabel("Player Name", 50, 200);
@@ -37,27 +41,22 @@ public class JoinServerScreen implements JoinServerView {
 
         connectButton = createButton("Connect", 800, 800);
 
-        joinServerScreenImage.add(serverNameLabel);
-        joinServerScreenImage.add(playerNameLabel);
-        joinServerScreenImage.add(serverNameText);
-        joinServerScreenImage.add(playerNameTextField);
-        joinServerScreenImage.add(connectButton);
+        panel.add(serverNameLabel);
+        panel.add(playerNameLabel);
+        panel.add(serverNameText);
+        panel.add(playerNameTextField);
+        panel.add(connectButton);
 
-        joinServerFrame.getContentPane().add(joinServerScreenImage);
-        joinServerFrame.pack();
-        joinServerFrame.setVisible(true);
-        joinServerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        addButtonHandlers();
     }
 
-    @Override
-    public void connectedToServer() {
-        PlayersConnectedScreen screen = new PlayersConnectedScreen(client, joinServerFrame);
-        client.register(screen);
-        joinServerScreenImage.setVisible(false);
-        displayMessage = new JPanel();
-        JOptionPane.showMessageDialog(displayMessage, "Connected to " + serverNameText.getText(), "Connected", JOptionPane.INFORMATION_MESSAGE);
-
+    private void addButtonHandlers() {
+        connectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.connectToServer();
+            }
+        });
     }
 
     @Override
@@ -65,14 +64,9 @@ public class JoinServerScreen implements JoinServerView {
         return playerNameTextField.getText();
     }
 
-    public void connectToServer() {
-        connectButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                client.connectToServer(serverNameText.getText());
-            }
-        });
-
+    @Override
+    public String getServerName() {
+        return serverNameText.getText();
     }
 
     private JButton createButton(String buttonLabel, int x_bound, int y_bound) {
