@@ -1,7 +1,6 @@
 package controllers.server;
 
 import channels.ConnectionListener;
-import channels.Messages.ChannelMessage;
 import channels.Server.SocketServer;
 import channels.SocketChannel;
 import gameMessages.PlayersConnectedMessage;
@@ -9,16 +8,16 @@ import controllers.Workflow;
 import views.server.StartServerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class GameServerController implements ConnectionListener, GameGod {
+public class GameServerController implements  GameGod {
 
     private final Workflow workflow;
-    SocketServer server = new SocketServer(1234, this);
-    ArrayList<Player> players = new ArrayList<Player>();
+    private SocketServer server = new SocketServer(1234, new NewConnectionListener(this));
+    private List<Player> players = new ArrayList<Player>();
     private StartServerView view;
 
     public GameServerController(Workflow workflow) {
-
         this.workflow = workflow;
     }
 
@@ -26,21 +25,8 @@ public class GameServerController implements ConnectionListener, GameGod {
         this.view = view;
     }
 
-
-    @Override
-    public void onConnectionEstablished(SocketChannel channel) {
-        players.add(new Player(channel, this));
-    }
-
-    @Override
-    public void onConnectionFailed(String serverAddress, int serverPort, Exception e) {
-        throw new RuntimeException("Could not start server",e);
-    }
-
-    public void sendMessageToClients(ChannelMessage message) {
-        for (Player player : players) {
-            player.sendMessage(message);
-        }
+    public void addPlayer(Player newPlayer) {
+        players.add(newPlayer);
     }
 
     public String getPlayersListName() {
@@ -52,12 +38,15 @@ public class GameServerController implements ConnectionListener, GameGod {
     }
 
     @Override
-    public void playersUpdated(Player player) {
+    public void playersUpdated() {
         view.updatePlayers(players);
-        sendMessageToClients(new PlayersConnectedMessage(getPlayersListName()));
+        for (Player player : players) {
+            player.sendMessage(new PlayersConnectedMessage(getPlayersListName()));
+        }
     }
 
     public void start() {
         server.start();
     }
+
 }

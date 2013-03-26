@@ -20,7 +20,17 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="JGoodies Forms" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://D:/docs/mockito-1.9.5/mockito-all-1.9.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://D:/docs/mockito-1.9.5/mockito-all-1.9.5.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
 

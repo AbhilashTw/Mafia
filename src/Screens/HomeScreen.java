@@ -18,9 +18,9 @@ public class HomeScreen implements HomeView {
     private static final String BG_IMAGE = "images/homepage.jpg";
     MainFrame mainFrame;
     private final HomeController controller;
-    JButton startServerButton;
-    JButton joinServerButton;
-    JButton quitButton;
+    private JButton startServerButton;
+    private JButton joinServerButton;
+    private JButton quitButton;
 
     public HomeScreen(MainFrame mainFrame, HomeController controller) {
         this.mainFrame = mainFrame;

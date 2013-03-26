@@ -18,13 +18,13 @@ public class JoinServerScreen implements JoinServerView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     MainFrame mainFrame;
     private final JoinServerController controller;
-    ImagePanel panel;
-    JLabel serverNameLabel;
-    JLabel playerNameLabel;
-    JTextField serverNameText;
-    JTextField playerNameTextField;
-    JButton connectButton;
-    JPanel displayMessage;
+    private ImagePanel panel;
+    private JLabel serverNameLabel;
+    private JLabel playerNameLabel;
+    private JTextField serverNameText;
+    private JTextField playerNameTextField;
+    private JButton connectButton;
+    private JPanel displayMessage;
 
 
     public JoinServerScreen(MainFrame mainFrame, JoinServerController controller) {

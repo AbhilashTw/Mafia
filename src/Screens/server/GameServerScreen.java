@@ -9,7 +9,8 @@ import views.server.StartServerView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 
 /**
  * Job:- Understands to display a window to connect to a server
@@ -20,12 +21,12 @@ public class GameServerScreen implements StartServerView {
     private final GameServerController controller;
     public SocketServer server;
     MainFrame startServerFrame;
-    JLabel playersJoinedLabel;
-    JButton startServerButton;
-    JButton stopServerButton;
-    ImagePanel panel;
-    DefaultListModel<String> allPlayers = new DefaultListModel<String>();
-    JList<String> playersList = new JList<String>(allPlayers);
+    private JLabel playersJoinedLabel;
+    private JButton startServerButton;
+    private JButton stopServerButton;
+    private ImagePanel panel;
+    private DefaultListModel<String> allPlayers = new DefaultListModel<String>();
+    private JList<String> playersList = new JList<String>(allPlayers);
 
     public GameServerScreen(MainFrame mainFrame, GameServerController controller) {
         startServerFrame = mainFrame;
@@ -45,7 +46,7 @@ public class GameServerScreen implements StartServerView {
     }
 
     @Override
-    public void updatePlayers(ArrayList<Player> players) {
+    public void updatePlayers(List<Player> players) {
         allPlayers.removeAllElements();
         for (Player player : players) {
             allPlayers.addElement(player.getName());
