@@ -11,7 +11,8 @@ public class ImagePanel extends JPanel {
 
     public ImagePanel(Image img) {
         this.img = img;
-        Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension size = new Dimension(screenSize.width, screenSize.height);
         setPreferredSize(size);
         setMinimumSize(size);
         setMaximumSize(size);

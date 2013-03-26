@@ -73,7 +73,4 @@ public class HomeScreen implements HomeView {
         return button;
     }
 
-    private void addHandlerForQuitButton() {
-
-    }
 }
