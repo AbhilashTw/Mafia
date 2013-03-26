@@ -53,7 +53,7 @@ public class GameServerController implements ConnectionListener, GameGod {
     @Override
     public void playersUpdated(Player player) {
         view.updatePlayers(players);
-        sendMessageToClients(new PlayersConnectedMessage(getPlayersListName()));
+        sendMessageToClients(PlayersConnectedMessage.createPlayersConnectedMessage(getPlayersListName()));
     }
 
     public void start() {
