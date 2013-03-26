@@ -1,8 +1,8 @@
 package screens.client;
 
 import controllers.client.JoinServerController;
+import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
-import screens.controls.MainFrame;
 import views.client.JoinServerView;
 
 import javax.swing.*;
@@ -23,11 +23,11 @@ public class JoinServerScreen implements JoinServerView {
     private final JTextField serverNameText;
     private final JTextField playerNameTextField;
     private final JButton connectButton;
-    public MainFrame mainFrame;
+    public IMainFrame mainFrame;
     private JPanel displayMessage;
 
 
-    public JoinServerScreen(MainFrame mainFrame, JoinServerController controller) {
+    public JoinServerScreen(IMainFrame mainFrame, JoinServerController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);

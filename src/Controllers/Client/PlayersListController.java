@@ -3,9 +3,12 @@ package controllers.client;
 import channels.Messages.ChannelMessage;
 import channels.SocketChannel;
 import channels.SocketChannelListener;
+import controllers.HomeController;
 import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
 import gameMessages.PlayersConnectedMessage;
+import runner.WorkflowManager;
+import screens.HomeScreen;
 import views.client.PlayersConnectedView;
 
 import java.io.IOException;
@@ -32,7 +35,7 @@ public class PlayersListController implements SocketChannelListener {
 
     @Override
     public void onClose(SocketChannel channel, Exception e) {
-        throw new RuntimeException("Connection closed", e);
+        throw new RuntimeException("close failed", e);
     }
 
     @Override

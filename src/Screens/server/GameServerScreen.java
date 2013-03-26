@@ -1,14 +1,18 @@
 package screens.server;
 
 import channels.Server.SocketServer;
+import controllers.client.PlayersListController;
 import controllers.server.GameServerController;
 import controllers.server.Player;
+import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
 import screens.controls.MainFrame;
 import views.server.GameServerView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
@@ -19,15 +23,16 @@ public class GameServerScreen implements GameServerView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     private final GameServerController controller;
     public SocketServer server;
-    MainFrame startServerFrame;
+    IMainFrame startServerFrame;
     private JLabel playersJoinedLabel;
     private JButton startServerButton;
     private JButton stopServerButton;
     private ImagePanel panel;
     private DefaultListModel<String> allPlayers = new DefaultListModel<String>();
     private JList<String> playersList = new JList<String>(allPlayers);
+    PlayersListController playersListController;
 
-    public GameServerScreen(MainFrame mainFrame, GameServerController controller) {
+    public GameServerScreen(IMainFrame mainFrame, GameServerController controller) {
         startServerFrame = mainFrame;
         this.controller = controller;
         this.controller.bind(this);
@@ -42,6 +47,7 @@ public class GameServerScreen implements GameServerView {
         panel.add(startServerButton);
         panel.add(stopServerButton);
         panel.add(playersList);
+        addButtonHandlers();
     }
 
     @Override
@@ -51,7 +57,6 @@ public class GameServerScreen implements GameServerView {
             allPlayers.addElement(player.getName());
         }
     }
-
 
     private void createList() {
         playersList.setSize(200, 850);
@@ -83,6 +88,11 @@ public class GameServerScreen implements GameServerView {
         return label;
     }
 
-
+    private void addButtonHandlers() {
+        stopServerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controller.stop();
+            }
+        });
+    }
 }
-

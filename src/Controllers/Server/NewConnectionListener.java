@@ -3,7 +3,7 @@ package controllers.server;
 import channels.ConnectionListener;
 import channels.SocketChannel;
 
-class NewConnectionListener implements ConnectionListener {
+public class NewConnectionListener implements ConnectionListener {
 
     private final GameServerController controller;
 

@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Job : Understands the window where game story plays.
  */
-public class MainFrame {
+public class MainFrame implements IMainFrame {
     private final JFrame frame;
 
     public MainFrame() {
@@ -21,10 +21,13 @@ public class MainFrame {
 
     }
 
+    @Override
     public ImagePanel createImagePanel(String imageFilePath) {
         frame.getContentPane().removeAll();
+        frame.repaint();
         ImagePanel imagePanel = new ImagePanel(new ImageIcon(imageFilePath).getImage());
         frame.getContentPane().add(imagePanel);
         return imagePanel;
     }
+
 }

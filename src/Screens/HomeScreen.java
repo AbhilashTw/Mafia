@@ -1,8 +1,8 @@
 package screens;
 
 import controllers.HomeController;
+import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
-import screens.controls.MainFrame;
 import views.HomeView;
 
 import javax.swing.*;
@@ -16,19 +16,19 @@ import java.awt.event.ActionListener;
 
 public class HomeScreen implements HomeView {
     private static final String BG_IMAGE = "images/homepage.jpg";
-    public final MainFrame mainFrame;
+    public final IMainFrame mainFrame;
     private final HomeController controller;
-
+    private ImagePanel panel;
 
     private final JButton startServerButton;
     private final JButton joinServerButton;
     private final JButton quitButton;
 
 
-    public HomeScreen(MainFrame mainFrame, HomeController controller) {
+    public HomeScreen(IMainFrame mainFrame, HomeController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
-        ImagePanel panel = mainFrame.createImagePanel(BG_IMAGE);
+        panel = mainFrame.createImagePanel(BG_IMAGE);
 
         startServerButton = createButton(100, 300, "StartServer");
         joinServerButton = createButton(100, 400, "JoinServer");
@@ -52,6 +52,7 @@ public class HomeScreen implements HomeView {
                 controller.joinServer();
             }
         });
+
         quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int selectedOption = JOptionPane.showConfirmDialog(null, "Do you really want to quit?", "", JOptionPane.YES_NO_OPTION);

@@ -20,7 +20,6 @@ public class SocketServer {
     private boolean stopWaiting;
 
     public SocketServer(int port, ConnectionListener listener) {
-
         this.port = port;
         this.listener = listener;
     }
