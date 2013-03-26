@@ -14,12 +14,10 @@ public class JoinServerController implements ConnectionListener {
     private int serverPort = 1234;
 
     public JoinServerController(Workflow workflow) {
-
         this.workflow = workflow;
     }
 
     public void bind(JoinServerView view) {
-
         this.view = view;
     }
 

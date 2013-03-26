@@ -11,11 +11,13 @@ import java.awt.*;
 public class PlayersListScreen implements PlayersConnectedView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     private final PlayersListController controller;
+
     MainFrame mainFrame;
-    ImagePanel playersConnectedScreenImage;
-    JLabel playersConnectedLabel;
-    DefaultListModel<String> playersDefaultList = new DefaultListModel<String>();
-    JList playersList = new JList(playersDefaultList);
+    private ImagePanel playersConnectedScreenImage;
+    private JLabel playersConnectedLabel;
+    private DefaultListModel<String> playersDefaultList = new DefaultListModel<String>();
+    private JList playersList = new JList(playersDefaultList);
+
 
     public PlayersListScreen(MainFrame mainFrame, PlayersListController controller) {
 

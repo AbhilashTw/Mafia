@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Player implements SocketChannelListener {
     private final GameGod god;
-    SocketChannel channel;
+    private SocketChannel channel;
     private String name;
 
     public Player(SocketChannel channel, GameGod god) {
@@ -40,10 +40,11 @@ public class Player implements SocketChannelListener {
         if (message instanceof PlayerDetailsMessage) {
             PlayerDetailsMessage pdM = (PlayerDetailsMessage) message;
             name = pdM.getPlayerName();
-            god.playersUpdated(this);
+            god.playersUpdated();
         }
 
     }
+
 
     @Override
     public void onMessageReadError(SocketChannel channel, Exception e) {

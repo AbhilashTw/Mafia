@@ -1,12 +1,11 @@
 package runner;
 
-import java.io.IOException;
-
 /**
  * Job: Understands invoking point of application.
  */
+
 public class Main {
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) {
         new WorkflowManager().start();
     }
 }

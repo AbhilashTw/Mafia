@@ -9,7 +9,9 @@ import views.server.GameServerView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * Job:- Understands to display a window to connect to a server
@@ -20,12 +22,12 @@ public class GameServerScreen implements GameServerView {
     private final GameServerController controller;
     public SocketServer server;
     MainFrame startServerFrame;
-    JLabel playersJoinedLabel;
-    JButton startServerButton;
-    JButton stopServerButton;
-    ImagePanel panel;
-    DefaultListModel<String> allPlayers = new DefaultListModel<String>();
-    JList<String> playersList = new JList<String>(allPlayers);
+    private JLabel playersJoinedLabel;
+    private JButton startServerButton;
+    private JButton stopServerButton;
+    private ImagePanel panel;
+    private DefaultListModel<String> allPlayers = new DefaultListModel<String>();
+    private JList<String> playersList = new JList<String>(allPlayers);
 
     public GameServerScreen(MainFrame mainFrame, GameServerController controller) {
         startServerFrame = mainFrame;
@@ -42,16 +44,33 @@ public class GameServerScreen implements GameServerView {
         panel.add(startServerButton);
         panel.add(stopServerButton);
         panel.add(playersList);
+        addButtonHandlers();
+    }
+
+    private void addButtonHandlers() {
+        startServerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (controller.canGameBeStarted()) {
+
+                } else {
+                    JOptionPane optionPane = new JOptionPane("Cannot Start Game," +
+                            "Required Minimum 3 players to Start Game ", JOptionPane.ERROR_MESSAGE);
+                    JDialog dialog = optionPane.createDialog("Error Message");
+                    dialog.setAlwaysOnTop(true);
+                    dialog.setVisible(true);
+                }
+            }
+        });
     }
 
     @Override
-    public void updatePlayers(ArrayList<Player> players) {
+    public void updatePlayers(List<Player> players) {
         allPlayers.removeAllElements();
         for (Player player : players) {
             allPlayers.addElement(player.getName());
         }
     }
-
 
     private void createList() {
         playersList.setSize(200, 850);
