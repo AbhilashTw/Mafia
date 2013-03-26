@@ -52,6 +52,7 @@ public class GameServerScreen implements GameServerView {
         }
     }
 
+
     private void createList() {
         playersList.setSize(200, 850);
         playersList.setBorder(BorderFactory.createLineBorder(SystemColor.WHITE));
