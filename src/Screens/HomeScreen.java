@@ -1,8 +1,8 @@
 package screens;
 
 import controllers.HomeController;
-import screens.controls.MainFrame;
 import screens.controls.ImagePanel;
+import screens.controls.MainFrame;
 import views.HomeView;
 
 import javax.swing.*;
@@ -11,16 +11,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Job:- Understands to display the start window of the application.
+ * Job:- Understands to display the starting window of the application.
  */
 
 public class HomeScreen implements HomeView {
     private static final String BG_IMAGE = "images/homepage.jpg";
-    MainFrame mainFrame;
+    public final MainFrame mainFrame;
     private final HomeController controller;
-    private JButton startServerButton;
-    private JButton joinServerButton;
-    private JButton quitButton;
+
+
+    private final JButton startServerButton;
+    private final JButton joinServerButton;
+    private final JButton quitButton;
+
 
     public HomeScreen(MainFrame mainFrame, HomeController controller) {
         this.mainFrame = mainFrame;

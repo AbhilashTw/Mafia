@@ -5,6 +5,9 @@ import channels.SocketChannel;
 import controllers.Workflow;
 import views.client.JoinServerView;
 
+/**
+ * Job:- Understands to control connections between channels.
+ */
 public class JoinServerController implements ConnectionListener {
     private final Workflow workflow;
     private JoinServerView view;

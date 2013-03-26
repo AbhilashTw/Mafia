@@ -2,7 +2,7 @@ package controllers;
 
 import channels.SocketChannel;
 
-public interface Workflow{
+public interface Workflow {
     void startServer();
 
     void joinServer();

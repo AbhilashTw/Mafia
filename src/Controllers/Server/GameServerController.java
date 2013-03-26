@@ -1,33 +1,33 @@
 package controllers.server;
 
-import channels.ConnectionListener;
 import channels.Server.SocketServer;
-import channels.SocketChannel;
-import gameMessages.PlayersConnectedMessage;
 import controllers.Workflow;
-import views.server.StartServerView;
+import gameMessages.PlayersConnectedMessage;
+import screens.server.GameServerScreen;
+import views.server.GameServerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameServerController implements  GameGod {
+public class GameServerController implements GameGod {
 
     private final Workflow workflow;
     private SocketServer server = new SocketServer(1234, new NewConnectionListener(this));
     private List<Player> players = new ArrayList<Player>();
-    private StartServerView view;
+    private GameServerView view;
 
     public GameServerController(Workflow workflow) {
         this.workflow = workflow;
     }
 
-    public void bind(StartServerView view) {
+    public void bind(GameServerView view) {
         this.view = view;
     }
 
     public void addPlayer(Player newPlayer) {
         players.add(newPlayer);
     }
+
 
     public String getPlayersListName() {
         String resultName = "";
@@ -41,7 +41,7 @@ public class GameServerController implements  GameGod {
     public void playersUpdated() {
         view.updatePlayers(players);
         for (Player player : players) {
-            player.sendMessage(new PlayersConnectedMessage(getPlayersListName()));
+            player.sendMessage(PlayersConnectedMessage.createPlayersConnectedMessage(getPlayersListName()));
         }
     }
 

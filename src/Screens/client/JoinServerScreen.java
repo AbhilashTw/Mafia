@@ -1,8 +1,8 @@
 package screens.client;
 
 import controllers.client.JoinServerController;
-import screens.controls.MainFrame;
 import screens.controls.ImagePanel;
+import screens.controls.MainFrame;
 import views.client.JoinServerView;
 
 import javax.swing.*;
@@ -16,37 +16,31 @@ import java.awt.event.ActionListener;
 
 public class JoinServerScreen implements JoinServerView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
-    MainFrame mainFrame;
     private final JoinServerController controller;
-    private ImagePanel panel;
-    private JLabel serverNameLabel;
-    private JLabel playerNameLabel;
-    private JTextField serverNameText;
-    private JTextField playerNameTextField;
-    private JButton connectButton;
+    private final ImagePanel panel;
+    private final JLabel serverNameLabel;
+    private final JLabel playerNameLabel;
+    private final JTextField serverNameText;
+    private final JTextField playerNameTextField;
+    private final JButton connectButton;
+    public MainFrame mainFrame;
     private JPanel displayMessage;
 
 
     public JoinServerScreen(MainFrame mainFrame, JoinServerController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
-
         panel = mainFrame.createImagePanel(BG_IMAGE);
-
         serverNameLabel = createLabel("Server Name", 50, 100);
         playerNameLabel = createLabel("Player Name", 50, 200);
-
         serverNameText = createTextField(150, 140);
         playerNameTextField = createTextField(150, 240);
-
         connectButton = createButton("Connect", 800, 800);
-
         panel.add(serverNameLabel);
         panel.add(playerNameLabel);
         panel.add(serverNameText);
         panel.add(playerNameTextField);
         panel.add(connectButton);
-
         addButtonHandlers();
     }
 

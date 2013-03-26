@@ -3,6 +3,9 @@ package screens.controls;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Job : Understands the window where game story plays.
+ */
 public class MainFrame {
     private final JFrame frame;
 
@@ -15,6 +18,7 @@ public class MainFrame {
         frame.setBackground(Color.BLACK);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     public ImagePanel createImagePanel(String imageFilePath) {
