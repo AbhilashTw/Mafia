@@ -1,3 +1,5 @@
+
+import channels.Server.SocketServer;
 import controllers.Workflow;
 import controllers.server.GameServerController;
 import controllers.server.Player;
@@ -5,12 +7,12 @@ import gameMessages.PlayersConnectedMessage;
 import org.junit.Test;
 import views.server.GameServerView;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
+
 
 public class GameServerControllerTest {
 
@@ -46,5 +48,26 @@ public class GameServerControllerTest {
 
         // verification
         verify(mockPlayer).sendMessage(PlayersConnectedMessage.createPlayersConnectedMessage(playerName + "\n")); // verification
+    }
+
+    @Test
+    public void stopServer_stops_the_server() {
+        SocketServer mockServer = mock(SocketServer.class);
+        GameServerController gameServerController = new GameServerController(mock(Workflow.class));
+        gameServerController.start(mockServer);
+
+        gameServerController.stop();
+
+        verify(mockServer).stop();
+    }
+
+    @Test
+    public void stopServer_transitions_to_the_homescreen() {
+        Workflow mockWorkflow = mock(Workflow.class);
+
+        GameServerController gameServerController = new GameServerController(mockWorkflow);
+        gameServerController.stop();
+
+        verify(mockWorkflow).start();
     }
 }

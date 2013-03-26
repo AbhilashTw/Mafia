@@ -42,7 +42,6 @@ public class Player implements SocketChannelListener {
             name = pdM.getPlayerName();
             god.playersUpdated();
         }
-
     }
 
 

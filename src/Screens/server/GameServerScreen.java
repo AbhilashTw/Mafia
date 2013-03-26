@@ -1,10 +1,11 @@
 package screens.server;
 
 import channels.Server.SocketServer;
+import controllers.client.PlayersListController;
 import controllers.server.GameServerController;
 import controllers.server.Player;
+import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
-import screens.controls.MainFrame;
 import views.server.GameServerView;
 
 import javax.swing.*;
@@ -21,7 +22,8 @@ public class GameServerScreen implements GameServerView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     private final GameServerController controller;
     public SocketServer server;
-    MainFrame startServerFrame;
+    IMainFrame startServerFrame;
+    PlayersListController playersListController;
     private JLabel playersJoinedLabel;
     private JButton startServerButton;
     private JButton stopServerButton;
@@ -29,7 +31,7 @@ public class GameServerScreen implements GameServerView {
     private DefaultListModel<String> allPlayers = new DefaultListModel<String>();
     private JList<String> playersList = new JList<String>(allPlayers);
 
-    public GameServerScreen(MainFrame mainFrame, GameServerController controller) {
+    public GameServerScreen(IMainFrame mainFrame, GameServerController controller) {
         startServerFrame = mainFrame;
         this.controller = controller;
         this.controller.bind(this);
@@ -45,23 +47,6 @@ public class GameServerScreen implements GameServerView {
         panel.add(stopServerButton);
         panel.add(playersList);
         addButtonHandlers();
-    }
-
-    private void addButtonHandlers() {
-        startServerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (controller.canGameBeStarted()) {
-
-                } else {
-                    JOptionPane optionPane = new JOptionPane("Cannot Start Game," +
-                            "Required Minimum 3 players to Start Game ", JOptionPane.ERROR_MESSAGE);
-                    JDialog dialog = optionPane.createDialog("Error Message");
-                    dialog.setAlwaysOnTop(true);
-                    dialog.setVisible(true);
-                }
-            }
-        });
     }
 
     @Override
@@ -102,6 +87,25 @@ public class GameServerScreen implements GameServerView {
         return label;
     }
 
+    private void addButtonHandlers() {
+        startServerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (controller.canGameBeStarted()) {
 
+                } else {
+                    JOptionPane optionPane = new JOptionPane("Cannot Start Game," +
+                            "Required Minimum 3 players to Start Game ", JOptionPane.ERROR_MESSAGE);
+                    JDialog dialog = optionPane.createDialog("Error Message");
+                    dialog.setAlwaysOnTop(true);
+                    dialog.setVisible(true);
+                }
+            }
+        });
+        stopServerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controller.stop();
+            }
+        });
+    }
 }
-

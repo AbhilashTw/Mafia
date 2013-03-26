@@ -1,14 +1,18 @@
 package runner;
 
+import channels.Server.SocketServer;
 import channels.SocketChannel;
 import controllers.HomeController;
 import controllers.Workflow;
 import controllers.client.JoinServerController;
 import controllers.client.PlayersListController;
 import controllers.server.GameServerController;
+import controllers.server.NewConnectionListener;
 import screens.HomeScreen;
+import screens.MafiaViewFactory;
 import screens.client.JoinServerScreen;
 import screens.client.PlayersListScreen;
+import screens.controls.IMainFrame;
 import screens.controls.MainFrame;
 import screens.server.GameServerScreen;
 
@@ -17,12 +21,17 @@ import screens.server.GameServerScreen;
  */
 public class WorkflowManager implements Workflow {
 
-    private MainFrame mainFrame;
+    private final MafiaViewFactory viewFactory;
+    private IMainFrame mainFrame;
 
+    public WorkflowManager(MafiaViewFactory viewFactory, IMainFrame mainFrame) {
+        this.viewFactory = viewFactory;
+        this.mainFrame = mainFrame;
+    }
+
+    @Override
     public void start() {
-        mainFrame = new MainFrame();
-        HomeController controller = new HomeController(this);
-        controller.bind(new HomeScreen(mainFrame, controller));
+        HomeController controller = viewFactory.getHomeController(this, mainFrame);
         controller.start();
     }
 
@@ -30,7 +39,9 @@ public class WorkflowManager implements Workflow {
     public void startServer() {
         GameServerController controller = new GameServerController(this);
         controller.bind(new GameServerScreen(mainFrame, controller));
-        controller.start();
+
+        SocketServer server = new SocketServer(1234, new NewConnectionListener(controller));
+        controller.start(server);
     }
 
     @Override
@@ -46,4 +57,5 @@ public class WorkflowManager implements Workflow {
         controller.bind(new PlayersListScreen(mainFrame, controller));
         controller.start();
     }
+
 }

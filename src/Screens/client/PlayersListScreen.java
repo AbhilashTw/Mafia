@@ -1,8 +1,8 @@
 package screens.client;
 
 import controllers.client.PlayersListController;
+import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
-import screens.controls.MainFrame;
 import views.client.PlayersConnectedView;
 
 import javax.swing.*;
@@ -11,16 +11,14 @@ import java.awt.*;
 public class PlayersListScreen implements PlayersConnectedView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     private final PlayersListController controller;
-
-    MainFrame mainFrame;
+    IMainFrame mainFrame;
     private ImagePanel playersConnectedScreenImage;
     private JLabel playersConnectedLabel;
     private DefaultListModel<String> playersDefaultList = new DefaultListModel<String>();
     private JList playersList = new JList(playersDefaultList);
 
 
-    public PlayersListScreen(MainFrame mainFrame, PlayersListController controller) {
-
+    public PlayersListScreen(IMainFrame mainFrame, PlayersListController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         playersConnectedScreenImage = mainFrame.createImagePanel(BG_IMAGE);
