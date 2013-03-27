@@ -5,7 +5,6 @@ import channels.SocketChannel;
 import channels.SocketChannelListener;
 import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
-import gameMessages.RoleAssignedMessage;
 
 import java.io.IOException;
 
@@ -32,26 +31,6 @@ public class Player implements SocketChannelListener {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Player player = (Player) o;
-
-        if (!channel.equals(player.channel)) return false;
-        if (!name.equals(player.name)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = channel.hashCode();
-        result = 31 * result + name.hashCode();
-        return result;
-    }
-
-    @Override
     public void onClose(SocketChannel channel, Exception e) {
         channel.stop();
         god.removePlayer(this);
@@ -70,12 +49,6 @@ public class Player implements SocketChannelListener {
             name = pdM.getPlayerName();
             god.playersUpdated();
         }
-        if (message instanceof RoleAssignedMessage) {
-            if (message.equals("villager")) { //todo : string comparison
-                workflow.startVillagerScreen();
-            } else if (message.equals("mafia"))
-                workflow.startMafiaScreen();
-        }
     }
 
     @Override
@@ -85,7 +58,6 @@ public class Player implements SocketChannelListener {
     public void stop() {
         channel.stop();
     }
-
 
     public void assignRole(Role mafia) {
         role = mafia;
@@ -97,5 +69,25 @@ public class Player implements SocketChannelListener {
 
     public String getRole() {
         return role.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        if (!channel.equals(player.channel)) return false;
+        if (!name.equals(player.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = channel.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
     }
 }

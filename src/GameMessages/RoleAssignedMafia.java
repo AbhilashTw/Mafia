@@ -4,5 +4,5 @@ import channels.Messages.ChannelMessage;
 
 import java.io.Serializable;
 
-public class RoleAssignedMessage extends ChannelMessage implements Serializable {
+public class RoleAssignedMafia extends ChannelMessage implements Serializable {
 }

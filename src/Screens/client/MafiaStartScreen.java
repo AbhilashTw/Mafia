@@ -10,9 +10,9 @@ import java.awt.*;
 
 public class MafiaStartScreen implements MafiaStartScreenView {
 
-    IMainFrame mainFrame;
-    private final MafiaStartScreenController controller;
     private static final String BG_IMAGE = "images/MafiaStartScreen.jpg";
+    private final MafiaStartScreenController controller;
+    IMainFrame mainFrame;
     private ImagePanel panel;
     private JLabel mafiaLabel;
 
@@ -20,7 +20,7 @@ public class MafiaStartScreen implements MafiaStartScreenView {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
-        mafiaLabel = createLabel("Your assigned as a mafia", 900, 450);
+        mafiaLabel = createLabel("Your assigned as a mafia", 100, 450);
         panel.add(mafiaLabel);
     }
 
@@ -29,7 +29,7 @@ public class MafiaStartScreen implements MafiaStartScreenView {
         label.setForeground(Color.white);
         label.setSize(800, 900);
         label.setLocation(x_bound, y_bound);
-        Font font = new Font("Monospaced", Font.BOLD, 33);
+        Font font = new Font("Monospaced", Font.BOLD, 25);
         label.setFont(font);
         label.setForeground(Color.ORANGE);
         return label;

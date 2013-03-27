@@ -6,7 +6,8 @@ import channels.SocketChannelListener;
 import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
 import gameMessages.PlayersConnectedMessage;
-
+import gameMessages.RoleAssignedMafia;
+import gameMessages.RoleAssignedVillagers;
 import views.client.PlayersConnectedView;
 
 import java.io.IOException;
@@ -46,6 +47,10 @@ public class PlayersListController implements SocketChannelListener {
             PlayersConnectedMessage pCm = (PlayersConnectedMessage) message;
             view.displayConnectedPlayers(pCm.getPlayersConnected());
         }
+        if (message instanceof RoleAssignedVillagers)
+            workflow.startVillagerScreen();
+        if (message instanceof RoleAssignedMafia)
+            workflow.startMafiaScreen();
     }
 
     @Override
@@ -63,7 +68,7 @@ public class PlayersListController implements SocketChannelListener {
     }
 
     public void goToHomeScreen() {
-       channel.stop();
+        channel.stop();
         workflow.start();
     }
 }
