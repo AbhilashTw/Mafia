@@ -4,6 +4,7 @@ import controllers.client.PlayersListController;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
 import views.client.PlayersConnectedView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -83,8 +84,7 @@ public class PlayersListScreen implements PlayersConnectedView {
             public void actionPerformed(ActionEvent e) {
                 int selectedOption = JOptionPane.showConfirmDialog(null, "Do you really want to quit?", "", JOptionPane.YES_NO_OPTION);
                 if (selectedOption == JOptionPane.YES_OPTION) {
-
-                 controller.goToHomeScreen();
+                    controller.goToHomeScreen();
                 }
             }
         });
