@@ -8,12 +8,10 @@ import controllers.client.JoinServerController;
 import controllers.client.PlayersListController;
 import controllers.server.GameServerController;
 import controllers.server.NewConnectionListener;
-import screens.HomeScreen;
 import screens.MafiaViewFactory;
 import screens.client.JoinServerScreen;
 import screens.client.PlayersListScreen;
 import screens.controls.IMainFrame;
-import screens.controls.MainFrame;
 import screens.server.GameServerScreen;
 
 /**
@@ -39,7 +37,6 @@ public class WorkflowManager implements Workflow {
     public void startServer() {
         GameServerController controller = new GameServerController(this);
         controller.bind(new GameServerScreen(mainFrame, controller));
-
         SocketServer server = new SocketServer(1234, new NewConnectionListener(controller));
         controller.start(server);
     }

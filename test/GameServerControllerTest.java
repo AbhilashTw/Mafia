@@ -1,4 +1,3 @@
-
 import channels.Server.SocketServer;
 import controllers.Workflow;
 import controllers.server.GameServerController;
@@ -15,13 +14,13 @@ import static org.mockito.Mockito.*;
 
 
 public class GameServerControllerTest {
-
+    GameServerView gameServerView = mock(GameServerView.class);
+    Workflow workflow = mock(Workflow.class);
+    GameServerController gameServerController = new GameServerController(workflow);
 
     @Test
     public void when_gameServerController_calls_players_updated_it_invokes_updatePlayers_method_in_startServerScreen() throws IOException {
-        GameServerView gameServerView = mock(GameServerView.class);
-        Workflow workflow = mock(Workflow.class);
-        GameServerController gameServerController = new GameServerController(workflow);
+
         gameServerController.bind(gameServerView);
         gameServerController.playersUpdated();
 
@@ -33,13 +32,10 @@ public class GameServerControllerTest {
     public void players_connected_message_is_sent_whenever_a_new_player_is_updated() {
         //setup
         String playerName = "MafiaPlayer";
-        GameServerView gameServerView = mock(GameServerView.class);
 
-        Workflow mockWorkflow = mock(Workflow.class);
         Player mockPlayer = mock(Player.class);
         when(mockPlayer.getName()).thenReturn(playerName);
-
-        GameServerController gameServerController = new GameServerController(mockWorkflow);
+        GameServerController gameServerController = new GameServerController(workflow);
         gameServerController.bind(gameServerView);
         gameServerController.addPlayer(mockPlayer);
 

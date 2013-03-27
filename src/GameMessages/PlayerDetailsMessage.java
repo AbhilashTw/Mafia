@@ -25,11 +25,8 @@ public class PlayerDetailsMessage extends ChannelMessage implements Serializable
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PlayerDetailsMessage)) return false;
-
         PlayerDetailsMessage that = (PlayerDetailsMessage) o;
-
         if (playerName != null ? !playerName.equals(that.playerName) : that.playerName != null) return false;
-
         return true;
     }
 

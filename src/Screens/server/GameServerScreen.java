@@ -94,8 +94,7 @@ public class GameServerScreen implements GameServerView {
                 if (controller.canGameBeStarted()) {
 
                 } else {
-                    JOptionPane optionPane = new JOptionPane("Cannot Start Game," +
-                            "Required Minimum 3 players to Start Game ", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane optionPane = new JOptionPane("Required Minimum 3 players to Start Game ", JOptionPane.ERROR_MESSAGE);
                     JDialog dialog = optionPane.createDialog("Error Message");
                     dialog.setAlwaysOnTop(true);
                     dialog.setVisible(true);
