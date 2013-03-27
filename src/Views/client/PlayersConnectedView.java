@@ -4,4 +4,6 @@ public interface PlayersConnectedView {
     void displayConnectedPlayers(String[] players);
 
     void connectedToServer(String serverName, String playerName);
+
+    void connectionClosed();
 }

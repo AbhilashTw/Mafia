@@ -62,4 +62,12 @@ public class PlayersListScreen implements PlayersConnectedView {
     public void connectedToServer(String serverName, String playerName) {
         //Show those two fields on the screen
     }
+
+    @Override
+    public void connectionClosed() {
+        JOptionPane optionPane = new JOptionPane("Server Closed", JOptionPane.ERROR_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Error Message");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
 }

@@ -50,13 +50,20 @@ public class GameServerController implements GameGod {
     }
 
     public boolean canGameBeStarted() {
-        return players.size() > 2;
+        return players.size() > 0;
     }
 
     public void stop() {
-        if (server != null)
+        if (server != null) {
+            for (Player player : players) {
+                player.stop();
+            }
             server.stop();
-
+        }
         workflow.start();
+    }
+
+    public void startGame() {
+        workflow.startGame(players);
     }
 }

@@ -50,11 +50,6 @@ public class PlayersListControllerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void should_throw_RuntimeException_When_OnClose_Is_Called() {
-        playersListController.onClose(socketChannel, new IOException());
-    }
-
-    @Test(expected = RuntimeException.class)
     public void should_throw_RuntimeException_When_OnMessageReadError_Is_Called() {
         playersListController.onMessageReadError(socketChannel, new IOException());
     }

@@ -3,12 +3,9 @@ package controllers.client;
 import channels.Messages.ChannelMessage;
 import channels.SocketChannel;
 import channels.SocketChannelListener;
-import controllers.HomeController;
 import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
 import gameMessages.PlayersConnectedMessage;
-import runner.WorkflowManager;
-import screens.HomeScreen;
 import views.client.PlayersConnectedView;
 
 import java.io.IOException;
@@ -25,7 +22,6 @@ public class PlayersListController implements SocketChannelListener {
     private PlayersConnectedView view;
 
     public PlayersListController(Workflow workflow, SocketChannel channel, String serverName, String playerName) {
-
         this.workflow = workflow;
         this.channel = channel;
         this.serverName = serverName;
@@ -35,7 +31,8 @@ public class PlayersListController implements SocketChannelListener {
 
     @Override
     public void onClose(SocketChannel channel, Exception e) {
-        throw new RuntimeException("close failed", e);
+        //  view.connectionClosed();
+        workflow.start();
     }
 
     @Override
