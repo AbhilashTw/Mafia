@@ -3,12 +3,9 @@ package controllers.client;
 import channels.Messages.ChannelMessage;
 import channels.SocketChannel;
 import channels.SocketChannelListener;
-import controllers.HomeController;
 import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
 import gameMessages.PlayersConnectedMessage;
-import runner.WorkflowManager;
-import screens.HomeScreen;
 import views.client.PlayersConnectedView;
 
 import java.io.IOException;

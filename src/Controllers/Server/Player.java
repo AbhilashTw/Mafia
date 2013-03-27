@@ -3,6 +3,7 @@ package controllers.server;
 import channels.Messages.ChannelMessage;
 import channels.SocketChannel;
 import channels.SocketChannelListener;
+import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ public class Player implements SocketChannelListener {
     private final GameGod god;
     private SocketChannel channel;
     private String name;
+    private Workflow workflow;
 
     public Player(SocketChannel channel, GameGod god) {
         this.channel = channel;
@@ -28,6 +30,7 @@ public class Player implements SocketChannelListener {
 
     @Override
     public void onClose(SocketChannel channel, Exception e) {
+        workflow.start();
     }
 
     @Override

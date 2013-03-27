@@ -61,7 +61,7 @@ public class GameServerControllerTest {
     }
 
     @Test
-    public void stopServer_transitions_to_the_homescreen() {
+    public void stopServer_transitions_to_the_homeScreen() {
         Workflow mockWorkflow = mock(Workflow.class);
 
         GameServerController gameServerController = new GameServerController(mockWorkflow);

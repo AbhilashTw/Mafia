@@ -8,12 +8,10 @@ import controllers.client.JoinServerController;
 import controllers.client.PlayersListController;
 import controllers.server.GameServerController;
 import controllers.server.NewConnectionListener;
-import screens.HomeScreen;
 import screens.MafiaViewFactory;
 import screens.client.JoinServerScreen;
 import screens.client.PlayersListScreen;
 import screens.controls.IMainFrame;
-import screens.controls.MainFrame;
 import screens.server.GameServerScreen;
 
 /**
@@ -30,16 +28,9 @@ public class WorkflowManager implements Workflow {
     }
 
     @Override
-    public void start() {
-        HomeController controller = viewFactory.getHomeController(this, mainFrame);
-        controller.start();
-    }
-
-    @Override
     public void startServer() {
         GameServerController controller = new GameServerController(this);
         controller.bind(new GameServerScreen(mainFrame, controller));
-
         SocketServer server = new SocketServer(1234, new NewConnectionListener(controller));
         controller.start(server);
     }
@@ -55,6 +46,12 @@ public class WorkflowManager implements Workflow {
     public void connectedToServer(SocketChannel channel, String serverName, String playerName) {
         PlayersListController controller = new PlayersListController(this, channel, serverName, playerName);
         controller.bind(new PlayersListScreen(mainFrame, controller));
+        controller.start();
+    }
+
+    @Override
+    public void start() {
+        HomeController controller = viewFactory.getHomeController(this, mainFrame);
         controller.start();
     }
 

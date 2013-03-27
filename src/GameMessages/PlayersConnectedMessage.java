@@ -29,9 +29,8 @@ public class PlayersConnectedMessage extends ChannelMessage implements Serializa
 
         PlayersConnectedMessage that = (PlayersConnectedMessage) o;
 
-        if (!Arrays.equals(playerName, that.playerName)) return false;
+        return Arrays.equals(playerName, that.playerName);
 
-        return true;
     }
 
     @Override

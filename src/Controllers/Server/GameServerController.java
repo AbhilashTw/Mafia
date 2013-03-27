@@ -1,17 +1,10 @@
 package controllers.server;
 
 import channels.Server.SocketServer;
-import channels.SocketChannel;
-import channels.SocketChannelListener;
 import controllers.Workflow;
 import gameMessages.PlayersConnectedMessage;
-import gameMessages.ServerDisconnectedMessage;
-import screens.server.GameServerScreen;
 import views.server.GameServerView;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +50,6 @@ public class GameServerController implements GameGod {
     public void stop() {
         if (server != null)
             server.stop();
-
         workflow.start();
     }
 }
