@@ -5,12 +5,16 @@ import channels.SocketChannel;
 import controllers.HomeController;
 import controllers.Workflow;
 import controllers.client.JoinServerController;
+import controllers.client.MafiaStartScreenController;
 import controllers.client.PlayersListController;
+import controllers.client.VillagerStartScreenController;
 import controllers.server.GameServerController;
 import controllers.server.NewConnectionListener;
 import screens.MafiaViewFactory;
 import screens.client.JoinServerScreen;
+import screens.client.MafiaStartScreen;
 import screens.client.PlayersListScreen;
+import screens.client.VillagerStartScreen;
 import screens.controls.IMainFrame;
 import screens.server.GameServerScreen;
 
@@ -53,6 +57,18 @@ public class WorkflowManager implements Workflow {
     public void start() {
         HomeController controller = viewFactory.getHomeController(this, mainFrame);
         controller.start();
+    }
+
+    @Override
+    public void startVillagerScreen() {
+        VillagerStartScreenController controller = new VillagerStartScreenController(this);
+        controller.bind(new VillagerStartScreen(mainFrame, controller));
+    }
+
+    @Override
+    public void startMafiaScreen() {
+        MafiaStartScreenController controller = new MafiaStartScreenController(this);
+        controller.bind(new MafiaStartScreen(mainFrame, controller));
     }
 
 }

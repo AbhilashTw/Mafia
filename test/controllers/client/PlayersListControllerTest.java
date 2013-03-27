@@ -73,5 +73,18 @@ public class PlayersListControllerTest {
         verify(socketChannel).send(PlayerDetailsMessage.createPlayerDetailsMessage(playerName));
     }
 
+    @Test
+    public void should_invoke_channel_stop_when_goToHomeScreen_is_called() {
+        playersListController.goToHomeScreen();
+        verify(socketChannel).stop();
+    }
+
+    @Test
+    public void should_invoke_workflow_start_when_goToHomeScreen_is_called() {
+        playersListController.goToHomeScreen();
+        verify(workflow).start();
+    }
+
+
 }
 

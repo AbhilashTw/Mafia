@@ -12,5 +12,4 @@ public class MafiaViewFactory {
         homeController.bind(screen);
         return homeController;
     }
-
 }
