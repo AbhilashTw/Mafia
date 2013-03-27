@@ -85,9 +85,17 @@ public class PlayersListScreen implements PlayersConnectedView {
                 if (selectedOption == JOptionPane.YES_OPTION) {
 
                  controller.goToHomeScreen();
-                }ti
+                }
             }
         });
     }
 
+
+    @Override
+    public void connectionClosed() {
+        JOptionPane optionPane = new JOptionPane("Server Closed", JOptionPane.ERROR_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Error Message");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
 }

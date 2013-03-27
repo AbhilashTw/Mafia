@@ -14,56 +14,48 @@ import static org.mockito.Mockito.*;
 
 
 public class GameServerControllerTest {
+    private final String playerName = "MafiaPlayer";
     GameServerView gameServerView = mock(GameServerView.class);
     Workflow workflow = mock(Workflow.class);
+    Player mockPlayer = mock(Player.class);
+    SocketServer mockServer = mock(SocketServer.class);
     GameServerController gameServerController = new GameServerController(workflow);
+    List<Player> players = new ArrayList<Player>();
 
     @Test
     public void when_gameServerController_calls_players_updated_it_invokes_updatePlayers_method_in_startServerScreen() throws IOException {
-
         gameServerController.bind(gameServerView);
         gameServerController.playersUpdated();
-
-        List<Player> players = new ArrayList<Player>();
         verify(gameServerView).updatePlayers(players);
     }
 
     @Test
     public void players_connected_message_is_sent_whenever_a_new_player_is_updated() {
-        //setup
-        String playerName = "MafiaPlayer";
-
-        Player mockPlayer = mock(Player.class);
         when(mockPlayer.getName()).thenReturn(playerName);
-        GameServerController gameServerController = new GameServerController(workflow);
         gameServerController.bind(gameServerView);
         gameServerController.addPlayer(mockPlayer);
-
-        // actual method to test
         gameServerController.playersUpdated();
-
-        // verification
-        verify(mockPlayer).sendMessage(PlayersConnectedMessage.createPlayersConnectedMessage(playerName + "\n")); // verification
+        verify(mockPlayer).sendMessage(PlayersConnectedMessage.createPlayersConnectedMessage(playerName + "\n"));
     }
 
     @Test
     public void stopServer_stops_the_server() {
-        SocketServer mockServer = mock(SocketServer.class);
-        GameServerController gameServerController = new GameServerController(mock(Workflow.class));
         gameServerController.start(mockServer);
-
         gameServerController.stop();
-
         verify(mockServer).stop();
     }
 
     @Test
     public void stopServer_transitions_to_the_homeScreen() {
-        Workflow mockWorkflow = mock(Workflow.class);
 
-        GameServerController gameServerController = new GameServerController(mockWorkflow);
         gameServerController.stop();
-
-        verify(mockWorkflow).start();
+        verify(workflow).start();
     }
+
+    @Test
+    public void startGame_invokes_Workflow_startGame() {
+        gameServerController.startGame();
+        verify(workflow).startGame(players);
+    }
+
 }

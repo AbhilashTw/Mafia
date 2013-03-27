@@ -47,13 +47,13 @@ public class GameServerController implements GameGod {
 
     @Override
     public void removePlayer(Player player) {
-        List<Player> newPlayers=new ArrayList<Player>();
+        List<Player> newPlayers = new ArrayList<Player>();
         for (Player player1 : players) {
-                     if(!player1.equals(player)) {
-                              newPlayers.add(player1);
-                     }
+            if (!player1.equals(player)) {
+                newPlayers.add(player1);
+            }
         }
-         players=newPlayers;
+        players = newPlayers;
     }
 
 
@@ -63,7 +63,7 @@ public class GameServerController implements GameGod {
     }
 
     public boolean canGameBeStarted() {
-        return players.size() > 2;
+        return players.size() > 0;
     }
 
     public void stop() {
@@ -71,8 +71,13 @@ public class GameServerController implements GameGod {
             for (Player player : players) {
                 player.stop();
             }
+
+            server.stop();
         }
-        server.stop();
         workflow.start();
+    }
+
+    public void startGame() {
+        workflow.startGame(players);
     }
 }

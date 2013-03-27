@@ -6,7 +6,7 @@ import channels.SocketChannelListener;
 import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
 import gameMessages.PlayersConnectedMessage;
-import gameMessages.PlayersDisconnectedMessage;
+
 import views.client.PlayersConnectedView;
 
 import java.io.IOException;
@@ -23,7 +23,6 @@ public class PlayersListController implements SocketChannelListener {
     private PlayersConnectedView view;
 
     public PlayersListController(Workflow workflow, SocketChannel channel, String serverName, String playerName) {
-
         this.workflow = workflow;
         this.channel = channel;
         this.serverName = serverName;

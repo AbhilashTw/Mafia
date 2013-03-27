@@ -14,6 +14,8 @@ public class Player implements SocketChannelListener {
     private SocketChannel channel;
     private String name;
     private Workflow workflow;
+    private Role role;
+
 
     public Player(SocketChannel channel, GameGod god) {
         this.channel = channel;
@@ -51,7 +53,7 @@ public class Player implements SocketChannelListener {
 
     @Override
     public void onClose(SocketChannel channel, Exception e) {
-       channel.stop();
+        channel.stop();
         god.removePlayer(this);
         god.playersUpdated();
     }
@@ -76,12 +78,24 @@ public class Player implements SocketChannelListener {
         }
     }
 
-
     @Override
     public void onMessageReadError(SocketChannel channel, Exception e) {
     }
 
     public void stop() {
         channel.stop();
+    }
+
+
+    public void assignRole(Role mafia) {
+        role = mafia;
+    }
+
+    public boolean isRoleAssigned() {
+        return role != null;
+    }
+
+    public String getRole() {
+        return role.toString();
     }
 }

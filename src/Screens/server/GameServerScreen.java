@@ -92,7 +92,7 @@ public class GameServerScreen implements GameServerView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (controller.canGameBeStarted()) {
-
+                    controller.startGame();
                 } else {
                     JOptionPane optionPane = new JOptionPane("Required Minimum 3 players to Start Game ", JOptionPane.ERROR_MESSAGE);
                     JDialog dialog = optionPane.createDialog("Error Message");

@@ -10,6 +10,8 @@ import controllers.client.PlayersListController;
 import controllers.client.VillagerStartScreenController;
 import controllers.server.GameServerController;
 import controllers.server.NewConnectionListener;
+import controllers.server.Player;
+import controllers.server.PlayersRoleInfoController;
 import screens.MafiaViewFactory;
 import screens.client.JoinServerScreen;
 import screens.client.MafiaStartScreen;
@@ -17,6 +19,9 @@ import screens.client.PlayersListScreen;
 import screens.client.VillagerStartScreen;
 import screens.controls.IMainFrame;
 import screens.server.GameServerScreen;
+import screens.server.PlayersRoleInfoScreen;
+
+import java.util.List;
 
 /**
  * Job : Understands procedural flow of data.
@@ -29,6 +34,15 @@ public class WorkflowManager implements Workflow {
     public WorkflowManager(MafiaViewFactory viewFactory, IMainFrame mainFrame) {
         this.viewFactory = viewFactory;
         this.mainFrame = mainFrame;
+    }
+
+
+    @Override
+    public void startGame(List<Player> players) {
+        PlayersRoleInfoController controller = new PlayersRoleInfoController(players, this);
+        controller.bind(new PlayersRoleInfoScreen(mainFrame, controller));
+        controller.start();
+
     }
 
     @Override
