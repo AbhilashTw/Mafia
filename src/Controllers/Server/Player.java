@@ -3,9 +3,7 @@ package controllers.server;
 import channels.Messages.ChannelMessage;
 import channels.SocketChannel;
 import channels.SocketChannelListener;
-import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
-import gameMessages.RoleAssignedMessage;
 
 import java.io.IOException;
 
@@ -13,7 +11,6 @@ public class Player implements SocketChannelListener {
     private final GameGod god;
     private SocketChannel channel;
     private String name;
-    private Workflow workflow;
     private Role role;
 
 
@@ -69,12 +66,6 @@ public class Player implements SocketChannelListener {
             PlayerDetailsMessage pdM = (PlayerDetailsMessage) message;
             name = pdM.getPlayerName();
             god.playersUpdated();
-        }
-        if (message instanceof RoleAssignedMessage) {
-            if (message.equals("villager")) { //todo : string comparison
-                workflow.startVillagerScreen();
-            } else if (message.equals("mafia"))
-                workflow.startMafiaScreen();
         }
     }
 

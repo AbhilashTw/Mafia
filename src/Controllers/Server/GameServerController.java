@@ -3,7 +3,6 @@ package controllers.server;
 import channels.Server.SocketServer;
 import controllers.Workflow;
 import gameMessages.PlayersConnectedMessage;
-import gameMessages.PlayersDisconnectedMessage;
 import views.server.GameServerView;
 
 import java.util.ArrayList;
@@ -71,7 +70,6 @@ public class GameServerController implements GameGod {
             for (Player player : players) {
                 player.stop();
             }
-
             server.stop();
         }
         workflow.start();
