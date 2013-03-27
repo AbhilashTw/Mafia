@@ -3,6 +3,7 @@ package controllers.server;
 import channels.Server.SocketServer;
 import controllers.Workflow;
 import gameMessages.PlayersConnectedMessage;
+import gameMessages.PlayersDisconnectedMessage;
 import views.server.GameServerView;
 
 import java.util.ArrayList;
@@ -44,6 +45,18 @@ public class GameServerController implements GameGod {
         }
     }
 
+    @Override
+    public void removePlayer(Player player) {
+        List<Player> newPlayers=new ArrayList<Player>();
+        for (Player player1 : players) {
+                     if(!player1.equals(player)) {
+                              newPlayers.add(player1);
+                     }
+        }
+         players=newPlayers;
+    }
+
+
     public void start(SocketServer server) {
         this.server = server;
         server.start();
@@ -54,8 +67,12 @@ public class GameServerController implements GameGod {
     }
 
     public void stop() {
-        if (server != null)
-            server.stop();
+        if (server != null) {
+            for (Player player : players) {
+                player.stop();
+            }
+        }
+        server.stop();
         workflow.start();
     }
 }

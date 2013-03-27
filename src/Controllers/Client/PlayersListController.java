@@ -6,6 +6,7 @@ import channels.SocketChannelListener;
 import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
 import gameMessages.PlayersConnectedMessage;
+import gameMessages.PlayersDisconnectedMessage;
 import views.client.PlayersConnectedView;
 
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class PlayersListController implements SocketChannelListener {
 
     @Override
     public void onClose(SocketChannel channel, Exception e) {
-        throw new RuntimeException("close failed", e);
+        workflow.start();
     }
 
     @Override
@@ -54,12 +55,16 @@ public class PlayersListController implements SocketChannelListener {
     }
 
     public void bind(PlayersConnectedView view) {
-
         this.view = view;
     }
 
     public void start() {
         view.connectedToServer(serverName, playerName);
         this.channel.send(PlayerDetailsMessage.createPlayerDetailsMessage(playerName));
+    }
+
+    public void goToHomeScreen() {
+       channel.stop();
+        workflow.start();
     }
 }
