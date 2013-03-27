@@ -6,7 +6,6 @@ import controllers.server.GameServerController;
 import controllers.server.Player;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
-import screens.controls.MainFrame;
 import views.server.GameServerView;
 
 import javax.swing.*;
@@ -24,13 +23,13 @@ public class GameServerScreen implements GameServerView {
     private final GameServerController controller;
     public SocketServer server;
     IMainFrame startServerFrame;
+    PlayersListController playersListController;
     private JLabel playersJoinedLabel;
     private JButton startServerButton;
     private JButton stopServerButton;
     private ImagePanel panel;
     private DefaultListModel<String> allPlayers = new DefaultListModel<String>();
     private JList<String> playersList = new JList<String>(allPlayers);
-    PlayersListController playersListController;
 
     public GameServerScreen(IMainFrame mainFrame, GameServerController controller) {
         startServerFrame = mainFrame;
@@ -89,6 +88,19 @@ public class GameServerScreen implements GameServerView {
     }
 
     private void addButtonHandlers() {
+        startServerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (controller.canGameBeStarted()) {
+
+                } else {
+                    JOptionPane optionPane = new JOptionPane("Required Minimum 3 players to Start Game ", JOptionPane.ERROR_MESSAGE);
+                    JDialog dialog = optionPane.createDialog("Error Message");
+                    dialog.setAlwaysOnTop(true);
+                    dialog.setVisible(true);
+                }
+            }
+        });
         stopServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 controller.stop();

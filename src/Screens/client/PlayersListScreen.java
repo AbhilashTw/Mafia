@@ -11,7 +11,6 @@ import java.awt.*;
 public class PlayersListScreen implements PlayersConnectedView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     private final PlayersListController controller;
-
     IMainFrame mainFrame;
     private ImagePanel playersConnectedScreenImage;
     private JLabel playersConnectedLabel;

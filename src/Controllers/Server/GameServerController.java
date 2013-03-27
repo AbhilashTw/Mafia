@@ -8,7 +8,9 @@ import views.server.GameServerView;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class GameServerController implements GameGod {
+
     private final Workflow workflow;
     private SocketServer server;
     private List<Player> players = new ArrayList<Player>();
@@ -45,6 +47,10 @@ public class GameServerController implements GameGod {
     public void start(SocketServer server) {
         this.server = server;
         server.start();
+    }
+
+    public boolean canGameBeStarted() {
+        return players.size() > 2;
     }
 
     public void stop() {

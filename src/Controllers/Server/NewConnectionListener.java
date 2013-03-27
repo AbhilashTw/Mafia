@@ -3,6 +3,7 @@ package controllers.server;
 import channels.ConnectionListener;
 import channels.SocketChannel;
 
+
 public class NewConnectionListener implements ConnectionListener {
 
     private final GameServerController controller;
@@ -18,7 +19,7 @@ public class NewConnectionListener implements ConnectionListener {
 
     @Override
     public void onConnectionFailed(String serverAddress, int serverPort, Exception e) {
-        throw new RuntimeException("Could not start server",e);
+        throw new RuntimeException("Could not start server", e);
     }
 
 }
