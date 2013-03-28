@@ -5,57 +5,75 @@ import controllers.server.GameServerController;
 import controllers.server.Player;
 import gameMessages.PlayersConnectedMessage;
 import org.junit.Test;
+import controllers.server.Players;
 import views.server.GameServerView;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.mockito.Mockito.*;
 
 
 public class GameServerControllerTest {
-    private final String playerName = "MafiaPlayer";
-    GameServerView gameServerView = mock(GameServerView.class);
+    GameServerView view = mock(GameServerView.class);
     Workflow workflow = mock(Workflow.class);
-    Player mockPlayer = mock(Player.class);
-    SocketServer mockServer = mock(SocketServer.class);
-    GameServerController gameServerController = new GameServerController(workflow);
-    List<Player> players = new ArrayList<Player>();
+    Player player = mock(Player.class);
+    SocketServer server = mock(SocketServer.class);
+    Players gamePlayers = mock(Players.class);
+    GameServerController controller = new GameServerController(workflow, gamePlayers);
 
     @Test
-    public void when_gameServerController_calls_players_updated_it_invokes_updatePlayers_method_in_startServerScreen() throws IOException {
-        gameServerController.bind(gameServerView);
-        gameServerController.playersUpdated();
-        verify(gameServerView).updatePlayers(players);
+    public void when_gameServerController_calls_players_updated_it_invokes_updatePlayers_method_sends_message_to_the_player() {
+        String testSample = "Abhilash" + "\n";
+        when(gamePlayers.getPlayersName()).thenReturn(testSample);
+        when(player.getName()).thenReturn(testSample);
+        controller.bind(view);
+        controller.playersUpdated();
+        controller.addPlayer(player);
+        verify(view).updatePlayers(gamePlayers.getPlayers());
+        verify(gamePlayers).sendMessage(PlayersConnectedMessage.createPlayersConnectedMessage(testSample));
     }
 
     @Test
-    public void players_connected_message_is_sent_whenever_a_new_player_is_updated() {
-        when(mockPlayer.getName()).thenReturn(playerName);
-        gameServerController.bind(gameServerView);
-        gameServerController.addPlayer(mockPlayer);
-        gameServerController.playersUpdated();
-        verify(mockPlayer).sendMessage(PlayersConnectedMessage.createPlayersConnectedMessage(playerName + "\n"));
-    }
-
-    @Test
-    public void stopServer_stops_the_server() {
-        gameServerController.start(mockServer);
-        gameServerController.stop();
-        verify(mockServer).stop();
-    }
-
-    @Test
-    public void stopServer_transitions_to_the_homeScreen() {
-        gameServerController.stop();
-        verify(workflow).start();
+    public void start_invokes_start_from_Server() {
+        controller.start(server);
+        verify(server).start();
     }
 
     @Test
     public void startGame_invokes_Workflow_startGame() {
-        gameServerController.startGame();
-        verify(workflow).startGame(players);
+        controller.startGame();
+        verify(workflow).startGame(gamePlayers);
+    }
+    @Test
+    public void on_calling_addPlayer_it_invokes_Players_addPlayer(){
+        controller.addPlayer(player);
+        verify(gamePlayers).addPlayer(player);
+    }
+    @Test
+    public void when_getPlayerListNames_is_called_it_invokes_getPlayerName_from_Players(){
+        controller.getPlayersListName();
+        verify(gamePlayers).getPlayersName();
+    }
+
+    @Test
+    public void removePlayer_in_GameServerController_invokes_removePlayers_from_Players(){
+        controller.removePlayer(player);
+        verify(gamePlayers).removePlayer(player);
+    }
+    @Test
+    public void canGameBeStarted_in_GameServerController_invokes_getPlayersCount_from_Players(){
+        controller.canGameBeStarted();
+        verify(gamePlayers).getPlayersCount();
+    }
+    @Test
+    public void controllers_stop_invokes_Players_quit(){
+        controller.start(server);
+        controller.stop();
+        verify(gamePlayers).quit();
+    }
+    @Test
+    public void controllers_stop_invokes_servers_stop(){
+        controller.start(server);
+        controller.stop();
+        verify(server).stop();
     }
 
 

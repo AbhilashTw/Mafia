@@ -57,7 +57,7 @@ public class Player implements SocketChannelListener {
         channel.stop();
     }
 
-    public void assignRole(Role mafia) {
+    public void setRole(Role mafia) {
         role = mafia;
     }
 

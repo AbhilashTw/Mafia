@@ -1,13 +1,12 @@
 package runner;
 
 import controllers.HomeController;
-import controllers.Workflow;
+import controllers.server.Players;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import screens.MafiaViewFactory;
 import screens.controls.IMainFrame;
-import screens.controls.MainFrame;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -35,7 +34,7 @@ public class WorkflowManagerTest {
         MafiaViewFactory mockViewFactory = mock(MafiaViewFactory.class);
 
         IMainFrame mockMainFrame = mock(IMainFrame.class);
-        WorkflowManager workflowManager = new WorkflowManager(mockViewFactory, mockMainFrame);
+        WorkflowManager workflowManager = new WorkflowManager(mockViewFactory, mockMainFrame, new Players());
 
         when(mockViewFactory.getHomeController(workflowManager, mockMainFrame)).thenReturn(mockController);
 

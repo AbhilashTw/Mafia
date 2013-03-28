@@ -1,9 +1,7 @@
 package controllers;
 
 import channels.SocketChannel;
-import controllers.server.Player;
-
-import java.util.List;
+import controllers.server.Players;
 
 public interface Workflow {
     void startServer();
@@ -19,5 +17,5 @@ public interface Workflow {
 
     void startMafiaScreen();
 
-    void startGame(List<Player> players);
+    void startGame(Players players);
 }

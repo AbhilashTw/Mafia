@@ -16,8 +16,6 @@ public class PlayersRoleInfoScreen implements PlayersRoleInfoView {
     private final IMainFrame mainFrame;
     private final PlayersRoleInfoController controller;
     private ImagePanel panel;
-    private JLabel playerName;
-    private JLabel role;
     private DefaultListModel<String> playersNameList = new DefaultListModel<String>();
     private JList playersName = new JList(playersNameList);
     private DefaultListModel<String> playersRoleList = new DefaultListModel<String>();

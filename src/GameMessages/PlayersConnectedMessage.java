@@ -14,7 +14,7 @@ public class PlayersConnectedMessage extends ChannelMessage implements Serializa
     }
 
     public static PlayersConnectedMessage createPlayersConnectedMessage(String playerNames) {
-        if(playerNames == null) throw  new IllegalArgumentException("PlayerName is null");
+        if (playerNames == null) throw new IllegalArgumentException("PlayerName is null");
         return new PlayersConnectedMessage(playerNames);
     }
 
