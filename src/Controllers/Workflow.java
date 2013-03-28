@@ -16,9 +16,6 @@ public interface Workflow {
 
     void startMafiaScreen();
 
-
-    void mafiaNightArrived();
-
     void startGame(Players players);
 
 }

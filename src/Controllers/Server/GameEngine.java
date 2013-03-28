@@ -1,6 +1,6 @@
 package controllers.server;
 
-public interface GameGod {
+public interface GameEngine {
 
     void playersUpdated();
 

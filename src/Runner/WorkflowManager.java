@@ -80,14 +80,8 @@ public class WorkflowManager implements Workflow {
 
     @Override
     public void startMafiaScreen() {
-        MafiaStartScreenController controller = new MafiaStartScreenController(this);
+        MafiaStartScreenController controller = new MafiaStartScreenController(this, players);
         controller.bind(new MafiaStartScreen(mainFrame, controller));
     }
 
-    @Override
-    public void mafiaNightArrived() {
-        MafiaStartScreenController controller = new MafiaStartScreenController(this);
-        controller.bind(new MafiaStartScreen(mainFrame, controller));
-        controller.nightArrived();
-    }
 }

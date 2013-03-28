@@ -13,14 +13,14 @@ import static org.mockito.Mockito.verify;
 public class PlayerTest {
     Player player;
     SocketChannel socketChannel;
-    GameGod gameGod;
+    GameEngine gameEngine;
     PlayerDetailsMessage message;
 
     @Before
     public void setUp() throws Exception {
         socketChannel = mock(SocketChannel.class);
-        gameGod = mock(GameGod.class);
-        player = new Player(socketChannel, gameGod);
+        gameEngine = mock(GameEngine.class);
+        player = new Player(socketChannel, gameEngine);
         message = mock(PlayerDetailsMessage.class);
     }
 
@@ -44,19 +44,19 @@ public class PlayerTest {
     @Test
     public void on_calling_onClose_invokes_removePlayer_from_GameGod() {
         player.onClose(socketChannel, new Exception());
-        verify(gameGod).removePlayer(player);
+        verify(gameEngine).removePlayer(player);
     }
 
     @Test
     public void on_calling_onClose_invokes_playersUpdated_from_GameGod() {
         player.onClose(socketChannel, new Exception());
-        verify(gameGod).playersUpdated();
+        verify(gameEngine).playersUpdated();
     }
 
     @Test
     public void on_calling_onNewMessageArrived_invokes_playersUpdated_from_GameGod() {
         player.onNewMessageArrived(socketChannel, message);
-        verify(gameGod).playersUpdated();
+        verify(gameEngine).playersUpdated();
     }
 
     @Test

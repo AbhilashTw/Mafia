@@ -48,8 +48,6 @@ public class PlayersListController implements SocketChannelListener {
             workflow.startVillagerScreen();
         if (message instanceof MafiaRoleAssigned)
             workflow.startMafiaScreen();
-        if (message instanceof MafiaNightArrivedMessage)
-            workflow.mafiaNightArrived();
     }
 
     @Override

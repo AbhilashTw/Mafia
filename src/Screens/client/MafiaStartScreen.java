@@ -1,14 +1,13 @@
 package screens.client;
 
 import controllers.client.MafiaStartScreenController;
-import controllers.server.Player;
+import controllers.server.Players;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
 import views.client.MafiaStartScreenView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class MafiaStartScreen implements MafiaStartScreenView {
 
@@ -18,7 +17,7 @@ public class MafiaStartScreen implements MafiaStartScreenView {
     private ImagePanel panel;
     private JLabel mafiaLabel;
     private JRadioButton voteButton;
-    private List<Player> players;
+
 
     public MafiaStartScreen(IMainFrame mainFrame, MafiaStartScreenController controller) {
         this.mainFrame = mainFrame;
@@ -38,21 +37,5 @@ public class MafiaStartScreen implements MafiaStartScreenView {
         label.setFont(font);
         label.setForeground(Color.ORANGE);
         return label;
-    }
-
-    @Override
-    public void showMafiaNightScreen() {
-        voteButton = createButton(100, 100, "Vote");
-        panel.add(voteButton);
-    }
-
-    private JRadioButton createButton(int x_axis, int y_axis, String buttonName) {
-        JRadioButton button = new JRadioButton(buttonName);
-        button.setSize(145, 50);
-        button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
-        button.setForeground(Color.ORANGE);
-        button.setBackground(Color.BLACK);
-        return button;
     }
 }
