@@ -28,7 +28,7 @@ public class PlayersRoleInfoController {
         int assignedMafia = 0, assignedVillagers = 0;
         calculateRatio();
         for (Player player : players) {
-            if (generateRandomNumber()) {
+            if (generateRandomNumber() == 0) {
                 if (assignedMafia < mafiaCount) {
                     player.assignRole(Role.Mafia);
                     assignedMafia++;
@@ -53,9 +53,9 @@ public class PlayersRoleInfoController {
 
     }
 
-    private boolean generateRandomNumber() {
+    private int generateRandomNumber() {
         Random random = new Random();
-        return random.nextBoolean();
+        return random.nextInt(2 - 0) + 0;
     }
 
     private void calculateRatio() {

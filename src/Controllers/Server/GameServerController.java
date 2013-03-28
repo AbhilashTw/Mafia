@@ -69,7 +69,6 @@ public class GameServerController implements GameGod {
             for (Player player : players) {
                 player.stop();
             }
-
             server.stop();
         }
         workflow.start();

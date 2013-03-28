@@ -13,7 +13,6 @@ public class VillagerStartScreenController {
     }
 
     public void bind(VillagerStartScreenView view) {
-
         this.view = view;
     }
 }

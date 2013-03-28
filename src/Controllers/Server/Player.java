@@ -3,7 +3,6 @@ package controllers.server;
 import channels.Messages.ChannelMessage;
 import channels.SocketChannel;
 import channels.SocketChannelListener;
-import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
 
 import java.io.IOException;
@@ -12,7 +11,6 @@ public class Player implements SocketChannelListener {
     private final GameGod god;
     private SocketChannel channel;
     private String name;
-    private Workflow workflow;
     private Role role;
 
 
