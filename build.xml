@@ -11,7 +11,7 @@
     <target name="ci-setup">
         <sound>
             <success source="sounds\Success.wav"/>
-            <fail source="sounds\Syran.wav" duration="10000"/>
+            <fail source="sounds\NewFail.wav" duration="10000"/>
         </sound>
     </target>
 

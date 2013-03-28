@@ -48,7 +48,10 @@ public class JoinServerScreen implements JoinServerView {
         connectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.connectToServer();
+                if (serverNameText.getText().equals("")) {
+                    displayMessage = new JPanel();
+                    JOptionPane.showMessageDialog(displayMessage, "Invalid Server Name", "Error", JOptionPane.ERROR_MESSAGE);
+                } else controller.connectToServer();
             }
         });
     }
