@@ -3,13 +3,9 @@ package controllers.server;
 import channels.SocketChannel;
 import controllers.Workflow;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import views.server.PlayersRoleInfoView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -17,17 +13,17 @@ import static org.mockito.Mockito.verify;
 public class PlayersRoleInfoControllerTest {
     private PlayersRoleInfoView view;
     private Workflow workflow;
-    private List<Player> players;
+    private Players players;
     private Player playerOne;
     private PlayersRoleInfoController controller;
 
     @Before
     public void setUp() throws Exception {
+        players = mock(Players.class);
         workflow = mock(Workflow.class);
         view = mock(PlayersRoleInfoView.class);
-        players = new ArrayList<Player>();
         playerOne = new Player(mock(SocketChannel.class), mock(GameGod.class));
-        players.add(playerOne);
+        players.addPlayer(playerOne);
     }
 
     @After
@@ -36,18 +32,19 @@ public class PlayersRoleInfoControllerTest {
     }
 
     @Test
-    public void assignRoles_when_called_invokes_Players_assignRole() {
+    public void when_assign_Role_is_called_the_Players_assign_role_is_invoke() {
         controller = new PlayersRoleInfoController(players, workflow);
         controller.assignRoles();
-        Assert.assertEquals(true, playerOne.isRoleAssigned());
+        verify(players).assignRoles();
     }
 
     @Test
-    public void display_Invokes_PlayersInfoScreen_Display() {
+    public void when_display_is_called_the_view_display_is_invoke() {
         controller = new PlayersRoleInfoController(players, workflow);
         controller.bind(view);
         controller.display();
-        verify(view).display(players);
+        verify(view).display(players.getPlayers());
     }
+
 
 }

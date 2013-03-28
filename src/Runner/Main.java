@@ -1,6 +1,7 @@
 package runner;
 
 
+import controllers.server.Players;
 import screens.MafiaViewFactory;
 import screens.controls.MainFrame;
 
@@ -10,7 +11,7 @@ import screens.controls.MainFrame;
 
 public class Main {
     public static void main(String args[]) {
-        new WorkflowManager(new MafiaViewFactory(), new MainFrame()).start();
+        new WorkflowManager(new MafiaViewFactory(), new MainFrame(), new Players()).start();
     }
 }
 
