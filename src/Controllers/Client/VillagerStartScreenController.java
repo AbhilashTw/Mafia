@@ -1,15 +1,14 @@
 package controllers.client;
 
-import runner.WorkflowManager;
+import controllers.Workflow;
 import views.client.VillagerStartScreenView;
 
 public class VillagerStartScreenController {
-    private final WorkflowManager workflowManager;
+    private final Workflow workflow;
     private VillagerStartScreenView view;
 
-    public VillagerStartScreenController(WorkflowManager workflowManager) {
-
-        this.workflowManager = workflowManager;
+    public VillagerStartScreenController(Workflow workflow) {
+        this.workflow = workflow;
     }
 
     public void bind(VillagerStartScreenView view) {

@@ -36,14 +36,14 @@ public class WorkflowManager implements Workflow {
         this.mainFrame = mainFrame;
     }
 
-
     @Override
     public void startGame(List<Player> players) {
         PlayersRoleInfoController controller = new PlayersRoleInfoController(players, this);
         controller.bind(new PlayersRoleInfoScreen(mainFrame, controller));
         controller.start();
-
     }
+
+
 
     @Override
     public void startServer() {
@@ -85,4 +85,10 @@ public class WorkflowManager implements Workflow {
         controller.bind(new MafiaStartScreen(mainFrame, controller));
     }
 
+    @Override
+    public void mafiaNightArrived() {
+        MafiaStartScreenController controller = new MafiaStartScreenController(this);
+        controller.bind(new MafiaStartScreen(mainFrame, controller));
+        controller.nightArrived();
+    }
 }

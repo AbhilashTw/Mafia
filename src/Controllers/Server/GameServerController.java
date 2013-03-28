@@ -76,5 +76,8 @@ public class GameServerController implements GameGod {
 
     public void startGame() {
         workflow.startGame(players);
+        for (Player player : players) {
+            player.sendMessage(PlayersConnectedMessage.createPlayersConnectedMessage(getPlayersListName()));
+        }
     }
 }

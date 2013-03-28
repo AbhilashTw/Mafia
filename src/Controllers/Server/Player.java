@@ -35,9 +35,10 @@ public class Player implements SocketChannelListener {
         god.playersUpdated();
     }
 
+
     @Override
     public void onSendFailed(SocketChannel channel, IOException e, ChannelMessage message) {
-        System.out.println("Unable to send in Server ");
+        throw new RuntimeException("Send Failed",e);
     }
 
     @Override

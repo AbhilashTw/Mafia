@@ -1,8 +1,9 @@
 package controllers.server;
 
 import controllers.Workflow;
-import gameMessages.RoleAssignedMafia;
-import gameMessages.RoleAssignedVillagers;
+import gameMessages.MafiaNightArrivedMessage;
+import gameMessages.MafiaRoleAssigned;
+import gameMessages.VillagerRoleAssigned;
 import views.server.PlayersRoleInfoView;
 
 import java.util.List;
@@ -68,15 +69,23 @@ public class PlayersRoleInfoController {
         assignRoles();
         sendClientsMessage();
         display();
+        mafiaNightArrived();
     }
 
     private void sendClientsMessage() {
         for (Player player : players) {
             if (player.getRole().equals(Role.Mafia.toString()))
-                player.sendMessage(new RoleAssignedMafia());
+                player.sendMessage(new MafiaRoleAssigned());
             else
-                player.sendMessage(new RoleAssignedVillagers());
+                player.sendMessage(new VillagerRoleAssigned());
         }
     }
 
+    public void mafiaNightArrived() {
+        for (Player player : players) {
+            if (player.getRole().equals(Role.Mafia.toString())) {
+                player.sendMessage(new MafiaNightArrivedMessage());
+            }
+        }
+    }
 }

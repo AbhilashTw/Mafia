@@ -14,10 +14,11 @@ public interface Workflow {
 
     void start();
 
-
     void startVillagerScreen();
 
     void startMafiaScreen();
 
     void startGame(List<Player> players);
+
+    void mafiaNightArrived();
 }

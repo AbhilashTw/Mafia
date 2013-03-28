@@ -1,17 +1,24 @@
 package controllers.client;
 
-import runner.WorkflowManager;
+import controllers.Workflow;
+import controllers.server.PlayersRoleInfoController;
 import views.client.MafiaStartScreenView;
 
 public class MafiaStartScreenController {
-    private final WorkflowManager workflowManager;
+    private final Workflow workflow;
     private MafiaStartScreenView view;
+    private PlayersRoleInfoController controller;
 
-    public MafiaStartScreenController(WorkflowManager workflowManager) {
-        this.workflowManager = workflowManager;
+    public MafiaStartScreenController(Workflow workflow) {
+
+        this.workflow = workflow;
     }
 
     public void bind(MafiaStartScreenView view) {
         this.view = view;
+    }
+
+    public void nightArrived() {
+        view.showMafiaNightScreen();
     }
 }
