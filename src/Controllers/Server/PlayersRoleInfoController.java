@@ -1,6 +1,8 @@
 package controllers.server;
 
 import controllers.Workflow;
+import gameMessages.RoleAssignedMafia;
+import gameMessages.RoleAssignedVillagers;
 import views.server.PlayersRoleInfoView;
 
 import java.util.List;
@@ -26,8 +28,7 @@ public class PlayersRoleInfoController {
         int assignedMafia = 0, assignedVillagers = 0;
         calculateRatio();
         for (Player player : players) {
-
-            if (generateRandomNumber()) {
+            if (generateRandomNumber() == 0) {
                 if (assignedMafia < mafiaCount) {
                     player.assignRole(Role.Mafia);
                     assignedMafia++;
@@ -52,9 +53,9 @@ public class PlayersRoleInfoController {
 
     }
 
-    private boolean generateRandomNumber() {
+    private int generateRandomNumber() {
         Random random = new Random();
-        return random.nextBoolean();
+        return random.nextInt(2 - 0) + 0;
     }
 
     private void calculateRatio() {
@@ -65,6 +66,17 @@ public class PlayersRoleInfoController {
 
     public void start() {
         assignRoles();
+        sendClientsMessage();
         display();
     }
+
+    private void sendClientsMessage() {
+        for (Player player : players) {
+            if (player.getRole().equals(Role.Mafia.toString()))
+                player.sendMessage(new RoleAssignedMafia());
+            else
+                player.sendMessage(new RoleAssignedVillagers());
+        }
+    }
+
 }

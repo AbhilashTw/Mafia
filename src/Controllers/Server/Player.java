@@ -29,26 +29,6 @@ public class Player implements SocketChannelListener {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Player player = (Player) o;
-
-        if (!channel.equals(player.channel)) return false;
-        if (!name.equals(player.name)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = channel.hashCode();
-        result = 31 * result + name.hashCode();
-        return result;
-    }
-
-    @Override
     public void onClose(SocketChannel channel, Exception e) {
         channel.stop();
         god.removePlayer(this);
@@ -77,7 +57,6 @@ public class Player implements SocketChannelListener {
         channel.stop();
     }
 
-
     public void assignRole(Role mafia) {
         role = mafia;
     }
@@ -88,5 +67,25 @@ public class Player implements SocketChannelListener {
 
     public String getRole() {
         return role.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        if (!channel.equals(player.channel)) return false;
+        if (!name.equals(player.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = channel.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
     }
 }

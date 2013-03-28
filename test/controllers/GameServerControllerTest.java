@@ -1,5 +1,6 @@
+package controllers;
+
 import channels.Server.SocketServer;
-import controllers.Workflow;
 import controllers.server.GameServerController;
 import controllers.server.Player;
 import gameMessages.PlayersConnectedMessage;
@@ -47,7 +48,6 @@ public class GameServerControllerTest {
 
     @Test
     public void stopServer_transitions_to_the_homeScreen() {
-
         gameServerController.stop();
         verify(workflow).start();
     }
@@ -57,5 +57,6 @@ public class GameServerControllerTest {
         gameServerController.startGame();
         verify(workflow).startGame(players);
     }
+
 
 }

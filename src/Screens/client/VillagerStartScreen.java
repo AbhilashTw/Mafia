@@ -10,9 +10,9 @@ import java.awt.*;
 
 public class VillagerStartScreen implements VillagerStartScreenView {
 
-    IMainFrame mainFrame;
-    private final VillagerStartScreenController controller;
     private static final String BG_IMAGE = "images/villagerStartScreen.jpg";
+    private final VillagerStartScreenController controller;
+    IMainFrame mainFrame;
     private ImagePanel panel;
     private JLabel villagerLabel;
 
@@ -20,7 +20,7 @@ public class VillagerStartScreen implements VillagerStartScreenView {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
-        villagerLabel = createLabel("Your assigned as a villager", 900, 500);
+        villagerLabel = createLabel("Your assigned as a villager", 100, 500);
         panel.add(villagerLabel);
     }
 

@@ -55,7 +55,6 @@ public class GameServerController implements GameGod {
         players = newPlayers;
     }
 
-
     public void start(SocketServer server) {
         this.server = server;
         server.start();
