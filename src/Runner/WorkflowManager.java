@@ -1,5 +1,6 @@
 package runner;
 
+import channels.Messages.ChannelMessage;
 import channels.Server.SocketServer;
 import channels.SocketChannel;
 import controllers.HomeController;
@@ -43,7 +44,6 @@ public class WorkflowManager implements Workflow {
         controller.start();
     }
 
-
     @Override
     public void startServer() {
         GameServerController controller = new GameServerController(this, players);
@@ -73,21 +73,16 @@ public class WorkflowManager implements Workflow {
     }
 
     @Override
-    public void startVillagerScreen() {
-        VillagerStartScreenController controller = new VillagerStartScreenController(this);
+    public void startVillagerScreen(ChannelMessage message) {
+        VillagerStartScreenController controller = new VillagerStartScreenController(this, message);
         controller.bind(new VillagerStartScreen(mainFrame, controller));
+        controller.start();
     }
 
     @Override
-    public void startMafiaScreen() {
-        MafiaStartScreenController controller = new MafiaStartScreenController(this);
+    public void startMafiaScreen(ChannelMessage message) {
+        MafiaStartScreenController controller = new MafiaStartScreenController(this, message);
         controller.bind(new MafiaStartScreen(mainFrame, controller));
-    }
-
-    @Override
-    public void mafiaNightArrived() {
-        MafiaStartScreenController controller = new MafiaStartScreenController(this);
-        controller.bind(new MafiaStartScreen(mainFrame, controller));
-        controller.nightArrived();
+        controller.start();
     }
 }

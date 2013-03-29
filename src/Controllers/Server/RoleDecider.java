@@ -7,6 +7,7 @@ public class RoleDecider {
     private int mafiaCount;
     private int villagerCount;
 
+
     public RoleDecider(Players players) {
         this.players = players;
     }
@@ -14,6 +15,7 @@ public class RoleDecider {
     public void assignRoles() {
         calculateRatio();
         for (Player player : players.getPlayers()) {
+
             if (getRandomDecision()) {
                 assignAsMafia(player);
             } else {
@@ -24,20 +26,20 @@ public class RoleDecider {
 
     private void assignAsVillager(Player player) {
         if (villagerCount > 0) {
-            Role.Villager.assignRole(player);
+            player.setRole(Role.Villager);
             villagerCount--;
         } else if (mafiaCount > 0) {
-            Role.Mafia.assignRole(player);
+            player.setRole(Role.Mafia);
             mafiaCount--;
         }
     }
 
     private void assignAsMafia(Player player) {
         if (mafiaCount > 0) {
-            Role.Mafia.assignRole(player);
+            player.setRole(Role.Mafia);
             mafiaCount--;
         } else if (villagerCount > 0) {
-            Role.Villager.assignRole(player);
+            player.setRole(Role.Villager);
             villagerCount--;
         }
     }

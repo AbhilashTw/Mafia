@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class VillagerStartScreen implements VillagerStartScreenView {
 
-    private static final String BG_IMAGE = "images/villagerStartScreen.jpg";
+    private static final String BG_IMAGE = "images/homepage.jpg";
     private final VillagerStartScreenController controller;
     IMainFrame mainFrame;
     private ImagePanel panel;
@@ -20,7 +20,7 @@ public class VillagerStartScreen implements VillagerStartScreenView {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
-        villagerLabel = createLabel("Your assigned as a villager", 100, 500);
+        villagerLabel = createLabel("Your Assigned As a Villager", 100, 500);
         panel.add(villagerLabel);
     }
 
@@ -35,5 +35,23 @@ public class VillagerStartScreen implements VillagerStartScreenView {
         return label;
     }
 
+    @Override
+    public void display(String[] playersName) {
+        ButtonGroup bg = new ButtonGroup();
+        int x = 100, y = 100;
 
+        for (String player : playersName) {
+            System.out.println(player);
+            JRadioButton button = new JRadioButton(player);
+            button.setLocation(x, y);
+            button.setSize(100, 400);
+            button.setFont(new Font("Times New Roman", 1, 20));
+            button.setBackground(Color.ORANGE);
+            button.setVisible(true);
+            panel.add(button);
+            bg.add(button);
+            x += 100;
+            y += 100;
+        }
+    }
 }

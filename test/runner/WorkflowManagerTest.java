@@ -8,10 +8,7 @@ import org.junit.Test;
 import screens.MafiaViewFactory;
 import screens.controls.IMainFrame;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class WorkflowManagerTest {
 
@@ -32,14 +29,10 @@ public class WorkflowManagerTest {
     public void start_calls_start_on_HomeController() {
         HomeController mockController = mock(HomeController.class);
         MafiaViewFactory mockViewFactory = mock(MafiaViewFactory.class);
-
         IMainFrame mockMainFrame = mock(IMainFrame.class);
         WorkflowManager workflowManager = new WorkflowManager(mockViewFactory, mockMainFrame, new Players());
-
         when(mockViewFactory.getHomeController(workflowManager, mockMainFrame)).thenReturn(mockController);
-
         workflowManager.start();
-
         verify(mockController).start();
     }
 }

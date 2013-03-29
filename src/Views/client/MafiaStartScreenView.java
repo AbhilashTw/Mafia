@@ -1,5 +1,6 @@
 package views.client;
 
 public interface MafiaStartScreenView {
-    void showMafiaNightScreen();
+
+    void display(String[] playersName);
 }

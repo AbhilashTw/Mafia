@@ -1,14 +1,12 @@
 package screens.client;
 
 import controllers.client.MafiaStartScreenController;
-import controllers.server.Player;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
 import views.client.MafiaStartScreenView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class MafiaStartScreen implements MafiaStartScreenView {
 
@@ -18,7 +16,6 @@ public class MafiaStartScreen implements MafiaStartScreenView {
     private ImagePanel panel;
     private JLabel mafiaLabel;
     private JRadioButton voteButton;
-    private List<Player> players;
 
     public MafiaStartScreen(IMainFrame mainFrame, MafiaStartScreenController controller) {
         this.mainFrame = mainFrame;
@@ -41,18 +38,21 @@ public class MafiaStartScreen implements MafiaStartScreenView {
     }
 
     @Override
-    public void showMafiaNightScreen() {
-        voteButton = createButton(100, 100, "Vote");
-        panel.add(voteButton);
-    }
-
-    private JRadioButton createButton(int x_axis, int y_axis, String buttonName) {
-        JRadioButton button = new JRadioButton(buttonName);
-        button.setSize(145, 50);
-        button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
-        button.setForeground(Color.ORANGE);
-        button.setBackground(Color.BLACK);
-        return button;
+    public void display(String[] playersName) {
+        ButtonGroup bg = new ButtonGroup();
+        for (String player : playersName) {
+            System.out.println(player);
+            int x = 100, y = 100;
+            JRadioButton button = new JRadioButton(player);
+            button.setLocation(x, y);
+            button.setSize(50, 50);
+            button.setBackground(Color.ORANGE);
+            button.setVisible(true);
+            panel.add(button);
+            bg.add(button);
+            x += 100;
+            y += 100;
+        }
+        //panel.add(bg);
     }
 }

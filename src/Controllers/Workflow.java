@@ -1,5 +1,6 @@
 package controllers;
 
+import channels.Messages.ChannelMessage;
 import channels.SocketChannel;
 import controllers.server.Players;
 
@@ -12,12 +13,9 @@ public interface Workflow {
 
     void start();
 
-    void startVillagerScreen();
+    void startVillagerScreen(ChannelMessage message);
 
-    void startMafiaScreen();
-
-
-    void mafiaNightArrived();
+    void startMafiaScreen(ChannelMessage message);
 
     void startGame(Players players);
 
