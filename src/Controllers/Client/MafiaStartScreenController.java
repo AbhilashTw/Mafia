@@ -1,19 +1,21 @@
 package controllers.client;
 
+import channels.Messages.ChannelMessage;
 import controllers.Workflow;
-import controllers.server.Player;
-import controllers.server.Players;
-import controllers.server.Role;
+import controllers.server.PlayersRoleInfoController;
+import gameMessages.MafiaRoleAssigned;
+import runner.WorkflowManager;
 import views.client.MafiaStartScreenView;
 
 public class MafiaStartScreenController {
-    private Workflow workflow;
-    private Players players;
+    private final Workflow workflow;
     private MafiaStartScreenView view;
+    private PlayersRoleInfoController controller;
+    private MafiaRoleAssigned message;
 
-    public MafiaStartScreenController(Workflow workflow, Players players) {
-        this.workflow = workflow;
-        this.players = players;
+    public MafiaStartScreenController(WorkflowManager manager, ChannelMessage message) {
+        this.workflow = manager;
+        this.message = (MafiaRoleAssigned) message;
     }
 
     public void bind(MafiaStartScreenView view) {
@@ -21,28 +23,7 @@ public class MafiaStartScreenController {
     }
 
     public void start() {
-        String villagersNames = getVillagersNames();
-        int villagersCount = getVillagersCount();
-        view.mafiaNightArrived(villagersNames, villagersCount);
+        view.display(message.getPlayersName());
     }
 
-    private String getVillagersNames() {
-        String villagersNames = "";
-        for (Player player : players.getPlayers()) {
-            if (player.getRole().equals(Role.Villager.toString())) {
-                villagersNames += player.getName() + "\n";
-            }
-        }
-        return villagersNames;
-    }
-
-    private int getVillagersCount() {
-        int villagersCount = 2;
-        for (Player player : players.getPlayers()) {
-            if (player.getRole().equals(Role.Villager.toString())) {
-                villagersCount++;
-            }
-        }
-        return villagersCount;
-    }
 }

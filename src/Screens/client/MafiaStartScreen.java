@@ -7,6 +7,8 @@ import views.client.MafiaStartScreenView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MafiaStartScreen implements MafiaStartScreenView {
 
@@ -15,7 +17,7 @@ public class MafiaStartScreen implements MafiaStartScreenView {
     IMainFrame mainFrame;
     private ImagePanel panel;
     private JLabel mafiaLabel;
-    private JRadioButton voteButton;
+    private JLabel countDownLabel = new JLabel("", SwingConstants.CENTER);
 
     public MafiaStartScreen(IMainFrame mainFrame, MafiaStartScreenController controller) {
         this.mainFrame = mainFrame;
@@ -24,6 +26,7 @@ public class MafiaStartScreen implements MafiaStartScreenView {
 
         mafiaLabel = createLabel("Your assigned as a mafia", 100, 450);
         panel.add(mafiaLabel);
+        new HurdlerTimer(this).start();
     }
 
     private JLabel createLabel(String labelName, int x_bound, int y_bound) {
@@ -38,25 +41,53 @@ public class MafiaStartScreen implements MafiaStartScreenView {
     }
 
     @Override
-    public void mafiaNightArrived(String villagersNames, int villagersCount) {
-        int x = 100, y = 200, i = 0;
-        while (i < villagersCount) {
-//            String[] names = villagersNames.split("\n");
-            voteButton = createButton(x, y, "Vote");
-            panel.add(voteButton);
-            x = x + 150;
-            i++;
+    public void display(String[] playersName) {
+        ButtonGroup bg = new ButtonGroup();
+        int x = 100, y = 100;
+        JLabel voteLabel = createLabel("You can vote now", 100, 450);
+        panel.add(voteLabel);
+        for (String player : playersName) {
+            JRadioButton button = new JRadioButton(player);
+            button.setLocation(x, y);
+            button.setSize(145, 50);
+            button.setBackground(Color.ORANGE);
+            button.setVisible(true);
+            panel.add(button);
+            bg.add(button);
+            y += 80;
         }
     }
 
-    private JRadioButton createButton(int x_axis, int y_axis, String buttonName) {
-        JRadioButton button = new JRadioButton(buttonName);
-        button.setSize(145, 50);
-        button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
-        button.setForeground(Color.ORANGE);
-        button.setBackground(Color.BLACK);
-        return button;
+    public void setCountDownLabelText(String text) {
+        countDownLabel.setText(text);
+    }
+}
+
+class HurdlerTimer {
+    private MafiaStartScreen mafiaStartScreen;
+    private final int MAX_COUNT = 10;
+    private static final int TIMER_PERIOD = 1000;
+    private int count;
+
+    public HurdlerTimer(MafiaStartScreen mafiaStartScreen) {
+        this.mafiaStartScreen = mafiaStartScreen; // initializes the reference to the Welcome class.
+        String text = "(" + (MAX_COUNT - count) + ") seconds left";
+        mafiaStartScreen.setCountDownLabelText(text);
     }
 
+    public void start() {
+        new Timer(TIMER_PERIOD, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (count < MAX_COUNT) {
+                    count++;
+                    String text = "(" + (MAX_COUNT - count) + ") seconds left";
+                    mafiaStartScreen.setCountDownLabelText(text); // uses the reference to Welcome
+                } else {
+                    ((Timer) e.getSource()).stop();
+                }
+            }
+        }).start();
+    }
 }
+

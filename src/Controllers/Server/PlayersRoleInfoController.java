@@ -26,21 +26,24 @@ public class PlayersRoleInfoController {
 
     public void display() {
         view.display(players.getPlayers());
+
     }
 
     public void start() {
         assignRoles();
         sendClientsMessage();
         display();
+
     }
 
     private void sendClientsMessage() {
         for (Player player : players.getPlayers()) {
             if (player.getRole().equals(Role.Mafia.toString()))
-                player.sendMessage(new MafiaRoleAssigned());
+                player.sendMessage(new MafiaRoleAssigned(players.getPlayersName()));
             else
-                player.sendMessage(new VillagerRoleAssigned());
+                player.sendMessage(new VillagerRoleAssigned(players.getPlayersName()));
         }
     }
+
 
 }

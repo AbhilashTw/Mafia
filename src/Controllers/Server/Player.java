@@ -8,24 +8,20 @@ import gameMessages.PlayerDetailsMessage;
 import java.io.IOException;
 
 public class Player implements SocketChannelListener {
-    private GameEngine engine;
+    private final GameEngine god;
     private SocketChannel channel;
     private String name;
     private Role role;
 
 
-    public Player(SocketChannel channel, GameEngine engine) {
+    public Player(SocketChannel channel, GameEngine god) {
         this.channel = channel;
-        this.engine = engine;
+        this.god = god;
         channel.bind(this);
     }
 
     public String getName() {
         return name;
-    }
-
-    public void reAssignGod(GameEngine engine) {
-        this.engine = engine;
     }
 
     public void sendMessage(ChannelMessage message) {
@@ -35,10 +31,9 @@ public class Player implements SocketChannelListener {
     @Override
     public void onClose(SocketChannel channel, Exception e) {
         channel.stop();
-        engine.removePlayer(this);
-        engine.playersUpdated();
+        god.removePlayer(this);
+        god.playersUpdated();
     }
-
 
     @Override
     public void onSendFailed(SocketChannel channel, IOException e, ChannelMessage message) {
@@ -50,9 +45,8 @@ public class Player implements SocketChannelListener {
         if (message instanceof PlayerDetailsMessage) {
             PlayerDetailsMessage pdM = (PlayerDetailsMessage) message;
             name = pdM.getPlayerName();
-            engine.playersUpdated();
+            god.playersUpdated();
         }
-
     }
 
     @Override
@@ -63,16 +57,16 @@ public class Player implements SocketChannelListener {
         channel.stop();
     }
 
-    public void setRole(Role mafia) {
-        role = mafia;
-    }
-
     public boolean isRoleAssigned() {
         return role != null;
     }
 
     public String getRole() {
         return role.toString();
+    }
+
+    public void setRole(Role mafia) {
+        role = mafia;
     }
 
     @Override
