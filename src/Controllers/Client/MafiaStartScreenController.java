@@ -10,8 +10,6 @@ import views.client.MafiaStartScreenView;
 public class MafiaStartScreenController {
     private Workflow workflow;
     private Players players;
-
-
     private MafiaStartScreenView view;
 
     public MafiaStartScreenController(Workflow workflow, Players players, ChannelMessage message) {
@@ -48,5 +46,4 @@ public class MafiaStartScreenController {
         }
         return villagersCount;
     }
-
 }

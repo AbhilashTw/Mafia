@@ -17,7 +17,6 @@ public class MafiaStartScreen implements MafiaStartScreenView {
     private JLabel mafiaLabel;
     private JRadioButton voteButton;
 
-
     public MafiaStartScreen(IMainFrame mainFrame, MafiaStartScreenController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
