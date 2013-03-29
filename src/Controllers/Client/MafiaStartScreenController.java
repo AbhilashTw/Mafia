@@ -1,6 +1,5 @@
 package controllers.client;
 
-import channels.Messages.ChannelMessage;
 import controllers.Workflow;
 import controllers.server.Player;
 import controllers.server.Players;
@@ -12,7 +11,7 @@ public class MafiaStartScreenController {
     private Players players;
     private MafiaStartScreenView view;
 
-    public MafiaStartScreenController(Workflow workflow, Players players, ChannelMessage message) {
+    public MafiaStartScreenController(Workflow workflow, Players players) {
         this.workflow = workflow;
         this.players = players;
     }
