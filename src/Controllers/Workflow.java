@@ -15,7 +15,9 @@ public interface Workflow {
 
     void startVillagerScreen(ChannelMessage message);
 
+
     void startMafiaScreen(ChannelMessage message);
+
 
     void startGame(Players players);
 

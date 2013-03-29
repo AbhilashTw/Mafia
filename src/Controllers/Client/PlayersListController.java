@@ -3,12 +3,9 @@ package controllers.client;
 import channels.Messages.ChannelMessage;
 import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
-import runner.WorkflowManager;
 import views.client.PlayersConnectedView;
 
-/**
- * Job:-
- */
+
 public class PlayersListController implements ClientEngine {
 
     private final ClientPlayer clientPlayer;
@@ -29,6 +26,7 @@ public class PlayersListController implements ClientEngine {
         view.connectedToServer(clientPlayer.getServerName(), clientPlayer.getPlayerName());
         clientPlayer.sendMessage(PlayerDetailsMessage.createPlayerDetailsMessage(clientPlayer.getPlayerName()));
     }
+
 
     public void goToHomeScreen() {
         clientPlayer.stop();

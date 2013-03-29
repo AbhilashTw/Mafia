@@ -22,7 +22,7 @@ public class PlayersRoleInfoControllerTest {
         players = mock(Players.class);
         workflow = mock(Workflow.class);
         view = mock(PlayersRoleInfoView.class);
-        playerOne = new Player(mock(SocketChannel.class), mock(GameGod.class));
+        playerOne = new Player(mock(SocketChannel.class), mock(GameEngine.class));
         players.addPlayer(playerOne);
     }
 

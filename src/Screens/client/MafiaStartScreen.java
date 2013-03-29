@@ -38,6 +38,7 @@ public class MafiaStartScreen implements MafiaStartScreenView {
     }
 
     @Override
+
     public void display(String[] playersName) {
         ButtonGroup bg = new ButtonGroup();
         for (String player : playersName) {
@@ -53,6 +54,17 @@ public class MafiaStartScreen implements MafiaStartScreenView {
             x += 100;
             y += 100;
         }
-        //panel.add(bg);
     }
+
+
+    private JRadioButton createButton(int x_axis, int y_axis, String buttonName) {
+        JRadioButton button = new JRadioButton(buttonName);
+        button.setSize(145, 50);
+        button.setLocation(x_axis, y_axis);
+        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setForeground(Color.ORANGE);
+        button.setBackground(Color.BLACK);
+        return button;
+    }
+
 }

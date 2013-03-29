@@ -6,7 +6,7 @@ import gameMessages.PlayersConnectedMessage;
 import views.server.GameServerView;
 
 
-public class GameServerController implements GameGod {
+public class GameServerController implements GameEngine {
 
     private final Workflow workflow;
     private final Players gamePlayers;

@@ -26,14 +26,12 @@ public class PlayersRoleInfoController {
 
     public void display() {
         view.display(players.getPlayers());
-
     }
 
     public void start() {
         assignRoles();
         sendClientsMessage();
         display();
-
     }
 
     private void sendClientsMessage() {

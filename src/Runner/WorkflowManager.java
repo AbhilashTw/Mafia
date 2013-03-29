@@ -82,4 +82,5 @@ public class WorkflowManager implements Workflow {
         controller.bind(new MafiaStartScreen(mainFrame, controller));
         controller.start();
     }
+
 }
