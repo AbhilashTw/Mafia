@@ -1,7 +1,7 @@
 package controllers;
 
 import channels.Messages.ChannelMessage;
-import channels.SocketChannel;
+import controllers.client.ClientPlayer;
 import controllers.server.Players;
 
 public interface Workflow {
@@ -9,7 +9,7 @@ public interface Workflow {
 
     void joinServer();
 
-    void connectedToServer(SocketChannel channel, String serverName, String playerName);
+    void connectedToServer(ClientPlayer clientPlayer);
 
     void start();
 

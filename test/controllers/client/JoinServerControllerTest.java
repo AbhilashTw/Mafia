@@ -18,13 +18,15 @@ public class JoinServerControllerTest {
     JoinServerView joinServerView;
     SocketChannel socketChannel;
     JoinServerController joinServerController;
+    ClientPlayer clientPlayer;
 
     @Before
     public void setUp() throws Exception {
+        clientPlayer = mock(ClientPlayer.class);
         workflow = mock(Workflow.class);
         joinServerView = mock(JoinServerView.class);
         socketChannel = mock(SocketChannel.class);
-        joinServerController = new JoinServerController(workflow);
+        joinServerController = new JoinServerController(workflow, clientPlayer);
     }
 
     @After
@@ -32,12 +34,6 @@ public class JoinServerControllerTest {
 
     }
 
-    @Test
-    public void should_invoke_connectedToServer_from_workFlow_when_onConnectionEstablished_is_called_from_JoinServerController() {
-        joinServerController.bind(joinServerView);
-        joinServerController.onConnectionEstablished(socketChannel);
-        verify(workflow).connectedToServer(socketChannel, joinServerView.getServerName(), joinServerView.getPlayerName());
-    }
 
     @Test
     public void should_invoke_connectionToServerFailed_from_view_when_onConnectionFailed_is_called_from_joinServerController() {

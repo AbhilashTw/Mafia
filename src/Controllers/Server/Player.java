@@ -35,10 +35,10 @@ public class Player implements SocketChannelListener {
         god.playersUpdated();
     }
 
-
     @Override
     public void onSendFailed(SocketChannel channel, IOException e, ChannelMessage message) {
-        throw new RuntimeException("Send Failed",e);
+        e.printStackTrace();
+        throw new RuntimeException("Send Failed", e);
     }
 
     @Override
@@ -52,14 +52,11 @@ public class Player implements SocketChannelListener {
 
     @Override
     public void onMessageReadError(SocketChannel channel, Exception e) {
+        e.printStackTrace();
     }
 
     public void stop() {
         channel.stop();
-    }
-
-    public void setRole(Role mafia) {
-        role = mafia;
     }
 
     public boolean isRoleAssigned() {
@@ -68,6 +65,10 @@ public class Player implements SocketChannelListener {
 
     public String getRole() {
         return role.toString();
+    }
+
+    public void setRole(Role mafia) {
+        role = mafia;
     }
 
     @Override
