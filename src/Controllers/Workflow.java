@@ -20,5 +20,4 @@ public interface Workflow {
     void startMafiaScreen(ChannelMessage message);
 
     void startGame(Players players);
-
 }

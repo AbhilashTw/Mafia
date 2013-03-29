@@ -24,7 +24,7 @@ public class ClientPlayer implements SocketChannelListener {
 
     @Override
     public void onClose(SocketChannel channel, Exception e) {
-       engine.ServerClosed();
+        engine.ServerClosed();
     }
 
     @Override
@@ -40,7 +40,6 @@ public class ClientPlayer implements SocketChannelListener {
         }
         if (message instanceof VillagerRoleAssigned)
             engine.startVillagerScreen(message);
-
         if (message instanceof MafiaRoleAssigned)
             engine.startMafiaScreen(message);
     }
@@ -59,7 +58,6 @@ public class ClientPlayer implements SocketChannelListener {
     }
 
     public String getServerName() {
-
         return serverName;
     }
 

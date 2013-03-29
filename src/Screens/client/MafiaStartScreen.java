@@ -18,19 +18,25 @@ public class MafiaStartScreen implements MafiaStartScreenView {
     private ImagePanel panel;
     private JLabel mafiaLabel;
 
+    private final JLabel lbl = new JLabel("50");
 
     public MafiaStartScreen(IMainFrame mainFrame, MafiaStartScreenController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
-
         mafiaLabel = createLabel("Your assigned as a mafia", 100, 450);
+
+        lbl.setForeground(Color.WHITE);
+        lbl.setBounds(800, 400, 200, 200);
+        lbl.setSize(145,50);
+
+        panel.add(lbl);
         panel.add(mafiaLabel);
+
     }
 
     private JLabel createLabel(String labelName, int x_bound, int y_bound) {
         JLabel label = new JLabel(labelName);
-        label.setForeground(Color.white);
         label.setSize(800, 900);
         label.setLocation(x_bound, y_bound);
         Font font = new Font("Monospaced", Font.BOLD, 25);
@@ -39,8 +45,10 @@ public class MafiaStartScreen implements MafiaStartScreenView {
         return label;
     }
 
+
     @Override
     public void display(String[] playersName) {
+        timerScreen();
         ButtonGroup bg = new ButtonGroup();
         int x = 100, y = 100;
         JLabel voteLabel = createLabel("You can vote now", 100, 450);
@@ -54,7 +62,19 @@ public class MafiaStartScreen implements MafiaStartScreenView {
             panel.add(button);
             bg.add(button);
             y += 80;
+
         }
+    }
+
+    public void timerScreen() {
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int time = Integer.parseInt(lbl.getText());
+                lbl.setText(String.valueOf(time - 1));
+            }
+        });
+        timer.start();
     }
 }
 
