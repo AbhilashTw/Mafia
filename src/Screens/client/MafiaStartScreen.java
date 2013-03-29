@@ -1,7 +1,6 @@
 package screens.client;
 
 import controllers.client.MafiaStartScreenController;
-import controllers.server.Players;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
 import views.client.MafiaStartScreenView;
@@ -38,4 +37,27 @@ public class MafiaStartScreen implements MafiaStartScreenView {
         label.setForeground(Color.ORANGE);
         return label;
     }
+
+    @Override
+    public void mafiaNightArrived(String villagersNames, int villagersCount) {
+        int x = 100, y = 200, i = 0;
+        while (i < villagersCount) {
+//            String[] names = villagersNames.split("\n");
+            voteButton = createButton(x, y, "Vote");
+            panel.add(voteButton);
+            x = x + 150;
+            i++;
+        }
+    }
+
+    private JRadioButton createButton(int x_axis, int y_axis, String buttonName) {
+        JRadioButton button = new JRadioButton(buttonName);
+        button.setSize(145, 50);
+        button.setLocation(x_axis, y_axis);
+        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setForeground(Color.ORANGE);
+        button.setBackground(Color.BLACK);
+        return button;
+    }
+
 }

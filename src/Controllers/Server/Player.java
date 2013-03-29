@@ -52,6 +52,7 @@ public class Player implements SocketChannelListener {
             name = pdM.getPlayerName();
             engine.playersUpdated();
         }
+
     }
 
     @Override

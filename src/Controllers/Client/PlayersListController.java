@@ -9,7 +9,7 @@ import views.client.PlayersConnectedView;
 
 import java.io.IOException;
 
-/**
+/*
  * Job:-
  */
 public class PlayersListController implements SocketChannelListener {

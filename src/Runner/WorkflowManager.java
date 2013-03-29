@@ -1,5 +1,6 @@
 package runner;
 
+import channels.Messages.ChannelMessage;
 import channels.Server.SocketServer;
 import channels.SocketChannel;
 import controllers.HomeController;
@@ -29,6 +30,7 @@ public class WorkflowManager implements Workflow {
     private final MafiaViewFactory viewFactory;
     private IMainFrame mainFrame;
     private Players players;
+    private ChannelMessage message;
 
     public WorkflowManager(MafiaViewFactory viewFactory, IMainFrame mainFrame, Players players) {
         this.viewFactory = viewFactory;
@@ -42,7 +44,6 @@ public class WorkflowManager implements Workflow {
         controller.bind(new PlayersRoleInfoScreen(mainFrame, controller));
         controller.start();
     }
-
 
     @Override
     public void startServer() {
@@ -80,8 +81,9 @@ public class WorkflowManager implements Workflow {
 
     @Override
     public void startMafiaScreen() {
-        MafiaStartScreenController controller = new MafiaStartScreenController(this, players);
+        MafiaStartScreenController controller = new MafiaStartScreenController(this, players, message);
         controller.bind(new MafiaStartScreen(mainFrame, controller));
+        controller.start();
     }
 
 }
