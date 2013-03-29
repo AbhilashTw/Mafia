@@ -37,7 +37,7 @@ public class Player implements SocketChannelListener {
 
     @Override
     public void onSendFailed(SocketChannel channel, IOException e, ChannelMessage message) {
-        throw new RuntimeException("Send Failed", e);
+        e.printStackTrace();
     }
 
     @Override
@@ -51,6 +51,7 @@ public class Player implements SocketChannelListener {
 
     @Override
     public void onMessageReadError(SocketChannel channel, Exception e) {
+        e.printStackTrace();
     }
 
     public void stop() {

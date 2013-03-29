@@ -2,13 +2,9 @@ package runner;
 
 import channels.Messages.ChannelMessage;
 import channels.Server.SocketServer;
-import channels.SocketChannel;
 import controllers.HomeController;
 import controllers.Workflow;
-import controllers.client.JoinServerController;
-import controllers.client.MafiaStartScreenController;
-import controllers.client.PlayersListController;
-import controllers.client.VillagerStartScreenController;
+import controllers.client.*;
 import controllers.server.GameServerController;
 import controllers.server.NewConnectionListener;
 import controllers.server.Players;
@@ -30,11 +26,12 @@ public class WorkflowManager implements Workflow {
     private final MafiaViewFactory viewFactory;
     private IMainFrame mainFrame;
     private Players players;
+    private ClientPlayer clientPlayer;
 
-    public WorkflowManager(MafiaViewFactory viewFactory, IMainFrame mainFrame, Players players) {
+    public WorkflowManager(MafiaViewFactory viewFactory, IMainFrame mainFrame) {
         this.viewFactory = viewFactory;
         this.mainFrame = mainFrame;
-        this.players = players;
+        this.players = new Players();
     }
 
     @Override
@@ -54,14 +51,14 @@ public class WorkflowManager implements Workflow {
 
     @Override
     public void joinServer() {
-        JoinServerController controller = new JoinServerController(this);
+        JoinServerController controller = new JoinServerController(this, clientPlayer);
         controller.bind(new JoinServerScreen(mainFrame, controller));
         controller.start();
     }
 
     @Override
-    public void connectedToServer(SocketChannel channel, String serverName, String playerName) {
-        PlayersListController controller = new PlayersListController(this, channel, serverName, playerName);
+    public void connectedToServer(ClientPlayer clientPlayer) {
+        PlayersListController controller = new PlayersListController(this, clientPlayer);
         controller.bind(new PlayersListScreen(mainFrame, controller));
         controller.start();
     }

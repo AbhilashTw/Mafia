@@ -1,61 +1,22 @@
 package controllers.client;
 
 import channels.Messages.ChannelMessage;
-import channels.SocketChannel;
-import channels.SocketChannelListener;
 import controllers.Workflow;
-import gameMessages.MafiaRoleAssigned;
+
 import gameMessages.PlayerDetailsMessage;
-import gameMessages.PlayersConnectedMessage;
-import gameMessages.VillagerRoleAssigned;
 import views.client.PlayersConnectedView;
 
-import java.io.IOException;
 
-/**
- * Job:-
- */
-public class PlayersListController implements SocketChannelListener {
+public class PlayersListController implements ClientEngine {
 
+    private final ClientPlayer clientPlayer;
     private final Workflow workflow;
-    private final String serverName;
-    private final String playerName;
-    private SocketChannel channel;
     private PlayersConnectedView view;
 
-    public PlayersListController(Workflow workflow, SocketChannel channel, String serverName, String playerName) {
+    public PlayersListController(Workflow workflow, ClientPlayer clientPlayer) {
+        this.clientPlayer = clientPlayer;
         this.workflow = workflow;
-        this.channel = channel;
-        this.serverName = serverName;
-        this.playerName = playerName;
-        this.channel.bind(this);
-    }
-
-    @Override
-    public void onClose(SocketChannel channel, Exception e) {
-        workflow.start();
-    }
-
-    @Override
-    public void onSendFailed(SocketChannel channel, IOException e, ChannelMessage message) {
-        throw new RuntimeException("send failed", e);
-    }
-
-    @Override
-    public void onNewMessageArrived(SocketChannel channel, ChannelMessage message) {
-        if (message instanceof PlayersConnectedMessage) {
-            PlayersConnectedMessage pCm = (PlayersConnectedMessage) message;
-            view.displayConnectedPlayers(pCm.getPlayersConnected());
-        }
-        if (message instanceof VillagerRoleAssigned)
-            workflow.startVillagerScreen(message);
-        if (message instanceof MafiaRoleAssigned)
-            workflow.startMafiaScreen(message);
-    }
-
-    @Override
-    public void onMessageReadError(SocketChannel channel, Exception e) {
-        throw new RuntimeException("message read error", e);
+        this.clientPlayer.bindClientEngine(this);
     }
 
     public void bind(PlayersConnectedView view) {
@@ -63,13 +24,32 @@ public class PlayersListController implements SocketChannelListener {
     }
 
     public void start() {
-        view.connectedToServer(serverName, playerName);
-        this.channel.send(PlayerDetailsMessage.createPlayerDetailsMessage(playerName));
+        view.connectedToServer(clientPlayer.getServerName(), clientPlayer.getPlayerName());
+        clientPlayer.sendMessage(PlayerDetailsMessage.createPlayerDetailsMessage(clientPlayer.getPlayerName()));
     }
 
     public void goToHomeScreen() {
-        channel.stop();
+        clientPlayer.stop();
+        workflow.start();
+    }
 
+    @Override
+    public void displayConnectedPlayers(String[] playersConnected) {
+        view.displayConnectedPlayers(playersConnected);
+    }
+
+    @Override
+    public void startVillagerScreen(ChannelMessage message) {
+        workflow.startVillagerScreen(message);
+    }
+
+    @Override
+    public void startMafiaScreen(ChannelMessage message) {
+        workflow.startMafiaScreen(message);
+    }
+
+    @Override
+    public void ServerClosed() {
         workflow.start();
     }
 }

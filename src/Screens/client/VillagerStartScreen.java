@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class VillagerStartScreen implements VillagerStartScreenView {
 
     private static final String BG_IMAGE = "images/homepage.jpg";
-    private VillagerStartScreenController controller;
+    private final VillagerStartScreenController controller;
     IMainFrame mainFrame;
     private ImagePanel panel;
     private JLabel villagerLabel;
@@ -41,6 +41,7 @@ public class VillagerStartScreen implements VillagerStartScreenView {
     public void display(String[] playersName) {
         ButtonGroup bg = new ButtonGroup();
         int x = 100, y = 100;
+
         for (String player : playersName) {
             JRadioButton button = new JRadioButton(player);
             button.setLocation(x, y);

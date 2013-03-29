@@ -8,10 +8,12 @@ import runner.WorkflowManager;
 import views.client.MafiaStartScreenView;
 
 public class MafiaStartScreenController {
-    private final Workflow workflow;
+    private Workflow workflow;
+
     private MafiaStartScreenView view;
     private PlayersRoleInfoController controller;
     private MafiaRoleAssigned message;
+
 
     public MafiaStartScreenController(WorkflowManager manager, ChannelMessage message) {
         this.workflow = manager;
@@ -25,5 +27,4 @@ public class MafiaStartScreenController {
     public void start() {
         view.display(message.getPlayersName());
     }
-
 }
