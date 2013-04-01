@@ -48,4 +48,10 @@ public class MafiaController implements ClientEngine {
     public void displayMafiaVotingChart(String[] playerNames) {
         view.display(playerNames);
     }
+
+    @Override
+    public void displayVillagerVotingChart(String[] playerNames) {
+
+
+    }
 }

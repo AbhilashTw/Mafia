@@ -3,10 +3,7 @@ package controllers.client;
 import channels.SocketChannel;
 import channels.SocketChannelListener;
 import channels.messages.ChannelMessage;
-import gameMessages.MafiaRoleAssigned;
-import gameMessages.NightArrivedMessage;
-import gameMessages.PlayersConnectedMessage;
-import gameMessages.VillagerRoleAssigned;
+import gameMessages.*;
 
 import java.io.IOException;
 
@@ -45,6 +42,8 @@ public class ClientPlayer implements SocketChannelListener {
             engine.startMafiaScreen();
         if (message instanceof NightArrivedMessage)
             engine.displayMafiaVotingChart(((NightArrivedMessage) message).getPlayerNames());
+        if (message instanceof DayArrivedMessage)
+            engine.displayVillagerVotingChart(((DayArrivedMessage) message).getPlayerNames());
     }
 
     @Override

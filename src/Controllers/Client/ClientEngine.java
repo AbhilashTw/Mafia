@@ -10,4 +10,6 @@ public interface ClientEngine {
     void ServerClosed();
 
     void displayMafiaVotingChart(String[] playerNames);
+
+    void displayVillagerVotingChart(String[] playerNames);
 }

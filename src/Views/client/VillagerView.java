@@ -3,5 +3,5 @@ package views.client;
 public interface VillagerView {
     void display(String[] playersName);
 
-    void updateStatus();
+    void updateStatus(String statusMessage);
 }
