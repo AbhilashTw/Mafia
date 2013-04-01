@@ -1,23 +1,23 @@
 package controllers;
 
-import channels.Server.SocketServer;
-import controllers.server.GameServerController;
+import channels.server.SocketServer;
 import controllers.server.Player;
+import controllers.server.Players;
+import controllers.server.StartGameController;
 import gameMessages.PlayersConnectedMessage;
 import org.junit.Test;
-import controllers.server.Players;
-import views.server.GameServerView;
+import views.server.StartGameView;
 
 import static org.mockito.Mockito.*;
 
 
 public class GameServerControllerTest {
-    GameServerView view = mock(GameServerView.class);
+    StartGameView view = mock(StartGameView.class);
     Workflow workflow = mock(Workflow.class);
     Player player = mock(Player.class);
     SocketServer server = mock(SocketServer.class);
     Players gamePlayers = mock(Players.class);
-    GameServerController controller = new GameServerController(workflow, gamePlayers);
+    StartGameController controller = new StartGameController(workflow, gamePlayers);
 
     @Test
     public void when_gameServerController_calls_players_updated_it_invokes_updatePlayers_method_sends_message_to_the_player() {
@@ -42,35 +42,40 @@ public class GameServerControllerTest {
         controller.startGame();
         verify(workflow).startGame(gamePlayers);
     }
+
     @Test
-    public void on_calling_addPlayer_it_invokes_Players_addPlayer(){
+    public void on_calling_addPlayer_it_invokes_Players_addPlayer() {
         controller.addPlayer(player);
         verify(gamePlayers).addPlayer(player);
     }
+
     @Test
-    public void when_getPlayerListNames_is_called_it_invokes_getPlayerName_from_Players(){
+    public void when_getPlayerListNames_is_called_it_invokes_getPlayerName_from_Players() {
         controller.getPlayersListName();
         verify(gamePlayers).getPlayersName();
     }
 
     @Test
-    public void removePlayer_in_GameServerController_invokes_removePlayers_from_Players(){
+    public void removePlayer_in_GameServerController_invokes_removePlayers_from_Players() {
         controller.removePlayer(player);
         verify(gamePlayers).removePlayer(player);
     }
+
     @Test
-    public void canGameBeStarted_in_GameServerController_invokes_getPlayersCount_from_Players(){
+    public void canGameBeStarted_in_GameServerController_invokes_getPlayersCount_from_Players() {
         controller.canGameBeStarted();
         verify(gamePlayers).getPlayersCount();
     }
+
     @Test
-    public void controllers_stop_invokes_Players_quit(){
+    public void controllers_stop_invokes_Players_quit() {
         controller.start(server);
         controller.stop();
         verify(gamePlayers).quit();
     }
+
     @Test
-    public void controllers_stop_invokes_servers_stop(){
+    public void controllers_stop_invokes_servers_stop() {
         controller.start(server);
         controller.stop();
         verify(server).stop();

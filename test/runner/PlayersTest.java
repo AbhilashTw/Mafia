@@ -1,6 +1,6 @@
 package runner;
 
-import channels.Messages.ChannelMessage;
+import channels.messages.ChannelMessage;
 import controllers.server.Player;
 import controllers.server.Players;
 import org.junit.After;

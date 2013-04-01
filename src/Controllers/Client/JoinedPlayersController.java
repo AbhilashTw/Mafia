@@ -1,25 +1,25 @@
 package controllers.client;
 
-import channels.Messages.ChannelMessage;
 import controllers.Workflow;
-
 import gameMessages.PlayerDetailsMessage;
-import views.client.PlayersConnectedView;
+import views.client.JoinedPlayersView;
 
-
-public class PlayersListController implements ClientEngine {
+/**
+ * Job: Understands to the other connected players to game.
+ */
+public class JoinedPlayersController implements ClientEngine {
 
     private final ClientPlayer clientPlayer;
     private final Workflow workflow;
-    private PlayersConnectedView view;
+    private JoinedPlayersView view;
 
-    public PlayersListController(Workflow workflow, ClientPlayer clientPlayer) {
+    public JoinedPlayersController(Workflow workflow, ClientPlayer clientPlayer) {
         this.clientPlayer = clientPlayer;
         this.workflow = workflow;
         this.clientPlayer.bindClientEngine(this);
     }
 
-    public void bind(PlayersConnectedView view) {
+    public void bind(JoinedPlayersView view) {
         this.view = view;
     }
 
@@ -39,17 +39,22 @@ public class PlayersListController implements ClientEngine {
     }
 
     @Override
-    public void startVillagerScreen(ChannelMessage message) {
-        workflow.startVillagerScreen(message);
+    public void startVillagerScreen() {
+        workflow.startVillagerScreen();
     }
 
     @Override
-    public void startMafiaScreen(ChannelMessage message) {
-        workflow.startMafiaScreen(message);
+    public void startMafiaScreen() {
+        workflow.startMafiaScreen();
     }
 
     @Override
     public void ServerClosed() {
         workflow.start();
+    }
+
+    @Override
+    public void displayMafiaVotingChart(String[] playerNames) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -1,6 +1,6 @@
 package controllers.server;
 
-import channels.Messages.ChannelMessage;
+import channels.messages.ChannelMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,14 @@ public class Players {
             resultName += player.getName() + "\n";
         }
         return resultName;
+    }
+
+    public String[] getAllPlayersName() {
+        ArrayList<String> names = new ArrayList<String>();
+        for (Player player : players) {
+            names.add(player.getName());
+        }
+        return names.toArray(new String[names.size()]);
     }
 
     public void sendMessage(ChannelMessage message) {

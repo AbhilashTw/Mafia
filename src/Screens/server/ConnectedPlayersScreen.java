@@ -1,20 +1,20 @@
 package screens.server;
 
+import controllers.server.ConnectedPlayersController;
 import controllers.server.Player;
-import controllers.server.PlayersRoleInfoController;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
-import views.server.PlayersRoleInfoView;
+import views.server.ConnectedPlayersView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class PlayersRoleInfoScreen implements PlayersRoleInfoView {
+public class ConnectedPlayersScreen implements ConnectedPlayersView {
 
     private static final String BG_IMAGE = "images/playersConnectedScreen.jpg";
     private final IMainFrame mainFrame;
-    private final PlayersRoleInfoController controller;
+    private final ConnectedPlayersController controller;
     private ImagePanel panel;
     private DefaultListModel<String> playersNameList = new DefaultListModel<String>();
     private JList playersName = new JList(playersNameList);
@@ -22,7 +22,7 @@ public class PlayersRoleInfoScreen implements PlayersRoleInfoView {
     private JList playersRole = new JList(playersRoleList);
 
 
-    public PlayersRoleInfoScreen(IMainFrame mainFrame, PlayersRoleInfoController controller) {
+    public ConnectedPlayersScreen(IMainFrame mainFrame, ConnectedPlayersController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);

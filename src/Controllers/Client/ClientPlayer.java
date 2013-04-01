@@ -1,9 +1,10 @@
 package controllers.client;
 
-import channels.Messages.ChannelMessage;
 import channels.SocketChannel;
 import channels.SocketChannelListener;
+import channels.messages.ChannelMessage;
 import gameMessages.MafiaRoleAssigned;
+import gameMessages.NightArrivedMessage;
 import gameMessages.PlayersConnectedMessage;
 import gameMessages.VillagerRoleAssigned;
 
@@ -39,9 +40,11 @@ public class ClientPlayer implements SocketChannelListener {
             engine.displayConnectedPlayers(pCm.getPlayersConnected());
         }
         if (message instanceof VillagerRoleAssigned)
-            engine.startVillagerScreen(message);
+            engine.startVillagerScreen();
         if (message instanceof MafiaRoleAssigned)
-            engine.startMafiaScreen(message);
+            engine.startMafiaScreen();
+        if (message instanceof NightArrivedMessage)
+            engine.displayMafiaVotingChart(((NightArrivedMessage) message).getPlayerNames());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package channels.Server;
+package channels.server;
 
 import channels.ConnectionListener;
 import channels.SocketChannel;
@@ -16,10 +16,10 @@ public class SocketServer {
     private int port;
     private ConnectionListener listener;
     private ServerSocket serverSocket;
-    private Thread thread;
     private boolean stopWaiting;
 
     public SocketServer(int port, ConnectionListener listener) {
+
         this.port = port;
         this.listener = listener;
     }
@@ -60,13 +60,12 @@ public class SocketServer {
 
     public void start() {
         stopWaiting = false;
-        thread = new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 waitForConnections();
             }
-        });
-        thread.start();
+        }, "wait for connections").start();
     }
 
     public void stop() {

@@ -1,6 +1,6 @@
 package views.client;
 
-public interface PlayersConnectedView {
+public interface JoinedPlayersView {
     void displayConnectedPlayers(String[] players);
 
     void connectedToServer(String serverName, String playerName);

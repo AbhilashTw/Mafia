@@ -1,12 +1,11 @@
 package screens.server;
 
-import channels.Server.SocketServer;
-import controllers.client.PlayersListController;
-import controllers.server.GameServerController;
+import channels.server.SocketServer;
 import controllers.server.Player;
+import controllers.server.StartGameController;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
-import views.server.GameServerView;
+import views.server.StartGameView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,12 +17,11 @@ import java.util.List;
  * Job:- Understands to display a window to connect to a server
  */
 
-public class GameServerScreen implements GameServerView {
+public class StartGameScreen implements StartGameView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
-    private final GameServerController controller;
+    private final StartGameController controller;
     public SocketServer server;
     IMainFrame startServerFrame;
-    PlayersListController playersListController;
     private JLabel playersJoinedLabel;
     private JButton startServerButton;
     private JButton stopServerButton;
@@ -31,7 +29,7 @@ public class GameServerScreen implements GameServerView {
     private DefaultListModel<String> allPlayers = new DefaultListModel<String>();
     private JList<String> playersList = new JList<String>(allPlayers);
 
-    public GameServerScreen(IMainFrame mainFrame, GameServerController controller) {
+    public StartGameScreen(IMainFrame mainFrame, StartGameController controller) {
         startServerFrame = mainFrame;
         this.controller = controller;
         this.controller.bind(this);

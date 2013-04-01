@@ -1,26 +1,25 @@
 package screens.client;
 
-import controllers.client.MafiaStartScreenController;
+import controllers.client.MafiaController;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
-import views.client.MafiaStartScreenView;
+import views.client.MafiaView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MafiaStartScreen implements MafiaStartScreenView {
+public class MafiaScreen implements MafiaView {
 
     private static final String BG_IMAGE = "images/MafiaStartScreen.jpg";
-    private final MafiaStartScreenController controller;
+    private final MafiaController controller;
+    private final JLabel lbl = new JLabel("50");
     IMainFrame mainFrame;
     private ImagePanel panel;
     private JLabel mafiaLabel;
 
-    private final JLabel lbl = new JLabel("50");
-
-    public MafiaStartScreen(IMainFrame mainFrame, MafiaStartScreenController controller) {
+    public MafiaScreen(IMainFrame mainFrame, MafiaController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
@@ -28,7 +27,7 @@ public class MafiaStartScreen implements MafiaStartScreenView {
 
         lbl.setForeground(Color.WHITE);
         lbl.setBounds(800, 400, 200, 200);
-        lbl.setSize(145,50);
+        lbl.setSize(145, 50);
 
         panel.add(lbl);
         panel.add(mafiaLabel);
@@ -44,7 +43,6 @@ public class MafiaStartScreen implements MafiaStartScreenView {
         label.setForeground(Color.ORANGE);
         return label;
     }
-
 
     @Override
     public void display(String[] playersName) {
@@ -76,5 +74,7 @@ public class MafiaStartScreen implements MafiaStartScreenView {
         });
         timer.start();
     }
+
+
 }
 

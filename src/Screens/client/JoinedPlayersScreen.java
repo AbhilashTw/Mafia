@@ -1,18 +1,18 @@
 package screens.client;
 
-import controllers.client.PlayersListController;
+import controllers.client.JoinedPlayersController;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
-import views.client.PlayersConnectedView;
+import views.client.JoinedPlayersView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PlayersListScreen implements PlayersConnectedView {
+public class JoinedPlayersScreen implements JoinedPlayersView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
-    private final PlayersListController controller;
+    private final JoinedPlayersController controller;
     IMainFrame mainFrame;
     private ImagePanel panel;
     private JLabel playersConnectedLabel;
@@ -20,7 +20,7 @@ public class PlayersListScreen implements PlayersConnectedView {
     private DefaultListModel<String> playersDefaultList = new DefaultListModel<String>();
     private JList playersList = new JList(playersDefaultList);
 
-    public PlayersListScreen(IMainFrame mainFrame, PlayersListController controller) {
+    public JoinedPlayersScreen(IMainFrame mainFrame, JoinedPlayersController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
