@@ -46,5 +46,4 @@ public class PlayersRoleInfoControllerTest {
         verify(view).display(players.getPlayers());
     }
 
-
 }

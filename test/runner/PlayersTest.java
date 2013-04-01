@@ -1,10 +1,10 @@
 package runner;
 
-import channels.Messages.ChannelMessage;
+import channels.messages.ChannelMessage;
 import controllers.server.Player;
 import controllers.server.Players;
-import org.junit.After;
 import org.junit.Assert;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 

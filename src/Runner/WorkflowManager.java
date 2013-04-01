@@ -1,11 +1,11 @@
 package runner;
 
-import channels.Messages.ChannelMessage;
-import channels.Server.SocketServer;
+import channels.messages.ChannelMessage;
+import channels.server.SocketServer;
 import controllers.HomeController;
 import controllers.Workflow;
 import controllers.client.*;
-import controllers.server.GameServerController;
+import controllers.server.PlayerListController;
 import controllers.server.NewConnectionListener;
 import controllers.server.Players;
 import controllers.server.PlayersRoleInfoController;
@@ -26,7 +26,7 @@ public class WorkflowManager implements Workflow {
     private final MafiaViewFactory viewFactory;
     private IMainFrame mainFrame;
     private Players players;
-    private ClientPlayer clientPlayer;
+    private ClientPlayerController clientPlayerController;
 
     public WorkflowManager(MafiaViewFactory viewFactory, IMainFrame mainFrame) {
         this.viewFactory = viewFactory;
@@ -41,9 +41,10 @@ public class WorkflowManager implements Workflow {
         controller.start();
     }
 
+
     @Override
     public void startServer() {
-        GameServerController controller = new GameServerController(this, players);
+        PlayerListController controller = new PlayerListController(this, players);
         controller.bind(new GameServerScreen(mainFrame, controller));
         SocketServer server = new SocketServer(1234, new NewConnectionListener(controller));
         controller.start(server);
@@ -51,14 +52,14 @@ public class WorkflowManager implements Workflow {
 
     @Override
     public void joinServer() {
-        JoinServerController controller = new JoinServerController(this, clientPlayer);
+        JoinServerController controller = new JoinServerController(this, clientPlayerController);
         controller.bind(new JoinServerScreen(mainFrame, controller));
         controller.start();
     }
 
     @Override
-    public void connectedToServer(ClientPlayer clientPlayer) {
-        PlayersListController controller = new PlayersListController(this, clientPlayer);
+    public void connectedToServer(ClientPlayerController clientPlayerController) {
+        PlayersListController controller = new PlayersListController(this, clientPlayerController);
         controller.bind(new PlayersListScreen(mainFrame, controller));
         controller.start();
     }
@@ -80,6 +81,13 @@ public class WorkflowManager implements Workflow {
     public void startMafiaScreen(ChannelMessage message) {
         MafiaStartScreenController controller = new MafiaStartScreenController(this, message);
         controller.bind(new MafiaStartScreen(mainFrame, controller));
+    }
+
+    @Override
+    public void MafiaNightScreen(ChannelMessage message) {
+        MafiaStartScreenController controller = new MafiaStartScreenController(this,message);
+        controller.bind(new MafiaStartScreen(mainFrame,controller));
         controller.start();
     }
+
 }

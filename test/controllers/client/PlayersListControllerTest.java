@@ -12,7 +12,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class PlayersListControllerTest {
-    ClientPlayer clientPlayer;
+    ClientPlayerController clientPlayerController;
     SocketChannel socketChannel;
     PlayersConnectedView playersConnectedView;
     PlayersConnectedMessage playersConnectedMessage;
@@ -21,12 +21,12 @@ public class PlayersListControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        clientPlayer = mock(ClientPlayer.class);
+        clientPlayerController = mock(ClientPlayerController.class);
         socketChannel = mock(SocketChannel.class);
         playersConnectedView = mock(PlayersConnectedView.class);
         playersConnectedMessage = mock(PlayersConnectedMessage.class);
         workflow = mock(Workflow.class);
-        playersListController = new PlayersListController(workflow, clientPlayer);
+        playersListController = new PlayersListController(workflow, clientPlayerController);
     }
 
     @After
@@ -37,7 +37,7 @@ public class PlayersListControllerTest {
 //    @Test
 //    public void should_invoke_channel_stop_when_goToHomeScreen_is_called() {
 //        playersListController.goToHomeScreen();
-//        verify(socketChannel).stop();
+//      verify(socketChannel).stop();
 //    }
 
     @Test
@@ -45,7 +45,5 @@ public class PlayersListControllerTest {
         playersListController.goToHomeScreen();
         verify(workflow).start();
     }
-
-
 }
 

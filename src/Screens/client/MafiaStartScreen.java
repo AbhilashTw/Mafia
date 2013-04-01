@@ -18,7 +18,7 @@ public class MafiaStartScreen implements MafiaStartScreenView {
     private ImagePanel panel;
     private JLabel mafiaLabel;
 
-    private final JLabel lbl = new JLabel("50");
+    private final JLabel timerLabel = new JLabel("60");
 
     public MafiaStartScreen(IMainFrame mainFrame, MafiaStartScreenController controller) {
         this.mainFrame = mainFrame;
@@ -26,11 +26,11 @@ public class MafiaStartScreen implements MafiaStartScreenView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
         mafiaLabel = createLabel("Your assigned as a mafia", 100, 450);
 
-        lbl.setForeground(Color.WHITE);
-        lbl.setBounds(800, 400, 200, 200);
-        lbl.setSize(145,50);
+        timerLabel.setForeground(Color.WHITE);
+        timerLabel.setBounds(800, 400, 200, 200);
+        timerLabel.setSize(145, 50);
 
-        panel.add(lbl);
+        panel.add(timerLabel);
         panel.add(mafiaLabel);
 
     }
@@ -62,7 +62,6 @@ public class MafiaStartScreen implements MafiaStartScreenView {
             panel.add(button);
             bg.add(button);
             y += 80;
-
         }
     }
 
@@ -70,8 +69,8 @@ public class MafiaStartScreen implements MafiaStartScreenView {
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int time = Integer.parseInt(lbl.getText());
-                lbl.setText(String.valueOf(time - 1));
+                int time = Integer.parseInt(timerLabel.getText());
+                if (time > 0) timerLabel.setText(String.valueOf(time - 1));
             }
         });
         timer.start();

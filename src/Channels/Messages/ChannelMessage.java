@@ -1,7 +1,5 @@
-package channels.Messages;
+package channels.messages;
 
-import java.io.Serializable;
-
-public class ChannelMessage implements Serializable {
+public class ChannelMessage implements java.io.Serializable {
 
 }

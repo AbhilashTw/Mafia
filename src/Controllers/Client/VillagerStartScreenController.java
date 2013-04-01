@@ -1,6 +1,6 @@
 package controllers.client;
 
-import channels.Messages.ChannelMessage;
+import channels.messages.ChannelMessage;
 import controllers.Workflow;
 import gameMessages.VillagerRoleAssigned;
 import views.client.VillagerStartScreenView;
@@ -8,11 +8,11 @@ import views.client.VillagerStartScreenView;
 public class VillagerStartScreenController {
     private final Workflow workflow;
     private VillagerStartScreenView view;
-    private VillagerRoleAssigned meesage;
+    private VillagerRoleAssigned message;
 
     public VillagerStartScreenController(Workflow workflow, ChannelMessage message) {
         this.workflow = workflow;
-        this.meesage = (VillagerRoleAssigned) message;
+        this.message = (VillagerRoleAssigned) message;
     }
 
     public void bind(VillagerStartScreenView view) {
@@ -20,6 +20,6 @@ public class VillagerStartScreenController {
     }
 
     public void start() {
-        view.display(meesage.getPlayersName());
+        view.display(message.getPlayersName());
     }
 }

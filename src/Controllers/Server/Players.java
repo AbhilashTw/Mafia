@@ -1,6 +1,6 @@
 package controllers.server;
 
-import channels.Messages.ChannelMessage;
+import channels.messages.ChannelMessage;
 
 import java.util.ArrayList;
 import java.util.List;

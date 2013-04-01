@@ -1,8 +1,8 @@
 package screens.server;
 
-import channels.Server.SocketServer;
+import channels.server.SocketServer;
 import controllers.client.PlayersListController;
-import controllers.server.GameServerController;
+import controllers.server.PlayerListController;
 import controllers.server.Player;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class GameServerScreen implements GameServerView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
-    private final GameServerController controller;
+    private final PlayerListController controller;
     public SocketServer server;
     IMainFrame startServerFrame;
     PlayersListController playersListController;
@@ -31,7 +31,7 @@ public class GameServerScreen implements GameServerView {
     private DefaultListModel<String> allPlayers = new DefaultListModel<String>();
     private JList<String> playersList = new JList<String>(allPlayers);
 
-    public GameServerScreen(IMainFrame mainFrame, GameServerController controller) {
+    public GameServerScreen(IMainFrame mainFrame, PlayerListController controller) {
         startServerFrame = mainFrame;
         this.controller = controller;
         this.controller.bind(this);

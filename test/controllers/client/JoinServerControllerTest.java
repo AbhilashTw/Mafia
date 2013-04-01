@@ -18,22 +18,21 @@ public class JoinServerControllerTest {
     JoinServerView joinServerView;
     SocketChannel socketChannel;
     JoinServerController joinServerController;
-    ClientPlayer clientPlayer;
+    ClientPlayerController clientPlayerController;
 
     @Before
     public void setUp() throws Exception {
-        clientPlayer = mock(ClientPlayer.class);
+        clientPlayerController = mock(ClientPlayerController.class);
         workflow = mock(Workflow.class);
         joinServerView = mock(JoinServerView.class);
         socketChannel = mock(SocketChannel.class);
-        joinServerController = new JoinServerController(workflow, clientPlayer);
+        joinServerController = new JoinServerController(workflow, clientPlayerController);
     }
 
     @After
     public void tearDown() throws Exception {
 
     }
-
 
     @Test
     public void should_invoke_connectionToServerFailed_from_view_when_onConnectionFailed_is_called_from_joinServerController() {

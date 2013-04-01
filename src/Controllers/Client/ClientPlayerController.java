@@ -1,6 +1,6 @@
 package controllers.client;
 
-import channels.Messages.ChannelMessage;
+import channels.messages.ChannelMessage;
 import channels.SocketChannel;
 import channels.SocketChannelListener;
 import gameMessages.MafiaRoleAssigned;
@@ -9,13 +9,13 @@ import gameMessages.VillagerRoleAssigned;
 
 import java.io.IOException;
 
-public class ClientPlayer implements SocketChannelListener {
+public class ClientPlayerController implements SocketChannelListener {
     private final String serverName;
     private final String playerName;
     private SocketChannel channel;
     private ClientEngine engine;
 
-    public ClientPlayer(SocketChannel channel, String serverName, String playerName) {
+    public ClientPlayerController(SocketChannel channel, String serverName, String playerName) {
         this.channel = channel;
         this.serverName = serverName;
         this.playerName = playerName;
@@ -24,7 +24,7 @@ public class ClientPlayer implements SocketChannelListener {
 
     @Override
     public void onClose(SocketChannel channel, Exception e) {
-        engine.ServerClosed();
+        engine.serverClosed();
     }
 
     @Override

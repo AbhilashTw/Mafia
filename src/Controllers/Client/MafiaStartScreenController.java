@@ -1,6 +1,6 @@
 package controllers.client;
 
-import channels.Messages.ChannelMessage;
+import channels.messages.ChannelMessage;
 import controllers.Workflow;
 import controllers.server.PlayersRoleInfoController;
 import gameMessages.MafiaRoleAssigned;
@@ -27,4 +27,6 @@ public class MafiaStartScreenController {
     public void start() {
         view.display(message.getPlayersName());
     }
+
+
 }

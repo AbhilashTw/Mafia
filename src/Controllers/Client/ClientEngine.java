@@ -1,6 +1,6 @@
 package controllers.client;
 
-import channels.Messages.ChannelMessage;
+import channels.messages.ChannelMessage;
 
 public interface ClientEngine {
     void displayConnectedPlayers(String[] playersConnected);
@@ -9,5 +9,5 @@ public interface ClientEngine {
 
     void startMafiaScreen(ChannelMessage message);
 
-    void ServerClosed();
+    void serverClosed();
 }

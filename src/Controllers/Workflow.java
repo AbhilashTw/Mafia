@@ -1,8 +1,8 @@
 package controllers;
 
-import channels.Messages.ChannelMessage;
+import channels.messages.ChannelMessage;
 
-import controllers.client.ClientPlayer;
+import controllers.client.ClientPlayerController;
 
 import controllers.server.Players;
 
@@ -11,7 +11,7 @@ public interface Workflow {
 
     void joinServer();
 
-    void connectedToServer(ClientPlayer clientPlayer);
+    void connectedToServer(ClientPlayerController clientPlayerController);
 
     void start();
 
@@ -20,4 +20,6 @@ public interface Workflow {
     void startMafiaScreen(ChannelMessage message);
 
     void startGame(Players players);
+
+    void MafiaNightScreen(ChannelMessage message);
 }

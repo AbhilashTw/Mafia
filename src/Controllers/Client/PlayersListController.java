@@ -1,6 +1,6 @@
 package controllers.client;
 
-import channels.Messages.ChannelMessage;
+import channels.messages.ChannelMessage;
 import controllers.Workflow;
 
 import gameMessages.PlayerDetailsMessage;
@@ -9,14 +9,14 @@ import views.client.PlayersConnectedView;
 
 public class PlayersListController implements ClientEngine {
 
-    private final ClientPlayer clientPlayer;
+    private final ClientPlayerController clientPlayerController;
     private final Workflow workflow;
     private PlayersConnectedView view;
 
-    public PlayersListController(Workflow workflow, ClientPlayer clientPlayer) {
-        this.clientPlayer = clientPlayer;
+    public PlayersListController(Workflow workflow, ClientPlayerController clientPlayerController) {
+        this.clientPlayerController = clientPlayerController;
         this.workflow = workflow;
-        this.clientPlayer.bindClientEngine(this);
+        this.clientPlayerController.bindClientEngine(this);
     }
 
     public void bind(PlayersConnectedView view) {
@@ -24,12 +24,12 @@ public class PlayersListController implements ClientEngine {
     }
 
     public void start() {
-        view.connectedToServer(clientPlayer.getServerName(), clientPlayer.getPlayerName());
-        clientPlayer.sendMessage(PlayerDetailsMessage.createPlayerDetailsMessage(clientPlayer.getPlayerName()));
+        view.connectedToServer(clientPlayerController.getServerName(), clientPlayerController.getPlayerName());
+        clientPlayerController.sendMessage(PlayerDetailsMessage.createPlayerDetailsMessage(clientPlayerController.getPlayerName()));
     }
 
     public void goToHomeScreen() {
-        clientPlayer.stop();
+        clientPlayerController.stop();
         workflow.start();
     }
 
@@ -49,7 +49,7 @@ public class PlayersListController implements ClientEngine {
     }
 
     @Override
-    public void ServerClosed() {
+    public void serverClosed() {
         workflow.start();
     }
 }

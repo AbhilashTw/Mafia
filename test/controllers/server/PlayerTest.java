@@ -71,4 +71,10 @@ public class PlayerTest {
         Assert.assertEquals(Role.Mafia.toString(), player.getRole());
     }
 
+    @Test
+    public void when_stop_is_invoked_socketChannel_stop_is_called() {
+        player.stop();
+        verify(socketChannel).stop();
+    }
+
 }

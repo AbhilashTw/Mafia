@@ -1,19 +1,19 @@
 package controllers.server;
 
-import channels.Server.SocketServer;
+import channels.server.SocketServer;
 import controllers.Workflow;
 import gameMessages.PlayersConnectedMessage;
 import views.server.GameServerView;
 
 
-public class GameServerController implements GameEngine {
+public class PlayerListController implements GameEngine {
 
     private final Workflow workflow;
     private final Players gamePlayers;
     private SocketServer server;
     private GameServerView view;
 
-    public GameServerController(Workflow workflow, Players players) {
+    public PlayerListController(Workflow workflow, Players players) {
         this.workflow = workflow;
         gamePlayers = players;
     }
