@@ -19,6 +19,7 @@ import java.util.List;
 
 public class StartGameScreen implements StartGameView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
+
     private final StartGameController controller;
     public SocketServer server;
     IMainFrame startServerFrame;
@@ -28,6 +29,7 @@ public class StartGameScreen implements StartGameView {
     private ImagePanel panel;
     private DefaultListModel<String> allPlayers = new DefaultListModel<String>();
     private JList<String> playersList = new JList<String>(allPlayers);
+
 
     public StartGameScreen(IMainFrame mainFrame, StartGameController controller) {
         startServerFrame = mainFrame;

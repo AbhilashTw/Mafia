@@ -1,5 +1,6 @@
 package controllers.client;
 
+
 public interface ClientEngine {
     void displayConnectedPlayers(String[] playersConnected);
 
@@ -7,9 +8,10 @@ public interface ClientEngine {
 
     void startMafiaScreen();
 
-    void ServerClosed();
+    void serverClosed();
 
     void displayMafiaVotingChart(String[] playerNames);
 
     void displayVillagerVotingChart(String[] playerNames);
+
 }

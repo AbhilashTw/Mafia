@@ -1,5 +1,6 @@
 package controllers.client;
 
+
 import controllers.Workflow;
 import gameMessages.PlayerDetailsMessage;
 import views.client.JoinedPlayersView;
@@ -12,6 +13,7 @@ public class JoinedPlayersController implements ClientEngine {
     private final ClientPlayer clientPlayer;
     private final Workflow workflow;
     private JoinedPlayersView view;
+
 
     public JoinedPlayersController(Workflow workflow, ClientPlayer clientPlayer) {
         this.clientPlayer = clientPlayer;
@@ -49,7 +51,7 @@ public class JoinedPlayersController implements ClientEngine {
     }
 
     @Override
-    public void ServerClosed() {
+    public void serverClosed() {
         workflow.start();
     }
 

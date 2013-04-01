@@ -40,9 +40,10 @@ public class MafiaController implements ClientEngine {
     }
 
     @Override
-    public void ServerClosed() {
+    public void serverClosed() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
 
     @Override
     public void displayMafiaVotingChart(String[] playerNames) {

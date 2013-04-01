@@ -11,6 +11,7 @@ import views.client.JoinedPlayersView;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+
 public class JoinedPlayersControllerTest {
     ClientPlayer clientPlayer;
     SocketChannel socketChannel;
@@ -26,6 +27,7 @@ public class JoinedPlayersControllerTest {
         joinedPlayersView = mock(JoinedPlayersView.class);
         playersConnectedMessage = mock(PlayersConnectedMessage.class);
         workflow = mock(Workflow.class);
+
         joinedPlayersController = new JoinedPlayersController(workflow, clientPlayer);
     }
 
@@ -36,6 +38,7 @@ public class JoinedPlayersControllerTest {
 
 //    @Test
 //    public void should_invoke_channel_stop_when_goToHomeScreen_is_called() {
+
 //        joinedPlayersController.goToHomeScreen();
 //        verify(socketChannel).stop();
 //    }
@@ -45,7 +48,5 @@ public class JoinedPlayersControllerTest {
         joinedPlayersController.goToHomeScreen();
         verify(workflow).start();
     }
-
-
 }
 

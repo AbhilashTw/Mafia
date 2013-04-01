@@ -19,6 +19,7 @@ public class GameServerControllerTest {
     Players gamePlayers = mock(Players.class);
     StartGameController controller = new StartGameController(workflow, gamePlayers);
 
+
     @Test
     public void when_gameServerController_calls_players_updated_it_invokes_updatePlayers_method_sends_message_to_the_player() {
         String testSample = "Abhilash" + "\n";
@@ -80,6 +81,5 @@ public class GameServerControllerTest {
         controller.stop();
         verify(server).stop();
     }
-
 
 }

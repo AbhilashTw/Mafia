@@ -22,7 +22,7 @@ public class ClientPlayer implements SocketChannelListener {
 
     @Override
     public void onClose(SocketChannel channel, Exception e) {
-        engine.ServerClosed();
+        engine.serverClosed();
     }
 
     @Override

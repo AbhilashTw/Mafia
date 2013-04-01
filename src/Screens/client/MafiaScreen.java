@@ -13,54 +13,44 @@ import java.awt.event.ActionListener;
 public class MafiaScreen implements MafiaView {
 
     private static final String BG_IMAGE = "images/MafiaStartScreen.jpg";
-    private final MafiaController controller;
-    private final JLabel lbl = new JLabel("50");
+    private MafiaController controller;
     IMainFrame mainFrame;
     private ImagePanel panel;
-    private JLabel mafiaLabel;
+    private final JLabel timerLabel = new JLabel("10");
+
+    private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
+    private ButtonGroup bg = new ButtonGroup();
+    private JList statusList = new JList(defaultStatusList);
 
     public MafiaScreen(IMainFrame mainFrame, MafiaController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
-        mafiaLabel = createLabel("Your assigned as a mafia", 100, 450);
+        createList(400, 400);
 
-        lbl.setForeground(Color.WHITE);
-        lbl.setBounds(800, 400, 200, 200);
-        lbl.setSize(145, 50);
+        timerLabel.setForeground(Color.WHITE);
+        timerLabel.setBounds(800, 400, 200, 200);
+        timerLabel.setSize(145, 50);
 
-        panel.add(lbl);
-        panel.add(mafiaLabel);
-
-    }
-
-    private JLabel createLabel(String labelName, int x_bound, int y_bound) {
-        JLabel label = new JLabel(labelName);
-        label.setSize(800, 900);
-        label.setLocation(x_bound, y_bound);
-        Font font = new Font("Monospaced", Font.BOLD, 25);
-        label.setFont(font);
-        label.setForeground(Color.ORANGE);
-        return label;
+        panel.add(timerLabel);
+        panel.add(statusList);
+        changeStatus("Your assigned as a Mafia");
     }
 
     @Override
     public void display(String[] playersName) {
+        changeStatus("Night Arrived... You can vote now...");
         timerScreen();
-        ButtonGroup bg = new ButtonGroup();
         int x = 100, y = 100;
-        JLabel voteLabel = createLabel("You can vote now", 100, 450);
-        panel.add(voteLabel);
         for (String player : playersName) {
             JRadioButton button = new JRadioButton(player);
             button.setLocation(x, y);
             button.setSize(145, 50);
             button.setBackground(Color.ORANGE);
             button.setVisible(true);
-            panel.add(button);
             bg.add(button);
+            panel.add(button);
             y += 80;
-
         }
     }
 
@@ -68,13 +58,31 @@ public class MafiaScreen implements MafiaView {
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int time = Integer.parseInt(lbl.getText());
-                lbl.setText(String.valueOf(time - 1));
+                int time = Integer.parseInt(timerLabel.getText());
+                if (time > 0) timerLabel.setText(String.valueOf(time - 1));
+                else if (time == 0) sendVotes();
             }
         });
         timer.start();
     }
 
+    private void sendVotes() {
+        String playerVotedOut = bg.getSelection().getActionCommand();
+        System.out.println(playerVotedOut);
+    }
+
+    private void changeStatus(String status) {
+        defaultStatusList.addElement(status);
+    }
+
+    private void createList(int x_bound, int y_bound) {
+        statusList.setSize(400, 450);
+        statusList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
+        statusList.setLocation(x_bound, y_bound);
+        statusList.setBackground(Color.YELLOW);
+        Font f = new Font("Monospaced", Font.PLAIN, 20);
+        statusList.setFont(f);
+    }
 
 }
 

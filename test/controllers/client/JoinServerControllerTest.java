@@ -34,7 +34,6 @@ public class JoinServerControllerTest {
 
     }
 
-
     @Test
     public void should_invoke_connectionToServerFailed_from_view_when_onConnectionFailed_is_called_from_joinServerController() {
         Exception e = mock(Exception.class);

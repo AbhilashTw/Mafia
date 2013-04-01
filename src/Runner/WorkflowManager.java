@@ -38,8 +38,10 @@ public class WorkflowManager implements Workflow {
         controller.start();
     }
 
+
     @Override
     public void startServer() {
+
         StartGameController controller = new StartGameController(this, players);
         controller.bind(new StartGameScreen(mainFrame, controller));
         SocketServer server = new SocketServer(1234, new NewConnectionListener(controller));
@@ -88,4 +90,5 @@ public class WorkflowManager implements Workflow {
         controller.bind(new GameStatusScreen(mainFrame, controller));
         controller.start();
     }
+
 }
