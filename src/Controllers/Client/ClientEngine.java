@@ -1,13 +1,15 @@
 package controllers.client;
 
-import channels.messages.ChannelMessage;
 
 public interface ClientEngine {
     void displayConnectedPlayers(String[] playersConnected);
 
-    void startVillagerScreen(ChannelMessage message);
+    void startVillagerScreen();
 
-    void startMafiaScreen(ChannelMessage message);
+    void startMafiaScreen();
 
     void serverClosed();
+
+    void displayMafiaVotingChart(String[] playerNames);
+
 }

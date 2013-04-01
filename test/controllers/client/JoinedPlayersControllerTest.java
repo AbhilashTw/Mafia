@@ -6,27 +6,29 @@ import gameMessages.PlayersConnectedMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import views.client.PlayersConnectedView;
+import views.client.JoinedPlayersView;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class PlayersListControllerTest {
-    ClientPlayerController clientPlayerController;
+
+public class JoinedPlayersControllerTest {
+    ClientPlayer clientPlayer;
     SocketChannel socketChannel;
-    PlayersConnectedView playersConnectedView;
+    JoinedPlayersView joinedPlayersView;
     PlayersConnectedMessage playersConnectedMessage;
     Workflow workflow;
-    PlayersListController playersListController;
+    JoinedPlayersController joinedPlayersController;
 
     @Before
     public void setUp() throws Exception {
-        clientPlayerController = mock(ClientPlayerController.class);
+        clientPlayer = mock(ClientPlayer.class);
         socketChannel = mock(SocketChannel.class);
-        playersConnectedView = mock(PlayersConnectedView.class);
+        joinedPlayersView = mock(JoinedPlayersView.class);
         playersConnectedMessage = mock(PlayersConnectedMessage.class);
         workflow = mock(Workflow.class);
-        playersListController = new PlayersListController(workflow, clientPlayerController);
+
+        joinedPlayersController = new JoinedPlayersController(workflow, clientPlayer);
     }
 
     @After
@@ -36,13 +38,14 @@ public class PlayersListControllerTest {
 
 //    @Test
 //    public void should_invoke_channel_stop_when_goToHomeScreen_is_called() {
-//        playersListController.goToHomeScreen();
-//      verify(socketChannel).stop();
+
+//        joinedPlayersController.goToHomeScreen();
+//        verify(socketChannel).stop();
 //    }
 
     @Test
     public void should_invoke_workflow_start_when_goToHomeScreen_is_called() {
-        playersListController.goToHomeScreen();
+        joinedPlayersController.goToHomeScreen();
         verify(workflow).start();
     }
 }

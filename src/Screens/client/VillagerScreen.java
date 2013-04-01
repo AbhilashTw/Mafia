@@ -1,22 +1,22 @@
 package screens.client;
 
-import controllers.client.VillagerStartScreenController;
+import controllers.client.VillagerController;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
-import views.client.VillagerStartScreenView;
+import views.client.VillagerView;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class VillagerStartScreen implements VillagerStartScreenView {
+public class VillagerScreen implements VillagerView {
 
     private static final String BG_IMAGE = "images/homepage.jpg";
-    private final VillagerStartScreenController controller;
+    private final VillagerController controller;
     IMainFrame mainFrame;
     private ImagePanel panel;
     private JLabel villagerLabel;
 
-    public VillagerStartScreen(IMainFrame mainFrame, VillagerStartScreenController controller) {
+    public VillagerScreen(IMainFrame mainFrame, VillagerController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
@@ -51,5 +51,10 @@ public class VillagerStartScreen implements VillagerStartScreenView {
             bg.add(button);
             y += 80;
         }
+    }
+
+    @Override
+    public void updateStatus() {
+        villagerLabel = createLabel("Night Arrived", 100, 500);
     }
 }

@@ -6,9 +6,9 @@ import channels.SocketChannel;
 
 public class NewConnectionListener implements ConnectionListener {
 
-    private final PlayerListController controller;
+    private final StartGameController controller;
 
-    public NewConnectionListener(PlayerListController controller) {
+    public NewConnectionListener(StartGameController controller) {
         this.controller = controller;
     }
 

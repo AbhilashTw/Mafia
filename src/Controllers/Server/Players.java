@@ -25,6 +25,14 @@ public class Players {
         return resultName;
     }
 
+    public String[] getAllPlayersName() {
+        ArrayList<String> names = new ArrayList<String>();
+        for (Player player : players) {
+            names.add(player.getName());
+        }
+        return names.toArray(new String[names.size()]);
+    }
+
     public void sendMessage(ChannelMessage message) {
         for (Player player : players) {
             player.sendMessage(message);

@@ -3,22 +3,22 @@ package controllers.server;
 import channels.server.SocketServer;
 import controllers.Workflow;
 import gameMessages.PlayersConnectedMessage;
-import views.server.GameServerView;
+import views.server.StartGameView;
 
 
-public class PlayerListController implements GameEngine {
+public class StartGameController implements GameEngine {
 
     private final Workflow workflow;
     private final Players gamePlayers;
     private SocketServer server;
-    private GameServerView view;
+    private StartGameView view;
 
-    public PlayerListController(Workflow workflow, Players players) {
+    public StartGameController(Workflow workflow, Players players) {
         this.workflow = workflow;
         gamePlayers = players;
     }
 
-    public void bind(GameServerView view) {
+    public void bind(StartGameView view) {
         this.view = view;
     }
 

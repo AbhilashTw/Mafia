@@ -1,5 +1,7 @@
 package views.client;
 
-public interface VillagerStartScreenView {
+public interface VillagerView {
     void display(String[] playersName);
+
+    void updateStatus();
 }

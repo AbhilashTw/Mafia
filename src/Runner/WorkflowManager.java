@@ -1,22 +1,20 @@
 package runner;
 
-import channels.messages.ChannelMessage;
+
 import channels.server.SocketServer;
 import controllers.HomeController;
 import controllers.Workflow;
 import controllers.client.*;
-import controllers.server.PlayerListController;
-import controllers.server.NewConnectionListener;
-import controllers.server.Players;
-import controllers.server.PlayersRoleInfoController;
+import controllers.server.*;
 import screens.MafiaViewFactory;
 import screens.client.JoinServerScreen;
-import screens.client.MafiaStartScreen;
-import screens.client.PlayersListScreen;
-import screens.client.VillagerStartScreen;
+import screens.client.JoinedPlayersScreen;
+import screens.client.MafiaScreen;
+import screens.client.VillagerScreen;
 import screens.controls.IMainFrame;
-import screens.server.GameServerScreen;
-import screens.server.PlayersRoleInfoScreen;
+import screens.server.ConnectedPlayersScreen;
+import screens.server.GameStatusScreen;
+import screens.server.StartGameScreen;
 
 /**
  * Job : Understands procedural flow of data.
@@ -26,7 +24,7 @@ public class WorkflowManager implements Workflow {
     private final MafiaViewFactory viewFactory;
     private IMainFrame mainFrame;
     private Players players;
-    private ClientPlayerController clientPlayerController;
+    private ClientPlayer clientPlayer;
 
     public WorkflowManager(MafiaViewFactory viewFactory, IMainFrame mainFrame) {
         this.viewFactory = viewFactory;
@@ -35,58 +33,61 @@ public class WorkflowManager implements Workflow {
     }
 
     @Override
-    public void startGame(Players players) {
-        PlayersRoleInfoController controller = new PlayersRoleInfoController(players, this);
-        controller.bind(new PlayersRoleInfoScreen(mainFrame, controller));
+    public void start() {
+        HomeController controller = viewFactory.getHomeController(this, mainFrame);
         controller.start();
     }
 
 
     @Override
     public void startServer() {
-        PlayerListController controller = new PlayerListController(this, players);
-        controller.bind(new GameServerScreen(mainFrame, controller));
+
+        StartGameController controller = new StartGameController(this, players);
+        controller.bind(new StartGameScreen(mainFrame, controller));
         SocketServer server = new SocketServer(1234, new NewConnectionListener(controller));
         controller.start(server);
     }
 
     @Override
     public void joinServer() {
-        JoinServerController controller = new JoinServerController(this, clientPlayerController);
+        JoinServerController controller = new JoinServerController(this, clientPlayer);
         controller.bind(new JoinServerScreen(mainFrame, controller));
         controller.start();
     }
 
     @Override
-    public void connectedToServer(ClientPlayerController clientPlayerController) {
-        PlayersListController controller = new PlayersListController(this, clientPlayerController);
-        controller.bind(new PlayersListScreen(mainFrame, controller));
+    public void connectedToServer(ClientPlayer clientPlayer) {
+        this.clientPlayer = clientPlayer;
+        JoinedPlayersController controller = new JoinedPlayersController(this, clientPlayer);
+        controller.bind(new JoinedPlayersScreen(mainFrame, controller));
         controller.start();
     }
 
     @Override
-    public void start() {
-        HomeController controller = viewFactory.getHomeController(this, mainFrame);
+    public void startGame(Players players) {
+        ConnectedPlayersController controller = new ConnectedPlayersController(players, this);
+        controller.bind(new ConnectedPlayersScreen(mainFrame, controller));
         controller.start();
     }
 
     @Override
-    public void startVillagerScreen(ChannelMessage message) {
-        VillagerStartScreenController controller = new VillagerStartScreenController(this, message);
-        controller.bind(new VillagerStartScreen(mainFrame, controller));
+    public void startVillagerScreen() {
+        VillagerController controller = new VillagerController(this, clientPlayer);
+        controller.bind(new VillagerScreen(mainFrame, controller));
         controller.start();
     }
 
     @Override
-    public void startMafiaScreen(ChannelMessage message) {
-        MafiaStartScreenController controller = new MafiaStartScreenController(this, message);
-        controller.bind(new MafiaStartScreen(mainFrame, controller));
+    public void startMafiaScreen() {
+        MafiaController controller = new MafiaController(this, clientPlayer);
+        controller.bind(new MafiaScreen(mainFrame, controller));
+        controller.start();
     }
 
     @Override
-    public void MafiaNightScreen(ChannelMessage message) {
-        MafiaStartScreenController controller = new MafiaStartScreenController(this,message);
-        controller.bind(new MafiaStartScreen(mainFrame,controller));
+    public void showGameStatus() {
+        GameStatusController controller = new GameStatusController(this, players);
+        controller.bind(new GameStatusScreen(mainFrame, controller));
         controller.start();
     }
 

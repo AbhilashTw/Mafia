@@ -3,21 +3,24 @@ package controllers.server;
 import controllers.Workflow;
 import gameMessages.MafiaRoleAssigned;
 import gameMessages.VillagerRoleAssigned;
-import views.server.PlayersRoleInfoView;
+import views.server.ConnectedPlayersView;
 
-public class PlayersRoleInfoController {
+/**
+ * Job: Understands to assign role to player.
+ */
+public class ConnectedPlayersController {
     private final Workflow workflow;
     private Players players;
-    private PlayersRoleInfoView view;
+    private ConnectedPlayersView view;
 
 
-    public PlayersRoleInfoController(Players players, Workflow workflowManager) {
+    public ConnectedPlayersController(Players players, Workflow workflowManager) {
         this.players = players;
         workflow = workflowManager;
     }
 
-    public void bind(PlayersRoleInfoView playersRoleInfoView) {
-        this.view = playersRoleInfoView;
+    public void bind(ConnectedPlayersView connectedPlayersView) {
+        this.view = connectedPlayersView;
     }
 
     public void assignRoles() {
@@ -33,17 +36,17 @@ public class PlayersRoleInfoController {
         assignRoles();
         sendClientsMessage();
         display();
+        workflow.showGameStatus();
 
     }
 
     private void sendClientsMessage() {
         for (Player player : players.getPlayers()) {
             if (player.getRole().equals(Role.Mafia.toString()))
-                player.sendMessage(new MafiaRoleAssigned(players.getPlayersName()));
+                player.sendMessage(new MafiaRoleAssigned());
             else
-                player.sendMessage(new VillagerRoleAssigned(players.getPlayersName()));
+                player.sendMessage(new VillagerRoleAssigned());
         }
     }
-
 
 }

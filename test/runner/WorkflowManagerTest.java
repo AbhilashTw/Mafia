@@ -1,13 +1,10 @@
 package runner;
 
 import controllers.HomeController;
-import controllers.client.VillagerStartScreenController;
-import gameMessages.VillagerRoleAssigned;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import screens.MafiaViewFactory;
-import screens.client.VillagerStartScreen;
 import screens.controls.IMainFrame;
 
 import static org.mockito.Mockito.*;

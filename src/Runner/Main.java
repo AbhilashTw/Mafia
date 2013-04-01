@@ -4,7 +4,7 @@ import screens.MafiaViewFactory;
 import screens.controls.MainFrame;
 
 /**
- * Job: Understands invoking point of application.
+ * Job:Understands to Start up the Mafia Application.
  */
 
 public class Main {

@@ -1,23 +1,24 @@
 package controllers;
 
 import channels.server.SocketServer;
-import controllers.server.PlayerListController;
 import controllers.server.Player;
+import controllers.server.Players;
+import controllers.server.StartGameController;
 import gameMessages.PlayersConnectedMessage;
 import org.junit.Test;
-import controllers.server.Players;
-import views.server.GameServerView;
+import views.server.StartGameView;
 
 import static org.mockito.Mockito.*;
 
 
 public class GameServerControllerTest {
-    GameServerView view = mock(GameServerView.class);
+    StartGameView view = mock(StartGameView.class);
     Workflow workflow = mock(Workflow.class);
     Player player = mock(Player.class);
     SocketServer server = mock(SocketServer.class);
     Players gamePlayers = mock(Players.class);
-    PlayerListController controller = new PlayerListController(workflow, gamePlayers);
+    StartGameController controller = new StartGameController(workflow, gamePlayers);
+
 
     @Test
     public void when_gameServerController_calls_players_updated_it_invokes_updatePlayers_method_sends_message_to_the_player() {
