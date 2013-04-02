@@ -1,6 +1,7 @@
 package controllers.client;
 
 import controllers.Workflow;
+import gameMessages.MafiaVotedOutVillagerMessage;
 import runner.WorkflowManager;
 import views.client.MafiaView;
 
@@ -54,5 +55,9 @@ public class MafiaController implements ClientEngine {
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
+    }
+
+    public void sendMessage(MafiaVotedOutVillagerMessage message) {
+        clientPlayer.sendMessage(message);
     }
 }
