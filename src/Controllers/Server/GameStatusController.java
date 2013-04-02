@@ -1,5 +1,6 @@
 package controllers.server;
 
+import gameMessages.DayArrivedMessage;
 import gameMessages.NightArrivedMessage;
 import runner.WorkflowManager;
 import screens.server.GameStatusScreen;
@@ -26,6 +27,13 @@ public class GameStatusController implements GameStatusView {
 
     public void start() {
         sendNightArrivedMessage();
+        sendDayArrivedMessage();
+    }
+
+    private void sendDayArrivedMessage() {
+        DayArrivedMessage message = new DayArrivedMessage();
+        message.setPlayersName(players.getAllPlayersName());
+        players.sendMessage(message);
     }
 
     private void sendNightArrivedMessage() {

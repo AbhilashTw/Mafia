@@ -50,14 +50,8 @@ public class SocketChannel {
             public void run() {
                 pollForIncomingData();
             }
-
-        }
-
-                , "pollForIncomingData").
-
+        }, "pollForIncomingData").
                 start();
-
-
     }
 
     private void pollForIncomingData() {

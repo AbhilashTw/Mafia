@@ -13,14 +13,14 @@ import java.awt.event.ActionListener;
 public class MafiaScreen implements MafiaView {
 
     private static final String BG_IMAGE = "images/MafiaStartScreen.jpg";
-    private MafiaController controller;
-    IMainFrame mainFrame;
-    private ImagePanel panel;
     private final JLabel timerLabel = new JLabel("10");
-
+    private IMainFrame mainFrame;
+    private MafiaController controller;
+    private ImagePanel panel;
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private ButtonGroup bg = new ButtonGroup();
     private JList statusList = new JList(defaultStatusList);
+    private Timer timer;
 
     public MafiaScreen(IMainFrame mainFrame, MafiaController controller) {
         this.mainFrame = mainFrame;
@@ -39,7 +39,8 @@ public class MafiaScreen implements MafiaView {
 
     @Override
     public void display(String[] playersName) {
-        changeStatus("Night Arrived... You can vote now...");
+        changeStatus("Night Arrived");
+        changeStatus("You Can Vote Now");
         timerScreen();
         int x = 100, y = 100;
         for (String player : playersName) {
@@ -55,12 +56,15 @@ public class MafiaScreen implements MafiaView {
     }
 
     public void timerScreen() {
-        Timer timer = new Timer(1000, new ActionListener() {
+        timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int time = Integer.parseInt(timerLabel.getText());
                 if (time > 0) timerLabel.setText(String.valueOf(time - 1));
-                else if (time == 0) sendVotes();
+                else if (time == 0) {
+                    timer.stop();
+                    sendVotes();
+                }
             }
         });
         timer.start();
@@ -68,7 +72,6 @@ public class MafiaScreen implements MafiaView {
 
     private void sendVotes() {
         String playerVotedOut = bg.getSelection().getActionCommand();
-        System.out.println(playerVotedOut);
     }
 
     private void changeStatus(String status) {
@@ -76,10 +79,10 @@ public class MafiaScreen implements MafiaView {
     }
 
     private void createList(int x_bound, int y_bound) {
-        statusList.setSize(400, 450);
+        statusList.setSize(600, 450);
         statusList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
         statusList.setLocation(x_bound, y_bound);
-        statusList.setBackground(Color.YELLOW);
+        statusList.setBackground(Color.ORANGE);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         statusList.setFont(f);
     }

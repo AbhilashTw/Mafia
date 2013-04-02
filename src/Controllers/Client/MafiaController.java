@@ -4,6 +4,9 @@ import controllers.Workflow;
 import runner.WorkflowManager;
 import views.client.MafiaView;
 
+/**
+ * Job : Understands the Mafia Activities in the game.
+ */
 public class MafiaController implements ClientEngine {
     private final ClientPlayer clientPlayer;
     private Workflow workflow;
@@ -44,7 +47,6 @@ public class MafiaController implements ClientEngine {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-
     @Override
     public void displayMafiaVotingChart(String[] playerNames) {
         view.display(playerNames);
@@ -52,7 +54,5 @@ public class MafiaController implements ClientEngine {
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
-
-
     }
 }
