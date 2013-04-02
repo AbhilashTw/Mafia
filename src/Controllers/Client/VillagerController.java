@@ -5,14 +5,13 @@ import views.client.VillagerView;
 
 public class VillagerController implements ClientEngine {
     private final Workflow workflow;
-    private final ClientPlayer clientPlayer;
+    private final ClientPlayerController clientPlayerController;
     private VillagerView view;
 
-    public VillagerController(Workflow workflow, ClientPlayer clientPlayer) {
+    public VillagerController(Workflow workflow, ClientPlayerController clientPlayerController) {
         this.workflow = workflow;
-
-        this.clientPlayer = clientPlayer;
-        clientPlayer.bindClientEngine(this);
+        this.clientPlayerController = clientPlayerController;
+        clientPlayerController.bindClientEngine(this);
     }
 
     public void bind(VillagerView view) {
@@ -29,7 +28,7 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void startVillagerScreen() {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     @Override
@@ -44,12 +43,11 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void displayMafiaVotingChart(String[] playerNames) {
-        view.updateStatus("Night has arrived");
+        view.updateStatus("Night has arrived\n Good night");
     }
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
-        view.updateStatus("Day has arrived");
         view.display(playerNames);
     }
 

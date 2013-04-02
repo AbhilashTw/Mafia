@@ -2,23 +2,21 @@ package controllers.client;
 
 import controllers.Workflow;
 import gameMessages.MafiaVotedOutVillagerMessage;
-import runner.WorkflowManager;
 import views.client.MafiaView;
 
 /**
  * Job : Understands the Mafia Activities in the game.
  */
 public class MafiaController implements ClientEngine {
-    private final ClientPlayer clientPlayer;
+    private final ClientPlayerController clientPlayerController;
     private Workflow workflow;
     private MafiaView view;
 
 
-    public MafiaController(WorkflowManager manager, ClientPlayer clientPlayer) {
-        this.workflow = manager;
-
-        this.clientPlayer = clientPlayer;
-        clientPlayer.bindClientEngine(this);
+    public MafiaController(Workflow workflow, ClientPlayerController clientPlayerController) {
+        this.workflow = workflow;
+        this.clientPlayerController = clientPlayerController;
+        clientPlayerController.bindClientEngine(this);
     }
 
     public void bind(MafiaView view) {
@@ -58,6 +56,6 @@ public class MafiaController implements ClientEngine {
     }
 
     public void sendMessage(MafiaVotedOutVillagerMessage message) {
-        clientPlayer.sendMessage(message);
+        clientPlayerController.sendMessage(message);
     }
 }

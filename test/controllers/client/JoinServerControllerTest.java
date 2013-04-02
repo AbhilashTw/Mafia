@@ -18,15 +18,15 @@ public class JoinServerControllerTest {
     JoinServerView joinServerView;
     SocketChannel socketChannel;
     JoinServerController joinServerController;
-    ClientPlayer clientPlayer;
+    ClientPlayerController clientPlayerController;
 
     @Before
     public void setUp() throws Exception {
-        clientPlayer = mock(ClientPlayer.class);
+        clientPlayerController = mock(ClientPlayerController.class);
         workflow = mock(Workflow.class);
         joinServerView = mock(JoinServerView.class);
         socketChannel = mock(SocketChannel.class);
-        joinServerController = new JoinServerController(workflow, clientPlayer);
+        joinServerController = new JoinServerController(workflow, clientPlayerController);
     }
 
     @After

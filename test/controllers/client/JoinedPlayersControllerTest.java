@@ -13,7 +13,7 @@ import static org.mockito.Mockito.verify;
 
 
 public class JoinedPlayersControllerTest {
-    ClientPlayer clientPlayer;
+    ClientPlayerController clientPlayerController;
     SocketChannel socketChannel;
     JoinedPlayersView joinedPlayersView;
     PlayersConnectedMessage playersConnectedMessage;
@@ -22,13 +22,13 @@ public class JoinedPlayersControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        clientPlayer = mock(ClientPlayer.class);
+        clientPlayerController = mock(ClientPlayerController.class);
         socketChannel = mock(SocketChannel.class);
         joinedPlayersView = mock(JoinedPlayersView.class);
         playersConnectedMessage = mock(PlayersConnectedMessage.class);
         workflow = mock(Workflow.class);
 
-        joinedPlayersController = new JoinedPlayersController(workflow, clientPlayer);
+        joinedPlayersController = new JoinedPlayersController(workflow, clientPlayerController);
     }
 
     @After

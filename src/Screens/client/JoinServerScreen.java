@@ -35,6 +35,8 @@ public class JoinServerScreen implements JoinServerView {
         playerNameLabel = createLabel("Player Name", 50, 200);
         serverNameText = createTextField(150, 140);
         playerNameTextField = createTextField(150, 240);
+        //todo: remove setText before pushing into production
+        serverNameText.setText("localhost");
         connectButton = createButton("Connect", 800, 800);
         panel.add(serverNameLabel);
         panel.add(playerNameLabel);

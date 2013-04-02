@@ -13,12 +13,12 @@ public class VillagerControllerTest {
     VillagerController controller;
     VillagerView view;
     Workflow workflow;
-    ClientPlayer player;
+    ClientPlayerController player;
 
     @Before
     public void setUp() throws Exception {
         workflow = mock(Workflow.class);
-        player = mock(ClientPlayer.class);
+        player = mock(ClientPlayerController.class);
         view = mock(VillagerView.class);
         controller = new VillagerController(workflow, player);
     }
@@ -32,7 +32,7 @@ public class VillagerControllerTest {
     public void displayMafiaVotingChart_is_Called_views_updateStatus_is_invoked() {
         controller.bind(view);
         controller.displayMafiaVotingChart(new String[]{});
-        verify(view).updateStatus("Night has arrived");
+        verify(view).updateStatus("Night has arrived\n Good night");
     }
 
     @Test
@@ -41,4 +41,5 @@ public class VillagerControllerTest {
         controller.displayVillagerVotingChart(new String[]{});
         verify(view).display(new String[]{});
     }
+
 }

@@ -49,13 +49,4 @@ public class ConnectedPlayersControllerTest {
         verify(view).display(players.getPlayers());
     }
 
-
-    @Test
-    public void Start_Invokes_assignRoles_Which_Inturn_Invokes_Player_assignRole() {
-        controller = new ConnectedPlayersController(players, workflow);
-        controller.start();
-        verify(players).assignRoles();
-    }
-
-
 }
