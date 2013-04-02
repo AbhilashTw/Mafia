@@ -1,6 +1,7 @@
 package screens.client;
 
 import controllers.client.MafiaController;
+import gameMessages.MafiaVotedOutVillagerMessage;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
 import views.client.MafiaView;
@@ -17,9 +18,10 @@ public class MafiaScreen implements MafiaView {
     IMainFrame mainFrame;
     private ImagePanel panel;
     private final JLabel timerLabel = new JLabel("10");
-
+    private Timer timer;
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private ButtonGroup bg = new ButtonGroup();
+    private String votedOutPlayer;
     private JList statusList = new JList(defaultStatusList);
 
     public MafiaScreen(IMainFrame mainFrame, MafiaController controller) {
@@ -49,26 +51,25 @@ public class MafiaScreen implements MafiaView {
             button.setBackground(Color.ORANGE);
             button.setVisible(true);
             bg.add(button);
+            button.addActionListener(new MyAction());
             panel.add(button);
             y += 80;
         }
     }
 
     public void timerScreen() {
-        Timer timer = new Timer(1000, new ActionListener() {
+        timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int time = Integer.parseInt(timerLabel.getText());
                 if (time > 0) timerLabel.setText(String.valueOf(time - 1));
-                else if (time == 0) sendVotes();
+                else if (time == 0) {
+                    timer.stop();
+                   new MafiaVotedOutVillagerMessage(votedOutPlayer);
+                }
             }
         });
         timer.start();
-    }
-
-    private void sendVotes() {
-        String playerVotedOut = bg.getSelection().getActionCommand();
-        System.out.println(playerVotedOut);
     }
 
     private void changeStatus(String status) {
@@ -83,6 +84,17 @@ public class MafiaScreen implements MafiaView {
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         statusList.setFont(f);
     }
+
+
+    class MyAction implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            votedOutPlayer = e.getActionCommand();
+        }
+
+    }
+
 
 }
 
