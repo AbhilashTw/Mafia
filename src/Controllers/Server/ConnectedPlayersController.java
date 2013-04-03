@@ -40,7 +40,6 @@ public class ConnectedPlayersController {
         sendClientsMessage();
         display();
         workflow.showGameStatus();
-
     }
 
     private void sendClientsMessage() {

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Players {
     private List<Player> players = new ArrayList<Player>();
-    private RoleDecider roleDecider = new RoleDecider(null); // TODO : Abhilash
+    private RoleDecider roleDecider = new RoleDecider(this);
 
     public void addPlayer(Player player) {
         if (player == null) throw new IllegalArgumentException("Cannot add a null valued player");
