@@ -2,6 +2,8 @@ package controllers.client;
 
 import controllers.Workflow;
 import entities.ClientPlayer;
+import gameMessages.MafiaVotedOutVillagerMessage;
+import gameMessages.VillagerVotedOutMafiaMessage;
 import views.client.VillagerView;
 
 public class VillagerController implements ClientEngine {
@@ -52,4 +54,7 @@ public class VillagerController implements ClientEngine {
         view.display(playerNames);
     }
 
+    public void sendMessage(VillagerVotedOutMafiaMessage message) {
+        clientPlayer.sendMessage(message);
+    }
 }

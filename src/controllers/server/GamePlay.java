@@ -3,7 +3,6 @@ package controllers.server;
 import entities.Player;
 import entities.Players;
 import entities.Role;
-import gameMessages.NightArrivedMessage;
 
 public class GamePlay {
     private Players players;
@@ -25,6 +24,10 @@ public class GamePlay {
 
     public boolean mafiaPollStatus() {
         return getMafiaCount() == poll.getPollCount();
+    }
+
+    public boolean villagerPollStatus() {
+        return getMafiaCount() + getVillagerCount() == poll.getPollCount();
     }
 
     private int getMafiaCount() {
@@ -52,5 +55,4 @@ public class GamePlay {
         else if (getVillagerCount() <= getMafiaCount()) return GameResult.MafiaWins;
         return GameResult.GameStable;
     }
-
 }

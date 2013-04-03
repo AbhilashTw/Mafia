@@ -12,7 +12,7 @@ public class NightArrivedMessage extends ChannelMessage implements Serializable 
         super();
     }
 
-    public void setPlayersName(String[] playersName) {
+    public void   setPlayersName(String[] playersName) {
         this.playersName = playersName;
     }
 

@@ -15,7 +15,7 @@ import java.util.Enumeration;
 public class MafiaScreen implements MafiaView {
 
     private static final String BG_IMAGE = "images/MafiaStartScreen.jpg";
-    private final JLabel timerLabel = new JLabel("10");
+    private final JLabel timerLabel = new JLabel("30");
     private IMainFrame mainFrame;
     private MafiaController controller;
     private ImagePanel panel;
@@ -120,7 +120,6 @@ public class MafiaScreen implements MafiaView {
     }
 
     class MyAction implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             votedOutPlayer = e.getActionCommand();
