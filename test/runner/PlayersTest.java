@@ -1,8 +1,8 @@
 package runner;
 
 import channels.messages.ChannelMessage;
-import controllers.server.Player;
-import controllers.server.Players;
+import entities.Player;
+import entities.Players;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

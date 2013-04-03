@@ -1,15 +1,17 @@
-package controllers.server;
+package entities;
 
 
 import channels.SocketChannel;
 import channels.SocketChannelListener;
 import channels.messages.ChannelMessage;
+import controllers.server.GameEngine;
+import gameMessages.MafiaVotedOutVillagerMessage;
 import gameMessages.PlayerDetailsMessage;
 
 import java.io.IOException;
 
 public class Player implements SocketChannelListener {
-    private final GameEngine god;
+    private GameEngine god;
     private SocketChannel channel;
     private String name;
     private Role role;
@@ -47,6 +49,9 @@ public class Player implements SocketChannelListener {
             PlayerDetailsMessage pdM = (PlayerDetailsMessage) message;
             name = pdM.getPlayerName();
             god.playersUpdated();
+        }
+        if (message instanceof MafiaVotedOutVillagerMessage) {
+            god.updateMafiaVotes(getName(), ((MafiaVotedOutVillagerMessage) message).getMafiaVotedOutPlayer());
         }
     }
 
@@ -89,5 +94,9 @@ public class Player implements SocketChannelListener {
         int result = channel.hashCode();
         result = 31 * result + name.hashCode();
         return result;
+    }
+
+    public void setGameEngine(GameEngine gameEngine) {
+        this.god = gameEngine;
     }
 }

@@ -1,6 +1,8 @@
 package controllers.server;
 
 import channels.SocketChannel;
+import entities.Player;
+import entities.Role;
 import gameMessages.PlayerDetailsMessage;
 import org.junit.After;
 import org.junit.Assert;

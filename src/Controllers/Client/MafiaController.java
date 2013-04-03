@@ -1,6 +1,7 @@
 package controllers.client;
 
 import controllers.Workflow;
+import entities.ClientPlayer;
 import gameMessages.MafiaVotedOutVillagerMessage;
 import runner.WorkflowManager;
 import views.client.MafiaView;

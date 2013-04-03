@@ -1,6 +1,7 @@
 package controllers.client;
 
 import controllers.Workflow;
+import entities.ClientPlayer;
 import views.client.VillagerView;
 
 public class VillagerController implements ClientEngine {

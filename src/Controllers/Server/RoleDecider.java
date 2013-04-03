@@ -1,5 +1,9 @@
 package controllers.server;
 
+import entities.Player;
+import entities.Players;
+import entities.Role;
+
 import java.util.Random;
 
 public class RoleDecider {

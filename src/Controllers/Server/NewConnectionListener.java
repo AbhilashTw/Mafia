@@ -2,6 +2,7 @@ package controllers.server;
 
 import channels.ConnectionListener;
 import channels.SocketChannel;
+import entities.Player;
 
 
 public class NewConnectionListener implements ConnectionListener {

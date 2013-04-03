@@ -1,44 +1,53 @@
 package controllers.server;
 
-import gameMessages.DayArrivedMessage;
-import gameMessages.NightArrivedMessage;
-import runner.WorkflowManager;
-import screens.server.GameStatusScreen;
+import controllers.Workflow;
+import entities.Player;
+import entities.Players;
 import views.server.GameStatusView;
 
-/*
-   Job: Understands to Inform the Player about the routine.
-*/
-public class GameStatusController implements GameStatusView {
+/**
+ * Job: Understands to Inform the Player about the routine.
+ */
+public class GameStatusController implements GameEngine {
 
-    private final WorkflowManager workflowManager;
+    private final Workflow workflowManager;
     private final Players players;
-    private GameStatusScreen gameStatusScreen;
+    private GameStatusView view;
+    private GamePlay gamePlay;
 
-    public GameStatusController(WorkflowManager workflowManager, Players players) {
 
+    public GameStatusController(Workflow workflowManager, Players players, GamePlay gamePlay) {
         this.workflowManager = workflowManager;
         this.players = players;
+        this.gamePlay = gamePlay;
+        players.bindEngine(this);
     }
 
-    public void bind(GameStatusScreen gameStatusScreen) {
-        this.gameStatusScreen = gameStatusScreen;
+    public void bind(GameStatusView gameStatusScreen) {
+        this.view = gameStatusScreen;
     }
 
     public void start() {
-        sendNightArrivedMessage();
-        sendDayArrivedMessage();
+        gamePlay.sendNightArrivedMessage();
+
+
     }
 
-    private void sendDayArrivedMessage() {
-        DayArrivedMessage message = new DayArrivedMessage();
-        message.setPlayersName(players.getAllPlayersName());
-        players.sendMessage(message);
+    @Override
+    public void playersUpdated() {
     }
 
-    private void sendNightArrivedMessage() {
-        NightArrivedMessage message = new NightArrivedMessage();
-        message.setPlayersName(players.getAllPlayersName());
-        players.sendMessage(message);
+    @Override
+    public void removePlayer(Player player) {
     }
+
+    @Override
+    public void updateMafiaVotes(String playerName, String killedPlayer) {
+        view.updateMafiaVotingStatus(playerName, killedPlayer);
+        gamePlay.poll(killedPlayer);
+        if (gamePlay.mafiaPollStatus()) removePlayer(gamePlay.getKilledPlayer());
+        if (gamePlay.getGameStatus().equals(GameResult.GameStable)) start();
+    }
+
+
 }

@@ -1,7 +1,7 @@
 package screens.server;
 
 import controllers.server.ConnectedPlayersController;
-import controllers.server.Player;
+import entities.Player;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
 import views.server.ConnectedPlayersView;

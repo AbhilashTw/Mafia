@@ -1,6 +1,7 @@
 package controllers.client;
 
 import controllers.Workflow;
+import entities.ClientPlayer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

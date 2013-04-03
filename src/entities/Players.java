@@ -1,6 +1,9 @@
-package controllers.server;
+package entities;
 
 import channels.messages.ChannelMessage;
+import controllers.server.GameEngine;
+import controllers.server.RoleDecider;
+import entities.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.List;
  */
 public class Players {
     private List<Player> players = new ArrayList<Player>();
-    private RoleDecider roleDecider = new RoleDecider(this);
+    private RoleDecider roleDecider = new RoleDecider(null); // TODO : Abhilash
 
     public void addPlayer(Player player) {
         if (player == null) throw new IllegalArgumentException("Cannot add a null valued player");
@@ -65,6 +68,12 @@ public class Players {
 
     public void assignRoles() {
         roleDecider.assignRoles();
+    }
+
+    public void bindEngine(GameEngine engine) {
+        for (Player player : players) {
+            player.setGameEngine(engine);
+        }
     }
 
 }

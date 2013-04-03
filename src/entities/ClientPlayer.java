@@ -1,8 +1,9 @@
-package controllers.client;
+package entities;
 
 import channels.SocketChannel;
 import channels.SocketChannelListener;
 import channels.messages.ChannelMessage;
+import controllers.client.ClientEngine;
 import gameMessages.*;
 
 import java.io.IOException;

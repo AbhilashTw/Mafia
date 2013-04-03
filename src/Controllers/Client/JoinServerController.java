@@ -3,6 +3,7 @@ package controllers.client;
 import channels.ConnectionListener;
 import channels.SocketChannel;
 import controllers.Workflow;
+import entities.ClientPlayer;
 import views.client.JoinServerView;
 
 /**

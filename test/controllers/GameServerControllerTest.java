@@ -1,9 +1,9 @@
 package controllers;
 
 import channels.server.SocketServer;
-import controllers.server.Player;
-import controllers.server.Players;
 import controllers.server.StartGameController;
+import entities.Player;
+import entities.Players;
 import gameMessages.PlayersConnectedMessage;
 import org.junit.Test;
 import views.server.StartGameView;
@@ -18,7 +18,6 @@ public class GameServerControllerTest {
     SocketServer server = mock(SocketServer.class);
     Players gamePlayers = mock(Players.class);
     StartGameController controller = new StartGameController(workflow, gamePlayers);
-
 
     @Test
     public void when_gameServerController_calls_players_updated_it_invokes_updatePlayers_method_sends_message_to_the_player() {

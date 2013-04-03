@@ -2,6 +2,7 @@ package controllers.client;
 
 import channels.SocketChannel;
 import controllers.Workflow;
+import entities.ClientPlayer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

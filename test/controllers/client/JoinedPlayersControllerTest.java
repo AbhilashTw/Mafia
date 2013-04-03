@@ -2,6 +2,7 @@ package controllers.client;
 
 import channels.SocketChannel;
 import controllers.Workflow;
+import entities.ClientPlayer;
 import gameMessages.PlayersConnectedMessage;
 import org.junit.After;
 import org.junit.Before;

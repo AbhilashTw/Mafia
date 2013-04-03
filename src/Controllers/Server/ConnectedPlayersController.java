@@ -1,6 +1,9 @@
 package controllers.server;
 
 import controllers.Workflow;
+import entities.Player;
+import entities.Players;
+import entities.Role;
 import gameMessages.MafiaRoleAssigned;
 import gameMessages.VillagerRoleAssigned;
 import views.server.ConnectedPlayersView;

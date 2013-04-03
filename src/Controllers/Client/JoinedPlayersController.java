@@ -2,6 +2,7 @@ package controllers.client;
 
 
 import controllers.Workflow;
+import entities.ClientPlayer;
 import gameMessages.PlayerDetailsMessage;
 import views.client.JoinedPlayersView;
 

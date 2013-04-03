@@ -1,8 +1,8 @@
 package controllers;
 
 
-import controllers.client.ClientPlayer;
-import controllers.server.Players;
+import entities.ClientPlayer;
+import entities.Players;
 
 public interface Workflow {
     void startServer();

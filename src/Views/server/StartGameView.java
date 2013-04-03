@@ -1,6 +1,6 @@
 package views.server;
 
-import controllers.server.Player;
+import entities.Player;
 
 import java.util.List;
 

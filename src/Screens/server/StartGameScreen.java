@@ -1,7 +1,7 @@
 package screens.server;
 
 import channels.server.SocketServer;
-import controllers.server.Player;
+import entities.Player;
 import controllers.server.StartGameController;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
@@ -19,7 +19,6 @@ import java.util.List;
 
 public class StartGameScreen implements StartGameView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
-
     private final StartGameController controller;
     public SocketServer server;
     IMainFrame startServerFrame;

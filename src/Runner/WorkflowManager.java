@@ -4,8 +4,13 @@ package runner;
 import channels.server.SocketServer;
 import controllers.HomeController;
 import controllers.Workflow;
-import controllers.client.*;
+import controllers.client.JoinServerController;
+import controllers.client.JoinedPlayersController;
+import controllers.client.MafiaController;
+import controllers.client.VillagerController;
 import controllers.server.*;
+import entities.ClientPlayer;
+import entities.Players;
 import screens.MafiaViewFactory;
 import screens.client.JoinServerScreen;
 import screens.client.JoinedPlayersScreen;
@@ -37,7 +42,6 @@ public class WorkflowManager implements Workflow {
         HomeController controller = viewFactory.getHomeController(this, mainFrame);
         controller.start();
     }
-
 
     @Override
     public void startServer() {
@@ -86,7 +90,7 @@ public class WorkflowManager implements Workflow {
 
     @Override
     public void showGameStatus() {
-        GameStatusController controller = new GameStatusController(this, players);
+        GameStatusController controller = new GameStatusController(this, players, new GamePlay());
         controller.bind(new GameStatusScreen(mainFrame, controller));
         controller.start();
     }

@@ -1,4 +1,4 @@
-package controllers.server;
+package entities;
 
 public enum Role {
     Villager,

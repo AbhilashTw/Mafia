@@ -2,6 +2,8 @@ package controllers.server;
 
 import channels.server.SocketServer;
 import controllers.Workflow;
+import entities.Player;
+import entities.Players;
 import gameMessages.PlayersConnectedMessage;
 import views.server.StartGameView;
 
@@ -41,6 +43,11 @@ public class StartGameController implements GameEngine {
     public void removePlayer(Player player) {
         gamePlayers.removePlayer(player);
 
+    }
+
+    @Override
+    public void updateMafiaVotes(String playerName, String killedPlayer) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public void start(SocketServer server) {
