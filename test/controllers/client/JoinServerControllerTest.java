@@ -42,4 +42,5 @@ public class JoinServerControllerTest {
         joinServerController.onConnectionFailed("localhost", 1234, e);
         verify(joinServerView).connectionToServerFailed();
     }
+
 }

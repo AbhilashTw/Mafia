@@ -11,7 +11,6 @@ public class VillagerController implements ClientEngine {
 
     public VillagerController(Workflow workflow, ClientPlayer clientPlayer) {
         this.workflow = workflow;
-
         this.clientPlayer = clientPlayer;
         clientPlayer.bindClientEngine(this);
     }
@@ -30,7 +29,7 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void startVillagerScreen() {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     @Override
@@ -45,12 +44,11 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void displayMafiaVotingChart(String[] playerNames) {
-        view.updateStatus("Night has arrived");
+        view.updateStatus("Night has arrived\n Good night");
     }
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
-        view.updateStatus("Day has arrived");
         view.display(playerNames);
     }
 

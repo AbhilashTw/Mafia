@@ -3,7 +3,6 @@ package controllers.client;
 import controllers.Workflow;
 import entities.ClientPlayer;
 import gameMessages.MafiaVotedOutVillagerMessage;
-import runner.WorkflowManager;
 import views.client.MafiaView;
 
 /**
@@ -15,9 +14,8 @@ public class MafiaController implements ClientEngine {
     private MafiaView view;
 
 
-    public MafiaController(WorkflowManager manager, ClientPlayer clientPlayer) {
-        this.workflow = manager;
-
+    public MafiaController(Workflow workflow, ClientPlayer clientPlayer) {
+        this.workflow = workflow;
         this.clientPlayer = clientPlayer;
         clientPlayer.bindClientEngine(this);
     }
@@ -61,4 +59,5 @@ public class MafiaController implements ClientEngine {
     public void sendMessage(MafiaVotedOutVillagerMessage message) {
         clientPlayer.sendMessage(message);
     }
+
 }

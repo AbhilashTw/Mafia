@@ -32,7 +32,6 @@ public class ConnectedPlayersController {
 
     public void display() {
         view.display(players.getPlayers());
-
     }
 
     public void start() {

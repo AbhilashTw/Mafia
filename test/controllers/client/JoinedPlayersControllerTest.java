@@ -37,17 +37,38 @@ public class JoinedPlayersControllerTest {
 
     }
 
-//    @Test
-//    public void should_invoke_channel_stop_when_goToHomeScreen_is_called() {
 
-//        joinedPlayersController.goToHomeScreen();
-//        verify(socketChannel).stop();
-//    }
 
     @Test
     public void should_invoke_workflow_start_when_goToHomeScreen_is_called() {
         joinedPlayersController.goToHomeScreen();
         verify(workflow).start();
     }
+
+    @Test
+    public void should_invoke_clientPlayerController_stop_when_goToHomeScreen_is_called() {
+        joinedPlayersController.goToHomeScreen();
+        verify(clientPlayer).stop();
+    }
+
+    @Test
+    public void should_invoke_workflow_startVillagerScreen_when_startVillagerScreen_is_called() {
+        joinedPlayersController.startVillagerScreen();
+        verify(workflow).startVillagerScreen();
+    }
+
+    @Test
+    public void should_invoke_workflow_startMafiaScreen_when_startMafiaScreen_is_called() {
+        joinedPlayersController.startMafiaScreen();
+        verify(workflow).startMafiaScreen();
+    }
+
+    @Test
+    public void should_invoke_workflow_start_when_serverClosed_is_called() {
+        joinedPlayersController.serverClosed();
+        verify(workflow).start();
+    }
+
+
 }
 

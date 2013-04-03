@@ -8,6 +8,7 @@ public class MafiaVotedOutVillagerMessage extends ChannelMessage implements Seri
     private final String votedOutPlayer;
 
     public MafiaVotedOutVillagerMessage(String votedOutPlayer) {
+        super();
         this.votedOutPlayer = votedOutPlayer;
     }
 

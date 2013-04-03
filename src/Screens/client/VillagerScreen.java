@@ -9,34 +9,54 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
 public class VillagerScreen implements VillagerView {
 
-    private static final String BG_IMAGE = "images/homepage.jpg";
+    private static final String BG_IMAGE = "images/VillagerScreen.jpg";
     private final VillagerController controller;
     private IMainFrame mainFrame;
-    private Timer timer;
-    private ButtonGroup bg;
-    private DefaultListModel<String> statusMessage = new DefaultListModel<String>();
+    private final JLabel timerLabel = new JLabel("10");
     private ImagePanel panel;
-    private JList gameStatus = new JList(statusMessage);
-    private JEditorPane timerLabel;
-    private JPanel votingPanel;
+    private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
+    private ButtonGroup bg = new ButtonGroup();
+    private JList statusList = new JList(defaultStatusList);
+    private Timer timer;
 
     public VillagerScreen(IMainFrame mainFrame, VillagerController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
-        panel.add(gameStatus);
-        statusMessage.addElement("You have been Assigned as a Villager");
+
+        createList(900, 100);
+        createTimerLabel();
+
+        panel.add(timerLabel);
+        panel.add(statusList);
+        updateStatus("Your Assigned as a villager");
+    }
+
+    private void createTimerLabel() {
+        timerLabel.setForeground(Color.WHITE);
+        timerLabel.setLocation(900, 800);
+        timerLabel.setSize(200, 200);
+        Font timerFont = new Font("Monospaced", Font.PLAIN, 100);
+        timerLabel.setFont(timerFont);
+    }
+
+    private void createList(int x_bound, int y_bound) {
+        statusList.setSize(600, 450);
+        statusList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
+        statusList.setLocation(x_bound, y_bound);
+        statusList.setBackground(Color.ORANGE);
+        Font f = new Font("Monospaced", Font.PLAIN, 20);
+        statusList.setFont(f);
     }
 
     @Override
     public void display(String[] playersName) {
-        votingPanel = new JPanel();
-        bg = new ButtonGroup();
+        updateStatus("Day Arrived \n You can vote now ");
         int x = 100, y = 100;
-
         for (String player : playersName) {
             JRadioButton button = new JRadioButton(player);
             button.setLocation(x, y);
@@ -44,19 +64,17 @@ public class VillagerScreen implements VillagerView {
             button.setFont(new Font("Times New Roman", 1, 20));
             button.setBackground(Color.ORANGE);
             button.setVisible(true);
-            votingPanel.add(button);
             bg.add(button);
+            button.addActionListener(new MyAction());
+            panel.add(button);
             y += 80;
         }
-        updateStatus("Voting Starts Now");
         timerScreen();
-        votingPanel.setVisible(true);
-        panel.add(votingPanel);
     }
 
     @Override
-    public void updateStatus(String statusMessage) {
-        this.statusMessage.addElement(statusMessage);
+    public void updateStatus(String status) {
+        defaultStatusList.addElement(status);
     }
 
     public void timerScreen() {
@@ -64,18 +82,30 @@ public class VillagerScreen implements VillagerView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int time = Integer.parseInt(timerLabel.getText());
-                if (time > 0) {
+                if (time > 0)
                     timerLabel.setText(String.valueOf(time - 1));
-                } else
+                else if (time == 0) {
                     timer.stop();
-                disableVoting();
-
+                    disableVoteButtons();
+                }
             }
         });
         timer.start();
     }
 
-    private void disableVoting() {
-        votingPanel.setVisible(false);
+    private void disableVoteButtons() {
+        updateStatus("Your Voting Time Ended");
+        Enumeration<AbstractButton> allButtons = bg.getElements();
+        while (allButtons.hasMoreElements()) {
+            allButtons.nextElement().setVisible(false);
+        }
     }
+
+    class MyAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            e.getActionCommand();
+        }
+    }
+
 }
