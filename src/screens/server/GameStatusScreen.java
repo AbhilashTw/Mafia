@@ -40,12 +40,7 @@ public class GameStatusScreen implements GameStatusView {
     }
 
     @Override
-<<<<<<< HEAD
-    public void updateVillagerVotingStatus(String playerName, String killedPlayer) {
-        defaultStatusList.addElement(playerName + " " + "Voted" + " " + killedPlayer);
-=======
     public void updatePlayerKilledStatus(String name) {
         defaultStatusList.addElement("Player " + name + " Killed");
->>>>>>> 6c833b98b4a2c1d79835dd5c7c5fd9adeaaf5146
     }
 }

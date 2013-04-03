@@ -61,7 +61,6 @@ public class VillagerScreen implements VillagerView {
         statusList.setFont(f);
     }
 
-
     private void createVoteList(int xBound, int yBound) {
         voteList.setSize(200, 650);
         voteList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
@@ -77,7 +76,7 @@ public class VillagerScreen implements VillagerView {
         timerScreen();
         int x = 100, y = 100;
         for (String player : playersName) {
-            JRadioButton button = new JRadioButton(player);
+            AbstractButton button = new JRadioButton(player);
             button.setLocation(x, y);
             button.setSize(145, 50);
             button.setFont(new Font("Times New Roman", 1, 20));

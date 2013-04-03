@@ -59,13 +59,4 @@ public class GameStatusControllerTest {
         verify(play).mafiaPollStatus();
     }
 
-    @Test
-    public void removePlayer_invokes_players_remove_player() {
-        controller.removePlayer(player);
-        verify(players).removePlayer(player);
-    }
-
-
-
-
 }

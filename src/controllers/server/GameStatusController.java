@@ -19,7 +19,6 @@ public class GameStatusController implements GameEngine {
     private GameStatusView view;
     private GamePlay gamePlay;
 
-
     public GameStatusController(Workflow workflow, Players players, GamePlay gamePlay) {
         this.workflow = workflow;
         this.players = players;
@@ -32,7 +31,6 @@ public class GameStatusController implements GameEngine {
     }
 
     public void start() {
-
         sendNightArrivedMessage();
         gamePlay.createPlayersPoll(new GamePoll(), players);
     }
@@ -42,7 +40,6 @@ public class GameStatusController implements GameEngine {
         gamePlay.createPlayersPoll(new GamePoll(), players);
         message.setPlayersName(players.getAllPlayersName());
         players.sendMessage(message);
-        isGameStable();
     }
 
     @Override
@@ -65,11 +62,17 @@ public class GameStatusController implements GameEngine {
     }
 
     private void isGameStable() {
-        if (gamePlay.getGameStatus().equals(GameResult.GameStable)) players.sendMessage(new DayArrivedMessage());
+        if (gamePlay.getGameStatus().equals(GameResult.GameStable)) sendDayArrivedMessage();
         else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
         else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
     }
 
+    private void sendDayArrivedMessage() {
+        DayArrivedMessage message = new DayArrivedMessage();
+        gamePlay.createPlayersPoll(new GamePoll(), players);
+        message.setPlayersName(players.getAllPlayersName());
+        players.sendMessage(message);
+    }
 
     @Override
     public void updateMafiaVotes(String playerName, String votedPlayer) {
@@ -78,14 +81,13 @@ public class GameStatusController implements GameEngine {
         isEveryOneVoted();
     }
 
-
     private void isEveryOneVoted() {
         if (gamePlay.mafiaPollStatus()) removePlayer(gamePlay.getKilledPlayer());
     }
 
     @Override
     public void updateVillagerVotes(String playerName, String killedPlayer) {
-        view.updateVillagerVotingStatus(playerName, killedPlayer);
+        view.updateVoteStatus(playerName, killedPlayer);
         gamePlay.poll(killedPlayer);
         if (gamePlay.villagerPollStatus()) removePlayer(gamePlay.getKilledPlayer());
         if (gamePlay.getGameStatus().equals(GameResult.GameStable)) start();
