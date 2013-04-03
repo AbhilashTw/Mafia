@@ -3,6 +3,7 @@ package controllers.server;
 import controllers.Workflow;
 import entities.Player;
 import entities.Players;
+import gameMessages.NightArrivedMessage;
 import views.server.GameStatusView;
 
 /**
@@ -28,9 +29,10 @@ public class GameStatusController implements GameEngine {
     }
 
     public void start() {
-        gamePlay.sendNightArrivedMessage();
 
-
+        NightArrivedMessage message = new NightArrivedMessage();
+        message.setPlayersName(players.getAllPlayersName());
+        players.sendMessage(message);
     }
 
     @Override
