@@ -54,6 +54,7 @@ public class MafiaController implements ClientEngine {
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
+
     }
 
     public void sendMessage(MafiaVotedOutVillagerMessage message) {

@@ -15,7 +15,7 @@ import java.util.Enumeration;
 public class MafiaScreen implements MafiaView {
 
     private static final String BG_IMAGE = "images/MafiaStartScreen.jpg";
-    private final JLabel timerLabel = new JLabel("10");
+    private final JLabel timerLabel = new JLabel("30");
     private IMainFrame mainFrame;
     private MafiaController controller;
     private ImagePanel panel;
@@ -77,7 +77,6 @@ public class MafiaScreen implements MafiaView {
         timerScreen();
         int x = 100, y = 100;
         for (String player : playersName) {
-            System.out.println(player);
             AbstractButton button = new JRadioButton(player);
             button.setLocation(x, y);
             button.setSize(145, 50);

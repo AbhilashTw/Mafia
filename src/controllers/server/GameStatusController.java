@@ -3,6 +3,7 @@ package controllers.server;
 import controllers.Workflow;
 import entities.Player;
 import entities.Players;
+import gameMessages.DayArrivedMessage;
 import gameMessages.NightArrivedMessage;
 import views.server.GameStatusView;
 
@@ -29,10 +30,20 @@ public class GameStatusController implements GameEngine {
     }
 
     public void start() {
-
         NightArrivedMessage message = new NightArrivedMessage();
+        gamePlay.createPlayersPoll(new GamePoll(), players);
         message.setPlayersName(players.getAllPlayersName());
         players.sendMessage(message);
+        isGameStable();
+    }
+
+
+    private void isGameStable() {
+        if (gamePlay.getGameStatus().equals(GameResult.GameStable)) {
+            DayArrivedMessage message = new DayArrivedMessage();
+            message.setPlayersName(players.getAllPlayersName());
+            players.sendMessage(message);
+        }
     }
 
     @Override
@@ -51,5 +62,12 @@ public class GameStatusController implements GameEngine {
         if (gamePlay.getGameStatus().equals(GameResult.GameStable)) start();
     }
 
+    @Override
+    public void updateVillagerVotes(String playerName, String killedPlayer) {
+        view.updateVillagerVotingStatus(playerName, killedPlayer);
+        gamePlay.poll(killedPlayer);
+        if (gamePlay.villagerPollStatus()) removePlayer(gamePlay.getKilledPlayer());
+        if (gamePlay.getGameStatus().equals(GameResult.GameStable)) start();
+    }
 
 }

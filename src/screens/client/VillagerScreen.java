@@ -1,6 +1,7 @@
 package screens.client;
 
 import controllers.client.VillagerController;
+import gameMessages.VillagerVotedOutMafiaMessage;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
 import views.client.VillagerView;
@@ -16,12 +17,17 @@ public class VillagerScreen implements VillagerView {
     private static final String BG_IMAGE = "images/VillagerScreen.jpg";
     private final VillagerController controller;
     private IMainFrame mainFrame;
-    private final JLabel timerLabel = new JLabel("10");
+    private final JLabel timerLabel = new JLabel("30");
     private ImagePanel panel;
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
-    private ButtonGroup bg = new ButtonGroup();
     private JList statusList = new JList(defaultStatusList);
+
+    private JList voteList = new JList<JRadioButton>();
+
+    private ButtonGroup bg = new ButtonGroup();
     private Timer timer;
+
+    private String votedOutPlayer;
 
     public VillagerScreen(IMainFrame mainFrame, VillagerController controller) {
         this.mainFrame = mainFrame;
@@ -29,10 +35,12 @@ public class VillagerScreen implements VillagerView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
         createList(900, 100);
+        createVoteList(100, 100);
         createTimerLabel();
 
         panel.add(timerLabel);
         panel.add(statusList);
+        panel.add(voteList);
         updateStatus("Your Assigned as a villager");
     }
 
@@ -53,9 +61,20 @@ public class VillagerScreen implements VillagerView {
         statusList.setFont(f);
     }
 
+
+    private void createVoteList(int xBound, int yBound) {
+        voteList.setSize(200, 650);
+        voteList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
+        voteList.setLocation(xBound, yBound);
+        voteList.setBackground(Color.ORANGE);
+        Font f = new Font("Monospaced", Font.PLAIN, 20);
+        voteList.setFont(f);
+    }
+
     @Override
     public void display(String[] playersName) {
         updateStatus("Day Arrived \n You can vote now ");
+        timerScreen();
         int x = 100, y = 100;
         for (String player : playersName) {
             JRadioButton button = new JRadioButton(player);
@@ -65,11 +84,10 @@ public class VillagerScreen implements VillagerView {
             button.setBackground(Color.ORANGE);
             button.setVisible(true);
             bg.add(button);
+            voteList.add(button);
             button.addActionListener(new MyAction());
-            panel.add(button);
             y += 80;
         }
-        timerScreen();
     }
 
     @Override
@@ -82,10 +100,10 @@ public class VillagerScreen implements VillagerView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int time = Integer.parseInt(timerLabel.getText());
-                if (time > 0)
-                    timerLabel.setText(String.valueOf(time - 1));
+                if (time > 0) timerLabel.setText(String.valueOf(time - 1));
                 else if (time == 0) {
                     timer.stop();
+                    controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
                     disableVoteButtons();
                 }
             }
@@ -95,6 +113,7 @@ public class VillagerScreen implements VillagerView {
 
     private void disableVoteButtons() {
         updateStatus("Your Voting Time Ended");
+        voteList.setVisible(false);
         Enumeration<AbstractButton> allButtons = bg.getElements();
         while (allButtons.hasMoreElements()) {
             allButtons.nextElement().setVisible(false);
@@ -104,7 +123,7 @@ public class VillagerScreen implements VillagerView {
     class MyAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            e.getActionCommand();
+            votedOutPlayer = e.getActionCommand();
         }
     }
 
