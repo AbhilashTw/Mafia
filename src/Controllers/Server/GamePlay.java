@@ -53,9 +53,4 @@ public class GamePlay {
         return GameResult.GameStable;
     }
 
-    public void sendNightArrivedMessage() {
-        NightArrivedMessage message = new NightArrivedMessage();
-        message.setPlayersName(players.getAllPlayersName());
-        players.sendMessage(message);
-    }
 }

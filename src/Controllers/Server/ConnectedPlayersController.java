@@ -36,9 +36,7 @@ public class ConnectedPlayersController {
 
     public void start() {
         assignRoles();
-        sendClientsMessage();
         display();
-        workflow.showGameStatus();
     }
 
     private void sendClientsMessage() {
@@ -50,4 +48,8 @@ public class ConnectedPlayersController {
         }
     }
 
+    public void Continue() {
+        sendClientsMessage();
+        workflow.showGameStatus();
+    }
 }
