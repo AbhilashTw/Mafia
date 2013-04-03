@@ -18,6 +18,7 @@ import screens.client.MafiaScreen;
 import screens.client.VillagerScreen;
 import screens.controls.IMainFrame;
 import screens.server.ConnectedPlayersScreen;
+import screens.server.GameEndScreen;
 import screens.server.GameStatusScreen;
 import screens.server.StartGameScreen;
 
@@ -97,7 +98,9 @@ public class WorkflowManager implements Workflow {
 
     @Override
     public void gameEnd(GameResult gameStatus) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        GameEndController controller = new GameEndController(players, this, gameStatus);
+        controller.bind(new GameEndScreen(mainFrame, controller));
+        controller.start();
     }
 
 }
