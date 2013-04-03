@@ -77,6 +77,7 @@ public class MafiaScreen implements MafiaView {
         timerScreen();
         int x = 100, y = 100;
         for (String player : playersName) {
+            System.out.println(player);
             AbstractButton button = new JRadioButton(player);
             button.setLocation(x, y);
             button.setSize(145, 50);
@@ -120,7 +121,6 @@ public class MafiaScreen implements MafiaView {
     }
 
     class MyAction implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             votedOutPlayer = e.getActionCommand();
