@@ -95,4 +95,9 @@ public class WorkflowManager implements Workflow {
         controller.start();
     }
 
+    @Override
+    public void gameEnd(GameResult gameStatus) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 }

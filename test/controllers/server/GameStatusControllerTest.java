@@ -1,28 +1,29 @@
 package controllers.server;
 
 import controllers.Workflow;
+import entities.Player;
 import entities.Players;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
 
 import views.server.GameStatusView;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 
 public class GameStatusControllerTest {
-    GamePoll gamePoll = mock(GamePoll.class);
-    GameStatusController controller;
     GameStatusView view = mock(GameStatusView.class);
     Players players = mock(Players.class);
     Workflow workflow = mock(Workflow.class);
+    GameStatusController controller;
+    GamePlay play = mock(GamePlay.class);
+    Player player = mock(Player.class);
 
     @Before
     public void setUp() throws Exception {
-
-
+        controller = new GameStatusController(workflow, players, play);
     }
 
     @After
@@ -32,9 +33,39 @@ public class GameStatusControllerTest {
 
 
     @Test
-    public void test() {
-        Assert.assertEquals(1, 1);
+    public void start_Invokes_players_getAllPlayerNames() {
+        controller.start();
+        verify(players).getAllPlayersName();
     }
+
+    @Test
+    public void updateMafiaVotes_invokes_views_updateStatus() {
+        controller.bind(view);
+        controller.updateMafiaVotes("Abhilash", "Sneha");
+        verify(view).updateVoteStatus("Abhilash", "Sneha");
+    }
+
+    @Test
+    public void updateMafiaVotes_invokes_GamePlays_poll() {
+        controller.bind(view);
+        controller.updateMafiaVotes("Abhilash", "Sneha");
+        verify(play).poll("Sneha");
+    }
+
+    @Test
+    public void updateMafiaVotes_Invokes_mafiaPollStatus_from_GamePlay() {
+        controller.bind(view);
+        controller.updateMafiaVotes("", "");
+        verify(play).mafiaPollStatus();
+    }
+
+    @Test
+    public void removePlayer_invokes_players_remove_player() {
+        controller.removePlayer(player);
+        verify(players).removePlayer(player);
+    }
+
+
 
 
 }
