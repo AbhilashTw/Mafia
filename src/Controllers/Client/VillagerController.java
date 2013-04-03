@@ -5,13 +5,13 @@ import views.client.VillagerView;
 
 public class VillagerController implements ClientEngine {
     private final Workflow workflow;
-    private final ClientPlayerController clientPlayerController;
+    private final ClientPlayer clientPlayer;
     private VillagerView view;
 
-    public VillagerController(Workflow workflow, ClientPlayerController clientPlayerController) {
+    public VillagerController(Workflow workflow, ClientPlayer clientPlayer) {
         this.workflow = workflow;
-        this.clientPlayerController = clientPlayerController;
-        clientPlayerController.bindClientEngine(this);
+        this.clientPlayer = clientPlayer;
+        clientPlayer.bindClientEngine(this);
     }
 
     public void bind(VillagerView view) {

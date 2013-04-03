@@ -10,15 +10,15 @@ import views.client.JoinedPlayersView;
  */
 public class JoinedPlayersController implements ClientEngine {
 
-    private final ClientPlayerController clientPlayerController;
+    private final ClientPlayer clientPlayer;
     private final Workflow workflow;
     private JoinedPlayersView view;
 
 
-    public JoinedPlayersController(Workflow workflow, ClientPlayerController clientPlayerController) {
-        this.clientPlayerController = clientPlayerController;
+    public JoinedPlayersController(Workflow workflow, ClientPlayer clientPlayer) {
+        this.clientPlayer = clientPlayer;
         this.workflow = workflow;
-        this.clientPlayerController.bindClientEngine(this);
+        this.clientPlayer.bindClientEngine(this);
     }
 
     public void bind(JoinedPlayersView view) {
@@ -26,12 +26,12 @@ public class JoinedPlayersController implements ClientEngine {
     }
 
     public void start() {
-        view.connectedToServer(clientPlayerController.getServerName(), clientPlayerController.getPlayerName());
-        clientPlayerController.sendMessage(PlayerDetailsMessage.createPlayerDetailsMessage(clientPlayerController.getPlayerName()));
+        view.connectedToServer(clientPlayer.getServerName(), clientPlayer.getPlayerName());
+        clientPlayer.sendMessage(PlayerDetailsMessage.createPlayerDetailsMessage(clientPlayer.getPlayerName()));
     }
 
     public void goToHomeScreen() {
-        clientPlayerController.stop();
+        clientPlayer.stop();
         workflow.start();
     }
 

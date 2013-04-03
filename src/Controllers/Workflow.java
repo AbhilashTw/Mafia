@@ -1,7 +1,7 @@
 package controllers;
 
 
-import controllers.client.ClientPlayerController;
+import controllers.client.ClientPlayer;
 import controllers.server.Players;
 
 public interface Workflow {
@@ -9,7 +9,7 @@ public interface Workflow {
 
     void joinServer();
 
-    void connectedToServer(ClientPlayerController clientPlayerController);
+    void connectedToServer(ClientPlayer clientPlayer);
 
     void start();
 

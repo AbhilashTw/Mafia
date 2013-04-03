@@ -13,12 +13,12 @@ public class VillagerControllerTest {
     VillagerController controller;
     VillagerView view;
     Workflow workflow;
-    ClientPlayerController player;
+    ClientPlayer player;
 
     @Before
     public void setUp() throws Exception {
         workflow = mock(Workflow.class);
-        player = mock(ClientPlayerController.class);
+        player = mock(ClientPlayer.class);
         view = mock(VillagerView.class);
         controller = new VillagerController(workflow, player);
     }

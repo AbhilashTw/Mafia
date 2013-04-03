@@ -14,12 +14,12 @@ public class MafiaControllerTest {
     MafiaController controller;
     MafiaView view;
     Workflow workflow;
-    ClientPlayerController player;
+    ClientPlayer player;
 
     @Before
     public void setUp() throws Exception {
         workflow = mock(Workflow.class);
-        player = mock(ClientPlayerController.class);
+        player = mock(ClientPlayer.class);
         view = mock(MafiaView.class);
         controller = new MafiaController(workflow, player);
     }

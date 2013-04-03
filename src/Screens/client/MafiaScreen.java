@@ -21,10 +21,12 @@ public class MafiaScreen implements MafiaView {
     private ImagePanel panel;
 
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
-    private ButtonGroup bg = new ButtonGroup();
-
-    private String votedOutPlayer;
     private JList statusList = new JList(defaultStatusList);
+
+    private JList voteList = new JList<JRadioButton>();
+
+    private ButtonGroup bg = new ButtonGroup();
+    private String votedOutPlayer;
 
     private Timer timer;
 
@@ -34,11 +36,22 @@ public class MafiaScreen implements MafiaView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
         createList(900, 100);
+        createVoteList(100, 100);
         createTimerLabel();
 
         panel.add(timerLabel);
         panel.add(statusList);
+        panel.add(voteList);
         updateStatus("Your assigned as a Mafia");
+    }
+
+    private void createVoteList(int xBound, int yBound) {
+        voteList.setSize(200, 650);
+        voteList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
+        voteList.setLocation(xBound, yBound);
+        voteList.setBackground(Color.ORANGE);
+        Font f = new Font("Monospaced", Font.PLAIN, 20);
+        voteList.setFont(f);
     }
 
     private void createTimerLabel() {
@@ -70,8 +83,8 @@ public class MafiaScreen implements MafiaView {
             button.setBackground(Color.ORANGE);
             button.setVisible(true);
             bg.add(button);
+            voteList.add(button);
             button.addActionListener(new MyAction());
-            panel.add(button);
             y += 80;
         }
     }
@@ -99,6 +112,7 @@ public class MafiaScreen implements MafiaView {
 
     private void disableVoteButtons() {
         updateStatus("Your Voting Time Ended");
+        voteList.setVisible(false);
         Enumeration<AbstractButton> allButtons = bg.getElements();
         while (allButtons.hasMoreElements()) {
             allButtons.nextElement().setVisible(false);
@@ -106,6 +120,7 @@ public class MafiaScreen implements MafiaView {
     }
 
     class MyAction implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             votedOutPlayer = e.getActionCommand();

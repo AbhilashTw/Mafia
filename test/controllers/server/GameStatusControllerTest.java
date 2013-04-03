@@ -23,10 +23,7 @@ public class GameStatusControllerTest {
 
     }
 
-    @Test
-    public void sendNightArrivedMessage_Invokes_send_message_from_Players() {
 
-    }
 
 
 }

@@ -13,7 +13,7 @@ import static org.mockito.Mockito.verify;
 
 
 public class JoinedPlayersControllerTest {
-    ClientPlayerController clientPlayerController;
+    ClientPlayer clientPlayer;
     SocketChannel socketChannel;
     JoinedPlayersView joinedPlayersView;
     PlayersConnectedMessage playersConnectedMessage;
@@ -22,13 +22,13 @@ public class JoinedPlayersControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        clientPlayerController = mock(ClientPlayerController.class);
+        clientPlayer = mock(ClientPlayer.class);
         socketChannel = mock(SocketChannel.class);
         joinedPlayersView = mock(JoinedPlayersView.class);
         playersConnectedMessage = mock(PlayersConnectedMessage.class);
         workflow = mock(Workflow.class);
 
-        joinedPlayersController = new JoinedPlayersController(workflow, clientPlayerController);
+        joinedPlayersController = new JoinedPlayersController(workflow, clientPlayer);
     }
 
     @After
@@ -36,17 +36,38 @@ public class JoinedPlayersControllerTest {
 
     }
 
-//    @Test
-//    public void should_invoke_channel_stop_when_goToHomeScreen_is_called() {
 
-//        joinedPlayersController.goToHomeScreen();
-//        verify(socketChannel).stop();
-//    }
 
     @Test
     public void should_invoke_workflow_start_when_goToHomeScreen_is_called() {
         joinedPlayersController.goToHomeScreen();
         verify(workflow).start();
     }
+
+    @Test
+    public void should_invoke_clientPlayerController_stop_when_goToHomeScreen_is_called() {
+        joinedPlayersController.goToHomeScreen();
+        verify(clientPlayer).stop();
+    }
+
+    @Test
+    public void should_invoke_workflow_startVillagerScreen_when_startVillagerScreen_is_called() {
+        joinedPlayersController.startVillagerScreen();
+        verify(workflow).startVillagerScreen();
+    }
+
+    @Test
+    public void should_invoke_workflow_startMafiaScreen_when_startMafiaScreen_is_called() {
+        joinedPlayersController.startMafiaScreen();
+        verify(workflow).startMafiaScreen();
+    }
+
+    @Test
+    public void should_invoke_workflow_start_when_serverClosed_is_called() {
+        joinedPlayersController.serverClosed();
+        verify(workflow).start();
+    }
+
+
 }
 

@@ -24,7 +24,7 @@ public class WorkflowManager implements Workflow {
     private final MafiaViewFactory viewFactory;
     private IMainFrame mainFrame;
     private Players players;
-    private ClientPlayerController clientPlayerController;
+    private ClientPlayer clientPlayer;
 
     public WorkflowManager(MafiaViewFactory viewFactory, IMainFrame mainFrame) {
         this.viewFactory = viewFactory;
@@ -50,15 +50,15 @@ public class WorkflowManager implements Workflow {
 
     @Override
     public void joinServer() {
-        JoinServerController controller = new JoinServerController(this, clientPlayerController);
+        JoinServerController controller = new JoinServerController(this, clientPlayer);
         controller.bind(new JoinServerScreen(mainFrame, controller));
         controller.start();
     }
 
     @Override
-    public void connectedToServer(ClientPlayerController clientPlayerController) {
-        this.clientPlayerController = clientPlayerController;
-        JoinedPlayersController controller = new JoinedPlayersController(this, clientPlayerController);
+    public void connectedToServer(ClientPlayer clientPlayer) {
+        this.clientPlayer = clientPlayer;
+        JoinedPlayersController controller = new JoinedPlayersController(this, clientPlayer);
         controller.bind(new JoinedPlayersScreen(mainFrame, controller));
         controller.start();
     }
@@ -72,14 +72,14 @@ public class WorkflowManager implements Workflow {
 
     @Override
     public void startVillagerScreen() {
-        VillagerController controller = new VillagerController(this, clientPlayerController);
+        VillagerController controller = new VillagerController(this, clientPlayer);
         controller.bind(new VillagerScreen(mainFrame, controller));
         controller.start();
     }
 
     @Override
     public void startMafiaScreen() {
-        MafiaController controller = new MafiaController(this, clientPlayerController);
+        MafiaController controller = new MafiaController(this, clientPlayer);
         controller.bind(new MafiaScreen(mainFrame, controller));
         controller.start();
     }

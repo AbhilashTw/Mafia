@@ -10,13 +10,13 @@ import views.client.JoinServerView;
  */
 public class JoinServerController implements ConnectionListener {
     private final Workflow workflow;
-    private ClientPlayerController clientPlayerController;
+    private ClientPlayer clientPlayer;
     private JoinServerView view;
     private int serverPort = 1234;
 
-    public JoinServerController(Workflow workflow, ClientPlayerController clientPlayerController) {
+    public JoinServerController(Workflow workflow, ClientPlayer clientPlayer) {
         this.workflow = workflow;
-        this.clientPlayerController = clientPlayerController;
+        this.clientPlayer = clientPlayer;
     }
 
     public void bind(JoinServerView view) {
@@ -32,8 +32,8 @@ public class JoinServerController implements ConnectionListener {
 
     @Override
     public void onConnectionEstablished(SocketChannel channel) {
-        clientPlayerController = new ClientPlayerController(channel, view.getServerName(), view.getPlayerName());
-        workflow.connectedToServer(clientPlayerController);
+        clientPlayer = new ClientPlayer(channel, view.getServerName(), view.getPlayerName());
+        workflow.connectedToServer(clientPlayer);
     }
 
     @Override

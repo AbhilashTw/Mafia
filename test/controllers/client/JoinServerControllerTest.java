@@ -18,15 +18,15 @@ public class JoinServerControllerTest {
     JoinServerView joinServerView;
     SocketChannel socketChannel;
     JoinServerController joinServerController;
-    ClientPlayerController clientPlayerController;
+    ClientPlayer clientPlayer;
 
     @Before
     public void setUp() throws Exception {
-        clientPlayerController = mock(ClientPlayerController.class);
+        clientPlayer = mock(ClientPlayer.class);
         workflow = mock(Workflow.class);
         joinServerView = mock(JoinServerView.class);
         socketChannel = mock(SocketChannel.class);
-        joinServerController = new JoinServerController(workflow, clientPlayerController);
+        joinServerController = new JoinServerController(workflow, clientPlayer);
     }
 
     @After
@@ -41,4 +41,5 @@ public class JoinServerControllerTest {
         joinServerController.onConnectionFailed("localhost", 1234, e);
         verify(joinServerView).connectionToServerFailed();
     }
+
 }

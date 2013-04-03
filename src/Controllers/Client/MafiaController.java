@@ -8,15 +8,15 @@ import views.client.MafiaView;
  * Job : Understands the Mafia Activities in the game.
  */
 public class MafiaController implements ClientEngine {
-    private final ClientPlayerController clientPlayerController;
+    private final ClientPlayer clientPlayer;
     private Workflow workflow;
     private MafiaView view;
 
 
-    public MafiaController(Workflow workflow, ClientPlayerController clientPlayerController) {
+    public MafiaController(Workflow workflow, ClientPlayer clientPlayer) {
         this.workflow = workflow;
-        this.clientPlayerController = clientPlayerController;
-        clientPlayerController.bindClientEngine(this);
+        this.clientPlayer = clientPlayer;
+        clientPlayer.bindClientEngine(this);
     }
 
     public void bind(MafiaView view) {
@@ -56,6 +56,7 @@ public class MafiaController implements ClientEngine {
     }
 
     public void sendMessage(MafiaVotedOutVillagerMessage message) {
-        clientPlayerController.sendMessage(message);
+        clientPlayer.sendMessage(message);
     }
+
 }

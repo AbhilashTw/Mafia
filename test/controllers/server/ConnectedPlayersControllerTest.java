@@ -49,4 +49,6 @@ public class ConnectedPlayersControllerTest {
         verify(view).display(players.getPlayers());
     }
 
+
+
 }

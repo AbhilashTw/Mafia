@@ -7,13 +7,13 @@ import gameMessages.*;
 
 import java.io.IOException;
 
-public class ClientPlayerController implements SocketChannelListener {
+public class ClientPlayer implements SocketChannelListener {
     private final String serverName;
     private final String playerName;
     private SocketChannel channel;
     private ClientEngine engine;
 
-    public ClientPlayerController(SocketChannel channel, String serverName, String playerName) {
+    public ClientPlayer(SocketChannel channel, String serverName, String playerName) {
         this.channel = channel;
         this.serverName = serverName;
         this.playerName = playerName;
