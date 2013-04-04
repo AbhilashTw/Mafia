@@ -41,12 +41,11 @@ public class MafiaScreen implements MafiaView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
         createList(900, 100);
-        createVoteList(100, 100);
         createTimerLabel();
 
         panel.add(timerLabel);
         panel.add(statusList);
-        panel.add(voteList);
+
         updateStatus("Your assigned as a Mafia");
     }
 
@@ -75,8 +74,11 @@ public class MafiaScreen implements MafiaView {
         statusList.setFont(f);
     }
 
+
     @Override
     public void display(String[] playersName, GameStatus status) {
+        createVoteList(100, 100);
+        panel.add(voteList);
         this.status = status;
         timerScreen();
         int x = 100, y = 100;
@@ -126,8 +128,8 @@ public class MafiaScreen implements MafiaView {
     }
 
     private void disableVoteButtons() {
+        voteList.removeAll();
         updateStatus("Your Voting Time Ended");
-        voteList.setVisible(false);
         Enumeration<AbstractButton> allButtons = bg.getElements();
         while (allButtons.hasMoreElements()) {
             allButtons.nextElement().setVisible(false);

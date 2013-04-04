@@ -98,9 +98,9 @@ public class VillagerScreen implements VillagerView {
                 int time = Integer.parseInt(timerLabel.getText());
                 if (time > 0) timerLabel.setText(String.valueOf(time - 1));
                 else if (time == 0) {
-                    timer.stop();
                     controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
                     disableVoteButtons();
+                    timer.stop();
                 }
             }
         });
