@@ -12,7 +12,9 @@ import views.server.GameStatusView;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-
+/*
+  Job: Ensures correctness and behaviour of GameStatusController.
+ */
 public class GameStatusControllerTest {
     GameStatusView view = mock(GameStatusView.class);
     Players players = mock(Players.class);

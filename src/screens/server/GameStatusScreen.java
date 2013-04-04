@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameStatusScreen implements GameStatusView {
-    private final String BG_IMAGE = "images/MafiaStartScreen.jpg";
+    private final String BG_IMAGE = "images/status.jpg";
     private final IMainFrame mainFrame;
     private final GameStatusController controller;
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();

@@ -55,6 +55,7 @@ public class GameStatusController implements GameEngine {
         isGameStable();
     }
 
+
     private void sendKilledPlayerMessage(Player removedPlayer) {
         KilledPlayerMessage message = new KilledPlayerMessage();
         message.setPlayerName(removedPlayer.getName());
@@ -78,10 +79,10 @@ public class GameStatusController implements GameEngine {
     public void updateMafiaVotes(String playerName, String votedPlayer) {
         view.updateVoteStatus(playerName, votedPlayer);
         gamePlay.poll(votedPlayer);
-        isEveryOneVoted();
+        isAllMafiaVoted();
     }
 
-    private void isEveryOneVoted() {
+    private void isAllMafiaVoted() {
         if (gamePlay.mafiaPollStatus()) removePlayer(gamePlay.getKilledPlayer());
     }
 
@@ -89,6 +90,11 @@ public class GameStatusController implements GameEngine {
     public void updateVillagerVotes(String playerName, String killedPlayer) {
         view.updateVoteStatus(playerName, killedPlayer);
         gamePlay.poll(killedPlayer);
+        isAllVillagersVoted();
+
+    }
+
+    private void isAllVillagersVoted() {
         if (gamePlay.villagerPollStatus()) removePlayer(gamePlay.getKilledPlayer());
         if (gamePlay.getGameStatus().equals(GameResult.GameStable)) start();
     }
