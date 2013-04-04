@@ -54,11 +54,6 @@ public class VillagerController implements ClientEngine {
         view.display(playerNames);
     }
 
-    @Override
-
-    public void PlayerDead() {
-        workflow.startPlayerDeadScreen();
-    }
 
     @Override
     public void PlayerKilled(String playerName) {
@@ -68,7 +63,7 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void showDeadScreen() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        workflow.showDeadScreen();
     }
 
     public void sendMessage(VillagerVotedOutMafiaMessage message) {

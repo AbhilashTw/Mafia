@@ -17,7 +17,8 @@ import java.util.Enumeration;
 public class MafiaScreen implements MafiaView {
 
     private static final String BG_IMAGE = "images/MafiaStartScreen.jpg";
-    private final JLabel timerLabel = new JLabel("30");
+    private JLabel timerLabel = new JLabel("30");
+
     private IMainFrame mainFrame;
     private MafiaController controller;
     private ImagePanel panel;
@@ -31,7 +32,7 @@ public class MafiaScreen implements MafiaView {
     private ButtonGroup bg = new ButtonGroup();
     private String votedOutPlayer;
 
-    private Timer timer;
+    //private Timer timer;
     private GameStatus status;
 
     public MafiaScreen(IMainFrame mainFrame, MafiaController controller) {
@@ -86,8 +87,6 @@ public class MafiaScreen implements MafiaView {
             button.setVisible(true);
             bg.add(button);
             voteList.add(button);
-
-
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -104,8 +103,8 @@ public class MafiaScreen implements MafiaView {
     }
 
     public void timerScreen() {
-
-        timer = new Timer(1000, new ActionListener() {
+        timerLabel.setText("30");
+        Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int time = Integer.parseInt(timerLabel.getText());
@@ -113,13 +112,11 @@ public class MafiaScreen implements MafiaView {
 
                 else {
                     sendMessage();
-                    timer.stop();
+                    ((Timer) e.getSource()).stop();
                 }
             }
         });
         timer.start();
-
-
     }
 
     private void sendMessage() {

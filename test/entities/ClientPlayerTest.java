@@ -16,16 +16,16 @@ public class ClientPlayerTest {
     SocketChannel channel;
     ChannelMessage message;
     ClientEngine engine;
-    VillagerRoleAssigned villagermessage;
+    VillagerRoleAssigned villagerMessage;
 
 
     @Before
     public void setUp() throws Exception {
-        channel =  mock(SocketChannel.class);
+        channel = mock(SocketChannel.class);
         clientPlayer = new ClientPlayer(channel, "localHost", "Sneha");
         message = mock(ChannelMessage.class);
         engine = mock(ClientEngine.class);
-        villagermessage = mock(VillagerRoleAssigned.class);
+        villagerMessage = mock(VillagerRoleAssigned.class);
     }
 
     @After
@@ -44,16 +44,18 @@ public class ClientPlayerTest {
         clientPlayer.sendMessage(message);
         verify(channel).send(message);
     }
+
     @Test
-    public void onClose_invokes_ClientEngines_severClosed(){
+    public void onClose_invokes_ClientEngines_severClosed() {
         clientPlayer.bindClientEngine(engine);
         clientPlayer.onClose(channel, new Exception());
         verify(engine).serverClosed();
     }
+
     @Test
-    public void onNewMessageArrives_invokes_ClientEngines_startVillagerScreen(){
+    public void onNewMessageArrives_invokes_ClientEngines_startVillagerScreen() {
         clientPlayer.bindClientEngine(engine);
-        clientPlayer.onNewMessageArrived(channel, villagermessage);
+        clientPlayer.onNewMessageArrived(channel, villagerMessage);
         verify(engine).startVillagerScreen();
     }
 
