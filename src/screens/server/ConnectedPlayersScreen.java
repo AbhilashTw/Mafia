@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ConnectedPlayersScreen implements ConnectedPlayersView {
 
-    private static final String BG_IMAGE = "images/playersConnectedScreen.jpg";
+    private static final String BG_IMAGE = "images/connected.jpg";
     private final IMainFrame mainFrame;
     private final ConnectedPlayersController controller;
     private ImagePanel panel;
@@ -39,12 +39,12 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
     }
 
     private void addListener() {
-            continueButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    controller.Continue();
-                }
-            });
+        continueButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.Continue();
+            }
+        });
     }
 
     private JList createList(JList playersList, int x_bound, int y_bound) {

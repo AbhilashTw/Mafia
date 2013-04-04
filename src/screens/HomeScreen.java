@@ -10,9 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Job:- Understands to display the starting window of the application.
- */
+/* Job:- Understands to display the starting window of the application. */
 
 public class HomeScreen implements HomeView {
     private static final String BG_IMAGE = "images/homepage.jpg";
