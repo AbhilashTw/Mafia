@@ -110,6 +110,7 @@ public class MafiaScreen implements MafiaView {
             public void actionPerformed(ActionEvent e) {
                 int time = Integer.parseInt(timerLabel.getText());
                 if (time > 0) timerLabel.setText(String.valueOf(time - 1));
+
                 else {
                     sendMessage();
                     timer.stop();

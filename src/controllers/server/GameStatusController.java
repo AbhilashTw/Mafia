@@ -55,7 +55,6 @@ public class GameStatusController implements GameEngine {
         isGameStable(status);
     }
 
-
     private void sendKilledPlayerMessage(Player removedPlayer) {
         KilledPlayerMessage message = new KilledPlayerMessage();
         message.setPlayerName(removedPlayer.getName());
@@ -94,7 +93,6 @@ public class GameStatusController implements GameEngine {
         view.updateVoteStatus(playerName, killedPlayer);
         gamePlay.poll(killedPlayer);
         isAllVillagersVoted();
-
     }
 
     private void isAllVillagersVoted() {

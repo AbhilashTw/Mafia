@@ -17,4 +17,7 @@ public interface ClientEngine {
     void PlayerDead();
 
     void PlayerKilled(String playerName);
+
+    void showDeadScreen();
+
 }

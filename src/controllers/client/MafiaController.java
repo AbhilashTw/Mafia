@@ -68,6 +68,13 @@ public class MafiaController implements ClientEngine {
     @Override
     public void PlayerDead() {
         workflow.startPlayerDeadScreen();
+
+    }
+
+    @Override
+    public void showDeadScreen() {
+        workflow.showDeadScreen();
+
     }
 
     public void sendMessage(ChannelMessage message) {

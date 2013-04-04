@@ -25,4 +25,6 @@ public interface Workflow {
     void gameEnd(GameResult gameStatus);
 
     void startPlayerDeadScreen();
+
+    void showDeadScreen();
 }

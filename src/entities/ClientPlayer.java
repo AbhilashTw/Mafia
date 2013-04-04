@@ -49,10 +49,14 @@ public class ClientPlayer implements SocketChannelListener {
         if (message instanceof DayArrivedMessage)
             engine.displayVillagerVotingChart(((DayArrivedMessage) message).getPlayerNames());
         if (message instanceof KilledMessage)
+
             engine.PlayerDead();
         if (message instanceof KilledPlayerMessage) {
             engine.PlayerKilled(((KilledPlayerMessage) message).getPlayerName());
         }
+
+        engine.showDeadScreen();
+
     }
 
 
