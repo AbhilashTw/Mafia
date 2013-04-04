@@ -51,7 +51,19 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
+        view.updateStatus("Day Arrived");
         view.display(playerNames);
+    }
+
+    @Override
+    public void PlayerDead() {
+        workflow.startPlayerDeadScreen();
+    }
+
+    @Override
+    public void PlayerKilled(String playerName) {
+        view.updateStatus(playerName + " is Killed");
+
     }
 
     public void sendMessage(VillagerVotedOutMafiaMessage message) {

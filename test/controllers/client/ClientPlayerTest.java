@@ -42,17 +42,5 @@ public class ClientPlayerTest {
 
     }
 
-//    @Test
-//    public void test() {
-//        players.sendMessage(message);
-//        player.onNewMessageArrived(socketChannel, message);
-//        verify(engine).displayConnectedPlayers(new String[]{});
-//    }
-
-//    @Test
-//    public void test_() {
-//        player.sendMessage(message);
-//        verify(engine).
-//    }
 
 }

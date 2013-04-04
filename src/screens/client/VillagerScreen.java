@@ -72,7 +72,7 @@ public class VillagerScreen implements VillagerView {
 
     @Override
     public void display(String[] playersName) {
-        updateStatus("Day Arrived \n You can vote now ");
+        updateStatus("You can vote now ");
         timerScreen();
         int x = 100, y = 100;
         for (String player : playersName) {

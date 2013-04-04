@@ -73,7 +73,6 @@ public class MafiaScreen implements MafiaView {
 
     @Override
     public void display(String[] playersName) {
-        updateStatus("Night Arrived\n You Can Vote Now");
         timerScreen();
         int x = 100, y = 100;
         for (String player : playersName) {

@@ -103,4 +103,9 @@ public class WorkflowManager implements Workflow {
         controller.start();
     }
 
+    @Override
+    public void startPlayerDeadScreen() {
+
+    }
+
 }
