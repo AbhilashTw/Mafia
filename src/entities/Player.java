@@ -34,7 +34,7 @@ public class Player implements SocketChannelListener {
     @Override
     public void onClose(SocketChannel channel, Exception e) {
         channel.stop();
-        god.removePlayer(this);
+        god.removePlayer(this, controllers.server.GameStatus.NIGHT);
         god.playersUpdated();
     }
 

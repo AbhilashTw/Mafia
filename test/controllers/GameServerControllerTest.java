@@ -57,7 +57,7 @@ public class GameServerControllerTest {
 
     @Test
     public void removePlayer_in_GameServerController_invokes_removePlayers_from_Players() {
-        controller.removePlayer(player);
+        controller.removePlayer(player, controllers.server.GameStatus.NIGHT);
         verify(gamePlayers).removePlayer(player);
     }
 

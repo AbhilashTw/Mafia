@@ -26,7 +26,7 @@ public class GameStatusScreen implements GameStatusView {
 
     private void createList(int x_bound, int y_bound) {
         statusList.setSize(400, 450);
-        statusList.setOpaque(false);
+        statusList.setOpaque(true);
         statusList.setLocation(x_bound, y_bound);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         statusList.setFont(f);

@@ -2,6 +2,7 @@ package controllers.server;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 public class GameEndControllerTest {
     @Before
@@ -11,6 +12,11 @@ public class GameEndControllerTest {
 
     @After
     public void tearDown() throws Exception {
+
+    }
+
+    @Test
+    public void test(){
 
     }
 }

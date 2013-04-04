@@ -47,12 +47,12 @@ public class GameStatusController implements GameEngine {
     }
 
     @Override
-    public void removePlayer(Player removedPlayer) {
+    public void removePlayer(Player removedPlayer, GameStatus status) {
         removedPlayer.sendMessage(new KilledMessage());
         players.removePlayer(removedPlayer);
         sendKilledPlayerMessage(removedPlayer);
         view.updatePlayerKilledStatus(removedPlayer.getName());
-        isGameStable();
+        isGameStable(status);
     }
 
 
@@ -62,8 +62,9 @@ public class GameStatusController implements GameEngine {
         players.sendMessage(message);
     }
 
-    private void isGameStable() {
-        if (gamePlay.getGameStatus().equals(GameResult.GameStable)) sendDayArrivedMessage();
+    private void isGameStable(GameStatus status) {
+        if((status.equals(GameStatus.NIGHT) && gamePlay.getGameStatus().equals(GameResult.GameStable))) sendDayArrivedMessage();
+        else if((status.equals(GameStatus.DAY) && gamePlay.getGameStatus().equals(GameResult.GameStable))) sendNightArrivedMessage();
         else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
         else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
     }
@@ -83,7 +84,7 @@ public class GameStatusController implements GameEngine {
     }
 
     private void isAllMafiaVoted() {
-        if (gamePlay.mafiaPollStatus()) removePlayer(gamePlay.getKilledPlayer());
+        if (gamePlay.mafiaPollStatus()) removePlayer(gamePlay.getKilledPlayer(),GameStatus.NIGHT);
     }
 
     @Override
@@ -95,7 +96,7 @@ public class GameStatusController implements GameEngine {
     }
 
     private void isAllVillagersVoted() {
-        if (gamePlay.villagerPollStatus()) removePlayer(gamePlay.getKilledPlayer());
+        if (gamePlay.villagerPollStatus()) removePlayer(gamePlay.getKilledPlayer(),GameStatus.DAY);
         if (gamePlay.getGameStatus().equals(GameResult.GameStable)) start();
     }
 

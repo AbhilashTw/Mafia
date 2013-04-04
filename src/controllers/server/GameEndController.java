@@ -33,13 +33,13 @@ public class GameEndController {
 
     private void sendVillagerWinsMessage() {
         players.sendMessage(new VillagerWinsMessage());
-        view.display("Villager Wins the Game");
+        view.display("Villager Won the Game");
 
     }
 
     private void sendMafiaWinsMessage() {
         players.sendMessage(new MafiaWinsMessage());
-        view.display("Mafia Wins the Game");
+        view.display("Mafia Won the Game");
     }
 
     public void goToHomeScreen() {
