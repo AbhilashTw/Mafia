@@ -20,7 +20,7 @@ public class VillagerScreen implements VillagerView {
     private final JLabel timerLabel = new JLabel("30");
     private ImagePanel panel;
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
-    private JList statusList = new JList(defaultStatusList);
+    private JList statusList = new JList<String>(defaultStatusList);
 
     private JList voteList = new JList<JRadioButton>();
 
@@ -54,18 +54,16 @@ public class VillagerScreen implements VillagerView {
 
     private void createList(int x_bound, int y_bound) {
         statusList.setSize(600, 450);
-        statusList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
         statusList.setLocation(x_bound, y_bound);
-        statusList.setBackground(Color.ORANGE);
+        statusList.setOpaque(false);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         statusList.setFont(f);
     }
 
     private void createVoteList(int xBound, int yBound) {
         voteList.setSize(200, 650);
-        voteList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
         voteList.setLocation(xBound, yBound);
-        voteList.setBackground(Color.ORANGE);
+        voteList.setOpaque(false);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         voteList.setFont(f);
     }
@@ -79,13 +77,12 @@ public class VillagerScreen implements VillagerView {
             AbstractButton button = new JRadioButton(player);
             button.setLocation(x, y);
             button.setSize(145, 50);
-            button.setFont(new Font("Times New Roman", 1, 20));
-            button.setBackground(Color.ORANGE);
+            button.setFont(new Font("Times New Roman", Font.PLAIN, 20));
             button.setVisible(true);
             bg.add(button);
             voteList.add(button);
             button.addActionListener(new MyAction());
-            y += 80;
+            y += 60;
         }
     }
 

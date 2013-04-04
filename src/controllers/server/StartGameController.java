@@ -40,8 +40,8 @@ public class StartGameController implements GameEngine {
     }
 
     @Override
-    public void removePlayer(Player player) {
-        gamePlayers.removePlayer(player);
+    public void removePlayer(Player removedPlayer, GameStatus night) {
+        gamePlayers.removePlayer(removedPlayer);
     }
 
     @Override

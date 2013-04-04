@@ -21,15 +21,13 @@ public class GameStatusScreen implements GameStatusView {
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
         panel.add(statusList);
-        createList(400, 400);
-
+        createList(100, 100);
     }
 
     private void createList(int x_bound, int y_bound) {
-        statusList.setSize(600, 450);
-        statusList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
+        statusList.setSize(400, 450);
+        statusList.setOpaque(true);
         statusList.setLocation(x_bound, y_bound);
-        statusList.setBackground(Color.ORANGE);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         statusList.setFont(f);
     }
