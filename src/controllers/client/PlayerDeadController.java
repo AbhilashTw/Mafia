@@ -17,6 +17,10 @@ public class PlayerDeadController {
     }
 
     public void start() {
+        view.display();
+    }
 
+    public void goToHomeScreen() {
+         workflow.start();
     }
 }
