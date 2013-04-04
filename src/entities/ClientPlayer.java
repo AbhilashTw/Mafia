@@ -26,11 +26,14 @@ public class ClientPlayer implements SocketChannelListener {
 
     @Override
     public void onClose(SocketChannel channel, Exception e) {
+        System.out.println(playerName + " server closed failed");
+
         engine.serverClosed();
     }
 
     @Override
     public void onSendFailed(SocketChannel channel, IOException e, ChannelMessage message) {
+        System.out.println(playerName + " sending failed");
         e.printStackTrace();
     }
 
@@ -46,22 +49,23 @@ public class ClientPlayer implements SocketChannelListener {
             engine.startMafiaScreen();
         if (message instanceof NightArrivedMessage)
             engine.displayMafiaVotingChart(((NightArrivedMessage) message).getPlayerNames());
+
         if (message instanceof DayArrivedMessage)
             engine.displayVillagerVotingChart(((DayArrivedMessage) message).getPlayerNames());
-        if (message instanceof KilledMessage)
 
-            engine.PlayerDead();
+        if (message instanceof KilledMessage)
+            engine.showDeadScreen();
         if (message instanceof KilledPlayerMessage) {
             engine.PlayerKilled(((KilledPlayerMessage) message).getPlayerName());
         }
-
-        engine.showDeadScreen();
 
     }
 
 
     @Override
     public void onMessageReadError(SocketChannel channel, Exception e) {
+        System.out.println(playerName + " message read failed");
+
         e.printStackTrace();
     }
 
