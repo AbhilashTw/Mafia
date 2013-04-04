@@ -4,18 +4,12 @@ package runner;
 import channels.server.SocketServer;
 import controllers.HomeController;
 import controllers.Workflow;
-import controllers.client.JoinServerController;
-import controllers.client.JoinedPlayersController;
-import controllers.client.MafiaController;
-import controllers.client.VillagerController;
+import controllers.client.*;
 import controllers.server.*;
 import entities.ClientPlayer;
 import entities.Players;
 import screens.MafiaViewFactory;
-import screens.client.JoinServerScreen;
-import screens.client.JoinedPlayersScreen;
-import screens.client.MafiaScreen;
-import screens.client.VillagerScreen;
+import screens.client.*;
 import screens.controls.IMainFrame;
 import screens.server.ConnectedPlayersScreen;
 import screens.server.GameEndScreen;
@@ -100,6 +94,13 @@ public class WorkflowManager implements Workflow {
     public void gameEnd(GameResult gameStatus) {
         GameEndController controller = new GameEndController(players, this, gameStatus);
         controller.bind(new GameEndScreen(mainFrame, controller));
+        controller.start();
+    }
+
+    @Override
+    public void showDeadScreen() {
+        PlayerDeadController controller = new PlayerDeadController(this);
+        controller.bind(new PlayerDeadScreen(mainFrame,controller));
         controller.start();
     }
 

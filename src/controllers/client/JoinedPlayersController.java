@@ -65,4 +65,9 @@ public class JoinedPlayersController implements ClientEngine {
     public void displayVillagerVotingChart(String[] playerNames) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    @Override
+    public void showDeadScreen() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

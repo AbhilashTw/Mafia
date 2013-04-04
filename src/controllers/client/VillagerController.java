@@ -54,6 +54,11 @@ public class VillagerController implements ClientEngine {
         view.display(playerNames);
     }
 
+    @Override
+    public void showDeadScreen() {
+        workflow.showDeadScreen();
+    }
+
     public void sendMessage(VillagerVotedOutMafiaMessage message) {
         clientPlayer.sendMessage(message);
     }

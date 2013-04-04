@@ -45,6 +45,8 @@ public class ClientPlayer implements SocketChannelListener {
             engine.displayMafiaVotingChart(((NightArrivedMessage) message).getPlayerNames());
         if (message instanceof DayArrivedMessage)
             engine.displayVillagerVotingChart(((DayArrivedMessage) message).getPlayerNames());
+        if (message instanceof KilledMessage)
+            engine.showDeadScreen();
     }
 
     @Override
