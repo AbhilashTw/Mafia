@@ -36,7 +36,8 @@ public class GamePoll {
         }
         pollCount++;
     }
-    public int getPollCount(){
+
+    public int getPollCount() {
         return pollCount;
     }
 }

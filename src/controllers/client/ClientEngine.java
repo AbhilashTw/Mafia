@@ -14,5 +14,10 @@ public interface ClientEngine {
 
     void displayVillagerVotingChart(String[] playerNames);
 
+    void PlayerDead();
+
+    void PlayerKilled(String playerName);
+
     void showDeadScreen();
+
 }

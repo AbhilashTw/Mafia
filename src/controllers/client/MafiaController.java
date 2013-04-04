@@ -1,8 +1,9 @@
 package controllers.client;
 
+import channels.messages.ChannelMessage;
 import controllers.Workflow;
+import controllers.server.GameStatus;
 import entities.ClientPlayer;
-import gameMessages.MafiaVotedOutVillagerMessage;
 import views.client.MafiaView;
 
 /**
@@ -48,21 +49,35 @@ public class MafiaController implements ClientEngine {
     }
 
     @Override
+    public void PlayerKilled(String playerName) {
+        view.updateStatus(playerName + " is Killed");
+    }
+
+    @Override
     public void displayMafiaVotingChart(String[] playerNames) {
-        view.display(playerNames);
+        view.updateStatus("Night Arrived");
+        view.display(playerNames, GameStatus.NIGHT);
     }
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
-        view.display(playerNames);
+        view.updateStatus("Day Arrived");
+        view.display(playerNames, GameStatus.DAY);
+    }
+
+    @Override
+    public void PlayerDead() {
+        workflow.startPlayerDeadScreen();
+
     }
 
     @Override
     public void showDeadScreen() {
         workflow.showDeadScreen();
+
     }
 
-    public void sendMessage(MafiaVotedOutVillagerMessage message) {
+    public void sendMessage(ChannelMessage message) {
         clientPlayer.sendMessage(message);
     }
 

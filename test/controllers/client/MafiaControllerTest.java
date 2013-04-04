@@ -4,7 +4,6 @@ import controllers.Workflow;
 import entities.ClientPlayer;
 import gameMessages.MafiaVotedOutVillagerMessage;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +36,7 @@ public class MafiaControllerTest {
     public void displayMafiaVotingChart_invokes_display_from_view_when_called() {
         controller.bind(view);
         controller.displayMafiaVotingChart(new String[]{});
-        verify(view).display(new String[]{});
+        verify(view).display(new String[]{}, controllers.server.GameStatus.NIGHT);
     }
 
     @Test

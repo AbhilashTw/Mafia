@@ -8,6 +8,9 @@ import gameMessages.*;
 
 import java.io.IOException;
 
+/*
+  Job: Understands the player who is playing the game.
+ */
 public class ClientPlayer implements SocketChannelListener {
     private final String serverName;
     private final String playerName;
@@ -46,8 +49,16 @@ public class ClientPlayer implements SocketChannelListener {
         if (message instanceof DayArrivedMessage)
             engine.displayVillagerVotingChart(((DayArrivedMessage) message).getPlayerNames());
         if (message instanceof KilledMessage)
-            engine.showDeadScreen();
+
+            engine.PlayerDead();
+        if (message instanceof KilledPlayerMessage) {
+            engine.PlayerKilled(((KilledPlayerMessage) message).getPlayerName());
+        }
+
+        engine.showDeadScreen();
+
     }
+
 
     @Override
     public void onMessageReadError(SocketChannel channel, Exception e) {

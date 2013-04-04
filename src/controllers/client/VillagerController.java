@@ -2,7 +2,6 @@ package controllers.client;
 
 import controllers.Workflow;
 import entities.ClientPlayer;
-import gameMessages.MafiaVotedOutVillagerMessage;
 import gameMessages.VillagerVotedOutMafiaMessage;
 import views.client.VillagerView;
 
@@ -51,12 +50,25 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
+        view.updateStatus("Day Arrived");
         view.display(playerNames);
     }
 
     @Override
+
+    public void PlayerDead() {
+        workflow.startPlayerDeadScreen();
+    }
+
+    @Override
+    public void PlayerKilled(String playerName) {
+        view.updateStatus(playerName + " is Killed");
+
+    }
+
+    @Override
     public void showDeadScreen() {
-        workflow.showDeadScreen();
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public void sendMessage(VillagerVotedOutMafiaMessage message) {
