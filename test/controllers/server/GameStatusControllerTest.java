@@ -6,7 +6,6 @@ import entities.Players;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import views.server.GameStatusView;
 
 import static org.mockito.Mockito.mock;
@@ -32,7 +31,6 @@ public class GameStatusControllerTest {
     public void tearDown() throws Exception {
 
     }
-
 
     @Test
     public void start_Invokes_players_getAllPlayerNames() {

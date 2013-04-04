@@ -54,7 +54,12 @@ public class MafiaController implements ClientEngine {
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
-         view.display(playerNames);
+        view.display(playerNames);
+    }
+
+    @Override
+    public void showDeadScreen() {
+        workflow.showDeadScreen();
     }
 
     public void sendMessage(MafiaVotedOutVillagerMessage message) {
