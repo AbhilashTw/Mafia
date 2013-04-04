@@ -1,7 +1,9 @@
 package screens.client;
 
 import controllers.client.MafiaController;
+import controllers.server.GameStatus;
 import gameMessages.MafiaVotedOutVillagerMessage;
+import gameMessages.VillagerVotedOutMafiaMessage;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
 import views.client.MafiaView;
@@ -30,6 +32,7 @@ public class MafiaScreen implements MafiaView {
     private String votedOutPlayer;
 
     private Timer timer;
+    private GameStatus status;
 
     public MafiaScreen(IMainFrame mainFrame, MafiaController controller) {
         this.mainFrame = mainFrame;
@@ -72,7 +75,8 @@ public class MafiaScreen implements MafiaView {
     }
 
     @Override
-    public void display(String[] playersName) {
+    public void display(String[] playersName, GameStatus status) {
+        this.status = status;
         timerScreen();
         int x = 100, y = 100;
         for (String player : playersName) {
@@ -82,7 +86,14 @@ public class MafiaScreen implements MafiaView {
             button.setVisible(true);
             bg.add(button);
             voteList.add(button);
-            button.addActionListener(new MyAction());
+
+
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    votedOutPlayer = e.getActionCommand();
+                }
+            });
             y += 60;
         }
     }
@@ -93,19 +104,27 @@ public class MafiaScreen implements MafiaView {
     }
 
     public void timerScreen() {
+
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int time = Integer.parseInt(timerLabel.getText());
                 if (time > 0) timerLabel.setText(String.valueOf(time - 1));
-                else if (time == 0) {
+                else {
+                    sendMessage();
                     timer.stop();
-                    controller.sendMessage(new MafiaVotedOutVillagerMessage(votedOutPlayer));
-                    disableVoteButtons();
                 }
             }
         });
         timer.start();
+
+
+    }
+
+    private void sendMessage() {
+        if (status.equals(GameStatus.NIGHT)) controller.sendMessage(new MafiaVotedOutVillagerMessage(votedOutPlayer));
+        else controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
+        disableVoteButtons();
     }
 
     private void disableVoteButtons() {
@@ -117,11 +136,5 @@ public class MafiaScreen implements MafiaView {
         }
     }
 
-    class MyAction implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            votedOutPlayer = e.getActionCommand();
-        }
-    }
 }
 

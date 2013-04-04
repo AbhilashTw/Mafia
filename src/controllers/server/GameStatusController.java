@@ -63,8 +63,10 @@ public class GameStatusController implements GameEngine {
     }
 
     private void isGameStable(GameStatus status) {
-        if((status.equals(GameStatus.NIGHT) && gamePlay.getGameStatus().equals(GameResult.GameStable))) sendDayArrivedMessage();
-        else if((status.equals(GameStatus.DAY) && gamePlay.getGameStatus().equals(GameResult.GameStable))) sendNightArrivedMessage();
+        if ((status.equals(GameStatus.NIGHT) && gamePlay.getGameStatus().equals(GameResult.GameStable)))
+            sendDayArrivedMessage();
+        else if ((status.equals(GameStatus.DAY) && gamePlay.getGameStatus().equals(GameResult.GameStable)))
+            sendNightArrivedMessage();
         else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
         else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
     }
@@ -84,7 +86,7 @@ public class GameStatusController implements GameEngine {
     }
 
     private void isAllMafiaVoted() {
-        if (gamePlay.mafiaPollStatus()) removePlayer(gamePlay.getKilledPlayer(),GameStatus.NIGHT);
+        if (gamePlay.mafiaPollStatus()) removePlayer(gamePlay.getKilledPlayer(), GameStatus.NIGHT);
     }
 
     @Override
@@ -96,7 +98,7 @@ public class GameStatusController implements GameEngine {
     }
 
     private void isAllVillagersVoted() {
-        if (gamePlay.villagerPollStatus()) removePlayer(gamePlay.getKilledPlayer(),GameStatus.DAY);
+        if (gamePlay.villagerPollStatus()) removePlayer(gamePlay.getKilledPlayer(), GameStatus.DAY);
         if (gamePlay.getGameStatus().equals(GameResult.GameStable)) start();
     }
 

@@ -2,8 +2,8 @@ package controllers.client;
 
 import channels.messages.ChannelMessage;
 import controllers.Workflow;
+import controllers.server.GameStatus;
 import entities.ClientPlayer;
-import gameMessages.MafiaVotedOutVillagerMessage;
 import views.client.MafiaView;
 
 /**
@@ -56,13 +56,13 @@ public class MafiaController implements ClientEngine {
     @Override
     public void displayMafiaVotingChart(String[] playerNames) {
         view.updateStatus("Night Arrived");
-        view.display(playerNames);
+        view.display(playerNames, GameStatus.NIGHT);
     }
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
         view.updateStatus("Day Arrived");
-        view.display(playerNames);
+        view.display(playerNames, GameStatus.DAY);
     }
 
     @Override
