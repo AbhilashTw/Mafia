@@ -25,7 +25,6 @@ public class VillagerScreen implements VillagerView {
     private JList voteList = new JList<JRadioButton>();
 
     private ButtonGroup bg = new ButtonGroup();
-    private Timer timer;
 
     private String votedOutPlayer;
 
@@ -81,7 +80,12 @@ public class VillagerScreen implements VillagerView {
             button.setVisible(true);
             bg.add(button);
             voteList.add(button);
-            button.addActionListener(new MyAction());
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    votedOutPlayer = e.getActionCommand();
+                }
+            });
             y += 60;
         }
     }
@@ -92,15 +96,15 @@ public class VillagerScreen implements VillagerView {
     }
 
     public void timerScreen() {
-        timer = new Timer(1000, new ActionListener() {
+        Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int time = Integer.parseInt(timerLabel.getText());
                 if (time > 0) timerLabel.setText(String.valueOf(time - 1));
                 else if (time == 0) {
-                    timer.stop();
                     controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
                     disableVoteButtons();
+                    ((Timer) e.getSource()).stop();
                 }
             }
         });
@@ -115,12 +119,4 @@ public class VillagerScreen implements VillagerView {
             allButtons.nextElement().setVisible(false);
         }
     }
-
-    class MyAction implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            votedOutPlayer = e.getActionCommand();
-        }
-    }
-
 }

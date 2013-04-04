@@ -58,7 +58,6 @@ public class VillagerController implements ClientEngine {
     @Override
     public void PlayerKilled(String playerName) {
         view.updateStatus(playerName + " is Killed");
-
     }
 
     @Override

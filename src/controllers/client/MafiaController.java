@@ -55,20 +55,19 @@ public class MafiaController implements ClientEngine {
 
     @Override
     public void displayMafiaVotingChart(String[] playerNames) {
-        view.updateStatus("Night Arrived");
+        view.updateStatus("Night Arrived\n You can vote now");
         view.display(playerNames, GameStatus.NIGHT);
     }
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
-        view.updateStatus("Day Arrived");
+        view.updateStatus("Day Arrived\n You can vote now");
         view.display(playerNames, GameStatus.DAY);
     }
 
     @Override
     public void showDeadScreen() {
         workflow.showDeadScreen();
-
     }
 
     public void sendMessage(ChannelMessage message) {

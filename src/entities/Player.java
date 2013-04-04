@@ -7,6 +7,7 @@ import channels.messages.ChannelMessage;
 import controllers.server.GameEngine;
 import gameMessages.MafiaVotedOutVillagerMessage;
 import gameMessages.PlayerDetailsMessage;
+import gameMessages.VillagerVotedOutMafiaMessage;
 
 import java.io.IOException;
 
@@ -53,6 +54,9 @@ public class Player implements SocketChannelListener {
         }
         if (message instanceof MafiaVotedOutVillagerMessage) {
             god.updateMafiaVotes(getName(), ((MafiaVotedOutVillagerMessage) message).getMafiaVotedOutPlayer());
+        }
+        if(message instanceof VillagerVotedOutMafiaMessage){
+            god.updateVillagerVotes(getName(),((VillagerVotedOutMafiaMessage)message).getVillagerVotedOutPlayer());
         }
     }
 
