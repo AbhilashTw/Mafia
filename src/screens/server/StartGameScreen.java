@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 public class StartGameScreen implements StartGameView {
-    private static final String BG_IMAGE = "images/joinServerScreen.jpg";
+    private static final String BG_IMAGE = "images/startgame.jpg";
     private final StartGameController controller;
     public SocketServer server;
     IMainFrame startServerFrame;

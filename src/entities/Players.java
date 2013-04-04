@@ -3,7 +3,6 @@ package entities;
 import channels.messages.ChannelMessage;
 import controllers.server.GameEngine;
 import controllers.server.RoleDecider;
-import entities.Player;
 
 import java.util.ArrayList;
 import java.util.List;

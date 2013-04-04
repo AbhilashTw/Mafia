@@ -6,7 +6,10 @@ public interface GameEngine {
 
     void playersUpdated();
 
-    void removePlayer(Player player);
+    void removePlayer(Player removedPlayer, GameStatus night);
 
     void updateMafiaVotes(String playerName, String killedPlayer);
+
+    void updateVillagerVotes(String playerName, String killedPlayer);
+
 }

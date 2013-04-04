@@ -46,7 +46,7 @@ public class PlayerTest {
     @Test
     public void on_calling_onClose_invokes_removePlayer_from_GameGod() {
         player.onClose(socketChannel, new Exception());
-        verify(gameEngine).removePlayer(player);
+        verify(gameEngine).removePlayer(player, GameStatus.NIGHT);
     }
 
     @Test

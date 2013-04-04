@@ -1,6 +1,7 @@
 package controllers;
 
 
+import controllers.server.GameResult;
 import entities.ClientPlayer;
 import entities.Players;
 
@@ -20,4 +21,6 @@ public interface Workflow {
     void startGame(Players players);
 
     void showGameStatus();
+
+    void gameEnd(GameResult gameStatus);
 }

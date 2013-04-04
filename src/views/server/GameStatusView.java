@@ -1,5 +1,8 @@
 package views.server;
 
 public interface GameStatusView {
-    void updateMafiaVotingStatus(String playerName, String killedPlayer);
+
+    void updateVoteStatus(String playerName, String killedPlayer);
+
+    void updatePlayerKilledStatus(String name);
 }
