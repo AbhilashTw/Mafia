@@ -22,7 +22,7 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
     private JList playersName = new JList(playersNameList);
     private DefaultListModel<String> playersRoleList = new DefaultListModel<String>();
     private JList playersRole = new JList(playersRoleList);
-    private JButton Continue;
+    private JButton continueButton;
 
 
     public ConnectedPlayersScreen(IMainFrame mainFrame, ConnectedPlayersController controller) {
@@ -31,18 +31,18 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
         playersName = createList(playersName, 50, 100);
         playersRole = createList(playersRole, 300, 100);
-        Continue = createButton(800, 400, "Continue");
-        panel.add(Continue);
+        continueButton = createButton(800, 400, "Continue");
+        panel.add(continueButton);
         panel.add(playersName);
         panel.add(playersRole);
         addListener();
     }
 
     private void addListener() {
-            Continue.addActionListener(new ActionListener() {
+            continueButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                        controller.Continue();
+                    controller.Continue();
                 }
             });
     }
