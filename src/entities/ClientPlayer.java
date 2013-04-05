@@ -43,10 +43,13 @@ public class ClientPlayer implements SocketChannelListener {
             PlayersConnectedMessage pCm = (PlayersConnectedMessage) message;
             engine.displayConnectedPlayers(pCm.getPlayersConnected());
         }
+
         if (message instanceof VillagerRoleAssigned)
             engine.startVillagerScreen();
+
         if (message instanceof MafiaRoleAssigned)
             engine.startMafiaScreen();
+
         if (message instanceof NightArrivedMessage)
             engine.displayMafiaVotingChart(((NightArrivedMessage) message).getPlayerNames());
 
@@ -55,6 +58,7 @@ public class ClientPlayer implements SocketChannelListener {
 
         if (message instanceof KilledMessage)
             engine.showDeadScreen();
+
         if (message instanceof KilledPlayerMessage) {
             engine.PlayerKilled(((KilledPlayerMessage) message).getPlayerName());
         }

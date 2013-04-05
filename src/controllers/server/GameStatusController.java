@@ -35,48 +35,6 @@ public class GameStatusController implements GameEngine {
         gamePlay.createPlayersPoll(new GamePoll(), players);
     }
 
-    private void sendNightArrivedMessage() {
-        NightArrivedMessage message = new NightArrivedMessage();
-        gamePlay.createPlayersPoll(new GamePoll(), players);
-        message.setPlayersName(players.getAllPlayersName());
-        players.sendMessage(message);
-    }
-
-    @Override
-    public void playersUpdated() {
-    }
-
-    @Override
-    public void removePlayer(Player removedPlayer, GameStatus status) {
-        removedPlayer.sendMessage(new KilledMessage());
-        players.removePlayer(removedPlayer);
-        sendKilledPlayerMessage(removedPlayer);
-        view.updatePlayerKilledStatus(removedPlayer.getName());
-        isGameStable(status);
-    }
-
-    private void sendKilledPlayerMessage(Player removedPlayer) {
-        KilledPlayerMessage message = new KilledPlayerMessage();
-        message.setPlayerName(removedPlayer.getName());
-        players.sendMessage(message);
-    }
-
-    private void isGameStable(GameStatus status) {
-        if ((status.equals(GameStatus.NIGHT) && gamePlay.getGameStatus().equals(GameResult.GameStable)))
-            sendDayArrivedMessage();
-        else if ((status.equals(GameStatus.DAY) && gamePlay.getGameStatus().equals(GameResult.GameStable)))
-            sendNightArrivedMessage();
-        else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
-        else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
-    }
-
-    private void sendDayArrivedMessage() {
-        DayArrivedMessage message = new DayArrivedMessage();
-        gamePlay.createPlayersPoll(new GamePoll(), players);
-        message.setPlayersName(players.getAllPlayersName());
-        players.sendMessage(message);
-    }
-
     @Override
     public void updateMafiaVotes(String playerName, String votedPlayer) {
         view.updateVoteStatus(playerName, votedPlayer);
@@ -89,15 +47,59 @@ public class GameStatusController implements GameEngine {
     }
 
     @Override
+    public void removePlayer(Player removedPlayer, GameStatus status) {
+        removedPlayer.sendMessage(new KilledMessage());
+        players.removePlayer(removedPlayer);
+
+        sendKilledPlayerMessage(removedPlayer);
+        view.updatePlayerKilledStatus(removedPlayer.getName());
+
+        isGameStable(status);
+    }
+
+    private void isGameStable(GameStatus status) {
+        if ((status.equals(GameStatus.NIGHT) && gamePlay.getGameStatus().equals(GameResult.GameStable)))
+            sendDayArrivedMessage();
+        else if ((status.equals(GameStatus.DAY) && gamePlay.getGameStatus().equals(GameResult.GameStable)))
+            start();
+        else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
+        else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
+    }
+
+    @Override
     public void updateVillagerVotes(String playerName, String killedPlayer) {
         view.updateVoteStatus(playerName, killedPlayer);
         gamePlay.poll(killedPlayer);
         isAllVillagersVoted();
     }
 
+    private void sendNightArrivedMessage() {
+        NightArrivedMessage message = new NightArrivedMessage();
+        gamePlay.createPlayersPoll(new GamePoll(), players);
+        message.setPlayersName(players.getAllPlayersName());
+        players.sendMessage(message);
+    }
+
+    @Override
+    public void playersUpdated() {
+    }
+
+    private void sendKilledPlayerMessage(Player removedPlayer) {
+        KilledPlayerMessage message = new KilledPlayerMessage();
+        message.setPlayerName(removedPlayer.getName());
+        players.sendMessage(message);
+    }
+
+    private void sendDayArrivedMessage() {
+        DayArrivedMessage message = new DayArrivedMessage();
+        gamePlay.createPlayersPoll(new GamePoll(), players);
+        message.setPlayersName(players.getAllPlayersName());
+        players.sendMessage(message);
+        gamePlay.createPlayersPoll(new GamePoll(), players);
+    }
+
     private void isAllVillagersVoted() {
         if (gamePlay.villagerPollStatus()) removePlayer(gamePlay.getKilledPlayer(), GameStatus.DAY);
-        if (gamePlay.getGameStatus().equals(GameResult.GameStable)) start();
     }
 
 }
