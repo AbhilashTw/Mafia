@@ -53,6 +53,7 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
         workflow.gameEnd(status);
     }
 
+
     @Override
     public void startNight() {
         start();

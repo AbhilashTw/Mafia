@@ -26,13 +26,11 @@ public class MafiaScreen implements MafiaView {
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private JList statusList = new JList<String>(defaultStatusList);
 
-
     private JList voteList = new JList<JRadioButton>();
 
     private ButtonGroup bg = new ButtonGroup();
     private String votedOutPlayer;
 
-    //private Timer timer;
     private GameStatus status;
 
     public MafiaScreen(IMainFrame mainFrame, MafiaController controller) {
@@ -49,21 +47,20 @@ public class MafiaScreen implements MafiaView {
         updateStatus("Your assigned as a Mafia");
     }
 
-    private void createVoteList(int xBound, int yBound) {
-        voteList.setSize(200, 650);
-        voteList.setLocation(xBound, yBound);
-        voteList.setOpaque(false);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
-        voteList.setFont(f);
-
-    }
-
     private void createTimerLabel() {
         timerLabel.setForeground(Color.WHITE);
         timerLabel.setLocation(900, 800);
         timerLabel.setSize(200, 200);
         Font timerFont = new Font("Monospaced", Font.PLAIN, 100);
         timerLabel.setFont(timerFont);
+    }
+
+    private void createVoteList(int xBound, int yBound) {
+        voteList.setSize(200, 650);
+        voteList.setLocation(xBound, yBound);
+        voteList.setOpaque(false);
+        Font f = new Font("Monospaced", Font.PLAIN, 20);
+        voteList.setFont(f);
     }
 
     private void createList(int x_bound, int y_bound) {
@@ -111,8 +108,7 @@ public class MafiaScreen implements MafiaView {
             public void actionPerformed(ActionEvent e) {
                 int time = Integer.parseInt(timerLabel.getText());
                 if (time > 0) timerLabel.setText(String.valueOf(time - 1));
-
-                else {
+                else if (time == 0) {
                     sendMessage();
                     ((Timer) e.getSource()).stop();
                 }
@@ -135,6 +131,5 @@ public class MafiaScreen implements MafiaView {
             allButtons.nextElement().setVisible(false);
         }
     }
-
 }
 

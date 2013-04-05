@@ -89,7 +89,8 @@ public class SocketChannel {
 
     private ObjectOutputStream getOrCreateOutputStream() throws IOException {
         if (outputStream == null) outputStream = new ObjectOutputStream(socket.getOutputStream());
-        else outputStream.reset();
+        else
+            outputStream.flush();
         return outputStream;
     }
 
