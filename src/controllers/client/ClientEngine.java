@@ -19,4 +19,7 @@ public interface ClientEngine {
 
     void showDeadScreen();
 
+    void VillagersWon();
+
+    void MafiasWon();
 }
