@@ -38,7 +38,6 @@ public class JoinedPlayersControllerTest {
     }
 
 
-
     @Test
     public void should_invoke_workflow_start_when_goToHomeScreen_is_called() {
         joinedPlayersController.goToHomeScreen();
@@ -61,12 +60,6 @@ public class JoinedPlayersControllerTest {
     public void should_invoke_workflow_startMafiaScreen_when_startMafiaScreen_is_called() {
         joinedPlayersController.startMafiaScreen();
         verify(workflow).startMafiaScreen();
-    }
-
-    @Test
-    public void should_invoke_workflow_start_when_serverClosed_is_called() {
-        joinedPlayersController.serverClosed();
-        verify(workflow).start();
     }
 
 
