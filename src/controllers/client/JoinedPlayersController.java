@@ -76,4 +76,14 @@ public class JoinedPlayersController implements ClientEngine {
     public void showDeadScreen() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    @Override
+    public void VillagersWon() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void MafiasWon() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

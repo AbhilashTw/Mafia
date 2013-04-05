@@ -2,6 +2,7 @@ package controllers.client;
 
 import channels.messages.ChannelMessage;
 import controllers.Workflow;
+import controllers.server.GameResult;
 import controllers.server.GameStatus;
 import entities.ClientPlayer;
 import views.client.MafiaView;
@@ -68,6 +69,16 @@ public class MafiaController implements ClientEngine {
     @Override
     public void showDeadScreen() {
         workflow.showDeadScreen();
+    }
+
+    @Override
+    public void VillagersWon() {
+        workflow.gameEnd(GameResult.VillagerWins);
+    }
+
+    @Override
+    public void MafiasWon() {
+        workflow.gameEnd(GameResult.MafiaWins);
     }
 
     public void sendMessage(ChannelMessage message) {

@@ -1,6 +1,7 @@
 package controllers.client;
 
 import controllers.Workflow;
+import controllers.server.GameResult;
 import entities.ClientPlayer;
 import gameMessages.VillagerVotedOutMafiaMessage;
 import views.client.VillagerView;
@@ -54,6 +55,16 @@ public class VillagerController implements ClientEngine {
         view.display(playerNames);
     }
 
+
+    @Override
+    public void VillagersWon() {
+        workflow.gameEnd(GameResult.VillagerWins);
+    }
+
+    @Override
+    public void MafiasWon() {
+        workflow.gameEnd(GameResult.MafiaWins);
+    }
 
     @Override
     public void PlayerKilled(String playerName) {
