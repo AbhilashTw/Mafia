@@ -75,4 +75,12 @@ public class Players {
         }
     }
 
+    public String[] getMafiaPlayers() {
+        ArrayList<String> mafiaPlayer = new ArrayList<String>();
+        for (Player player : players) {
+            if (player.getRole().equals(Role.Mafia.toString()))
+                mafiaPlayer.add(player.getName());
+        }
+        return mafiaPlayer.toArray(new String[mafiaPlayer.size()]);
+    }
 }

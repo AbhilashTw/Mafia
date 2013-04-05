@@ -4,6 +4,7 @@ import entities.Player;
 import entities.Players;
 import gameMessages.KilledMessage;
 import gameMessages.KilledPlayerMessage;
+import gameMessages.KnowMafiaMessage;
 import gameMessages.NightArrivedMessage;
 
 public class NightController {
@@ -18,8 +19,15 @@ public class NightController {
     }
 
     public void start() {
+        sendAllMafiaNames();
         sendNightArrivedMessage();
         play.createPlayersPoll(new GamePoll(), players);
+    }
+
+    private void sendAllMafiaNames() {
+        KnowMafiaMessage message = new KnowMafiaMessage();
+        message.setPlayers(players.getMafiaPlayers());
+        players.sendMessage(message);
     }
 
     private void sendNightArrivedMessage() {

@@ -21,4 +21,6 @@ public interface ClientEngine {
     void VillagersWon();
 
     void MafiasWon();
+
+    void displayMafia(String[] players);
 }

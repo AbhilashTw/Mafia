@@ -17,11 +17,13 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
     private NightController nightController;
     private DayController dayController;
 
+
     public GameStatusController(Workflow workflow, Players players, GamePlay gamePlay) {
         this.workflow = workflow;
         this.players = players;
         this.gamePlay = gamePlay;
         players.bindEngine(this);
+
     }
 
     public void bind(GameStatusView gameStatusScreen) {

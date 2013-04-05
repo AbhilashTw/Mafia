@@ -77,6 +77,11 @@ public class MafiaController implements ClientEngine {
         workflow.gameEnd(GameResult.MafiaWins);
     }
 
+    @Override
+    public void displayMafia(String[] players) {
+        view.showMafia(players);
+    }
+
     public void sendMessage(ChannelMessage message) {
         clientPlayer.sendMessage(message);
     }

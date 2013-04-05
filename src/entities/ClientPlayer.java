@@ -12,6 +12,7 @@ import java.io.IOException;
   Job: Understands the player who is playing the game.
  */
 public class ClientPlayer implements SocketChannelListener {
+
     private final String serverName;
     private final String playerName;
     private SocketChannel channel;
@@ -66,6 +67,9 @@ public class ClientPlayer implements SocketChannelListener {
         }
         if (message instanceof MafiaWinsMessage) {
             engine.MafiasWon();
+        }
+        if (message instanceof KnowMafiaMessage) {
+            engine.displayMafia(((KnowMafiaMessage) message).getPlayers());
         }
 
     }
