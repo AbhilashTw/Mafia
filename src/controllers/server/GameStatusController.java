@@ -63,7 +63,7 @@ public class GameStatusController implements GameEngine {
         else if ((status.equals(GameStatus.DAY) && gamePlay.getGameStatus().equals(GameResult.GameStable)))
             start();
         else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
-        else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
+        else if (gamePlay.getGameStatus().equals(GameResult.VillagerWins)) workflow.gameEnd(gamePlay.getGameStatus());
     }
 
     @Override

@@ -104,7 +104,6 @@ public class VillagerScreen implements VillagerView {
                 else if (time == 0) {
                     controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
                     disableVoteButtons();
-
                     ((Timer) e.getSource()).stop();
 
                 }
