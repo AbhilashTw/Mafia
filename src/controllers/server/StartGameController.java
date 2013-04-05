@@ -46,12 +46,10 @@ public class StartGameController implements GameEngine {
 
     @Override
     public void updateMafiaVotes(String playerName, String killedPlayer) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void updateVillagerVotes(String playerName, String killedPlayer) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public void start(SocketServer server) {

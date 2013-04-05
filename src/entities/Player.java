@@ -91,10 +91,8 @@ public class Player implements SocketChannelListener {
 
         Player player = (Player) o;
 
-        if (!channel.equals(player.channel)) return false;
-        if (!name.equals(player.name)) return false;
+        return channel.equals(player.channel) && name.equals(player.name);
 
-        return true;
     }
 
     @Override

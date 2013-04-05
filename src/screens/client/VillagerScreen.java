@@ -80,6 +80,10 @@ public class VillagerScreen implements VillagerView {
             button.setVisible(true);
             bg.add(button);
             voteList.add(button);
+            if( controller.getClientName().equals(player) ) {
+                button.setSelected(true);
+                votedOutPlayer=controller.getClientName();
+            }
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

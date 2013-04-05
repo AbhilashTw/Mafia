@@ -17,7 +17,6 @@ import java.awt.event.ActionListener;
 public class JoinServerScreen implements JoinServerView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     private final JoinServerController controller;
-    private final ImagePanel panel;
     private final JLabel serverNameLabel;
     private final JLabel playerNameLabel;
     private final JTextField serverNameText;
@@ -30,7 +29,7 @@ public class JoinServerScreen implements JoinServerView {
     public JoinServerScreen(IMainFrame mainFrame, JoinServerController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
-        panel = mainFrame.createImagePanel(BG_IMAGE);
+        ImagePanel panel = mainFrame.createImagePanel(BG_IMAGE);
         serverNameLabel = createLabel("Server Name", 50, 100);
         playerNameLabel = createLabel("Player Name", 50, 200);
         serverNameText = createTextField(150, 140);

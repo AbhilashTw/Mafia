@@ -22,7 +22,7 @@ public class GameEndScreen implements GameEndView {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel("images/homepage.jpg");
-        exit = createButton(400, 400, "Exit");
+        exit = createButton(100, 800, "Exit");
         panel.add(exit);
         addListeners();
     }
@@ -40,9 +40,9 @@ public class GameEndScreen implements GameEndView {
     public void display(String s) {
         gameStatus = new JLabel(s);
         gameStatus.setSize(300, 300);
+        gameStatus.setLocation(400,600);
         gameStatus.setFont(new Font("monospaced", Font.BOLD, 20));
         gameStatus.setForeground(Color.ORANGE);
-        gameStatus.setBackground(Color.BLACK);
         panel.add(gameStatus);
     }
 

@@ -26,8 +26,7 @@ public class PlayerDetailsMessage extends ChannelMessage implements Serializable
         if (this == o) return true;
         if (!(o instanceof PlayerDetailsMessage)) return false;
         PlayerDetailsMessage that = (PlayerDetailsMessage) o;
-        if (playerName != null ? !playerName.equals(that.playerName) : that.playerName != null) return false;
-        return true;
+        return !(playerName != null ? !playerName.equals(that.playerName) : that.playerName != null);
     }
 
     @Override

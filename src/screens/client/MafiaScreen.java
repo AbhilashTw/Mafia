@@ -18,7 +18,6 @@ public class MafiaScreen implements MafiaView {
 
     private static final String BG_IMAGE = "images/MafiaStartScreen.jpg";
     private JLabel timerLabel = new JLabel("30");
-
     private IMainFrame mainFrame;
     private MafiaController controller;
     private ImagePanel panel;
@@ -43,7 +42,6 @@ public class MafiaScreen implements MafiaView {
 
         panel.add(timerLabel);
         panel.add(statusList);
-
         updateStatus("Your assigned as a Mafia");
     }
 
@@ -71,7 +69,6 @@ public class MafiaScreen implements MafiaView {
         statusList.setFont(f);
     }
 
-
     @Override
     public void display(String[] playersName, GameStatus status) {
         createVoteList(100, 100);
@@ -86,6 +83,10 @@ public class MafiaScreen implements MafiaView {
             button.setVisible(true);
             bg.add(button);
             voteList.add(button);
+            if( controller.getClientName().equals(player) ) {
+                button.setSelected(true);
+                votedOutPlayer=controller.getClientName();
+            }
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -132,4 +133,3 @@ public class MafiaScreen implements MafiaView {
         }
     }
 }
-

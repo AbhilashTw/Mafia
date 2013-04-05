@@ -26,7 +26,6 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void displayConnectedPlayers(String[] playersConnected) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -36,12 +35,10 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void startMafiaScreen() {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void serverClosed() {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -78,5 +75,9 @@ public class VillagerController implements ClientEngine {
 
     public void sendMessage(VillagerVotedOutMafiaMessage message) {
         clientPlayer.sendMessage(message);
+    }
+
+    public String getClientName(){
+        return clientPlayer.getPlayerName();
     }
 }

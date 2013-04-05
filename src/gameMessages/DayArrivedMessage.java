@@ -24,9 +24,8 @@ public class DayArrivedMessage extends ChannelMessage implements Serializable {
 
         DayArrivedMessage that = (DayArrivedMessage) o;
 
-        if (!Arrays.equals(playerNames, that.playerNames)) return false;
+        return Arrays.equals(playerNames, that.playerNames);
 
-        return true;
     }
 
     @Override

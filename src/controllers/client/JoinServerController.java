@@ -13,7 +13,6 @@ public class JoinServerController implements ConnectionListener {
     private final Workflow workflow;
     private ClientPlayer clientPlayer;
     private JoinServerView view;
-    private int serverPort = 1234;
 
     public JoinServerController(Workflow workflow, ClientPlayer clientPlayer) {
         this.workflow = workflow;
@@ -28,6 +27,7 @@ public class JoinServerController implements ConnectionListener {
     }
 
     public void connectToServer() {
+        int serverPort = 1234;
         SocketChannel.connectTo(view.getServerName(), serverPort, this);
     }
 

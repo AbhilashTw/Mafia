@@ -14,16 +14,15 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     private final JoinedPlayersController controller;
     IMainFrame mainFrame;
-    private ImagePanel panel;
     private JLabel playersConnectedLabel;
     private JButton exitButton;
     private DefaultListModel<String> playersDefaultList = new DefaultListModel<String>();
-    private JList playersList = new JList(playersDefaultList);
+    private JList playersList = new JList<String>(playersDefaultList);
 
     public JoinedPlayersScreen(IMainFrame mainFrame, JoinedPlayersController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
-        panel = mainFrame.createImagePanel(BG_IMAGE);
+        ImagePanel panel = mainFrame.createImagePanel(BG_IMAGE);
 
         playersConnectedLabel = createLabel("Players Joined", 50, -50);
         createList(50, 100);
@@ -37,9 +36,8 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
 
     private void createList(int x_bound, int y_bound) {
         playersList.setSize(200, 850);
-        playersList.setBorder(BorderFactory.createLineBorder(SystemColor.YELLOW));
         playersList.setLocation(x_bound, y_bound);
-        playersList.setBackground(Color.YELLOW);
+        playersList.setOpaque(false);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         playersList.setFont(f);
     }
@@ -64,7 +62,6 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
 
     @Override
     public void connectedToServer(String serverName, String playerName) {
-        //Show those two fields on the screen
     }
 
     private JButton createButton(int x_axis, int y_axis, String buttonName) {

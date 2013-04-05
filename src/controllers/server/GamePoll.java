@@ -48,10 +48,7 @@ public class GamePoll {
 
         GamePoll gamePoll = (GamePoll) o;
 
-        if (pollCount != gamePoll.pollCount) return false;
-        if (ballot != null ? !ballot.equals(gamePoll.ballot) : gamePoll.ballot != null) return false;
-
-        return true;
+        return pollCount == gamePoll.pollCount && !(ballot != null ? !ballot.equals(gamePoll.ballot) : gamePoll.ballot != null);
     }
 
     @Override

@@ -99,7 +99,6 @@ public class WorkflowManager implements Workflow {
 
     @Override
     public void startPlayerDeadScreen() {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

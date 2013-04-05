@@ -31,22 +31,18 @@ public class MafiaController implements ClientEngine {
 
     @Override
     public void displayConnectedPlayers(String[] playersConnected) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void startVillagerScreen() {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void startMafiaScreen() {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void serverClosed() {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -83,6 +79,10 @@ public class MafiaController implements ClientEngine {
 
     public void sendMessage(ChannelMessage message) {
         clientPlayer.sendMessage(message);
+    }
+
+    public String getClientName(){
+       return clientPlayer.getPlayerName();
     }
 
 }
