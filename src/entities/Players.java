@@ -48,6 +48,7 @@ public class Players {
                 newPlayers.add(player1);
             }
         }
+        player.stop();
         players = newPlayers;
     }
 

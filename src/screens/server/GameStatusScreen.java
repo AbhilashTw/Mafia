@@ -41,4 +41,9 @@ public class GameStatusScreen implements GameStatusView {
     public void updatePlayerKilledStatus(String name) {
         defaultStatusList.addElement("Player " + name + " Killed");
     }
+
+    @Override
+    public void status(String s) {
+        defaultStatusList.addElement(s);
+    }
 }

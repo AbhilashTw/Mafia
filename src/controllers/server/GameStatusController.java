@@ -3,21 +3,19 @@ package controllers.server;
 import controllers.Workflow;
 import entities.Player;
 import entities.Players;
-import gameMessages.DayArrivedMessage;
-import gameMessages.KilledMessage;
-import gameMessages.KilledPlayerMessage;
-import gameMessages.NightArrivedMessage;
 import views.server.GameStatusView;
 
 /**
  * Job: Understands to Inform the Player about the routine.
  */
-public class GameStatusController implements GameEngine {
+public class GameStatusController implements GameEngine, GamePlayEngine {
 
     private final Workflow workflow;
     private final Players players;
     private GameStatusView view;
     private GamePlay gamePlay;
+    private NightController nightController;
+    private DayController dayController;
 
     public GameStatusController(Workflow workflow, Players players, GamePlay gamePlay) {
         this.workflow = workflow;
@@ -31,75 +29,57 @@ public class GameStatusController implements GameEngine {
     }
 
     public void start() {
-        sendNightArrivedMessage();
-        gamePlay.createPlayersPoll(new GamePoll(), players);
+        view.status("Night Arrived");
+        nightController = new NightController(players, gamePlay, this);
+        nightController.start();
     }
 
     @Override
     public void updateMafiaVotes(String playerName, String votedPlayer) {
         view.updateVoteStatus(playerName, votedPlayer);
-        gamePlay.poll(votedPlayer);
-        isAllMafiaVoted();
+        nightController.pollPlayer(votedPlayer);
+
     }
 
-    private void isAllMafiaVoted() {
-        if (gamePlay.mafiaPollStatus()) removePlayer(gamePlay.getKilledPlayer(), GameStatus.NIGHT);
-    }
 
     @Override
     public void removePlayer(Player removedPlayer, GameStatus status) {
-        removedPlayer.sendMessage(new KilledMessage());
-        players.removePlayer(removedPlayer);
 
-        sendKilledPlayerMessage(removedPlayer);
-        view.updatePlayerKilledStatus(removedPlayer.getName());
-
-        isGameStable(status);
     }
 
-    private void isGameStable(GameStatus status) {
-        if ((status.equals(GameStatus.NIGHT) && gamePlay.getGameStatus().equals(GameResult.GameStable)))
-            sendDayArrivedMessage();
-        else if ((status.equals(GameStatus.DAY) && gamePlay.getGameStatus().equals(GameResult.GameStable)))
-            start();
-        else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
-        else if (gamePlay.getGameStatus().equals(GameResult.MafiaWins)) workflow.gameEnd(gamePlay.getGameStatus());
+
+    @Override
+    public void endGame(GameResult status) {
+        workflow.gameEnd(status);
+    }
+
+    @Override
+    public void startNight() {
+        start();
     }
 
     @Override
     public void updateVillagerVotes(String playerName, String killedPlayer) {
         view.updateVoteStatus(playerName, killedPlayer);
-        gamePlay.poll(killedPlayer);
-        isAllVillagersVoted();
+        dayController.poll(killedPlayer);
     }
 
-    private void sendNightArrivedMessage() {
-        NightArrivedMessage message = new NightArrivedMessage();
-        gamePlay.createPlayersPoll(new GamePoll(), players);
-        message.setPlayersName(players.getAllPlayersName());
-        players.sendMessage(message);
-    }
 
     @Override
     public void playersUpdated() {
     }
 
-    private void sendKilledPlayerMessage(Player removedPlayer) {
-        KilledPlayerMessage message = new KilledPlayerMessage();
-        message.setPlayerName(removedPlayer.getName());
-        players.sendMessage(message);
+
+    @Override
+    public void removePlayer(Player killedPlayer) {
+        view.status(killedPlayer.getName() + "is Killed");
+        players.removePlayer(killedPlayer);
     }
 
-    private void sendDayArrivedMessage() {
-        DayArrivedMessage message = new DayArrivedMessage();
-        gamePlay.createPlayersPoll(new GamePoll(), players);
-        message.setPlayersName(players.getAllPlayersName());
-        players.sendMessage(message);
-        gamePlay.createPlayersPoll(new GamePoll(), players);
+    @Override
+    public void startDay() {
+        view.status("Day Arrived");
+        dayController = new DayController(players, this, gamePlay);
+        dayController.start();
     }
-
-    private void isAllVillagersVoted() {
-        if (gamePlay.villagerPollStatus()) removePlayer(gamePlay.getKilledPlayer(), GameStatus.DAY);
-    }
-
 }

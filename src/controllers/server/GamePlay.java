@@ -22,7 +22,7 @@ public class GamePlay {
         poll.poll(playerName);
     }
 
-    public boolean mafiaPollStatus() {
+    public boolean nightPollStatus() {
         return getMafiaCount() == poll.getPollCount();
     }
 

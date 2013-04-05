@@ -53,7 +53,7 @@ public class GamePlayTest {
     @Test
     public void mafiaPollStatus_invokes_getPollCount_from_GamePoll() {
         gamePlay.createPlayersPoll(poll, players);
-        gamePlay.mafiaPollStatus();
+        gamePlay.nightPollStatus();
         verify(poll).getPollCount();
     }
 

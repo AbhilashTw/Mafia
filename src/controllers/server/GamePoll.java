@@ -40,4 +40,24 @@ public class GamePoll {
     public int getPollCount() {
         return pollCount;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GamePoll)) return false;
+
+        GamePoll gamePoll = (GamePoll) o;
+
+        if (pollCount != gamePoll.pollCount) return false;
+        if (ballot != null ? !ballot.equals(gamePoll.ballot) : gamePoll.ballot != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = ballot != null ? ballot.hashCode() : 0;
+        result = 31 * result + pollCount;
+        return result;
+    }
 }

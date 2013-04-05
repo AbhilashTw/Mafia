@@ -56,7 +56,7 @@ public class Player implements SocketChannelListener {
             god.updateMafiaVotes(getName(), ((MafiaVotedOutVillagerMessage) message).getMafiaVotedOutPlayer());
         }
         if (message instanceof VillagerVotedOutMafiaMessage) {
-            god.updateVillagerVotes(getName(), ((MafiaVotedOutVillagerMessage) message).getMafiaVotedOutPlayer());
+            god.updateVillagerVotes(getName(), ((VillagerVotedOutMafiaMessage) message).getVillagerVotedOutPlayer());
         }
     }
 
