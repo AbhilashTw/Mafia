@@ -74,7 +74,6 @@ public class MafiaScreen implements MafiaView {
         statusList.setFont(f);
     }
 
-
     private void createMafiaList(int x_bound, int y_bound) {
         mafiaList.setSize(600, 450);
         mafiaList.setLocation(x_bound, y_bound);
@@ -83,7 +82,6 @@ public class MafiaScreen implements MafiaView {
         mafiaList.setFont(f);
 
     }
-
 
     @Override
     public void display(String[] playersName, GameStatus status) {
@@ -99,9 +97,9 @@ public class MafiaScreen implements MafiaView {
             button.setVisible(true);
             bg.add(button);
             voteList.add(button);
-            if( controller.getClientName().equals(player) ) {
+            if (controller.getClientName().equals(player)) {
                 button.setSelected(true);
-                votedOutPlayer=controller.getClientName();
+                votedOutPlayer = controller.getClientName();
             }
             button.addActionListener(new ActionListener() {
                 @Override
@@ -157,4 +155,5 @@ public class MafiaScreen implements MafiaView {
             allButtons.nextElement().setVisible(false);
         }
     }
+
 }

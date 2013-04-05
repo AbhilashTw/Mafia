@@ -21,7 +21,7 @@ public class GameEndScreen implements GameEndView {
     public GameEndScreen(IMainFrame mainFrame, GameEndController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
-        panel = mainFrame.createImagePanel("images/homepage.jpg");
+        panel = mainFrame.createImagePanel("images/gameEndScreen.jpg");
         exit = createButton(100, 800, "Exit");
         panel.add(exit);
         addListeners();
@@ -41,7 +41,7 @@ public class GameEndScreen implements GameEndView {
         gameStatus = new JLabel(s);
         gameStatus.setSize(300, 300);
         gameStatus.setLocation(400,600);
-        gameStatus.setFont(new Font("monospaced", Font.BOLD, 20));
+        gameStatus.setFont(new Font("monospaced", Font.BOLD, 40));
         gameStatus.setForeground(Color.ORANGE);
         panel.add(gameStatus);
     }
