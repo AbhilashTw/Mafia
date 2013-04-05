@@ -7,7 +7,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 
 public class NightControllerTest {
     private NightController controller;
@@ -45,15 +47,16 @@ public class NightControllerTest {
     }
 
     @Test
-    public void pollPlayer_invokes_GamePlay_poll() {
-        controller.pollPlayer("Abhilash");
-        verify(play).poll("Abhilash");
-    }
-
-    @Test
     public void pollPlayer_invokes_GamePlay_mafiaVoteStatus() {
         controller.pollPlayer("Abhilash");
         verify(play).nightPollStatus();
+    }
+
+
+    @Test
+    public void pollPlayer_invokes_GamePlay_poll() {
+        controller.pollPlayer("Abhilash");
+        verify(play).poll("Abhilash");
     }
 
 
