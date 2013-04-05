@@ -25,6 +25,9 @@ public class MafiaScreen implements MafiaView {
 
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private JList statusList = new JList<String>(defaultStatusList);
+    private DefaultListModel<String> defaultMafiaList = new DefaultListModel<String>();
+    private JList mafiaList = new JList<String>(defaultMafiaList);
+
 
     private JList voteList = new JList<JRadioButton>();
 
@@ -43,6 +46,7 @@ public class MafiaScreen implements MafiaView {
 
         panel.add(timerLabel);
         panel.add(statusList);
+        panel.add(mafiaList);
 
         updateStatus("Your assigned as a Mafia");
     }
@@ -69,6 +73,15 @@ public class MafiaScreen implements MafiaView {
         statusList.setOpaque(false);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         statusList.setFont(f);
+    }
+
+    private void createMafiaList(int x_bound, int y_bound) {
+        mafiaList.setSize(600, 450);
+        mafiaList.setLocation(x_bound, y_bound);
+        mafiaList.setOpaque(false);
+        Font f = new Font("Monospaced", Font.PLAIN, 20);
+        mafiaList.setFont(f);
+
     }
 
 
@@ -99,6 +112,15 @@ public class MafiaScreen implements MafiaView {
     @Override
     public void updateStatus(String status) {
         defaultStatusList.addElement(status);
+    }
+
+    @Override
+    public void showMafia(String[] players) {
+        defaultMafiaList.addElement("Mafia Players");
+        createMafiaList(400, 600);
+        for (String player : players) {
+            defaultMafiaList.addElement(player);
+        }
     }
 
     public void timerScreen() {

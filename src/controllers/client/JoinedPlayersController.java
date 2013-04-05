@@ -86,4 +86,9 @@ public class JoinedPlayersController implements ClientEngine {
     public void MafiasWon() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    @Override
+    public void displayMafia(String[] players) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }
