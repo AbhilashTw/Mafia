@@ -56,13 +56,6 @@ public class NightControllerTest {
         verify(play).nightPollStatus();
     }
 
-    @Test
-    public void pollPlayer_invokes_GamePlay_getKilledPlayer_when_nightPollStatus_is_true() {
-        stub(play.getKilledPlayer()).toReturn(player);
-        stub(play.nightPollStatus()).toReturn(true);
-        controller.pollPlayer("Abhilash");
-        verify(play).getKilledPlayer();
-    }
 
 
 }
