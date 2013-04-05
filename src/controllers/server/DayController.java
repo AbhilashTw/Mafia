@@ -31,7 +31,6 @@ public class DayController {
     }
 
     public void poll(String votedPlayer) {
-        System.out.println("I entered once ");
         play.poll(votedPlayer);
         isEveryOneVoted();
     }
