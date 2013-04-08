@@ -7,6 +7,7 @@
     <property name="archiveDir" value="//blrfs02/STEP/MafiaArchives/Mafians/"/>
     <property name="Mockito" value="lib/mockito-all-1.9.5.jar"/>
     <property name="Junit4" value="lib/junit-4.0.jar"/>
+    <property name="Images" value="./images"/>
 
     <target name="ci-setup">
         <sound>
@@ -25,6 +26,9 @@
 
     <target name="compileSrc" depends="clean">
         <mkdir dir="${sourceOutput}"/>
+        <copy todir="${sourceOutput}/images">
+            <fileset dir="images"/>
+        </copy>
         <javac srcdir="src" destdir="${sourceOutput}" includeantruntime="yes"/>
 
 
@@ -34,7 +38,9 @@
         <jar destfile="${jarName}" basedir="${sourceOutput}">
             <manifest>
                 <attribute name="Main-Class" value="runner.Main"/>
+                <attribute name="Class-Path" value="images/*.jpg"/>
             </manifest>
+
         </jar>
     </target>
 

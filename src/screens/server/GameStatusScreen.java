@@ -15,6 +15,7 @@ public class GameStatusScreen implements GameStatusView {
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private JList statusList = new JList(defaultStatusList);
     private ImagePanel panel;
+    private JScrollPane listScroller;
 
     public GameStatusScreen(IMainFrame mainFrame, GameStatusController controller) {
         this.mainFrame = mainFrame;
@@ -25,11 +26,11 @@ public class GameStatusScreen implements GameStatusView {
     }
 
     private void createList(int x_bound, int y_bound) {
-        statusList.setSize(400, 450);
-        statusList.setOpaque(true);
+        statusList.setSize(400, 800);
+        statusList.setBackground(Color.ORANGE);
+        statusList.setForeground(Color.BLACK);
         statusList.setLocation(x_bound, y_bound);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
-        statusList.setFont(f);
+        statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
     }
 
     @Override

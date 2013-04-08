@@ -54,31 +54,31 @@ public class MafiaScreen implements MafiaView {
         timerLabel.setForeground(Color.WHITE);
         timerLabel.setLocation(900, 800);
         timerLabel.setSize(200, 200);
-        Font timerFont = new Font("Monospaced", Font.PLAIN, 100);
-        timerLabel.setFont(timerFont);
+        timerLabel.setFont(new Font("Monospaced", Font.PLAIN, 100));
     }
 
     private void createVoteList(int xBound, int yBound) {
         voteList.setSize(200, 650);
         voteList.setLocation(xBound, yBound);
-        voteList.setOpaque(false);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
-        voteList.setFont(f);
+        voteList.setBackground(Color.ORANGE);
+        voteList.setForeground(Color.BLACK);
+        voteList.setFont(new Font("Monospaced", Font.PLAIN, 20));
     }
 
     private void createList(int x_bound, int y_bound) {
         statusList.setSize(600, 450);
         statusList.setLocation(x_bound, y_bound);
-        statusList.setOpaque(false);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
-        statusList.setFont(f);
+        statusList.setBackground(Color.ORANGE);
+        statusList.setForeground(Color.BLACK);
+        statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
     }
 
 
     private void createMafiaList(int x_bound, int y_bound) {
         mafiaList.setSize(600, 450);
         mafiaList.setLocation(x_bound, y_bound);
-        mafiaList.setOpaque(false);
+        mafiaList.setBackground(Color.ORANGE);
+        mafiaList.setForeground(Color.BLACK);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         mafiaList.setFont(f);
 
@@ -99,10 +99,11 @@ public class MafiaScreen implements MafiaView {
             button.setVisible(true);
             bg.add(button);
             voteList.add(button);
-            if( controller.getClientName().equals(player) ) {
+            if (controller.getClientName().equals(player)) {
                 button.setSelected(true);
-                votedOutPlayer=controller.getClientName();
+                votedOutPlayer = controller.getClientName();
             }
+
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

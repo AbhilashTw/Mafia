@@ -50,7 +50,8 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
     private JList createList(JList playersList, int x_bound, int y_bound) {
         playersList.setSize(200, 850);
         playersList.setLocation(x_bound, y_bound);
-        playersList.setOpaque(false);
+        playersList.setBackground(Color.ORANGE);
+        playersList.setForeground(Color.BLACK);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         playersList.setFont(f);
         return playersList;

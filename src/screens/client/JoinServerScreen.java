@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
  */
 
 public class JoinServerScreen implements JoinServerView {
+
     private static final String BG_IMAGE = "images/joinServerScreen.jpg";
     private final JoinServerController controller;
     private final JLabel serverNameLabel;
@@ -29,14 +30,17 @@ public class JoinServerScreen implements JoinServerView {
     public JoinServerScreen(IMainFrame mainFrame, JoinServerController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
+
         ImagePanel panel = mainFrame.createImagePanel(BG_IMAGE);
         serverNameLabel = createLabel("Server Name", 50, 100);
         playerNameLabel = createLabel("Player Name", 50, 200);
         serverNameText = createTextField(150, 140);
         playerNameTextField = createTextField(150, 240);
+
         //todo: remove setText before pushing into production
         serverNameText.setText("localhost");
-        connectButton = createButton("Connect", 800, 800);
+        connectButton = createButton("Connect", 300, 300);
+
         panel.add(serverNameLabel);
         panel.add(playerNameLabel);
         panel.add(serverNameText);

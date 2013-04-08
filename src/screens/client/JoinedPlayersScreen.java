@@ -26,7 +26,7 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
 
         playersConnectedLabel = createLabel("Players Joined", 50, -50);
         createList(50, 100);
-        exitButton = createButton(800, 800, "Exit");
+        exitButton = createButton(400, 400, "Exit");
 
         panel.add(playersList);
         panel.add(playersConnectedLabel);
@@ -37,14 +37,15 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     private void createList(int x_bound, int y_bound) {
         playersList.setSize(200, 850);
         playersList.setLocation(x_bound, y_bound);
-        playersList.setOpaque(false);
+        playersList.setBackground(Color.ORANGE);
+        playersList.setForeground(Color.black);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         playersList.setFont(f);
     }
 
     private JLabel createLabel(String labelName, int x_bound, int y_bound) {
         JLabel label = new JLabel(labelName);
-        Font font = new Font("Comic Sans MS", Font.PLAIN, 28);
+        Font font = new Font("Monospaced", Font.PLAIN, 18);
         label.setFont(font);
         label.setForeground(Color.RED);
         label.setSize(200, 250);
