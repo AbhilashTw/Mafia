@@ -122,6 +122,7 @@ public class VillagerScreen implements VillagerView {
     @Override
     public void updateStatus(String status) {
         defaultStatusList.addElement(status);
+        panel.repaint();
     }
 
     public void timerScreen() {
@@ -141,7 +142,16 @@ public class VillagerScreen implements VillagerView {
         timer.start();
     }
 
+    @Override
+    public void serverClosed() {
+        JOptionPane optionPane = new JOptionPane("Server Closed", JOptionPane.ERROR_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Error Message");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
+
     private void disableVoteButtons() {
+        panel.repaint();
         updateStatus("Your Voting Time Ended");
         voteList.setVisible(false);
         Enumeration<AbstractButton> allButtons = bg.getElements();

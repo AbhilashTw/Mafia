@@ -9,4 +9,6 @@ public interface MafiaView {
     void updateStatus(String status);
 
     void showMafia(String[] players);
+
+    void serverClosed();
 }
