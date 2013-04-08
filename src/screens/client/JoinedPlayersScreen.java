@@ -23,18 +23,20 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     public JoinedPlayersScreen(IMainFrame mainFrame, JoinedPlayersController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
-
         panel = mainFrame.createImagePanel(BG_IMAGE);
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
 
-
-        playersConnectedLabel = createLabel("Players Joined", 50, -50);
-        createList(50, 100);
-        exitButton = createButton(400, 400, "Exit");
-
-        panel.add(playersList);
-        panel.add(playersConnectedLabel);
-        panel.add(exitButton);
-        addButtonHandlers();
+                playersConnectedLabel = createLabel("Players Joined", 50, -50);
+                createList(50, 100);
+                exitButton = createButton(400, 400, "Exit");
+                panel.add(playersList);
+                panel.add(playersConnectedLabel);
+                panel.add(exitButton);
+                addButtonHandlers();
+            }
+        });
     }
 
     private void createList(int x_bound, int y_bound) {
@@ -67,7 +69,7 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     public void connectedToServer(String serverName, String playerName) {
         JLabel connectedStatus = new JLabel("Connected to " + serverName + " as " + playerName);
         connectedStatus.setSize(400, 400);
-        connectedStatus.setLocation(400, 400);
+        connectedStatus.setLocation(300, 400);
         connectedStatus.setForeground(Color.WHITE);
         connectedStatus.setFont(new Font("Monospaced", Font.PLAIN, 18));
         panel.add(connectedStatus);
@@ -77,7 +79,7 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setFont(new Font("Monospaced", Font.BOLD, 14));
         return button;
     }
 

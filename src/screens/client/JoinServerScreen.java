@@ -75,7 +75,7 @@ public class JoinServerScreen implements JoinServerView {
         JButton button = new JButton(buttonLabel);
         button.setSize(145, 50);
         button.setLocation(x_bound, y_bound);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setFont(new Font("Monospaced", Font.BOLD, 14));
         return button;
     }
 

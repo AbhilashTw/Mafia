@@ -6,6 +6,8 @@ import entities.ClientPlayer;
 import gameMessages.PlayerDetailsMessage;
 import views.client.JoinedPlayersView;
 
+import javax.swing.*;
+
 /**
  * Job: Understands to the other connected players to game.
  */

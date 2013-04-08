@@ -21,15 +21,11 @@ public class MafiaScreen implements MafiaView {
     private IMainFrame mainFrame;
     private MafiaController controller;
     private ImagePanel panel;
-
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private JList statusList = new JList<String>(defaultStatusList);
     private DefaultListModel<String> defaultMafiaList = new DefaultListModel<String>();
     private JList mafiaList = new JList<String>(defaultMafiaList);
-
-
     private JList voteList = new JList<JRadioButton>();
-
     private ButtonGroup bg = new ButtonGroup();
     private String votedOutPlayer;
 
@@ -113,6 +109,8 @@ public class MafiaScreen implements MafiaView {
             button.setVisible(true);
             button.setBackground(Color.ORANGE);
             bg.add(button);
+
+
             voteList.add(button);
             if (controller.getClientName().equals(player)) {
                 button.setSelected(true);
@@ -132,6 +130,7 @@ public class MafiaScreen implements MafiaView {
     @Override
     public void updateStatus(String status) {
         defaultStatusList.addElement(status);
+        panel.revalidate();
         panel.repaint();
     }
 
@@ -140,16 +139,14 @@ public class MafiaScreen implements MafiaView {
         createMafiaList(400, 100);
         for (String player : players) {
             defaultMafiaList.addElement(player);
-            panel.repaint();
         }
+        panel.revalidate();
+        panel.repaint();
     }
 
     @Override
     public void serverClosed() {
-        JOptionPane optionPane = new JOptionPane("Server Closed", JOptionPane.ERROR_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Error Message");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
+
     }
 
     public void timerScreen() {
