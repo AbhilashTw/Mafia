@@ -33,11 +33,11 @@ public class VillagerScreen implements VillagerView {
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
-        createList(400, 100);
+        createList(700, 100);
         createVoteList(100, 100);
         createTimerLabel();
 
-        JLabel villagerLabel = createLabel("You are assigned as a Villager", 900, -50);
+        JLabel villagerLabel = createLabel("You are assigned as a Villager", 700, -50);
         JLabel votingPortalLabel = createLabel("Voting Portal", 100, -50);
 
         panel.add(timerLabel);
@@ -47,8 +47,6 @@ public class VillagerScreen implements VillagerView {
 
         panel.add(villagerLabel);
         panel.add(votingPortalLabel);
-
-        updateStatus("You are assigned as a villager");
 
     }
 
@@ -64,22 +62,17 @@ public class VillagerScreen implements VillagerView {
     private void createList(int x_bound, int y_bound) {
         statusList.setSize(450, 450);
         statusList.setLocation(x_bound, y_bound);
+        statusList.setFont(new Font("Monospaced", Font.PLAIN, 20));
         statusList.setBackground(Color.ORANGE);
         statusList.setForeground(Color.BLACK);
-        statusList.setFont(new Font("Monospaced", Font.PLAIN, 20));
     }
 
     private void createVoteList(int xBound, int yBound) {
         voteList.setSize(200, 650);
-        voteList.setBackground(Color.ORANGE);
         voteList.setLocation(xBound, yBound);
-        voteList.setBackground(Color.WHITE);
-        voteList.setForeground(Color.BLACK);
-
         voteList.setFont(new Font("Monospaced", Font.PLAIN, 20));
-        voteList.setAlignmentX(JList.CENTER_ALIGNMENT);
-        voteList.setFocusable(false);
-        voteList.setValueIsAdjusting(true);
+        voteList.setBackground(Color.BLACK);
+        voteList.setForeground(Color.WHITE);
     }
 
     private JLabel createLabel(String labelName, int x_bound, int y_bound) {

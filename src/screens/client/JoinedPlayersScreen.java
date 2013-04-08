@@ -18,7 +18,6 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     private JButton exitButton;
     private DefaultListModel<String> playersDefaultList = new DefaultListModel<String>();
     private JList playersList = new JList<String>(playersDefaultList);
-    private JLabel connectedStatus;
     ImagePanel panel;
 
     public JoinedPlayersScreen(IMainFrame mainFrame, JoinedPlayersController controller) {
@@ -49,9 +48,9 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
 
     private JLabel createLabel(String labelName, int x_bound, int y_bound) {
         JLabel label = new JLabel(labelName);
-        label.setFont(new Font("Monospaced", Font.PLAIN, 16));
+        label.setFont(new Font("Monospaced", Font.PLAIN, 20));
         label.setForeground(Color.WHITE);
-        label.setSize(300,320);
+        label.setSize(200, 250);
         label.setLocation(x_bound, y_bound);
         return label;
     }
@@ -66,7 +65,11 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
 
     @Override
     public void connectedToServer(String serverName, String playerName) {
-        connectedStatus = createLabel("Connected to " + serverName + " as " + playerName, 300, 350);
+        JLabel connectedStatus = new JLabel("Connected to " + serverName + " as " + playerName);
+        connectedStatus.setSize(400, 400);
+        connectedStatus.setLocation(400, 400);
+        connectedStatus.setForeground(Color.WHITE);
+        connectedStatus.setFont(new Font("Monospaced", Font.PLAIN, 18));
         panel.add(connectedStatus);
     }
 
