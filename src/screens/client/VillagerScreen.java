@@ -94,10 +94,10 @@ public class VillagerScreen implements VillagerView {
     @Override
     public void display(String[] playersName) {
         JButton confirmButton = createButton(50, 700, "Confirm");
+        addListeners(confirmButton);
         panel.add(confirmButton);
         updateStatus("You can vote now ");
         int x = 100, y = 100;
-        addListeners(confirmButton);
 
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
@@ -131,7 +131,6 @@ public class VillagerScreen implements VillagerView {
     }
 
 
-
     @Override
     public void serverClosed() {
     }
@@ -145,7 +144,5 @@ public class VillagerScreen implements VillagerView {
         while (allButtons.hasMoreElements()) {
             allButtons.nextElement().setVisible(false);
         }
-        panel.revalidate();
-        panel.repaint();
     }
 }

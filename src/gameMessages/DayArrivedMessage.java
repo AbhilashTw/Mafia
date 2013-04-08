@@ -8,6 +8,10 @@ import java.util.Arrays;
 public class DayArrivedMessage extends ChannelMessage implements Serializable {
     private String[] playerNames;
 
+    public DayArrivedMessage() {
+        super();
+    }
+
     public String[] getPlayerNames() {
         return playerNames;
     }
