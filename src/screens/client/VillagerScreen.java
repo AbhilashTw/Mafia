@@ -25,7 +25,6 @@ public class VillagerScreen implements VillagerView {
     private ButtonGroup bg = new ButtonGroup();
 
     private String votedOutPlayer;
-    private JButton confirmButton;
 
     public VillagerScreen(IMainFrame mainFrame, VillagerController controller) {
         this.mainFrame = mainFrame;
@@ -37,14 +36,12 @@ public class VillagerScreen implements VillagerView {
 
         JLabel villagerLabel = createLabel("You are assigned as a Villager", 700, -50);
         JLabel votingPortalLabel = createLabel("Voting Portal", 100, -50);
-        confirmButton = createButton(100, 900, "Confirm");
 
         panel.add(statusList);
         panel.add(voteList);
 
         panel.add(villagerLabel);
         panel.add(votingPortalLabel);
-        addListeners();
     }
 
     //todo: Have a common method for creating list.
@@ -76,12 +73,12 @@ public class VillagerScreen implements VillagerView {
         return label;
     }
 
-    private void addListeners() {
+    private void addListeners(final JButton confirmButton) {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
-                disableVoteButtons();
+                disableVoteButtons(confirmButton);
             }
         });
     }
@@ -96,9 +93,11 @@ public class VillagerScreen implements VillagerView {
 
     @Override
     public void display(String[] playersName) {
+        JButton confirmButton = createButton(50, 700, "Confirm");
         panel.add(confirmButton);
         updateStatus("You can vote now ");
         int x = 100, y = 100;
+        addListeners(confirmButton);
 
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
@@ -137,8 +136,9 @@ public class VillagerScreen implements VillagerView {
         dialog.setVisible(true);
     }
 
-    private void disableVoteButtons() {
+    private void disableVoteButtons(JButton confirmButton) {
         updateStatus("Your Voting Time Ended");
+        confirmButton.setVisible(false);
         voteList.setVisible(false);
         Enumeration<AbstractButton> allButtons = bg.getElements();
         while (allButtons.hasMoreElements()) {

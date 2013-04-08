@@ -25,7 +25,6 @@ public class MafiaScreen implements MafiaView {
     private JList statusList = new JList<String>(defaultStatusList);
     private DefaultListModel<String> defaultMafiaList = new DefaultListModel<String>();
     private JList mafiaList = new JList<String>(defaultMafiaList);
-    private JButton confirmButton;
 
     private JList voteList = new JList<JRadioButton>();
 
@@ -44,16 +43,12 @@ public class MafiaScreen implements MafiaView {
         JLabel mafiaLabel = createLabel("You are assigned as a Mafia", 700, -50);
         JLabel votingPortalLabel = createLabel("Voting Portal", 150, -50);
         JLabel mafiaListLabel = createLabel("Mafians", 400, -50);
-        confirmButton = createButton(100, 900, "Confirm");
 
         panel.add(statusList);
         panel.add(mafiaList);
-
         panel.add(mafiaLabel);
         panel.add(votingPortalLabel);
         panel.add(mafiaListLabel);
-        addListeners();
-
     }
 
 
@@ -92,11 +87,11 @@ public class MafiaScreen implements MafiaView {
         return label;
     }
 
-    private void addListeners() {
+    private void addListeners(final JButton confirmButton) {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                sendMessage();
+                sendMessage(confirmButton);
             }
         });
     }
@@ -111,9 +106,11 @@ public class MafiaScreen implements MafiaView {
 
     @Override
     public void display(String[] playersName, GameStatus status) {
+        JButton confirmButton = createButton(50, 700, "Confirm");
         panel.add(confirmButton);
         createVoteList(100, 100);
         panel.add(voteList);
+        addListeners(confirmButton);
         this.status = status;
         int x = 80, y = 80;
         for (String player : playersName) {
@@ -160,14 +157,15 @@ public class MafiaScreen implements MafiaView {
         dialog.setVisible(true);
     }
 
-    private void sendMessage() {
+    private void sendMessage(JButton confirmButton) {
         if (status.equals(GameStatus.NIGHT)) controller.sendMessage(new MafiaVotedOutVillagerMessage(votedOutPlayer));
         else controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
-        disableVoteButtons();
+        disableVoteButtons(confirmButton);
     }
 
-    private void disableVoteButtons() {
+    private void disableVoteButtons(JButton confirmButton) {
         voteList.removeAll();
+        confirmButton.setVisible(false);
         updateStatus("Your Voting Time Ended");
         Enumeration<AbstractButton> allButtons = bg.getElements();
         while (allButtons.hasMoreElements()) {
