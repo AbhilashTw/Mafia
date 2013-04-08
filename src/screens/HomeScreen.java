@@ -19,13 +19,12 @@ public class HomeScreen implements HomeView {
     private final JButton startServerButton;
     private final JButton joinServerButton;
     private final JButton quitButton;
-    private ImagePanel panel;
 
 
     public HomeScreen(IMainFrame mainFrame, HomeController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
-        panel = mainFrame.createImagePanel(BG_IMAGE);
+        ImagePanel panel = mainFrame.createImagePanel(BG_IMAGE);
 
         startServerButton = createButton(100, 300, "StartServer");
         joinServerButton = createButton(100, 400, "JoinServer");
@@ -68,9 +67,7 @@ public class HomeScreen implements HomeView {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
-        button.setForeground(Color.ORANGE);
-        button.setBackground(Color.BLACK);
+        button.setFont(new Font("Monospaced", Font.BOLD, 16));
         return button;
     }
 

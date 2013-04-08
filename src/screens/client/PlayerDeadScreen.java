@@ -21,12 +21,9 @@ public class PlayerDeadScreen implements PlayerDeadView {
     public PlayerDeadScreen(IMainFrame mainFrame, PlayerDeadController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
-
         panel = mainFrame.createImagePanel("images//KilledScreen.jpg");
-
         exitButton = createButton(100, 800, "Exit");
         panel.add(exitButton);
-
         addListeners();
     }
 

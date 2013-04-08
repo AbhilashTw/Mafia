@@ -40,7 +40,7 @@ public class GameEndScreen implements GameEndView {
     public void display(String s) {
         gameStatus = new JLabel(s);
         gameStatus.setSize(300, 300);
-        gameStatus.setLocation(400,600);
+        gameStatus.setLocation(400, 600);
         gameStatus.setFont(new Font("monospaced", Font.BOLD, 20));
         gameStatus.setForeground(Color.ORANGE);
         panel.add(gameStatus);

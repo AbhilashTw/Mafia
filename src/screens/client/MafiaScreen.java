@@ -40,47 +40,62 @@ public class MafiaScreen implements MafiaView {
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
-        createList(900, 100);
+        createList(700, 100);
         createTimerLabel();
+
+        JLabel mafiaLabel = createLabel("You are assigned as a Mafia", 700, -50);
+        JLabel votingPortalLabel = createLabel("Voting Portal", 100, -50);
+        JLabel mafiaListLabel = createLabel("Mafians", 400, -50);
 
         panel.add(timerLabel);
         panel.add(statusList);
         panel.add(mafiaList);
 
-        updateStatus("You are assigned as a Mafia");
+        panel.add(mafiaLabel);
+        panel.add(votingPortalLabel);
+        panel.add(mafiaListLabel);
     }
 
     private void createTimerLabel() {
         timerLabel.setForeground(Color.WHITE);
         timerLabel.setLocation(900, 800);
         timerLabel.setSize(200, 200);
-        Font timerFont = new Font("Monospaced", Font.PLAIN, 100);
-        timerLabel.setFont(timerFont);
+        timerLabel.setFont(new Font("Monospaced", Font.PLAIN, 100));
     }
 
     private void createVoteList(int xBound, int yBound) {
-        voteList.setSize(200, 650);
+        voteList.setSize(200, 450);
         voteList.setLocation(xBound, yBound);
-        voteList.setOpaque(false);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
-        voteList.setFont(f);
+        voteList.setBackground(Color.WHITE);
+        voteList.setForeground(Color.BLACK);
+        voteList.setFont(new Font("Monospaced", Font.PLAIN, 20));
     }
 
     private void createList(int x_bound, int y_bound) {
         statusList.setSize(600, 450);
         statusList.setLocation(x_bound, y_bound);
-        statusList.setOpaque(false);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
-        statusList.setFont(f);
+        statusList.setBackground(Color.WHITE);
+        statusList.setForeground(Color.BLACK);
+        statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
     }
 
-        private void createMafiaList(int x_bound, int y_bound) {
-        mafiaList.setSize(600, 450);
+    private void createMafiaList(int x_bound, int y_bound) {
+        mafiaList.setSize(200, 250);
         mafiaList.setLocation(x_bound, y_bound);
-        mafiaList.setOpaque(false);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
-        mafiaList.setFont(f);
+        mafiaList.setBackground(Color.WHITE);
+        mafiaList.setForeground(Color.BLACK);
+        mafiaList.setFont(new Font("Monospaced", Font.PLAIN, 20));
+    }
 
+    private JLabel createLabel(String labelName, int x_bound, int y_bound) {
+        JLabel label = new JLabel(labelName);
+        Font font = new Font("Monospaced", Font.BOLD, 16);
+        label.setFont(font);
+        label.setForeground(Color.RED);
+        label.setBackground(Color.BLACK);
+        label.setSize(300, 250);
+        label.setLocation(x_bound, y_bound);
+        return label;
     }
 
 
@@ -90,7 +105,7 @@ public class MafiaScreen implements MafiaView {
         panel.add(voteList);
         this.status = status;
         timerScreen();
-        int x = 100, y = 100;
+        int x = 80, y = 80;
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
             button.setLocation(x, y);
@@ -98,10 +113,11 @@ public class MafiaScreen implements MafiaView {
             button.setVisible(true);
             bg.add(button);
             voteList.add(button);
-            if( controller.getClientName().equals(player) ) {
+            if (controller.getClientName().equals(player)) {
                 button.setSelected(true);
-                votedOutPlayer=controller.getClientName();
+                votedOutPlayer = controller.getClientName();
             }
+
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -119,8 +135,7 @@ public class MafiaScreen implements MafiaView {
 
     @Override
     public void showMafia(String[] players) {
-        defaultMafiaList.addElement("Mafia Players");
-        createMafiaList(400, 600);
+        createMafiaList(400, 100);
         for (String player : players) {
             defaultMafiaList.addElement(player);
         }

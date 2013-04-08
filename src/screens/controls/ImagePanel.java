@@ -11,16 +11,18 @@ public class ImagePanel extends JPanel {
 
     public ImagePanel(Image img) {
         this.img = img;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension size = new Dimension(screenSize.width, screenSize.height);
+        //  Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); todo: Screen Size disabled
+        Dimension size = new Dimension(1000, 1000);
         setPreferredSize(size);
         setMinimumSize(size);
         setMaximumSize(size);
         setSize(size);
+        setForeground(Color.BLACK);
+        setBackground(Color.BLACK);
         setLayout(null);
     }
 
-    public void paintComponent(Graphics g) {
-        g.drawImage(img,0,0,getWidth(),getHeight(),this);
-    }
+//    public void paintComponent(Graphics g) {
+//        g.drawImage(img, 0, 0, getWidth(), getHeight(), this);   //todo: Image is disabled
+//    }
 }
