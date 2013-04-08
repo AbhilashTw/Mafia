@@ -51,7 +51,7 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
         JLabel label = new JLabel(labelName);
         label.setFont(new Font("Monospaced", Font.PLAIN, 16));
         label.setForeground(Color.WHITE);
-        label.setSize(300,320);
+        label.setSize(300, 320);
         label.setLocation(x_bound, y_bound);
         return label;
     }

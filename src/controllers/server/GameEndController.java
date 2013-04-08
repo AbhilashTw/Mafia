@@ -1,6 +1,7 @@
 package controllers.server;
 
 import controllers.Workflow;
+import entities.Player;
 import entities.Players;
 import gameMessages.MafiaWinsMessage;
 import gameMessages.VillagerWinsMessage;
@@ -44,5 +45,11 @@ public class GameEndController {
 
     public void goToHomeScreen() {
         workflow.start();
+    }
+
+    public void close() {
+        for (Player player : players.getPlayers()) {
+            player.stop();
+        }
     }
 }

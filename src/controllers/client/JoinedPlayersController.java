@@ -53,6 +53,7 @@ public class JoinedPlayersController implements ClientEngine {
 
     @Override
     public void serverClosed() {
+        view.connectionClosed();
         workflow.start();
     }
 

@@ -132,6 +132,7 @@ public class MafiaScreen implements MafiaView {
     @Override
     public void updateStatus(String status) {
         defaultStatusList.addElement(status);
+        panel.repaint();
     }
 
     @Override
@@ -139,7 +140,16 @@ public class MafiaScreen implements MafiaView {
         createMafiaList(400, 100);
         for (String player : players) {
             defaultMafiaList.addElement(player);
+            panel.repaint();
         }
+    }
+
+    @Override
+    public void serverClosed() {
+        JOptionPane optionPane = new JOptionPane("Server Closed", JOptionPane.ERROR_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Error Message");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
     }
 
     public void timerScreen() {

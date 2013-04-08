@@ -43,6 +43,7 @@ public class MafiaController implements ClientEngine {
 
     @Override
     public void serverClosed() {
+      view.serverClosed();
     }
 
     @Override
@@ -86,8 +87,8 @@ public class MafiaController implements ClientEngine {
         clientPlayer.sendMessage(message);
     }
 
-    public String getClientName(){
-       return clientPlayer.getPlayerName();
+    public String getClientName() {
+        return clientPlayer.getPlayerName();
     }
 
 }
