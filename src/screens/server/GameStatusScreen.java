@@ -15,7 +15,6 @@ public class GameStatusScreen implements GameStatusView {
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private JList statusList = new JList(defaultStatusList);
     private ImagePanel panel;
-    private JScrollPane listScroller;
 
     public GameStatusScreen(IMainFrame mainFrame, GameStatusController controller) {
         this.mainFrame = mainFrame;
@@ -42,9 +41,11 @@ public class GameStatusScreen implements GameStatusView {
 
     @Override
     public void updatePlayerKilledStatus(String name) {
+
         defaultStatusList.addElement("Player " + name + " Killed");
         panel.revalidate();
         panel.repaint();
+
     }
 
     @Override
