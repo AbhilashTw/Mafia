@@ -17,7 +17,7 @@ public class MainFrame implements IMainFrame {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        frame.setPreferredSize(new Dimension(600,800));
+        frame.setPreferredSize(new Dimension(1000,1000));
 
     }
 

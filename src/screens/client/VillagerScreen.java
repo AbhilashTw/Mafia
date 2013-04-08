@@ -79,6 +79,7 @@ public class VillagerScreen implements VillagerView {
             public void actionPerformed(ActionEvent e) {
                 controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
                 disableVoteButtons(confirmButton);
+                confirmButton.removeActionListener(this);
             }
         });
     }
@@ -95,10 +96,10 @@ public class VillagerScreen implements VillagerView {
     public void display(String[] playersName) {
         JButton confirmButton = createButton(50, 700, "Confirm");
         panel.add(confirmButton);
-        updateStatus("You can vote now ");
-        int x = 100, y = 100;
         addListeners(confirmButton);
 
+        updateStatus("You can vote now ");
+        int x = 100, y = 100;
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
             button.setLocation(x, y);
@@ -130,22 +131,18 @@ public class VillagerScreen implements VillagerView {
         panel.repaint();
     }
 
-
-
     @Override
     public void serverClosed() {
     }
 
-
     private void disableVoteButtons(JButton confirmButton) {
-        updateStatus("Your Voting Time Ended");
+        voteList.removeAll();
         confirmButton.setVisible(false);
-        voteList.setVisible(false);
+
+        updateStatus("Your Voting Time Ended");
         Enumeration<AbstractButton> allButtons = bg.getElements();
         while (allButtons.hasMoreElements()) {
             allButtons.nextElement().setVisible(false);
         }
-        panel.revalidate();
-        panel.repaint();
     }
 }
