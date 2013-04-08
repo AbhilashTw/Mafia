@@ -44,7 +44,7 @@ public class MafiaScreen implements MafiaView {
         createTimerLabel();
 
         JLabel mafiaLabel = createLabel("You are assigned as a Mafia", 700, -50);
-        JLabel votingPortalLabel = createLabel("Voting Portal", 100, -50);
+        JLabel votingPortalLabel = createLabel("Voting Portal", 150, -50);
         JLabel mafiaListLabel = createLabel("Mafians", 400, -50);
 
         panel.add(timerLabel);
@@ -66,15 +66,15 @@ public class MafiaScreen implements MafiaView {
     private void createVoteList(int xBound, int yBound) {
         voteList.setSize(200, 450);
         voteList.setLocation(xBound, yBound);
-        voteList.setBackground(Color.WHITE);
-        voteList.setForeground(Color.BLACK);
+        voteList.setBackground(Color.BLACK);
+        voteList.setForeground(Color.WHITE);
         voteList.setFont(new Font("Monospaced", Font.PLAIN, 20));
     }
 
     private void createList(int x_bound, int y_bound) {
         statusList.setSize(600, 450);
         statusList.setLocation(x_bound, y_bound);
-        statusList.setBackground(Color.WHITE);
+        statusList.setBackground(Color.ORANGE);
         statusList.setForeground(Color.BLACK);
         statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
     }
@@ -82,7 +82,7 @@ public class MafiaScreen implements MafiaView {
     private void createMafiaList(int x_bound, int y_bound) {
         mafiaList.setSize(200, 250);
         mafiaList.setLocation(x_bound, y_bound);
-        mafiaList.setBackground(Color.WHITE);
+        mafiaList.setBackground(Color.ORANGE);
         mafiaList.setForeground(Color.BLACK);
         mafiaList.setFont(new Font("Monospaced", Font.PLAIN, 20));
     }
@@ -91,7 +91,7 @@ public class MafiaScreen implements MafiaView {
         JLabel label = new JLabel(labelName);
         Font font = new Font("Monospaced", Font.BOLD, 16);
         label.setFont(font);
-        label.setForeground(Color.RED);
+        label.setForeground(Color.WHITE);
         label.setBackground(Color.BLACK);
         label.setSize(300, 250);
         label.setLocation(x_bound, y_bound);
@@ -111,6 +111,7 @@ public class MafiaScreen implements MafiaView {
             button.setLocation(x, y);
             button.setSize(145, 50);
             button.setVisible(true);
+            button.setBackground(Color.ORANGE);
             bg.add(button);
             voteList.add(button);
             if (controller.getClientName().equals(player)) {
