@@ -1,6 +1,7 @@
 package screens.controls;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Job : Understands the window where game story plays.
@@ -13,18 +14,17 @@ public class MainFrame implements IMainFrame {
         frame = new JFrame("Mafia Game");
         frame.setBounds(0, 0, 1280, 1024);
         frame.setVisible(true);
-        frame.setResizable(false);
+        frame.setBackground(Color.black);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
     @Override
     public ImagePanel createImagePanel(String imageFilePath) {
         frame.getContentPane().removeAll();
-        frame.repaint();
         ImagePanel imagePanel = new ImagePanel(new ImageIcon(imageFilePath).getImage());
         frame.getContentPane().add(imagePanel);
+        frame.repaint();
         return imagePanel;
     }
 

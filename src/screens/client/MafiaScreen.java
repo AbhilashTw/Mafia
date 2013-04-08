@@ -47,7 +47,7 @@ public class MafiaScreen implements MafiaView {
         panel.add(statusList);
         panel.add(mafiaList);
 
-        updateStatus("Your assigned as a Mafia");
+        updateStatus("You are assigned as a Mafia");
     }
 
     private void createTimerLabel() {
@@ -74,7 +74,7 @@ public class MafiaScreen implements MafiaView {
         statusList.setFont(f);
     }
 
-    private void createMafiaList(int x_bound, int y_bound) {
+        private void createMafiaList(int x_bound, int y_bound) {
         mafiaList.setSize(600, 450);
         mafiaList.setLocation(x_bound, y_bound);
         mafiaList.setOpaque(false);
@@ -82,6 +82,7 @@ public class MafiaScreen implements MafiaView {
         mafiaList.setFont(f);
 
     }
+
 
     @Override
     public void display(String[] playersName, GameStatus status) {
@@ -97,9 +98,9 @@ public class MafiaScreen implements MafiaView {
             button.setVisible(true);
             bg.add(button);
             voteList.add(button);
-            if (controller.getClientName().equals(player)) {
+            if( controller.getClientName().equals(player) ) {
                 button.setSelected(true);
-                votedOutPlayer = controller.getClientName();
+                votedOutPlayer=controller.getClientName();
             }
             button.addActionListener(new ActionListener() {
                 @Override
