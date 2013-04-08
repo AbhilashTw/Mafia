@@ -139,10 +139,8 @@ public class MafiaScreen implements MafiaView {
     @Override
     public void updateStatus(String status) {
         defaultStatusList.addElement(status);
-
         panel.revalidate();
         panel.repaint();
-
     }
 
     @Override
@@ -169,6 +167,7 @@ public class MafiaScreen implements MafiaView {
     private void disableVoteButtons(JButton confirmButton) {
         voteList.removeAll();
         confirmButton.setVisible(false);
+
         updateStatus("Your Voting Time Ended");
         Enumeration<AbstractButton> allButtons = bg.getElements();
         while (allButtons.hasMoreElements()) {

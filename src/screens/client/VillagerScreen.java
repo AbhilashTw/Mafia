@@ -32,13 +32,11 @@ public class VillagerScreen implements VillagerView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
         createList(700, 100);
-        createVoteList(100, 100);
 
         JLabel villagerLabel = createLabel("You are assigned as a Villager", 700, -50);
         JLabel votingPortalLabel = createLabel("Voting Portal", 100, -50);
 
         panel.add(statusList);
-        panel.add(voteList);
 
         panel.add(villagerLabel);
         panel.add(votingPortalLabel);
@@ -96,9 +94,14 @@ public class VillagerScreen implements VillagerView {
         JButton confirmButton = createButton(50, 700, "Confirm");
         addListeners(confirmButton);
         panel.add(confirmButton);
+
+        createVoteList(100,100);
+        panel.add(voteList);
+        addListeners(confirmButton);
+
+
         updateStatus("You can vote now ");
         int x = 100, y = 100;
-
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
             button.setLocation(x, y);
@@ -135,11 +138,11 @@ public class VillagerScreen implements VillagerView {
     public void serverClosed() {
     }
 
-
     private void disableVoteButtons(JButton confirmButton) {
-        updateStatus("Your Voting Time Ended");
+        voteList.removeAll();
         confirmButton.setVisible(false);
-        voteList.setVisible(false);
+
+        updateStatus("Your Voting Time Ended");
         Enumeration<AbstractButton> allButtons = bg.getElements();
         while (allButtons.hasMoreElements()) {
             allButtons.nextElement().setVisible(false);
