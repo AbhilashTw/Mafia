@@ -40,7 +40,7 @@ public class VillagerScreen implements VillagerView {
         panel.add(timerLabel);
         panel.add(statusList);
         panel.add(voteList);
-        updateStatus("Your Assigned as a villager");
+        updateStatus("You are Assigned as a villager");
     }
 
     private void createTimerLabel() {
@@ -80,9 +80,9 @@ public class VillagerScreen implements VillagerView {
             button.setVisible(true);
             bg.add(button);
             voteList.add(button);
-            if( controller.getClientName().equals(player) ) {
+            if (controller.getClientName().equals(player)) {
                 button.setSelected(true);
-                votedOutPlayer=controller.getClientName();
+                votedOutPlayer = controller.getClientName();
             }
             button.addActionListener(new ActionListener() {
                 @Override
