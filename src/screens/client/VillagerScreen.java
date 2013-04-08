@@ -17,16 +17,15 @@ public class VillagerScreen implements VillagerView {
     private static final String BG_IMAGE = "images/VillagerScreen.jpg";
     private final VillagerController controller;
     private IMainFrame mainFrame;
-    private final JLabel timerLabel = new JLabel("30");
+
     private ImagePanel panel;
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private JList statusList = new JList<String>(defaultStatusList);
-
     private JList voteList = new JList<JRadioButton>();
-
     private ButtonGroup bg = new ButtonGroup();
 
     private String votedOutPlayer;
+    private JButton confirmButton;
 
     public VillagerScreen(IMainFrame mainFrame, VillagerController controller) {
         this.mainFrame = mainFrame;
@@ -35,29 +34,20 @@ public class VillagerScreen implements VillagerView {
 
         createList(700, 100);
         createVoteList(100, 100);
-        createTimerLabel();
 
         JLabel villagerLabel = createLabel("You are assigned as a Villager", 700, -50);
         JLabel votingPortalLabel = createLabel("Voting Portal", 100, -50);
+        confirmButton = createButton(100, 900, "Confirm");
 
-        panel.add(timerLabel);
         panel.add(statusList);
         panel.add(voteList);
 
-
         panel.add(villagerLabel);
         panel.add(votingPortalLabel);
-
+        addListeners();
     }
 
     //todo: Have a common method for creating list.
-    private void createTimerLabel() {
-        timerLabel.setForeground(Color.WHITE);
-        timerLabel.setLocation(900, 800);
-        timerLabel.setSize(200, 200);
-        Font timerFont = new Font("Monospaced", Font.PLAIN, 100);
-        timerLabel.setFont(timerFont);
-    }
 
     private void createList(int x_bound, int y_bound) {
         statusList.setSize(450, 450);
@@ -86,12 +76,29 @@ public class VillagerScreen implements VillagerView {
         return label;
     }
 
+    private void addListeners() {
+        confirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
+                disableVoteButtons();
+            }
+        });
+    }
+
+    private JButton createButton(int x_axis, int y_axis, String buttonName) {
+        JButton button = new JButton(buttonName);
+        button.setSize(145, 50);
+        button.setLocation(x_axis, y_axis);
+        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        return button;
+    }
+
     @Override
     public void display(String[] playersName) {
+        panel.add(confirmButton);
         updateStatus("You can vote now ");
-        timerScreen();
         int x = 100, y = 100;
-
 
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
@@ -102,8 +109,6 @@ public class VillagerScreen implements VillagerView {
             button.setBackground(Color.ORANGE);
             button.setForeground(Color.black);
             bg.add(button);
-
-
             voteList.add(button);
             if (controller.getClientName().equals(player)) {
                 button.setSelected(true);
@@ -122,24 +127,6 @@ public class VillagerScreen implements VillagerView {
     @Override
     public void updateStatus(String status) {
         defaultStatusList.addElement(status);
-        panel.repaint();
-    }
-
-    public void timerScreen() {
-        Timer timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int time = Integer.parseInt(timerLabel.getText());
-                if (time > 0) timerLabel.setText(String.valueOf(time - 1));
-                else if (time == 0) {
-                    controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
-                    disableVoteButtons();
-                    ((Timer) e.getSource()).stop();
-
-                }
-            }
-        });
-        timer.start();
     }
 
     @Override
@@ -151,7 +138,6 @@ public class VillagerScreen implements VillagerView {
     }
 
     private void disableVoteButtons() {
-        panel.repaint();
         updateStatus("Your Voting Time Ended");
         voteList.setVisible(false);
         Enumeration<AbstractButton> allButtons = bg.getElements();

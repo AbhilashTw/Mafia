@@ -17,7 +17,6 @@ import java.util.Enumeration;
 public class MafiaScreen implements MafiaView {
 
     private static final String BG_IMAGE = "images/MafiaStartScreen.jpg";
-    private JLabel timerLabel = new JLabel("30");
     private IMainFrame mainFrame;
     private MafiaController controller;
     private ImagePanel panel;
@@ -26,7 +25,7 @@ public class MafiaScreen implements MafiaView {
     private JList statusList = new JList<String>(defaultStatusList);
     private DefaultListModel<String> defaultMafiaList = new DefaultListModel<String>();
     private JList mafiaList = new JList<String>(defaultMafiaList);
-
+    private JButton confirmButton;
 
     private JList voteList = new JList<JRadioButton>();
 
@@ -41,27 +40,22 @@ public class MafiaScreen implements MafiaView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
         createList(700, 100);
-        createTimerLabel();
 
         JLabel mafiaLabel = createLabel("You are assigned as a Mafia", 700, -50);
         JLabel votingPortalLabel = createLabel("Voting Portal", 150, -50);
         JLabel mafiaListLabel = createLabel("Mafians", 400, -50);
+        confirmButton = createButton(100, 900, "Confirm");
 
-        panel.add(timerLabel);
         panel.add(statusList);
         panel.add(mafiaList);
 
         panel.add(mafiaLabel);
         panel.add(votingPortalLabel);
         panel.add(mafiaListLabel);
+        addListeners();
+
     }
 
-    private void createTimerLabel() {
-        timerLabel.setForeground(Color.WHITE);
-        timerLabel.setLocation(900, 800);
-        timerLabel.setSize(200, 200);
-        timerLabel.setFont(new Font("Monospaced", Font.PLAIN, 100));
-    }
 
     private void createVoteList(int xBound, int yBound) {
         voteList.setSize(200, 450);
@@ -98,13 +92,29 @@ public class MafiaScreen implements MafiaView {
         return label;
     }
 
+    private void addListeners() {
+        confirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sendMessage();
+            }
+        });
+    }
+
+    private JButton createButton(int x_axis, int y_axis, String buttonName) {
+        JButton button = new JButton(buttonName);
+        button.setSize(145, 50);
+        button.setLocation(x_axis, y_axis);
+        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        return button;
+    }
 
     @Override
     public void display(String[] playersName, GameStatus status) {
+        panel.add(confirmButton);
         createVoteList(100, 100);
         panel.add(voteList);
         this.status = status;
-        timerScreen();
         int x = 80, y = 80;
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
@@ -132,7 +142,6 @@ public class MafiaScreen implements MafiaView {
     @Override
     public void updateStatus(String status) {
         defaultStatusList.addElement(status);
-        panel.repaint();
     }
 
     @Override
@@ -140,7 +149,6 @@ public class MafiaScreen implements MafiaView {
         createMafiaList(400, 100);
         for (String player : players) {
             defaultMafiaList.addElement(player);
-            panel.repaint();
         }
     }
 
@@ -150,22 +158,6 @@ public class MafiaScreen implements MafiaView {
         JDialog dialog = optionPane.createDialog("Error Message");
         dialog.setAlwaysOnTop(true);
         dialog.setVisible(true);
-    }
-
-    public void timerScreen() {
-        timerLabel.setText("30");
-        Timer timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int time = Integer.parseInt(timerLabel.getText());
-                if (time > 0) timerLabel.setText(String.valueOf(time - 1));
-                else if (time == 0) {
-                    sendMessage();
-                    ((Timer) e.getSource()).stop();
-                }
-            }
-        });
-        timer.start();
     }
 
     private void sendMessage() {
