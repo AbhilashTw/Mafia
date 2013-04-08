@@ -40,7 +40,9 @@ public class VillagerScreen implements VillagerView {
         panel.add(timerLabel);
         panel.add(statusList);
         panel.add(voteList);
+
         updateStatus("You are assigned as a villager");
+
     }
 
     //todo: Have a common method for creating list.

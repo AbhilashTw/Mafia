@@ -14,17 +14,21 @@ public class MainFrame implements IMainFrame {
         frame = new JFrame("Mafia Game");
         frame.setBounds(100, 110, 1000, 1000);
         frame.setVisible(true);
+
+        frame.setBackground(Color.black);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(true);
         frame.setMaximumSize(new Dimension(1000, 1000));
     }
 
     @Override
     public ImagePanel createImagePanel(String imageFilePath) {
         frame.getContentPane().removeAll();
-        frame.repaint();
         ImagePanel imagePanel = new ImagePanel(new ImageIcon(imageFilePath).getImage());
         frame.getContentPane().add(imagePanel);
+        frame.repaint();
+        frame.pack();
         return imagePanel;
     }
 

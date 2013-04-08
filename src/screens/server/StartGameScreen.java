@@ -70,8 +70,6 @@ public class StartGameScreen implements StartGameView {
         button.setSize(145, 50);
         button.setLocation(x_bound, y_bound);
         button.setFont(new Font("Monospaced", Font.BOLD, 14));
-        button.setForeground(Color.ORANGE);
-        button.setBackground(Color.BLACK);
         return button;
     }
 

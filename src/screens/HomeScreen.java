@@ -68,8 +68,6 @@ public class HomeScreen implements HomeView {
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
         button.setFont(new Font("Monospaced", Font.BOLD, 16));
-        button.setForeground(Color.BLACK);
-        button.setBackground(Color.ORANGE);
         return button;
     }
 
