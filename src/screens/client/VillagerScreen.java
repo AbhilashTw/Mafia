@@ -33,16 +33,17 @@ public class VillagerScreen implements VillagerView {
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
-        createList(900, 100);
+        createList(400, 100);
         createVoteList(100, 100);
         createTimerLabel();
 
         panel.add(timerLabel);
         panel.add(statusList);
         panel.add(voteList);
-        updateStatus("Your Assigned as a villager");
+        updateStatus("You are assigned as a villager");
     }
 
+    //todo: Have a common method for creating list.
     private void createTimerLabel() {
         timerLabel.setForeground(Color.WHITE);
         timerLabel.setLocation(900, 800);
@@ -52,19 +53,21 @@ public class VillagerScreen implements VillagerView {
     }
 
     private void createList(int x_bound, int y_bound) {
-        statusList.setSize(600, 450);
+        statusList.setSize(450, 450);
         statusList.setLocation(x_bound, y_bound);
-        statusList.setOpaque(false);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
-        statusList.setFont(f);
+        statusList.setBackground(Color.ORANGE);
+        statusList.setForeground(Color.BLACK);
+        statusList.setFont(new Font("Monospaced", Font.PLAIN, 20));
     }
 
     private void createVoteList(int xBound, int yBound) {
         voteList.setSize(200, 650);
+        voteList.setBackground(Color.ORANGE);
         voteList.setLocation(xBound, yBound);
-        voteList.setOpaque(false);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
-        voteList.setFont(f);
+        voteList.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        voteList.setAlignmentX(JList.CENTER_ALIGNMENT);
+        voteList.setFocusable(false);
+        voteList.setValueIsAdjusting(true);
     }
 
     @Override
@@ -72,17 +75,23 @@ public class VillagerScreen implements VillagerView {
         updateStatus("You can vote now ");
         timerScreen();
         int x = 100, y = 100;
+
+
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
             button.setLocation(x, y);
             button.setSize(145, 50);
             button.setFont(new Font("Times New Roman", Font.PLAIN, 20));
             button.setVisible(true);
+            button.setBackground(Color.ORANGE);
+            button.setForeground(Color.black);
             bg.add(button);
+
+
             voteList.add(button);
-            if( controller.getClientName().equals(player) ) {
+            if (controller.getClientName().equals(player)) {
                 button.setSelected(true);
-                votedOutPlayer=controller.getClientName();
+                votedOutPlayer = controller.getClientName();
             }
             button.addActionListener(new ActionListener() {
                 @Override
