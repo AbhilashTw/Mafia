@@ -37,10 +37,15 @@ public class VillagerScreen implements VillagerView {
         createVoteList(100, 100);
         createTimerLabel();
 
+        JLabel villagerLabel = createLabel("You are assigned as a Villager", 900, -50);
+        JLabel votingPortalLabel = createLabel("Voting Portal", 100, -50);
+
         panel.add(timerLabel);
         panel.add(statusList);
         panel.add(voteList);
-        updateStatus("You are Assigned as a villager");
+
+        panel.add(villagerLabel);
+        panel.add(votingPortalLabel);
     }
 
     private void createTimerLabel() {
@@ -54,7 +59,8 @@ public class VillagerScreen implements VillagerView {
     private void createList(int x_bound, int y_bound) {
         statusList.setSize(600, 450);
         statusList.setLocation(x_bound, y_bound);
-        statusList.setOpaque(false);
+        statusList.setBackground(Color.WHITE);
+        statusList.setForeground(Color.BLACK);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         statusList.setFont(f);
     }
@@ -62,9 +68,21 @@ public class VillagerScreen implements VillagerView {
     private void createVoteList(int xBound, int yBound) {
         voteList.setSize(200, 650);
         voteList.setLocation(xBound, yBound);
-        voteList.setOpaque(false);
+        voteList.setBackground(Color.WHITE);
+        voteList.setForeground(Color.BLACK);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         voteList.setFont(f);
+    }
+
+    private JLabel createLabel(String labelName, int x_bound, int y_bound) {
+        JLabel label = new JLabel(labelName);
+        Font font = new Font("Monospaced", Font.BOLD, 16);
+        label.setFont(font);
+        label.setForeground(Color.RED);
+        label.setBackground(Color.BLACK);
+        label.setSize(300, 250);
+        label.setLocation(x_bound, y_bound);
+        return label;
     }
 
     @Override
