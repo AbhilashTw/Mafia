@@ -79,7 +79,6 @@ public class VillagerScreen implements VillagerView {
             public void actionPerformed(ActionEvent e) {
                 controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
                 disableVoteButtons(confirmButton);
-                confirmButton.removeActionListener(this);
             }
         });
     }

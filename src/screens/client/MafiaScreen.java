@@ -90,7 +90,6 @@ public class MafiaScreen implements MafiaView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sendMessage(confirmButton);
-                confirmButton.removeActionListener(this);
             }
         });
     }
