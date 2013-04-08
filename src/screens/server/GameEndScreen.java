@@ -42,7 +42,7 @@ public class GameEndScreen implements GameEndView {
         gameStatus.setSize(300, 300);
         gameStatus.setLocation(400, 600);
         gameStatus.setFont(new Font("monospaced", Font.BOLD, 20));
-        gameStatus.setForeground(Color.ORANGE);
+        gameStatus.setForeground(Color.RED);
         panel.add(gameStatus);
     }
 
@@ -51,8 +51,6 @@ public class GameEndScreen implements GameEndView {
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
         button.setFont(new Font("Verdana", Font.BOLD, 14));
-        button.setForeground(Color.ORANGE);
-        button.setBackground(Color.BLACK);
         return button;
     }
 }

@@ -76,8 +76,6 @@ public class JoinServerScreen implements JoinServerView {
         button.setSize(145, 50);
         button.setLocation(x_bound, y_bound);
         button.setFont(new Font("Verdana", Font.BOLD, 14));
-        button.setForeground(Color.ORANGE);
-        button.setBackground(Color.BLACK);
         return button;
     }
 

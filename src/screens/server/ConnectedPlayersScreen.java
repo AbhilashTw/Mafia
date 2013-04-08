@@ -70,8 +70,6 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
         button.setFont(new Font("Verdana", Font.BOLD, 14));
-        button.setForeground(Color.ORANGE);
-        button.setBackground(Color.BLACK);
         return button;
     }
 
