@@ -33,6 +33,7 @@ public class HomeScreen implements HomeView {
         panel.add(startServerButton);
         panel.add(joinServerButton);
         panel.add(quitButton);
+        ((JFrame) startServerButton.getTopLevelAncestor()).pack();
         addButtonHandlers();
     }
 
