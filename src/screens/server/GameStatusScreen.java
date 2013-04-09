@@ -7,6 +7,10 @@ import views.server.GameStatusView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GameStatusScreen implements GameStatusView {
     private final String BG_IMAGE = "images/status.jpg";
@@ -15,6 +19,7 @@ public class GameStatusScreen implements GameStatusView {
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private JList statusList = new JList(defaultStatusList);
     private ImagePanel panel;
+    private JButton quit;
 
     public GameStatusScreen(IMainFrame mainFrame, GameStatusController controller) {
         this.mainFrame = mainFrame;
@@ -22,6 +27,36 @@ public class GameStatusScreen implements GameStatusView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
         panel.add(statusList);
         createList(100, 100);
+        quit = createButton(700, 700, "Quit");
+        addDefaultCloseAction();
+        addActionListeners();
+        panel.add(quit);
+    }
+
+    private void addActionListeners() {
+        quit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.close();
+            }
+        });
+    }
+
+    private JButton createButton(int x_axis, int y_axis, String buttonName) {
+        JButton button = new JButton(buttonName);
+        button.setSize(145, 50);
+        button.setLocation(x_axis, y_axis);
+        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        return button;
+    }
+
+    private void addDefaultCloseAction() {
+        mainFrame.getFrame().addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                controller.close();
+            }
+        });
     }
 
     private void createList(int x_bound, int y_bound) {

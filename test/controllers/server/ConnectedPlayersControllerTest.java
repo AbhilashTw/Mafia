@@ -51,5 +51,19 @@ public class ConnectedPlayersControllerTest {
         verify(view).display(players.getPlayers());
     }
 
+    @Test
+    public void when_close_is_called_players_quit_is_invoked() {
+        controller = new ConnectedPlayersController(players, workflow);
+        controller.close();
+        verify(players).quit();
+    }
+
+    @Test
+    public void when_close_is_called_Workflow_start_is_invoked() {
+        controller = new ConnectedPlayersController(players, workflow);
+        controller.close();
+        verify(workflow).start();
+    }
+
 
 }

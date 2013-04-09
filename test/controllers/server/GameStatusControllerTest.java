@@ -36,9 +36,19 @@ public class GameStatusControllerTest {
     public void start_Invokes_players_getAllPlayerNames() {
         controller.bind(view);
         controller.start();
-        verify(play).createPlayersPoll(new GamePoll(),players);
+        verify(play).createPlayersPoll(new GamePoll(), players);
     }
 
+    @Test
+    public void close_Invokes_players_quit() {
+        controller.close();
+        verify(players).quit();
+    }
 
+    @Test
+    public void close_Invokes_workflow_start() {
+        controller.close();
+        verify(workflow).start();
+    }
 
 }

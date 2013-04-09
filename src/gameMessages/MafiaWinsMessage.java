@@ -9,4 +9,5 @@ public class MafiaWinsMessage extends ChannelMessage implements Serializable {
     public MafiaWinsMessage() {
         super();
     }
+
 }

@@ -17,13 +17,14 @@ public class MainFrame implements IMainFrame {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        frame.setPreferredSize(new Dimension(1000,1000));
+        frame.setPreferredSize(new Dimension(1000, 1000));
 
     }
 
     @Override
     public ImagePanel createImagePanel(String imageFilePath) {
         frame.getContentPane().removeAll();
+        // ImagePanel imagePanel = new ImagePanel(new ImageIcon(getClass().getClassLoader().getResource(imageFilePath)).getImage());
         ImagePanel imagePanel = new ImagePanel(new ImageIcon(imageFilePath).getImage());
         frame.getContentPane().add(imagePanel);
         frame.pack();
