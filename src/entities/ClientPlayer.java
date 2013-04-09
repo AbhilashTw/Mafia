@@ -71,7 +71,6 @@ public class ClientPlayer implements SocketChannelListener {
         if (message instanceof KnowMafiaMessage) {
             engine.displayMafia(((KnowMafiaMessage) message).getPlayers());
         }
-
     }
 
     @Override

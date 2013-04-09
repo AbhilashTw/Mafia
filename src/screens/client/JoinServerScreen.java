@@ -25,6 +25,7 @@ public class JoinServerScreen implements JoinServerView {
     private final JButton connectButton;
     public IMainFrame mainFrame;
     private JPanel displayMessage;
+    private boolean sentConnection = false;
 
     public JoinServerScreen(IMainFrame mainFrame, JoinServerController controller) {
         this.mainFrame = mainFrame;
@@ -52,10 +53,16 @@ public class JoinServerScreen implements JoinServerView {
         connectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //todo :Work on if else
                 if (serverNameText.getText().equals("")) {
                     displayMessage = new JPanel();
                     JOptionPane.showMessageDialog(displayMessage, "Invalid Server Name", "Error", JOptionPane.ERROR_MESSAGE);
-                } else controller.connectToServer();
+                } else {
+                    if (!sentConnection) {
+                        controller.connectToServer();
+                        sentConnection = true;
+                    }
+                }
             }
         });
     }
@@ -81,6 +88,7 @@ public class JoinServerScreen implements JoinServerView {
     @Override
     public void connectionToServerFailed() {
         displayMessage = new JPanel();
+        sentConnection = false;
         JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to connect", "Error", JOptionPane.ERROR_MESSAGE);
     }
 

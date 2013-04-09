@@ -41,4 +41,9 @@ public class JoinServerController implements ConnectionListener {
     public void onConnectionFailed(String serverAddress, int serverPort, Exception e) {
         view.connectionToServerFailed();
     }
+
+    @Override
+    public void connectionSuccessful() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

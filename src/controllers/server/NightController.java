@@ -19,15 +19,15 @@ public class NightController {
     }
 
     public void start() {
-        sendAllMafiaNames();
         sendNightArrivedMessage();
+        sendAllMafiaNames();
         play.createPlayersPoll(new GamePoll(), players);
     }
 
     private void sendAllMafiaNames() {
         KnowMafiaMessage message = new KnowMafiaMessage();
         message.setPlayers(players.getMafiaPlayers());
-        players.sendMessage(message);
+        players.sendMessageToAllMafia(message);
     }
 
     private void sendNightArrivedMessage() {
@@ -46,14 +46,20 @@ public class NightController {
     }
 
     private void removePlayer() {
-        engine.removePlayer(play.getKilledPlayer());
-        sendKilledMessage(play.getKilledPlayer());
+        Player deadPlayer = play.getKilledPlayer();
+
+        sendKilledMessage(deadPlayer);
+
+        engine.removePlayer(deadPlayer);
+
+        sendKilledPlayerMessage(deadPlayer);
+
         isGameStable();
     }
 
     private void sendKilledMessage(Player deadPlayer) {
         deadPlayer.sendMessage(new KilledMessage());
-        sendKilledPlayerMessage(deadPlayer);
+
     }
 
     private void sendKilledPlayerMessage(Player removedPlayer) {

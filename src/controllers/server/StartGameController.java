@@ -14,6 +14,7 @@ public class StartGameController implements GameEngine {
     private final Players gamePlayers;
     private SocketServer server;
     private StartGameView view;
+    private boolean serverStatus = true;
 
     public StartGameController(Workflow workflow, Players players) {
         this.workflow = workflow;
@@ -52,9 +53,9 @@ public class StartGameController implements GameEngine {
     public void updateVillagerVotes(String playerName, String killedPlayer) {
     }
 
-    public void start(SocketServer server) {
+    public boolean start(SocketServer server) {
         this.server = server;
-        server.start();
+        return server.start();
     }
 
     public boolean canGameBeStarted() {
@@ -71,5 +72,17 @@ public class StartGameController implements GameEngine {
 
     public void startGame() {
         workflow.startGame(gamePlayers);
+    }
+
+    public void goToHomeScreen() {
+        workflow.start();
+    }
+
+    public void serverActive(boolean b) {
+        serverStatus = b;
+    }
+
+    public boolean activeServerExists() {
+        return serverStatus;
     }
 }

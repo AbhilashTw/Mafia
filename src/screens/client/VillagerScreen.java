@@ -153,10 +153,10 @@ public class VillagerScreen implements VillagerView {
 
     @Override
     public void serverClosed() {
-        JOptionPane optionPane = new JOptionPane("Server Closed ", JOptionPane.ERROR_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Error Message");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
+//        JOptionPane optionPane = new JOptionPane("Server Closed ", JOptionPane.ERROR_MESSAGE);
+//        JDialog dialog = optionPane.createDialog("Error Message");
+//        dialog.setAlwaysOnTop(true);
+//        dialog.setVisible(true);
     }
 
     private void disableVoteButtons(JButton confirmButton) {

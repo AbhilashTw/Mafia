@@ -5,4 +5,5 @@ public interface ConnectionListener {
 
     void onConnectionFailed(String serverAddress, int serverPort, Exception e);
 
+    void connectionSuccessful();
 }

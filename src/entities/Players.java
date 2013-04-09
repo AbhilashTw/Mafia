@@ -3,6 +3,7 @@ package entities;
 import channels.messages.ChannelMessage;
 import controllers.server.GameEngine;
 import controllers.server.RoleDecider;
+import gameMessages.KnowMafiaMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,5 +83,11 @@ public class Players {
                 mafiaPlayer.add(player.getName());
         }
         return mafiaPlayer.toArray(new String[mafiaPlayer.size()]);
+    }
+
+    public void sendMessageToAllMafia(KnowMafiaMessage message) {
+        for (Player player : players) {
+            if (player.isMafia()) player.sendMessage(message);
+        }
     }
 }

@@ -172,10 +172,10 @@ public class MafiaScreen implements MafiaView {
 
     @Override
     public void serverClosed() {
-        JOptionPane optionPane = new JOptionPane("Server Closed ", JOptionPane.ERROR_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Error Message");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
+//        JOptionPane optionPane = new JOptionPane("Server Closed ", JOptionPane.ERROR_MESSAGE);
+//        JDialog dialog = optionPane.createDialog("Error Message");
+//        dialog.setAlwaysOnTop(true);
+//        dialog.setVisible(true);
     }
 
     private void sendMessage(JButton confirmButton) {

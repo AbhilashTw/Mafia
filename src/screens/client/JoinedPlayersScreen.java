@@ -25,6 +25,7 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
+
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
