@@ -30,7 +30,7 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
             public void run() {
 
                 playersConnectedLabel = createLabel("Players Joined", 50, -50, 200, 250);
-                gameInfoLabel = createLabel("Wait for the game to start", 400, 400, 350, 400);
+                gameInfoLabel = createLabel("Wait for the game to start", 350, 300, 350, 400);
                 createList(50, 100);
 
                 exitButton = createButton(300, 300, "Exit");
