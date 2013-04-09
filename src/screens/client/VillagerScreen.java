@@ -23,6 +23,7 @@ public class VillagerScreen implements VillagerView {
     private JList statusList = new JList<String>(defaultStatusList);
     private JList voteList = new JList<JRadioButton>();
     private ButtonGroup buttonGroup = new ButtonGroup();
+    private JLabel playerName;
 
     private String votedOutPlayer;
 
@@ -35,9 +36,10 @@ public class VillagerScreen implements VillagerView {
 
         JLabel villagerLabel = createLabel("You are assigned as a Villager", 700, -50);
         JLabel votingPortalLabel = createLabel("Voting Portal", 100, -50);
+        playerName = createLabel("Player Name: " + controller.getClientName().toString(), 400, 600);
 
         panel.add(statusList);
-
+        panel.add(playerName);
         panel.add(villagerLabel);
         panel.add(votingPortalLabel);
     }
@@ -64,7 +66,7 @@ public class VillagerScreen implements VillagerView {
         JLabel label = new JLabel(labelName);
         Font font = new Font("Monospaced", Font.BOLD, 16);
         label.setFont(font);
-        label.setForeground(Color.RED);
+        label.setForeground(Color.WHITE);
         label.setBackground(Color.BLACK);
         label.setSize(300, 250);
         label.setLocation(x_bound, y_bound);
@@ -75,10 +77,14 @@ public class VillagerScreen implements VillagerView {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
-                disableVoteButtons(confirmButton);
+                sendMessage(confirmButton);
             }
         });
+    }
+
+    private void sendMessage(JButton confirmButton) {
+        controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
+        disableVoteButtons(confirmButton);
     }
 
     private JButton createButton(int x_axis, int y_axis, String buttonName) {

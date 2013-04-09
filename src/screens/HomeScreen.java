@@ -30,10 +30,21 @@ public class HomeScreen implements HomeView {
         joinServerButton = createButton(100, 400, "JoinServer");
         quitButton = createButton(100, 500, "Quit");
 
-        panel.add(startServerButton);
-        panel.add(joinServerButton);
-        panel.add(quitButton);
+        panel.add(startServerButton,addGridConstraints(100,100));
+        panel.add(joinServerButton,addGridConstraints(100,200));
+        panel.add(quitButton, addGridConstraints(100,300));
+
         addButtonHandlers();
+    }
+
+    private GridBagConstraints addGridConstraints( int xBound, int yBound) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = xBound;
+        gbc.gridy = yBound;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        gbc.anchor=GridBagConstraints.NORTHEAST;
+        gbc.insets= new Insets(30,30,30,30);
+        return gbc;
     }
 
     private void addButtonHandlers() {

@@ -24,6 +24,7 @@ public class MafiaScreen implements MafiaView {
     private JList statusList = new JList<String>(defaultStatusList);
     private DefaultListModel<String> defaultMafiaList = new DefaultListModel<String>();
     private JList mafiaList = new JList<String>(defaultMafiaList);
+    private JLabel playerName;
 
     private JList voteList = new JList<JRadioButton>();
     private ButtonGroup buttonGroup = new ButtonGroup();
@@ -36,12 +37,15 @@ public class MafiaScreen implements MafiaView {
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
+
         createList(700, 100);
 
         JLabel mafiaLabel = createLabel("You are assigned as a Mafia", 700, -50);
         JLabel votingPortalLabel = createLabel("Voting Portal", 150, -50);
         JLabel mafiaListLabel = createLabel("Mafians", 400, -50);
 
+        playerName=createLabel("Player Name: "+ controller.getClientName().toString(),400,600);
+        panel.add(playerName);
         panel.add(statusList);
         panel.add(mafiaList);
         panel.add(mafiaLabel);
