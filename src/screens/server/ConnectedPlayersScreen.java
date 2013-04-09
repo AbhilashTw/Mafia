@@ -34,7 +34,7 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
         playersName = createList(playersName, 50, 100);
         playersRole = createList(playersRole, 300, 100);
-        continueButton = createButton(800, 400, "Continue");
+        continueButton = createButton(700, 400, "Continue");
         exit = createButton(700, 500, "Stop Server");
         panel.add(continueButton);
         panel.add(playersName);

@@ -18,6 +18,7 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     private JButton exitButton;
     private DefaultListModel<String> playersDefaultList = new DefaultListModel<String>();
     private JList playersList = new JList<String>(playersDefaultList);
+    private JLabel gameInfoLabel;
     ImagePanel panel;
 
     public JoinedPlayersScreen(IMainFrame mainFrame, JoinedPlayersController controller) {
@@ -28,12 +29,15 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
             @Override
             public void run() {
 
-                playersConnectedLabel = createLabel("Players Joined", 50, -50);
+                playersConnectedLabel = createLabel("Players Joined", 50, -50, 200, 250);
+                gameInfoLabel = createLabel("Wait for the game to start", 400, 400, 350, 400);
                 createList(50, 100);
-                exitButton = createButton(400, 400, "Exit");
+
+                exitButton = createButton(300, 300, "Exit");
                 panel.add(playersList);
                 panel.add(playersConnectedLabel);
                 panel.add(exitButton);
+                panel.add(gameInfoLabel);
                 addButtonHandlers();
             }
         });
@@ -48,12 +52,12 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
         playersList.setFont(f);
     }
 
-    private JLabel createLabel(String labelName, int x_bound, int y_bound) {
+    private JLabel createLabel(String labelName, int xBound, int yBound, int xSize, int ySize) {
         JLabel label = new JLabel(labelName);
         label.setFont(new Font("Monospaced", Font.PLAIN, 20));
         label.setForeground(Color.WHITE);
-        label.setSize(200, 250);
-        label.setLocation(x_bound, y_bound);
+        label.setSize(xSize, ySize);
+        label.setLocation(xBound, yBound);
         return label;
     }
 

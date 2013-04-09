@@ -58,7 +58,7 @@ public class StartGameController implements GameEngine {
     }
 
     public boolean canGameBeStarted() {
-        return gamePlayers.getPlayersCount() > 0;
+        return gamePlayers.getPlayersCount() >= 3;
     }
 
     public void stop() {

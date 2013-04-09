@@ -25,6 +25,7 @@ public class StartGameScreen implements StartGameView {
     public SocketServer server;
     IMainFrame startServerFrame;
     private JLabel playersJoinedLabel;
+    private JLabel minimumPlayersLabel;
     private JButton startServerButton;
     private JButton stopServerButton;
     private ImagePanel panel;
@@ -39,15 +40,18 @@ public class StartGameScreen implements StartGameView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
         playersJoinedLabel = createLabel("Players Joined", 100, -50);
-        startServerButton = createButton("Start Game", 800, 800);
-        stopServerButton = createButton("Stop Server", 800, 900);
+        minimumPlayersLabel = createLabel("Minimum players : 3", 400, 400);
+        startServerButton = createButton("Start Game", 400, 600);
+        stopServerButton = createButton("Stop Server", 400, 700);
+
         createList();
 
-        panel.add(playersJoinedLabel);
-        panel.add(startServerButton);
-        panel.add(stopServerButton);
-        panel.add(playersList);
-        addButtonHandlers();
+        panel.add(playersJoinedLabel, addGridConstraints(playersJoinedLabel.getAlignmentX(), playersJoinedLabel.getAlignmentY()));
+        panel.add(playersList, addGridConstraints(playersList.getAlignmentX() + playersList.getHeight(), playersList.getAlignmentY() + playersList.getWidth()));
+        panel.add(startServerButton, addGridConstraints(startServerButton.getX(), startServerButton.getY()));
+        panel.add(stopServerButton, addGridConstraints(stopServerButton.getX(), stopServerButton.getY()));
+        panel.add(minimumPlayersLabel);
+        startServerButton.setEnabled(false);
         setDefaultCloseAction(controller);
     }
 
@@ -60,12 +64,22 @@ public class StartGameScreen implements StartGameView {
         });
     }
 
+    private GridBagConstraints addGridConstraints(float xBound, float yBound) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = (int) xBound;
+        gbc.gridy = (int) yBound;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        gbc.insets = new Insets(30, 30, 30, 30);
+        return gbc;
+    }
+
     @Override
     public void updatePlayers(List<Player> players) {
         allPlayers.removeAllElements();
         for (Player player : players) {
             allPlayers.addElement(player.getName());
         }
+        checkMinimumPlayers();
     }
 
     private void createList() {
@@ -91,23 +105,24 @@ public class StartGameScreen implements StartGameView {
         label.setFont(font);
         label.setForeground(Color.WHITE);
         label.setBackground(Color.BLACK);
-        label.setSize(200, 200);
+        label.setSize(250, 250);
         label.setLocation(x_bound, y_bound);
         return label;
     }
+
+    private void checkMinimumPlayers() {
+        if (controller.canGameBeStarted()) {
+            startServerButton.setEnabled(true);
+        }
+        addButtonHandlers();
+    }
+
 
     private void addButtonHandlers() {
         startServerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (controller.canGameBeStarted()) {
-                    controller.startGame();
-                } else {
-                    JOptionPane optionPane = new JOptionPane("Required Minimum 3 players to Start Game ", JOptionPane.ERROR_MESSAGE);
-                    JDialog dialog = optionPane.createDialog("Error Message");
-                    dialog.setAlwaysOnTop(true);
-                    dialog.setVisible(true);
-                }
+                controller.startGame();
             }
         });
         stopServerButton.addActionListener(new ActionListener() {
