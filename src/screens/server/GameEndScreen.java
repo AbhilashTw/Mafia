@@ -44,8 +44,9 @@ public class GameEndScreen implements GameEndView {
         gameStatus.setFont(new Font("monospaced", Font.BOLD, 20));
         gameStatus.setForeground(Color.RED);
         panel.add(gameStatus);
-        //controller.close();
     }
+
+
 
     private JButton createButton(int x_axis, int y_axis, String buttonName) {
         JButton button = new JButton(buttonName);

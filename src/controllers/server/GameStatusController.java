@@ -3,6 +3,7 @@ package controllers.server;
 import controllers.Workflow;
 import entities.Player;
 import entities.Players;
+import gameMessages.KilledPlayerMessage;
 import views.server.GameStatusView;
 
 /**
@@ -63,6 +64,7 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
 
     @Override
     public void updateVillagerVotes(String playerName, String killedPlayer) {
+        System.out.println(playerName + " voted " + killedPlayer);
         view.updateVoteStatus(playerName, killedPlayer);
         dayController.poll(killedPlayer);
     }
@@ -84,5 +86,10 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
         view.status("Day Arrived");
         dayController = new DayController(players, this, gamePlay);
         dayController.start();
+    }
+
+    public void close() {
+        players.quit();
+        workflow.start();
     }
 }

@@ -17,7 +17,9 @@ public class MainFrame implements IMainFrame {
         frame.setBackground(Color.BLACK);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         frame.setPreferredSize(new Dimension(1000, 1000));
+
     }
 
     @Override
@@ -25,7 +27,9 @@ public class MainFrame implements IMainFrame {
         URL url = getClass().getClassLoader().getResource(imageFilePath);
         Image image = new ImageIcon(url).getImage();
         frame.getContentPane().removeAll();
+
         ImagePanel imagePanel = new ImagePanel(image);
+
         frame.getContentPane().add(imagePanel);
         frame.pack();
         return imagePanel;

@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 public class ConnectedPlayersScreen implements ConnectedPlayersView {
@@ -23,6 +25,7 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
     private DefaultListModel<String> playersRoleList = new DefaultListModel<String>();
     private JList playersRole = new JList(playersRoleList);
     private JButton continueButton;
+    private JButton exit;
 
 
     public ConnectedPlayersScreen(IMainFrame mainFrame, ConnectedPlayersController controller) {
@@ -32,10 +35,22 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
         playersName = createList(playersName, 50, 100);
         playersRole = createList(playersRole, 300, 100);
         continueButton = createButton(800, 400, "Continue");
+        exit = createButton(700, 500, "Stop Server");
         panel.add(continueButton);
         panel.add(playersName);
         panel.add(playersRole);
+        panel.add(exit);
         addListener();
+        setDefaultCloseAction(mainFrame, controller);
+    }
+
+    private void setDefaultCloseAction(IMainFrame mainFrame, final ConnectedPlayersController controller) {
+        mainFrame.getFrame().addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                controller.close();
+            }
+        });
     }
 
     private void addListener() {
@@ -43,6 +58,12 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.Continue();
+            }
+        });
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.close();
             }
         });
     }

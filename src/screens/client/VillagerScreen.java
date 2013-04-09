@@ -22,7 +22,7 @@ public class VillagerScreen implements VillagerView {
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private JList statusList = new JList<String>(defaultStatusList);
     private JList voteList = new JList<JRadioButton>();
-    private ButtonGroup bg = new ButtonGroup();
+    private ButtonGroup buttonGroup = new ButtonGroup();
 
     private String votedOutPlayer;
 
@@ -95,9 +95,11 @@ public class VillagerScreen implements VillagerView {
 
     @Override
     public void display(String[] playersName) {
+
         JButton confirmButton = createButton(50, 700, "Confirm");
         addListeners(confirmButton);
         panel.add(confirmButton);
+
         createVoteList(100, 100);
         panel.add(voteList);
 
@@ -105,25 +107,37 @@ public class VillagerScreen implements VillagerView {
         int x = 100, y = 100;
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
-            button.setLocation(x, y);
-            button.setSize(145, 50);
-            button.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-            button.setVisible(true);
-            button.setBackground(Color.ORANGE);
-            button.setForeground(Color.black);
-            bg.add(button);
+            customizeButton(x, y, player, button);
             voteList.add(button);
-            if (controller.getClientName().equals(player)) {
-                button.setSelected(true);
-                votedOutPlayer = controller.getClientName();
-            }
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    votedOutPlayer = e.getActionCommand();
-                }
-            });
             y += 60;
+        }
+    }
+
+    private void customizeButton(int x, int y, String player, AbstractButton button) {
+        button.setLocation(x, y);
+        button.setSize(145, 50);
+        button.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        button.setVisible(true);
+        button.setBackground(Color.ORANGE);
+        button.setForeground(Color.black);
+        buttonGroup.add(button);
+        setDefaultSelect(player, button);
+        addActionListener(button);
+    }
+
+    private void addActionListener(AbstractButton button) {
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                votedOutPlayer = e.getActionCommand();
+            }
+        });
+    }
+
+    private void setDefaultSelect(String player, AbstractButton button) {
+        if (controller.getClientName().equals(player)) {
+            button.setSelected(true);
+            votedOutPlayer = controller.getClientName();
         }
     }
 
@@ -137,6 +151,10 @@ public class VillagerScreen implements VillagerView {
 
     @Override
     public void serverClosed() {
+        JOptionPane optionPane = new JOptionPane("Server Closed ", JOptionPane.ERROR_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Error Message");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
     }
 
     private void disableVoteButtons(JButton confirmButton) {
@@ -144,7 +162,7 @@ public class VillagerScreen implements VillagerView {
         confirmButton.setVisible(false);
 
         updateStatus("Your Voting Time Ended");
-        Enumeration<AbstractButton> allButtons = bg.getElements();
+        Enumeration<AbstractButton> allButtons = buttonGroup.getElements();
         while (allButtons.hasMoreElements()) {
             allButtons.nextElement().setVisible(false);
         }

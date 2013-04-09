@@ -52,4 +52,9 @@ public class ConnectedPlayersController {
         sendClientsMessage();
         workflow.showGameStatus();
     }
+
+    public void close() {
+        workflow.start();
+        players.quit();
+    }
 }

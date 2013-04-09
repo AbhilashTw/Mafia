@@ -27,13 +27,13 @@ public class ClientPlayer implements SocketChannelListener {
 
     @Override
     public void onClose(SocketChannel channel, Exception e) {
-        System.out.println(playerName + " server closed failed");
+        System.out.println(playerName + " Server is Closed");
         engine.serverClosed();
     }
 
     @Override
     public void onSendFailed(SocketChannel channel, IOException e, ChannelMessage message) {
-        System.out.println(playerName + " sending failed");
+        System.out.println(playerName + " Sending Failed");
         e.printStackTrace();
     }
 
@@ -76,7 +76,7 @@ public class ClientPlayer implements SocketChannelListener {
 
     @Override
     public void onMessageReadError(SocketChannel channel, Exception e) {
-        System.out.println(playerName + " message read failed");
+        System.out.println(playerName + " Message Read Failed");
         e.printStackTrace();
     }
 

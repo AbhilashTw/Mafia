@@ -26,7 +26,7 @@ public class MafiaScreen implements MafiaView {
     private JList mafiaList = new JList<String>(defaultMafiaList);
 
     private JList voteList = new JList<JRadioButton>();
-    private ButtonGroup bg = new ButtonGroup();
+    private ButtonGroup buttonGroup = new ButtonGroup();
     private String votedOutPlayer;
 
     private GameStatus status;
@@ -106,33 +106,46 @@ public class MafiaScreen implements MafiaView {
     public void display(String[] playersName, GameStatus status) {
         JButton confirmButton = createButton(50, 700, "Confirm");
         panel.add(confirmButton);
+        addListeners(confirmButton);
+
         createVoteList(100, 100);
         panel.add(voteList);
-        addListeners(confirmButton);
+
         this.status = status;
+
         int x = 80, y = 80;
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
-            button.setLocation(x, y);
-            button.setSize(145, 50);
-            button.setVisible(true);
-            button.setBackground(Color.ORANGE);
-            bg.add(button);
-
-
-            voteList.add(button);
-            if (controller.getClientName().equals(player)) {
-                button.setSelected(true);
-                votedOutPlayer = controller.getClientName();
-            }
-
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    votedOutPlayer = e.getActionCommand();
-                }
-            });
+            customizeButton(x, y, player, button);
             y += 60;
+            voteList.add(button);
+        }
+
+    }
+
+    private void customizeButton(int x, int y, String player, AbstractButton button) {
+        button.setLocation(x, y);
+        button.setSize(145, 50);
+        button.setVisible(true);
+        button.setBackground(Color.ORANGE);
+        buttonGroup.add(button);
+        setDefaultSelect(player, button);
+        addActionListener(button);
+    }
+
+    private void addActionListener(AbstractButton button) {
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                votedOutPlayer = e.getActionCommand();
+            }
+        });
+    }
+
+    private void setDefaultSelect(String player, AbstractButton button) {
+        if (controller.getClientName().equals(player)) {
+            button.setSelected(true);
+            votedOutPlayer = controller.getClientName();
         }
     }
 
@@ -155,7 +168,10 @@ public class MafiaScreen implements MafiaView {
 
     @Override
     public void serverClosed() {
-
+        JOptionPane optionPane = new JOptionPane("Server Closed ", JOptionPane.ERROR_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Error Message");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
     }
 
     private void sendMessage(JButton confirmButton) {
@@ -169,7 +185,7 @@ public class MafiaScreen implements MafiaView {
         confirmButton.setVisible(false);
 
         updateStatus("Your Voting Time Ended");
-        Enumeration<AbstractButton> allButtons = bg.getElements();
+        Enumeration<AbstractButton> allButtons = buttonGroup.getElements();
         while (allButtons.hasMoreElements()) {
             allButtons.nextElement().setVisible(false);
         }

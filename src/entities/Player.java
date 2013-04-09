@@ -1,6 +1,5 @@
 package entities;
 
-
 import channels.SocketChannel;
 import channels.SocketChannelListener;
 import channels.messages.ChannelMessage;
@@ -11,7 +10,11 @@ import gameMessages.VillagerVotedOutMafiaMessage;
 
 import java.io.IOException;
 
+/*
+  Job: Understands the one who participate in the game.
+*/
 public class Player implements SocketChannelListener {
+
     private GameEngine god;
     private SocketChannel channel;
     private String name;
@@ -42,6 +45,7 @@ public class Player implements SocketChannelListener {
     @Override
     public void onSendFailed(SocketChannel channel, IOException e, ChannelMessage message) {
         System.out.println(name + role + "Sending Failed " + channel.getAddress());
+        channel.send(message);
         e.printStackTrace();
     }
 
@@ -64,7 +68,6 @@ public class Player implements SocketChannelListener {
     @Override
     public void onMessageReadError(SocketChannel channel, Exception e) {
         System.out.println(name + role + "Read Failed " + channel.getAddress());
-
         e.printStackTrace();
     }
 

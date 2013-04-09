@@ -30,6 +30,7 @@ public class GameEndController {
     public void start() {
         if (gameStatus.equals(GameResult.MafiaWins)) sendMafiaWinsMessage();
         else sendVillagerWinsMessage();
+        close();
     }
 
     private void sendVillagerWinsMessage() {
@@ -41,6 +42,7 @@ public class GameEndController {
     private void sendMafiaWinsMessage() {
         players.sendMessage(new MafiaWinsMessage());
         view.display("Mafia Won the Game");
+
     }
 
     public void goToHomeScreen() {
@@ -48,8 +50,6 @@ public class GameEndController {
     }
 
     public void close() {
-        for (Player player : players.getPlayers()) {
-            player.stop();
-        }
+        players.quit();
     }
 }
