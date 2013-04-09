@@ -2,6 +2,7 @@ package screens.controls;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 /**
  * Job : Understands the window where game story plays.
@@ -16,15 +17,15 @@ public class MainFrame implements IMainFrame {
         frame.setBackground(Color.BLACK);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        frame.setPreferredSize(new Dimension(1000,1000));
-
+        frame.setPreferredSize(new Dimension(1000, 1000));
     }
 
     @Override
     public ImagePanel createImagePanel(String imageFilePath) {
+        URL url = getClass().getClassLoader().getResource(imageFilePath);
+        Image image = new ImageIcon(url).getImage();
         frame.getContentPane().removeAll();
-        ImagePanel imagePanel = new ImagePanel(new ImageIcon(imageFilePath).getImage());
+        ImagePanel imagePanel = new ImagePanel(image);
         frame.getContentPane().add(imagePanel);
         frame.pack();
         return imagePanel;
@@ -34,5 +35,4 @@ public class MainFrame implements IMainFrame {
     public JFrame getFrame() {
         return frame;
     }
-
 }

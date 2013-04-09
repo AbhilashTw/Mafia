@@ -75,10 +75,14 @@ public class VillagerScreen implements VillagerView {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
-                disableVoteButtons(confirmButton);
+                sendMessage(confirmButton);
             }
         });
+    }
+
+    private void sendMessage(JButton confirmButton) {
+        controller.sendMessage(new VillagerVotedOutMafiaMessage(votedOutPlayer));
+        disableVoteButtons(confirmButton);
     }
 
     private JButton createButton(int x_axis, int y_axis, String buttonName) {
@@ -94,11 +98,8 @@ public class VillagerScreen implements VillagerView {
         JButton confirmButton = createButton(50, 700, "Confirm");
         addListeners(confirmButton);
         panel.add(confirmButton);
-
-        createVoteList(100,100);
+        createVoteList(100, 100);
         panel.add(voteList);
-        addListeners(confirmButton);
-
 
         updateStatus("You can vote now ");
         int x = 100, y = 100;
