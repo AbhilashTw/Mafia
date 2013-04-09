@@ -79,9 +79,12 @@ public class SocketChannel {
 
     }
 
-    private void sendData(ChannelMessage message) {
+    private synchronized void sendData(ChannelMessage message) {
         try {
-            getOrCreateOutputStream().writeObject(message);
+            ObjectOutputStream out = getOrCreateOutputStream();
+            //System.out.println("While Sending" + message.getClass() + " Add: " + socket.getRemoteSocketAddress());
+            out.writeObject(message);
+
         } catch (IOException e) {
             channelListener.onSendFailed(this, e, message);
         }
@@ -89,10 +92,6 @@ public class SocketChannel {
 
     private ObjectOutputStream getOrCreateOutputStream() throws IOException {
         if (outputStream == null) outputStream = new ObjectOutputStream(socket.getOutputStream());
-        else {
-            //outputStream.flush();
-           // outputStream.reset();
-        }
         return outputStream;
     }
 
@@ -109,6 +108,7 @@ public class SocketChannel {
         try {
 
             ChannelMessage message = (ChannelMessage) getOrCreateObjectInputStream().readObject();
+            //System.out.println("While reading" + message.getClass() + " Add: " + socket.getRemoteSocketAddress());
             if (message instanceof ByeMessage) return false;
             channelListener.onNewMessageArrived(this, message);
 

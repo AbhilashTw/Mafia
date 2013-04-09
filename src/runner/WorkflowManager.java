@@ -40,11 +40,11 @@ public class WorkflowManager implements Workflow {
 
     @Override
     public void startServer() {
-
         StartGameController controller = new StartGameController(this, players);
-        controller.bind(new StartGameScreen(mainFrame, controller));
         SocketServer server = new SocketServer(1234, new NewConnectionListener(controller));
-        controller.start(server);
+        if(controller.start(server))
+            controller.bind(new StartGameScreen(mainFrame, controller));
+
     }
 
     @Override

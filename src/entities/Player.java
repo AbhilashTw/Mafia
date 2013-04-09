@@ -108,4 +108,8 @@ public class Player implements SocketChannelListener {
     public void setGameEngine(GameEngine gameEngine) {
         this.god = gameEngine;
     }
+
+    public boolean isMafia() {
+        return role == Role.Mafia;
+    }
 }

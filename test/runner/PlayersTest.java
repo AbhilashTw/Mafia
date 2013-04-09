@@ -3,6 +3,7 @@ package runner;
 import channels.messages.ChannelMessage;
 import entities.Player;
 import entities.Players;
+import gameMessages.KnowMafiaMessage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -70,5 +71,13 @@ public class PlayersTest {
         players.addPlayer(player);
         players.removePlayer(player);
         Assert.assertEquals(0, players.getPlayersCount());
+    }
+
+    @Test
+    public void sendMessageToAllMafia_invokes_player_sendMessage_if_isMafia_is_true() {
+        stub(player.isMafia()).toReturn(true);
+        players.addPlayer(player);
+        players.sendMessageToAllMafia(new KnowMafiaMessage());
+        verify(player).sendMessage(new KnowMafiaMessage());
     }
 }

@@ -4,13 +4,17 @@ import channels.ConnectionListener;
 import channels.SocketChannel;
 import entities.Player;
 
+import javax.swing.*;
+
 
 public class NewConnectionListener implements ConnectionListener {
 
     private final StartGameController controller;
 
+
     public NewConnectionListener(StartGameController controller) {
         this.controller = controller;
+
     }
 
     @Override
@@ -19,8 +23,18 @@ public class NewConnectionListener implements ConnectionListener {
     }
 
     @Override
+    public void connectionSuccessful() {
+        controller.serverActive(true);
+        System.out.println("Iam here");
+    }
+
+    @Override
     public void onConnectionFailed(String serverAddress, int serverPort, Exception e) {
-        throw new RuntimeException("Could not start server", e);
+        JOptionPane optionPane = new JOptionPane("Server Cant be Started", JOptionPane.ERROR_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Error Message");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+        controller.goToHomeScreen();
     }
 
 }

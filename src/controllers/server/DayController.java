@@ -40,8 +40,15 @@ public class DayController {
     }
 
     private void removePlayer() {
-        engine.removePlayer(play.getKilledPlayer());
-        sendKilledMessage(play.getKilledPlayer());
+
+        Player deadPlayer = play.getKilledPlayer();
+
+        sendKilledMessage(deadPlayer);
+
+        engine.removePlayer(deadPlayer);
+
+        sendKilledPlayerMessage(deadPlayer);
+
         isGameStable();
     }
 
@@ -53,7 +60,6 @@ public class DayController {
 
     private void sendKilledMessage(Player deadPlayer) {
         deadPlayer.sendMessage(new KilledMessage());
-        sendKilledPlayerMessage(deadPlayer);
     }
 
     private void sendKilledPlayerMessage(Player removedPlayer) {

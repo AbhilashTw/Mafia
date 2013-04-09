@@ -25,7 +25,7 @@ public class SocketServer {
     }
 
     private void waitForConnections() {
-        startServerSocket();
+
         while (true) {
             try {
                 acceptConnection();
@@ -49,23 +49,30 @@ public class SocketServer {
         listener.onConnectionEstablished(new SocketChannel(socket));
     }
 
-    private void startServerSocket() {
+    private boolean startServerSocket() {
         try {
             serverSocket = new ServerSocket(port);
+            listener.connectionSuccessful();
             serverSocket.setSoTimeout(SOCKET_TIMEOUT);
+            return true;
         } catch (IOException e) {
             listener.onConnectionFailed(null, port, e);
+            return false;
         }
     }
 
-    public void start() {
+    public boolean start() {
         stopWaiting = false;
+        if(startServerSocket()){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 waitForConnections();
             }
         }, "wait for connections").start();
+        return true;
+        }
+        return false;
     }
 
     public void stop() {

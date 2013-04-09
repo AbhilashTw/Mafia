@@ -39,6 +39,7 @@ public class HomeScreen implements HomeView {
     private void addButtonHandlers() {
         startServerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 controller.startServer();
             }
         });
