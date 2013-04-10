@@ -16,14 +16,19 @@ public class PlayerDeadScreen implements PlayerDeadView {
     private final ImagePanel panel;
     private JLabel deadLabel;
     private JButton exitButton;
+    private DefaultListModel<String> logModel = new DefaultListModel<String>();
+    private JList<String> log = new JList<String>(logModel);
 
 
     public PlayerDeadScreen(IMainFrame mainFrame, PlayerDeadController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel("images//KilledScreen.jpg");
-        exitButton = createButton(100, 800, "Exit");
+        exitButton = createButton(10, 600, "Exit");
+        createList();
         panel.add(exitButton);
+        panel.add(log);
+        mainFrame.setSize(400, 700);
         addListeners();
     }
 
@@ -31,11 +36,26 @@ public class PlayerDeadScreen implements PlayerDeadView {
     public void display(String playerName) {
         deadLabel = new JLabel(playerName + " You are dead...!!!");
         deadLabel.setSize(900, 350);
-        deadLabel.setLocation(200, 400);
-        deadLabel.setFont(new Font("Monospaced", Font.PLAIN, 28));
+        deadLabel.setLocation(10, -100);
+        deadLabel.setFont(new Font("Monospaced", Font.BOLD, 20));
         deadLabel.setForeground(Color.RED);
         panel.add(deadLabel);
         panel.repaint();
+    }
+
+    private void createList() {
+        log.setSize(300, 450);
+        log.setBorder(BorderFactory.createLineBorder(SystemColor.WHITE));
+        log.setLocation(10, 100);
+        log.setFont(new Font("Monospaced", Font.PLAIN, 14));
+        log.setBackground(Color.orange);
+    }
+
+    @Override
+    public void displayLog(String[] presentStatusLog) {
+        for (String s : presentStatusLog) {
+            logModel.addElement(s);
+        }
     }
 
     private void addListeners() {

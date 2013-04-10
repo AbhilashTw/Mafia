@@ -50,7 +50,7 @@ public class MafiaScreen implements MafiaView {
         JLabel playersListLabel = createLabel("Mafians", 250, -50);
 
         playerName = createLabel("Player Name: " + controller.getClientName(), 200, 400);
-        roleLabel = createLabel("Role: "+"Mafia",200,450);
+        roleLabel = createLabel("Role: " + "Mafia", 200, 450);
 
         panel.add(playerName);
         panel.add(statusList);
@@ -59,7 +59,7 @@ public class MafiaScreen implements MafiaView {
         panel.add(mafiaLabel);
         panel.add(votingPortalLabel);
         panel.add(playersListLabel);
-        mainFrame.setSize(900,700);
+        mainFrame.setSize(900, 700);
     }
 
 
@@ -77,6 +77,7 @@ public class MafiaScreen implements MafiaView {
         statusList.setBackground(Color.ORANGE);
         statusList.setForeground(Color.BLACK);
         statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
+
     }
 
     private void createMafiaList(int x_bound, int y_bound) {

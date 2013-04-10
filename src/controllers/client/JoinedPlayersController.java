@@ -89,4 +89,9 @@ public class JoinedPlayersController implements ClientEngine {
     public void displayPlayers(String[] allPlayersName) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    @Override
+    public void displayDeadLog(String[] presentStatusLog) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

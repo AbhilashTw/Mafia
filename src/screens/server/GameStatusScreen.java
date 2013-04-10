@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class GameStatusScreen implements GameStatusView {
     private final String BG_IMAGE = "images/status.jpg";
@@ -99,6 +100,15 @@ public class GameStatusScreen implements GameStatusView {
     @Override
     public void updateVoteStatus(String playerName, String votedPlayer, String format) {
         defaultStatusList.addElement(format + "" + playerName + "Voted" + " " + votedPlayer);
+    }
+
+    @Override
+    public String[] getPresentStatusLog() {
+        ArrayList<String> statusLog = new ArrayList<String>();
+        for (int i = 0; i < defaultStatusList.size(); i++) {
+            statusLog.add(defaultStatusList.getElementAt(i));
+        }
+        return statusLog.toArray(new String[statusLog.size()]);
     }
 
     @Override

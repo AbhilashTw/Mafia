@@ -71,8 +71,11 @@ public class ClientPlayer implements SocketChannelListener {
         if (message instanceof KnowMafiaMessage) {
             engine.displayMafia(((KnowMafiaMessage) message).getPlayers());
         }
-        if(message instanceof KnowVillagersMessage){
+        if (message instanceof KnowVillagersMessage) {
             engine.displayPlayers(((KnowVillagersMessage) message).getAllPlayersName());
+        }
+        if (message instanceof GameStatusLogMessage) {
+           engine.displayDeadLog(((GameStatusLogMessage) message).getPresentStatusLog());
         }
     }
 

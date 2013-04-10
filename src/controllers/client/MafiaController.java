@@ -55,7 +55,7 @@ public class MafiaController implements ClientEngine {
     @Override
     public void displayMafiaVotingChart(String[] playerNames) {
         view.updateStatus("Mafia Wake Up ! !" + "\n");
-        view.updateStatus( "Whom do you want to kill?");
+        view.updateStatus("Whom do you want to kill?");
         view.display(playerNames, GameStatus.NIGHT);
     }
 
@@ -88,6 +88,11 @@ public class MafiaController implements ClientEngine {
 
     @Override
     public void displayPlayers(String[] allPlayersName) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void displayDeadLog(String[] presentStatusLog) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

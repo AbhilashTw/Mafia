@@ -25,4 +25,6 @@ public interface ClientEngine {
     void displayMafia(String[] players);
 
     void displayPlayers(String[] allPlayersName);
+
+    void displayDeadLog(String[] presentStatusLog);
 }

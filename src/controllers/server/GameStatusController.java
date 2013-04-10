@@ -3,6 +3,7 @@ package controllers.server;
 import controllers.Workflow;
 import entities.Player;
 import entities.Players;
+import gameMessages.GameStatusLogMessage;
 import views.server.GameStatusView;
 
 import java.text.SimpleDateFormat;
@@ -89,7 +90,14 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         view.status(format.format(cal.getTime()) + " " + killedPlayer.getName() + " is Killed");
+        sendLogMessage(killedPlayer);
         players.removePlayer(killedPlayer);
+    }
+
+    private void sendLogMessage(Player player) {
+        GameStatusLogMessage message = new GameStatusLogMessage();
+        message.setLog(view.getPresentStatusLog());
+        player.sendMessage(message);
     }
 
     @Override

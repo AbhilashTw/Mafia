@@ -13,4 +13,6 @@ public interface GameStatusView {
     void updatePlayersList(Players players);
 
     void updateVoteStatus(String playerName, String votedPlayer, String format);
+
+    String[] getPresentStatusLog();
 }
