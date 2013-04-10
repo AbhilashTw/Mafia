@@ -34,15 +34,19 @@ public class GameStatusScreen implements GameStatusView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
         panel.add(statusList);
         panel.add(playersList);
+
         createList(100, 100);
         createPlayersList(600, 100);
-        quit = createButton(700, 900, "Quit");
-        gameStatus = createLabel("Game Status", 100, 20, 200, 50);
+
+        quit = createButton(400, 450, "Quit");
+        gameStatus = createLabel("Game Status", 100, 20, 200, 100);
         playersIn = createLabel("Players", 300, 200, 20, 50);
+
         addDefaultCloseAction();
         addActionListeners();
         panel.add(quit);
         panel.repaint();
+        mainFrame.setSize(600,900);
     }
 
     private JLabel createLabel(String labelName, int xBound, int yBound, int xSize, int ySize) {
@@ -81,7 +85,7 @@ public class GameStatusScreen implements GameStatusView {
     }
 
     private void createList(int x_bound, int y_bound) {
-        statusList.setSize(400, 600);
+        statusList.setSize(300, 400);
         statusList.setBackground(Color.ORANGE);
         statusList.setForeground(Color.BLACK);
         statusList.setLocation(x_bound, y_bound);
@@ -89,7 +93,7 @@ public class GameStatusScreen implements GameStatusView {
     }
 
     private void createPlayersList(int x_bound, int y_bound) {
-        playersList.setSize(300, 500);
+        playersList.setSize(200, 300);
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.BLACK);
         playersList.setLocation(x_bound, y_bound);

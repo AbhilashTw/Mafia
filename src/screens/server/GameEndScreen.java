@@ -22,9 +22,10 @@ public class GameEndScreen implements GameEndView {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel("images/gameEndScreen.jpg");
-        exit = createButton(100, 800, "Exit");
+        exit = createButton(100, 300, "Exit");
         panel.add(exit);
         addListeners();
+        mainFrame.setSize(400,400);
     }
 
     private void addListeners() {
@@ -39,10 +40,10 @@ public class GameEndScreen implements GameEndView {
     @Override
     public void display(String s) {
         gameStatus = new JLabel(s);
-        gameStatus.setSize(300, 300);
-        gameStatus.setLocation(200, 600);
+        gameStatus.setSize(400, 350);
+        gameStatus.setLocation(80, 10);
         gameStatus.setFont(new Font("monospaced", Font.BOLD, 20));
-        gameStatus.setForeground(Color.RED);
+        gameStatus.setForeground(Color.WHITE);
         panel.add(gameStatus);
         panel.repaint();
     }

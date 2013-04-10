@@ -121,11 +121,8 @@ public class VillagerScreen implements VillagerView {
         JButton confirmButton = createButton(30, 500, "Confirm");
         addListeners(confirmButton);
         panel.add(confirmButton);
-
         createVoteList(-50, 100);
         panel.add(voteList);
-
-        updateStatus("You can vote now ");
         int x = 80, y = 70;
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);

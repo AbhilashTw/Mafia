@@ -22,18 +22,19 @@ public class PlayerDeadScreen implements PlayerDeadView {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel("images//KilledScreen.jpg");
-        exitButton = createButton(100, 800, "Exit");
+        exitButton = createButton(100, 300, "Exit");
         panel.add(exitButton);
         addListeners();
+        mainFrame.setSize(400,400);
     }
 
     @Override
     public void display(String playerName) {
-        deadLabel = new JLabel(playerName + " You are dead...!!!");
-        deadLabel.setSize(900, 350);
-        deadLabel.setLocation(200, 400);
-        deadLabel.setFont(new Font("Monospaced", Font.PLAIN, 28));
-        deadLabel.setForeground(Color.RED);
+        deadLabel = new JLabel(playerName + " you are dead...!!!");
+        deadLabel.setSize(400, 350);
+        deadLabel.setLocation(80, 10);
+        deadLabel.setFont(new Font("Monospaced", Font.BOLD, 20));
+        deadLabel.setForeground(Color.WHITE);
         panel.add(deadLabel);
         panel.repaint();
     }
