@@ -8,6 +8,8 @@ import views.server.GameStatusView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Job: Understands to Inform the Player about the routine.
@@ -53,18 +55,15 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
 
     }
 
-
     @Override
     public void removePlayer(Player removedPlayer, GameStatus status) {
 
     }
 
-
     @Override
     public void endGame(GameResult status) {
         workflow.gameEnd(status);
     }
-
 
     @Override
     public void startNight() {
@@ -86,11 +85,17 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
 
 
     @Override
-    public void removePlayer(Player killedPlayer) {
+    public void removePlayer(final Player killedPlayer) {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         view.status(format.format(cal.getTime()) + " " + killedPlayer.getName() + " is Killed");
-        sendLogMessage(killedPlayer);
+        Timer time = new Timer();
+        time.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                sendLogMessage(killedPlayer);
+            }
+        }, 500);
         players.removePlayer(killedPlayer);
     }
 

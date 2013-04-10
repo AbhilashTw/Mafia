@@ -86,11 +86,11 @@ public class GameStatusScreen implements GameStatusView {
     }
 
     private void createList(int x_bound, int y_bound) {
-        statusList.setSize(300, 400);
+        statusList.setSize(300, 350);
         statusList.setBackground(Color.ORANGE);
         statusList.setForeground(Color.BLACK);
         statusList.setLocation(x_bound, y_bound);
-        statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
+        statusList.setFont(new Font("Monospaced", Font.BOLD, 16));
     }
 
     private void createPlayersList(int x_bound, int y_bound) {
@@ -98,12 +98,12 @@ public class GameStatusScreen implements GameStatusView {
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.BLACK);
         playersList.setLocation(x_bound, y_bound);
-        playersList.setFont(new Font("Monospaced", Font.BOLD, 20));
+        playersList.setFont(new Font("Monospaced", Font.BOLD, 16));
     }
 
     @Override
     public void updateVoteStatus(String playerName, String votedPlayer, String format) {
-        defaultStatusList.addElement(format + " " + playerName + "Voted" + " " + votedPlayer);
+        defaultStatusList.addElement(format + " " + playerName + " " + "Voted" + " " + votedPlayer);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class GameStatusScreen implements GameStatusView {
 
     @Override
     public void updateVillagerVotes(String name, String playerName, String killedPlayer) {
-        defaultStatusList.addElement(name + " " + playerName + "Voted" + " " + killedPlayer);
+        defaultStatusList.addElement(name + " " + playerName + " " + "Voted" + " " + killedPlayer);
 
     }
 
