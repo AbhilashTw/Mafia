@@ -7,12 +7,14 @@ import views.client.PlayerDeadView;
 public class PlayerDeadController implements ClientEngine {
     private final Workflow workflow;
     private final ClientPlayer clientPlayer;
+    private final String[] log;
     private PlayerDeadView view;
 
-    public PlayerDeadController(Workflow workflow, ClientPlayer clientPlayer) {
+    public PlayerDeadController(Workflow workflow, ClientPlayer clientPlayer, String[] log) {
 
         this.workflow = workflow;
         this.clientPlayer = clientPlayer;
+        this.log = log;
         clientPlayer.bindClientEngine(this);
     }
 
@@ -22,6 +24,7 @@ public class PlayerDeadController implements ClientEngine {
 
     public void start() {
         view.display(clientPlayer.getPlayerName());
+        view.displayLog(log);
     }
 
     public void goToHomeScreen() {
@@ -70,7 +73,7 @@ public class PlayerDeadController implements ClientEngine {
     }
 
     @Override
-    public void showDeadScreen() {
+    public void showDeadScreen(String[] log) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

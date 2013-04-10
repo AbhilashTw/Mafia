@@ -69,7 +69,7 @@ public class JoinedPlayersController implements ClientEngine {
     }
 
     @Override
-    public void showDeadScreen() {
+    public void showDeadScreen(String[] log) {
     }
 
     @Override

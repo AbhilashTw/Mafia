@@ -26,5 +26,5 @@ public interface Workflow {
 
     void startPlayerDeadScreen();
 
-    void showDeadScreen();
+    void showDeadScreen(String[] log);
 }

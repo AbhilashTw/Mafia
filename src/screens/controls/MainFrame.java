@@ -39,4 +39,9 @@ public class MainFrame implements IMainFrame {
         frame.setSize(x, y);
     }
 
+    @Override
+    public Container getContainer() {
+       return frame.getContentPane();
+    }
+
 }

@@ -16,7 +16,7 @@ public interface ClientEngine {
 
     void PlayerKilled(String playerName);
 
-    void showDeadScreen();
+    void showDeadScreen(String[] log);
 
     void VillagersWon();
 

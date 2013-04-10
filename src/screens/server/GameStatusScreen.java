@@ -40,19 +40,24 @@ public class GameStatusScreen implements GameStatusView {
         createPlayersList(500, 100);
 
         quit = createButton(500, 500, "Quit");
-        gameStatus = createLabel("Game Status", 100, 20, 200, 100);
-        playersIn = createLabel("Players", 250, 200, 20, 50);
+        gameStatus = createLabel("Game Status", 100, 30, 200, 100);
+        playersIn = createLabel("Players", 500, 30, 200, 100);
 
         addDefaultCloseAction();
         addActionListeners();
+        panel.add(gameStatus);
+        panel.add(playersIn);
         panel.add(quit);
         panel.repaint();
+        JScrollPane listScrollPane = new JScrollPane(playersList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        Container pane = mainFrame.getContainer();
+        pane.add(listScrollPane);
         mainFrame.setSize(900, 700);
     }
 
     private JLabel createLabel(String labelName, int xBound, int yBound, int xSize, int ySize) {
         JLabel label = new JLabel(labelName);
-        label.setFont(new Font("Monospaced", Font.BOLD, 90));
+        label.setFont(new Font("Monospaced", Font.BOLD, 20));
         label.setForeground(Color.WHITE);
         label.setSize(xSize, ySize);
         label.setLocation(xBound, yBound);
@@ -86,7 +91,7 @@ public class GameStatusScreen implements GameStatusView {
     }
 
     private void createList(int x_bound, int y_bound) {
-        statusList.setSize(300, 350);
+        statusList.setSize(350, 350);
         statusList.setBackground(Color.ORANGE);
         statusList.setForeground(Color.BLACK);
         statusList.setLocation(x_bound, y_bound);
@@ -118,19 +123,16 @@ public class GameStatusScreen implements GameStatusView {
     @Override
     public void updateVillagerVotes(String name, String playerName, String killedPlayer) {
         defaultStatusList.addElement(name + " " + playerName + " " + "Voted" + " " + killedPlayer);
-
     }
 
     @Override
     public void updatePlayerKilledStatus(String name) {
         defaultStatusList.addElement("Player " + name + " Killed");
-
     }
 
     @Override
     public void status(String s) {
         defaultStatusList.addElement(s);
-
     }
 
     @Override
@@ -139,6 +141,5 @@ public class GameStatusScreen implements GameStatusView {
         for (Player player : players.getPlayers()) {
             playersInGame.addElement(player.getName() + " " + "(" + player.getRole() + ")");
         }
-
     }
 }

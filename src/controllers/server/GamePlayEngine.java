@@ -10,4 +10,6 @@ public interface GamePlayEngine {
     void endGame(GameResult mafiaWins);
 
     void startNight();
+
+    String[] getLog();
 }

@@ -57,7 +57,7 @@ public class ClientPlayer implements SocketChannelListener {
             engine.displayVillagerVotingChart(((DayArrivedMessage) message).getPlayerNames());
 
         if (message instanceof KilledMessage)
-            engine.showDeadScreen();
+            engine.showDeadScreen(((KilledMessage) message).getLog());
 
         if (message instanceof KilledPlayerMessage) {
             engine.PlayerKilled(((KilledPlayerMessage) message).getPlayerName());
@@ -75,7 +75,7 @@ public class ClientPlayer implements SocketChannelListener {
             engine.displayPlayers(((KnowVillagersMessage) message).getAllPlayersName());
         }
         if (message instanceof GameStatusLogMessage) {
-           engine.displayDeadLog(((GameStatusLogMessage) message).getPresentStatusLog());
+            engine.displayDeadLog(((GameStatusLogMessage) message).getPresentStatusLog());
         }
     }
 

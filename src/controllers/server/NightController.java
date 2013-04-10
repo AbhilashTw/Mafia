@@ -70,15 +70,15 @@ public class NightController {
             @Override
             public void run() {
                 sendKilledPlayerMessage(deadPlayer);
-
             }
         }, 500);
         isGameStable();
     }
 
     private void sendKilledMessage(Player deadPlayer) {
-        deadPlayer.sendMessage(new KilledMessage());
-
+        KilledMessage message = new KilledMessage();
+        message.setLog(engine.getLog());
+        deadPlayer.sendMessage(message);
     }
 
     private void sendKilledPlayerMessage(Player removedPlayer) {
