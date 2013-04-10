@@ -55,6 +55,7 @@ public class VillagerScreen implements VillagerView {
         panel.add(votingPortalLabel);
         panel.add(playersListLabel);
         createPlayersList(200, 100);
+        mainFrame.setSize(900, 700);
     }
 
     //todo: Have a common method for creating list.
@@ -117,6 +118,14 @@ public class VillagerScreen implements VillagerView {
     }
 
     @Override
+    public void displayPlayers(String[] allPlayersName) {
+        defaultPlayersList.removeAllElements();
+        for (String s : allPlayersName) {
+            defaultPlayersList.addElement(s);
+        }
+    }
+
+    @Override
     public void display(String[] playersName) {
         JButton confirmButton = createButton(30, 500, "Confirm");
         addListeners(confirmButton);
@@ -136,7 +145,7 @@ public class VillagerScreen implements VillagerView {
     private void customizeButton(int x, int y, String player, AbstractButton button) {
         button.setLocation(x, y);
         button.setSize(145, 50);
-        button.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        button.setFont(new Font("Times New Roman", Font.BOLD, 14));
         button.setVisible(true);
         button.setBackground(Color.ORANGE);
         buttonGroup.add(button);

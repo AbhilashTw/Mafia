@@ -37,7 +37,7 @@ public class HomeScreen implements HomeView {
         panel.add(joinServerButton);
         panel.add(quitButton);
         panel.add(messageLabel);
-
+        mainFrame.setSize(400,400);
         addButtonHandlers();
     }
 
@@ -68,7 +68,7 @@ public class HomeScreen implements HomeView {
 
         quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                    System.exit(0);
+                System.exit(0);
             }
         });
     }

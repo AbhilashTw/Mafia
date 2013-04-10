@@ -26,6 +26,8 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
     private JList playersRole = new JList(playersRoleList);
     private JButton continueButton;
     private JButton exit;
+    private JLabel playerNames;
+    private JLabel role;
 
 
     public ConnectedPlayersScreen(IMainFrame mainFrame, ConnectedPlayersController controller) {
@@ -33,15 +35,23 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
         playersName = createList(playersName, 50, 100);
-        playersRole = createList(playersRole, 300, 100);
-        continueButton = createButton(700, 400, "Continue");
-        exit = createButton(700, 500, "Stop Server");
+        playersRole = createList(playersRole, 200, 100);
+        continueButton = createButton(400, 100, "Continue");
+        exit = createButton(400, 200, "Cancel");
+        playerNames = createLabel("Player Name", 50, -125, 150, 400);
+        role = createLabel("Role", 250, -120, 150, 400);
+
         panel.add(continueButton);
         panel.add(playersName);
         panel.add(playersRole);
         panel.add(exit);
+        panel.add(playerNames);
+        panel.add(role);
+
         addListener();
+        mainFrame.setSize(600, 600);
         setDefaultCloseAction(mainFrame, controller);
+        panel.repaint();
     }
 
     private void setDefaultCloseAction(IMainFrame mainFrame, final ConnectedPlayersController controller) {
@@ -69,13 +79,24 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
     }
 
     private JList createList(JList playersList, int x_bound, int y_bound) {
-        playersList.setSize(200, 550);
+
+        playersList.setSize(150, 450);
         playersList.setLocation(x_bound, y_bound);
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.BLACK);
-        Font f = new Font("Monospaced", Font.BOLD, 20);
+        playersList.setBorder(BorderFactory.createLineBorder(SystemColor.BLACK));
+        Font f = new Font("Monospaced", Font.PLAIN, 20);
         playersList.setFont(f);
         return playersList;
+    }
+
+    private JLabel createLabel(String labelName, int xBound, int yBound, int xSize, int ySize) {
+        JLabel label = new JLabel(labelName);
+        label.setFont(new Font("Monospaced", Font.PLAIN, 16));
+        label.setForeground(Color.WHITE);
+        label.setSize(xSize, ySize);
+        label.setLocation(xBound, yBound);
+        return label;
     }
 
     @Override

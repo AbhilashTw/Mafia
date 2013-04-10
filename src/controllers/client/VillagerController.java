@@ -44,7 +44,8 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void displayMafiaVotingChart(String[] playerNames) {
-        view.updateStatus("Night arrived. Villagers go to sleep");
+        view.updateStatus("Night arrived.");
+        view.updateStatus("Villagers go to sleep");
     }
 
     @Override
@@ -67,6 +68,11 @@ public class VillagerController implements ClientEngine {
     @Override
     public void displayMafia(String[] players) {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void displayPlayers(String[] allPlayersName) {
+        view.displayPlayers(allPlayersName);
     }
 
     @Override

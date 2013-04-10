@@ -33,7 +33,7 @@ public class VillagerControllerTest {
     public void displayMafiaVotingChart_is_Called_views_updateStatus_is_invoked() {
         controller.bind(view);
         controller.displayMafiaVotingChart(new String[]{});
-        verify(view).updateStatus("Night has arrived\n Good night");
+        verify(view).updateStatus("Night arrived.");
     }
 
     @Test
