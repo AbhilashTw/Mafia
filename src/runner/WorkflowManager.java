@@ -91,8 +91,8 @@ public class WorkflowManager implements Workflow {
     }
 
     @Override
-    public void gameEnd(GameResult gameStatus) {
-        GameEndController controller = new GameEndController(players, this, gameStatus);
+    public void gameEnd(GameResult gameStatus, String[] log) {
+        GameEndController controller = new GameEndController(players, this, gameStatus,log);
         controller.bind(new GameEndScreen(mainFrame, controller));
         controller.start();
     }
