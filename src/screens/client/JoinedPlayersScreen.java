@@ -39,12 +39,11 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     }
 
     private void createList(int x_bound, int y_bound) {
-
         playersList.setSize(200, 450);
         playersList.setLocation(x_bound, y_bound);
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.black);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
+        Font f = new Font("Monospaced", Font.BOLD, 20);
         playersList.setFont(f);
     }
 

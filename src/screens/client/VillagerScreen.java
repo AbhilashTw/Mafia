@@ -39,10 +39,11 @@ public class VillagerScreen implements VillagerView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
         createList(430, 100);
+        createPlayersList(30, 100);
 
         JLabel villagerLabel = createLabel("Game status", 430, -50);
-        JLabel votingPortalLabel = createLabel("Voting Portal", 30, -50);
-        JLabel playersListLabel = createLabel("Players", 250, -50);
+        JLabel votingPortalLabel = createLabel("Voting Portal",250, -50 );
+        JLabel playersListLabel = createLabel("Players", 30, -50);
 
         playerName = createLabel("Player Name: " + controller.getClientName().toString(), 200, 400);
         roleLabel = createLabel("Role: " + "Villager", 200, 450);
@@ -54,7 +55,6 @@ public class VillagerScreen implements VillagerView {
         panel.add(villagerLabel);
         panel.add(votingPortalLabel);
         panel.add(playersListLabel);
-        createPlayersList(200, 100);
         mainFrame.setSize(900, 700);
     }
 
@@ -113,7 +113,7 @@ public class VillagerScreen implements VillagerView {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setFont(new Font("Verdana", Font.BOLD, 16));
         return button;
     }
 
@@ -127,17 +127,17 @@ public class VillagerScreen implements VillagerView {
 
     @Override
     public void display(String[] playersName) {
-        JButton confirmButton = createButton(30, 500, "Confirm");
+        JButton confirmButton = createButton(250, 400, "Confirm");
         addListeners(confirmButton);
         panel.add(confirmButton);
-        createVoteList(-50, 100);
+        createVoteList(180, 30);
         panel.add(voteList);
         int x = 80, y = 70;
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
             customizeButton(x, y, player, button);
             voteList.add(button);
-            y += 30;
+            y += 50;
         }
         panel.repaint();
     }
@@ -145,7 +145,7 @@ public class VillagerScreen implements VillagerView {
     private void customizeButton(int x, int y, String player, AbstractButton button) {
         button.setLocation(x, y);
         button.setSize(145, 50);
-        button.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        button.setFont(new Font("Times New Roman", Font.BOLD, 16));
         button.setVisible(true);
         button.setBackground(Color.ORANGE);
         buttonGroup.add(button);

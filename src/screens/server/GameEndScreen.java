@@ -53,7 +53,7 @@ public class GameEndScreen implements GameEndView {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setFont(new Font("Verdana", Font.BOLD, 16));
         return button;
     }
 }

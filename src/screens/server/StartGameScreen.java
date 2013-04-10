@@ -78,7 +78,7 @@ public class StartGameScreen implements StartGameView {
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.BLACK);
         playersList.setBorder(BorderFactory.createLineBorder(SystemColor.BLACK));
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
+        Font f = new Font("Monospaced", Font.BOLD, 20);
         playersList.setFont(f);
     }
 
@@ -86,7 +86,7 @@ public class StartGameScreen implements StartGameView {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_bound, y_bound);
-        button.setFont(new Font("Monospaced", Font.BOLD, 14));
+        button.setFont(new Font("Monospaced", Font.BOLD, 16));
         return button;
     }
 

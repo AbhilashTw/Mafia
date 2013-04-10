@@ -59,7 +59,7 @@ public class JoinServerScreen implements JoinServerView {
         label.setForeground(Color.white);
         label.setSize(400, 100);
         label.setLocation(i, i1);
-        Font font = new Font("Monospaced", Font.BOLD, 14);
+        Font font = new Font("Monospaced", Font.BOLD, 20);
         label.setFont(font);
         label.setForeground(Color.WHITE);
         return label;
@@ -96,7 +96,7 @@ public class JoinServerScreen implements JoinServerView {
         JButton button = new JButton(buttonLabel);
         button.setSize(145, 50);
         button.setLocation(x_bound, y_bound);
-        button.setFont(new Font("Monospaced", Font.BOLD, 14));
+        button.setFont(new Font("Monospaced", Font.BOLD, 16));
         return button;
     }
 

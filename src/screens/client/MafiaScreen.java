@@ -46,8 +46,8 @@ public class MafiaScreen implements MafiaView {
         createList(430, 100);
 
         JLabel mafiaLabel = createLabel("Game status", 430, -50);
-        JLabel votingPortalLabel = createLabel("Voting Portal", 30, -50);
-        JLabel playersListLabel = createLabel("Mafians", 250, -50);
+        JLabel votingPortalLabel = createLabel("Voting Portal",250, -50);
+        JLabel playersListLabel = createLabel("Mafians",  30, -50);
 
         playerName = createLabel("Player Name: " + controller.getClientName(), 200, 400);
         roleLabel = createLabel("Role: "+"Mafia",200,450);
@@ -117,11 +117,11 @@ public class MafiaScreen implements MafiaView {
 
     @Override
     public void display(String[] playersName, GameStatus status) {
-        JButton confirmButton = createButton(30, 500, "Confirm");
+        JButton confirmButton = createButton(250, 400, "Confirm");
         panel.add(confirmButton);
         addListeners(confirmButton);
 
-        createVoteList(-50, 100);
+        createVoteList(180, 30);
         panel.add(voteList);
 
         this.status = status;
@@ -129,7 +129,7 @@ public class MafiaScreen implements MafiaView {
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
             customizeButton(x, y, player, button);
-            y += 30;
+            y += 50;
             voteList.add(button);
         }
         panel.repaint();
@@ -139,7 +139,7 @@ public class MafiaScreen implements MafiaView {
     private void customizeButton(int x, int y, String player, AbstractButton button) {
         button.setLocation(x, y);
         button.setSize(145, 50);
-        button.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        button.setFont(new Font("Times New Roman", Font.BOLD, 16));
         button.setVisible(true);
         button.setBackground(Color.ORANGE);
         buttonGroup.add(button);
@@ -174,7 +174,7 @@ public class MafiaScreen implements MafiaView {
 
     @Override
     public void showMafia(String[] players) {
-        createMafiaList(200, 100);
+        createMafiaList(30, 100);
         for (String player : players) {
             defaultPlayersList.addElement(player);
         }
