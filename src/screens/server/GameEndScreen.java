@@ -17,15 +17,20 @@ public class GameEndScreen implements GameEndView {
     private ImagePanel panel;
     private JLabel gameStatus;
     private JButton exit;
+    private DefaultListModel<String> logModel = new DefaultListModel<String>();
+    private JList<String> log = new JList<String>(logModel);
+
 
     public GameEndScreen(IMainFrame mainFrame, GameEndController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel("images/gameEndScreen.jpg");
         exit = createButton(100, 300, "Exit");
+        createList();
         panel.add(exit);
+        panel.add(log);
         addListeners();
-        mainFrame.setSize(400,400);
+        mainFrame.setSize(400, 400);
     }
 
     private void addListeners() {
@@ -46,6 +51,21 @@ public class GameEndScreen implements GameEndView {
         gameStatus.setForeground(Color.WHITE);
         panel.add(gameStatus);
         panel.repaint();
+    }
+
+    private void createList() {
+        log.setSize(300, 450);
+        log.setBorder(BorderFactory.createLineBorder(SystemColor.WHITE));
+        log.setLocation(10, 100);
+        log.setFont(new Font("Monospaced", Font.PLAIN, 14));
+        log.setBackground(Color.orange);
+    }
+
+    @Override
+    public void displayLog(String[] log) {
+        for (String s : log) {
+            logModel.addElement(s);
+        }
     }
 
 

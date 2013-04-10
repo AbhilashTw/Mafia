@@ -62,7 +62,7 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
 
     @Override
     public void endGame(GameResult status) {
-        workflow.gameEnd(status);
+        workflow.gameEnd(status,getLog());
     }
 
 

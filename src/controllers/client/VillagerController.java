@@ -56,13 +56,13 @@ public class VillagerController implements ClientEngine {
 
 
     @Override
-    public void VillagersWon() {
-        workflow.gameEnd(GameResult.VillagerWins);
+    public void VillagersWon(String[] log) {
+        workflow.gameEnd(GameResult.VillagerWins, log);
     }
 
     @Override
-    public void MafiasWon() {
-        workflow.gameEnd(GameResult.MafiaWins);
+    public void MafiasWon(String[] log) {
+        workflow.gameEnd(GameResult.MafiaWins, log);
     }
 
     @Override

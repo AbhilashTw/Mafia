@@ -22,7 +22,7 @@ public interface Workflow {
 
     void showGameStatus();
 
-    void gameEnd(GameResult gameStatus);
+    void gameEnd(GameResult gameStatus, String[] log);
 
     void startPlayerDeadScreen();
 
