@@ -14,9 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Enumeration;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class VillagerScreen implements VillagerView {
 
     private static final String BG_IMAGE = "images/VillagerScreen.jpg";
@@ -26,9 +23,13 @@ public class VillagerScreen implements VillagerView {
     private ImagePanel panel;
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private JList statusList = new JList<String>(defaultStatusList);
+    private DefaultListModel<String> defaultPlayersList = new DefaultListModel<String>();
+    private JList playersList = new JList<String>(defaultPlayersList);
+
     private JList voteList = new JList<JRadioButton>();
     private ButtonGroup buttonGroup = new ButtonGroup();
     private JLabel playerName;
+    private JLabel roleLabel;
 
     private String votedOutPlayer;
 
@@ -37,34 +38,48 @@ public class VillagerScreen implements VillagerView {
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
-        createList(700, 100);
+        createList(430, 100);
 
-        JLabel villagerLabel = createLabel("You are assigned as a Villager", 700, -50);
-        JLabel votingPortalLabel = createLabel("Voting Portal", 100, -50);
-        playerName = createLabel("Player Name: " + controller.getClientName().toString(), 400, 600);
+        JLabel villagerLabel = createLabel("Game status", 430, -50);
+        JLabel votingPortalLabel = createLabel("Voting Portal", 30, -50);
+        JLabel playersListLabel = createLabel("Players", 250, -50);
+
+        playerName = createLabel("Player Name: " + controller.getClientName().toString(), 200, 400);
+        roleLabel = createLabel("Role: " + "Villager", 200, 450);
 
         panel.add(statusList);
         panel.add(playerName);
+        panel.add(roleLabel);
+        panel.add(playersList);
         panel.add(villagerLabel);
         panel.add(votingPortalLabel);
+        panel.add(playersListLabel);
+        createPlayersList(200, 100);
     }
 
     //todo: Have a common method for creating list.
-
-    private void createList(int x_bound, int y_bound) {
-        statusList.setSize(450, 450);
-        statusList.setLocation(x_bound, y_bound);
-        statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
-        statusList.setBackground(Color.ORANGE);
-        statusList.setForeground(Color.BLACK);
-    }
-
     private void createVoteList(int xBound, int yBound) {
-        voteList.setSize(200, 650);
+        voteList.setSize(400, 450);
         voteList.setLocation(xBound, yBound);
-        voteList.setFont(new Font("Monospaced", Font.BOLD, 20));
         voteList.setBackground(Color.BLACK);
         voteList.setForeground(Color.WHITE);
+        voteList.setFont(new Font("Monospaced", Font.BOLD, 20));
+    }
+
+    private void createList(int x_bound, int y_bound) {
+        statusList.setSize(450, 350);
+        statusList.setLocation(x_bound, y_bound);
+        statusList.setBackground(Color.ORANGE);
+        statusList.setForeground(Color.BLACK);
+        statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
+    }
+
+    private void createPlayersList(int x_bound, int y_bound) {
+        playersList.setSize(200, 250);
+        playersList.setLocation(x_bound, y_bound);
+        playersList.setBackground(Color.ORANGE);
+        playersList.setForeground(Color.BLACK);
+        playersList.setFont(new Font("Monospaced", Font.BOLD, 20));
     }
 
     private JLabel createLabel(String labelName, int x_bound, int y_bound) {
@@ -82,7 +97,7 @@ public class VillagerScreen implements VillagerView {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                        sendMessage(confirmButton);
+                sendMessage(confirmButton);
 
             }
         });
@@ -103,22 +118,22 @@ public class VillagerScreen implements VillagerView {
 
     @Override
     public void display(String[] playersName) {
-
-        JButton confirmButton = createButton(50, 700, "Confirm");
+        JButton confirmButton = createButton(30, 500, "Confirm");
         addListeners(confirmButton);
         panel.add(confirmButton);
 
-        createVoteList(100, 100);
+        createVoteList(-50, 100);
         panel.add(voteList);
 
         updateStatus("You can vote now ");
-        int x = 100, y = 100;
+        int x = 80, y = 70;
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
             customizeButton(x, y, player, button);
             voteList.add(button);
-            y += 60;
+            y += 30;
         }
+        panel.repaint();
     }
 
     private void customizeButton(int x, int y, String player, AbstractButton button) {
@@ -127,7 +142,6 @@ public class VillagerScreen implements VillagerView {
         button.setFont(new Font("Times New Roman", Font.BOLD, 20));
         button.setVisible(true);
         button.setBackground(Color.ORANGE);
-        button.setForeground(Color.black);
         buttonGroup.add(button);
         setDefaultSelect(player, button);
         addActionListener(button);
@@ -171,7 +185,6 @@ public class VillagerScreen implements VillagerView {
         voteList.removeAll();
         confirmButton.setVisible(false);
 
-        updateStatus("Your Voting Time Ended");
         Enumeration<AbstractButton> allButtons = buttonGroup.getElements();
         while (allButtons.hasMoreElements()) {
             allButtons.nextElement().setVisible(false);

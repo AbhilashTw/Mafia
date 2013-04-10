@@ -54,13 +54,15 @@ public class MafiaController implements ClientEngine {
 
     @Override
     public void displayMafiaVotingChart(String[] playerNames) {
-        view.updateStatus("Mafia Wake Up ! !" + "\n" + "Whom do you want to kill?");
+        view.updateStatus("Mafia Wake Up ! !" + "\n");
+        view.updateStatus( "Whom do you want to kill?");
         view.display(playerNames, GameStatus.NIGHT);
     }
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
-        view.updateStatus("Villagers Wake Up ! !" + "\n" + "Whom do you want to suspect?");
+        view.updateStatus("Villagers Wake Up ! !\n");
+        view.updateStatus("Whom do you want to suspect?");
         view.display(playerNames, GameStatus.DAY);
     }
 

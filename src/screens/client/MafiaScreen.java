@@ -15,8 +15,6 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Enumeration;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MafiaScreen implements MafiaView {
 
@@ -26,9 +24,12 @@ public class MafiaScreen implements MafiaView {
     private ImagePanel panel;
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private JList statusList = new JList<String>(defaultStatusList);
-    private DefaultListModel<String> defaultMafiaList = new DefaultListModel<String>();
-    private JList mafiaList = new JList<String>(defaultMafiaList);
+
+    private DefaultListModel<String> defaultPlayersList = new DefaultListModel<String>();
+    private JList playersList = new JList<String>(defaultPlayersList);
+
     private JLabel playerName;
+    private JLabel roleLabel;
 
     private JList voteList = new JList<JRadioButton>();
     private ButtonGroup buttonGroup = new ButtonGroup();
@@ -42,25 +43,27 @@ public class MafiaScreen implements MafiaView {
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
+        createList(430, 100);
 
-        createList(700, 100);
+        JLabel mafiaLabel = createLabel("Game status", 430, -50);
+        JLabel votingPortalLabel = createLabel("Voting Portal", 30, -50);
+        JLabel playersListLabel = createLabel("Players", 250, -50);
 
-        JLabel mafiaLabel = createLabel("You are assigned as a Mafia", 700, -50);
-        JLabel votingPortalLabel = createLabel("Voting Portal", 150, -50);
-        JLabel mafiaListLabel = createLabel("Mafians", 400, -50);
+        playerName = createLabel("Player Name: " + controller.getClientName(), 200, 400);
+        roleLabel = createLabel("Role: "+"Mafia",200,450);
 
-        playerName = createLabel("Player Name: " + controller.getClientName(), 400, 600);
         panel.add(playerName);
         panel.add(statusList);
-        panel.add(mafiaList);
+        panel.add(playersList);
+        panel.add(roleLabel);
         panel.add(mafiaLabel);
         panel.add(votingPortalLabel);
-        panel.add(mafiaListLabel);
+        panel.add(playersListLabel);
     }
 
 
     private void createVoteList(int xBound, int yBound) {
-        voteList.setSize(200, 450);
+        voteList.setSize(400, 450);
         voteList.setLocation(xBound, yBound);
         voteList.setBackground(Color.BLACK);
         voteList.setForeground(Color.WHITE);
@@ -68,7 +71,7 @@ public class MafiaScreen implements MafiaView {
     }
 
     private void createList(int x_bound, int y_bound) {
-        statusList.setSize(600, 450);
+        statusList.setSize(450, 350);
         statusList.setLocation(x_bound, y_bound);
         statusList.setBackground(Color.ORANGE);
         statusList.setForeground(Color.BLACK);
@@ -76,11 +79,11 @@ public class MafiaScreen implements MafiaView {
     }
 
     private void createMafiaList(int x_bound, int y_bound) {
-        mafiaList.setSize(200, 250);
-        mafiaList.setLocation(x_bound, y_bound);
-        mafiaList.setBackground(Color.ORANGE);
-        mafiaList.setForeground(Color.BLACK);
-        mafiaList.setFont(new Font("Monospaced", Font.BOLD, 20));
+        playersList.setSize(200, 250);
+        playersList.setLocation(x_bound, y_bound);
+        playersList.setBackground(Color.ORANGE);
+        playersList.setForeground(Color.BLACK);
+        playersList.setFont(new Font("Monospaced", Font.BOLD, 20));
     }
 
     private JLabel createLabel(String labelName, int x_bound, int y_bound) {
@@ -113,20 +116,19 @@ public class MafiaScreen implements MafiaView {
 
     @Override
     public void display(String[] playersName, GameStatus status) {
-        JButton confirmButton = createButton(50, 700, "Confirm");
+        JButton confirmButton = createButton(30, 500, "Confirm");
         panel.add(confirmButton);
         addListeners(confirmButton);
 
-        createVoteList(100, 100);
+        createVoteList(-50, 100);
         panel.add(voteList);
 
         this.status = status;
-
-        int x = 80, y = 80;
+        int x = 80, y = 70;
         for (String player : playersName) {
             AbstractButton button = new JRadioButton(player);
             customizeButton(x, y, player, button);
-            y += 60;
+            y += 30;
             voteList.add(button);
         }
         panel.repaint();
@@ -170,9 +172,9 @@ public class MafiaScreen implements MafiaView {
 
     @Override
     public void showMafia(String[] players) {
-        createMafiaList(400, 100);
+        createMafiaList(200, 100);
         for (String player : players) {
-            defaultMafiaList.addElement(player);
+            defaultPlayersList.addElement(player);
         }
         panel.revalidate();
         panel.repaint();
