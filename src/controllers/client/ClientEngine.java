@@ -23,4 +23,6 @@ public interface ClientEngine {
     void MafiasWon();
 
     void displayMafia(String[] players);
+
+    void displayPlayers(String[] allPlayersName);
 }

@@ -70,6 +70,11 @@ public class VillagerController implements ClientEngine {
     }
 
     @Override
+    public void displayPlayers(String[] allPlayersName) {
+        view.displayPlayers(allPlayersName);
+    }
+
+    @Override
     public void PlayerKilled(String playerName) {
         view.updateStatus(playerName + " is Killed");
     }

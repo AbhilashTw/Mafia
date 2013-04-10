@@ -2,10 +2,7 @@ package controllers.server;
 
 import entities.Player;
 import entities.Players;
-import gameMessages.KilledMessage;
-import gameMessages.KilledPlayerMessage;
-import gameMessages.KnowMafiaMessage;
-import gameMessages.NightArrivedMessage;
+import gameMessages.*;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,7 +27,14 @@ public class NightController {
                 sendAllMafiaNames();
             }
         }, 1000);
+        sendAllVillagersNames();
         play.createPlayersPoll(new GamePoll(), players);
+    }
+
+    private void sendAllVillagersNames() {
+        KnowVillagersMessage message = new KnowVillagersMessage();
+        message.setPlayers(players.getAllPlayersName());
+        players.sendMessage(message);
     }
 
     private void sendAllMafiaNames() {

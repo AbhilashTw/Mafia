@@ -47,7 +47,7 @@ public class MafiaScreen implements MafiaView {
 
         JLabel mafiaLabel = createLabel("Game status", 430, -50);
         JLabel votingPortalLabel = createLabel("Voting Portal", 30, -50);
-        JLabel playersListLabel = createLabel("Players", 250, -50);
+        JLabel playersListLabel = createLabel("Mafians", 250, -50);
 
         playerName = createLabel("Player Name: " + controller.getClientName(), 200, 400);
         roleLabel = createLabel("Role: "+"Mafia",200,450);
@@ -59,6 +59,7 @@ public class MafiaScreen implements MafiaView {
         panel.add(mafiaLabel);
         panel.add(votingPortalLabel);
         panel.add(playersListLabel);
+        mainFrame.setSize(900,700);
     }
 
 

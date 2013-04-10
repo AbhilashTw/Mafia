@@ -6,4 +6,6 @@ public interface VillagerView {
     void updateStatus(String statusMessage);
 
     void serverClosed();
+
+    void displayPlayers(String[] allPlayersName);
 }

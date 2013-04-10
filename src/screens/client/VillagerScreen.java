@@ -55,6 +55,7 @@ public class VillagerScreen implements VillagerView {
         panel.add(votingPortalLabel);
         panel.add(playersListLabel);
         createPlayersList(200, 100);
+        mainFrame.setSize(900, 700);
     }
 
     //todo: Have a common method for creating list.
@@ -114,6 +115,14 @@ public class VillagerScreen implements VillagerView {
         button.setLocation(x_axis, y_axis);
         button.setFont(new Font("Verdana", Font.BOLD, 14));
         return button;
+    }
+
+    @Override
+    public void displayPlayers(String[] allPlayersName) {
+        defaultPlayersList.removeAllElements();
+        for (String s : allPlayersName) {
+            defaultPlayersList.addElement(s);
+        }
     }
 
     @Override

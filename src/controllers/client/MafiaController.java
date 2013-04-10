@@ -86,6 +86,11 @@ public class MafiaController implements ClientEngine {
         view.showMafia(players);
     }
 
+    @Override
+    public void displayPlayers(String[] allPlayersName) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     public void sendMessage(ChannelMessage message) {
         clientPlayer.sendMessage(message);
     }
