@@ -50,6 +50,7 @@ public class JoinServerScreen implements JoinServerView {
         panel.add(playerNameTextField);
         panel.add(connectButton);
         panel.add(status);
+
         mainFrame.setSize(500, 400);
         addButtonHandlers();
     }

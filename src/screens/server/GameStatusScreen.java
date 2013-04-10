@@ -49,9 +49,6 @@ public class GameStatusScreen implements GameStatusView {
         panel.add(playersIn);
         panel.add(quit);
         panel.repaint();
-        JScrollPane listScrollPane = new JScrollPane(playersList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        Container pane = mainFrame.getContainer();
-        pane.add(listScrollPane);
         mainFrame.setSize(900, 700);
     }
 

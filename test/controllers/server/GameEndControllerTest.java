@@ -30,17 +30,16 @@ public class GameEndControllerTest {
 
     @Test
     public void close_invokes_players_stop() {
-        controller = new GameEndController(players, workflow, GameResult.MafiaWins, null);
+        controller = new GameEndController(players, workflow, GameResult.MafiaWins);
         controller.close();
         verify(players).quit();
     }
 
     @Test
     public void goTOHomeScreen_invokes_workflow_start() {
-        controller = new GameEndController(players, workflow, GameResult.MafiaWins,null);
+        controller = new GameEndController(players, workflow, GameResult.MafiaWins);
         controller.goToHomeScreen();
         verify(workflow).start("");
     }
-
 
 }

@@ -73,11 +73,11 @@ public class JoinedPlayersController implements ClientEngine {
     }
 
     @Override
-    public void VillagersWon(String[] log) {
+    public void VillagersWon() {
     }
 
     @Override
-    public void MafiasWon(String[] log) {
+    public void MafiasWon() {
     }
 
     @Override

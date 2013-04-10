@@ -72,13 +72,13 @@ public class MafiaController implements ClientEngine {
     }
 
     @Override
-    public void VillagersWon(String[] log) {
-        workflow.gameEnd(GameResult.VillagerWins, null);
+    public void VillagersWon() {
+        workflow.gameEnd(GameResult.VillagerWins);
     }
 
     @Override
-    public void MafiasWon(String[] log) {
-        workflow.gameEnd(GameResult.MafiaWins, log);
+    public void MafiasWon() {
+        workflow.gameEnd(GameResult.MafiaWins);
     }
 
     @Override

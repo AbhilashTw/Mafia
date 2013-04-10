@@ -18,9 +18,9 @@ public interface ClientEngine {
 
     void showDeadScreen(String[] log);
 
-    void VillagersWon(String[] log);
+    void VillagersWon();
 
-    void MafiasWon(String[] log);
+    void MafiasWon();
 
     void displayMafia(String[] players);
 

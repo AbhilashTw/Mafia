@@ -63,10 +63,10 @@ public class ClientPlayer implements SocketChannelListener {
             engine.PlayerKilled(((KilledPlayerMessage) message).getPlayerName());
         }
         if (message instanceof VillagerWinsMessage) {
-            engine.VillagersWon(((VillagerWinsMessage) message).getLog());
+            engine.VillagersWon();
         }
         if (message instanceof MafiaWinsMessage) {
-            engine.MafiasWon(((MafiaWinsMessage) message).getLog());
+            engine.MafiasWon();
         }
         if (message instanceof KnowMafiaMessage) {
             engine.displayMafia(((KnowMafiaMessage) message).getPlayers());

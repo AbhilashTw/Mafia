@@ -78,12 +78,12 @@ public class PlayerDeadController implements ClientEngine {
     }
 
     @Override
-    public void VillagersWon(String[] log) {
+    public void VillagersWon() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public void MafiasWon(String[] log) {
+    public void MafiasWon() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

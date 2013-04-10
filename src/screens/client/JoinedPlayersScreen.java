@@ -39,6 +39,7 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     }
 
     private void createList(int x_bound, int y_bound) {
+
         playersList.setSize(200, 450);
         playersList.setLocation(x_bound, y_bound);
         playersList.setBackground(Color.ORANGE);

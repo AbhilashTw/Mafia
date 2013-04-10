@@ -10,27 +10,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class GameEndScreen implements GameEndView {
     private final IMainFrame mainFrame;
     private final GameEndController controller;
     private ImagePanel panel;
     private JLabel gameStatus;
     private JButton exit;
-    private DefaultListModel<String> logModel = new DefaultListModel<String>();
-    private JList<String> log = new JList<String>(logModel);
 
 
     public GameEndScreen(IMainFrame mainFrame, GameEndController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel("images/gameEndScreen.jpg");
-        exit = createButton(100, 300, "Exit");
-        createList();
+        exit = createButton(10, 600, "Exit");
+
         panel.add(exit);
-        panel.add(log);
+
         addListeners();
-        mainFrame.setSize(400, 400);
+        mainFrame.setSize(400, 700);
     }
 
     private void addListeners() {
@@ -46,26 +43,17 @@ public class GameEndScreen implements GameEndView {
     public void display(String s) {
         gameStatus = new JLabel(s);
         gameStatus.setSize(400, 350);
-        gameStatus.setLocation(80, 10);
+        gameStatus.setLocation(10, -100);
         gameStatus.setFont(new Font("monospaced", Font.BOLD, 20));
         gameStatus.setForeground(Color.WHITE);
         panel.add(gameStatus);
         panel.repaint();
     }
 
-    private void createList() {
-        log.setSize(300, 450);
-        log.setBorder(BorderFactory.createLineBorder(SystemColor.WHITE));
-        log.setLocation(10, 100);
-        log.setFont(new Font("Monospaced", Font.PLAIN, 14));
-        log.setBackground(Color.orange);
-    }
 
     @Override
     public void displayLog(String[] log) {
-        for (String s : log) {
-            logModel.addElement(s);
-        }
+
     }
 
 
