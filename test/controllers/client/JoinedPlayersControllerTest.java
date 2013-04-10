@@ -41,7 +41,7 @@ public class JoinedPlayersControllerTest {
     @Test
     public void should_invoke_workflow_start_when_goToHomeScreen_is_called() {
         joinedPlayersController.goToHomeScreen();
-        verify(workflow).start();
+        verify(workflow).start("");
     }
 
     @Test

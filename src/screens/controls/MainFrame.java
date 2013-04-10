@@ -14,11 +14,9 @@ public class MainFrame implements IMainFrame {
         frame = new JFrame("Mafia Game");
         frame.setVisible(true);
         frame.setBackground(Color.BLACK);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        frame.setPreferredSize(new Dimension(1000, 1000));
-
+        frame.setResizable(false);
+        frame.setPreferredSize(new Dimension(1000,1000));
     }
 
     @Override
@@ -34,6 +32,11 @@ public class MainFrame implements IMainFrame {
     @Override
     public JFrame getFrame() {
         return frame;
+    }
+
+    @Override
+    public void setSize(int x, int y) {
+        frame.setSize(x, y);
     }
 
 }

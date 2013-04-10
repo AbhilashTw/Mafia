@@ -15,7 +15,7 @@ public class Main {
 
         SwingUtilities.invokeAndWait(new Runnable() {
             public void run() {
-                new WorkflowManager(new MafiaViewFactory(), new MainFrame()).start();
+                new WorkflowManager(new MafiaViewFactory(), new MainFrame()).start("Welcome");
             }
         });
     }

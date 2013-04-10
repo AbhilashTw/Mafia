@@ -7,6 +7,9 @@ import gameMessages.KilledPlayerMessage;
 import gameMessages.KnowMafiaMessage;
 import gameMessages.NightArrivedMessage;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class NightController {
     private final Players players;
     private final GamePlay play;
@@ -20,7 +23,13 @@ public class NightController {
 
     public void start() {
         sendNightArrivedMessage();
-        sendAllMafiaNames();
+        Timer time = new Timer();
+        time.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                sendAllMafiaNames();
+            }
+        }, 1000);
         play.createPlayersPoll(new GamePoll(), players);
     }
 
@@ -46,14 +55,20 @@ public class NightController {
     }
 
     private void removePlayer() {
-        Player deadPlayer = play.getKilledPlayer();
+        final Player deadPlayer = play.getKilledPlayer();
 
         sendKilledMessage(deadPlayer);
 
         engine.removePlayer(deadPlayer);
 
-        sendKilledPlayerMessage(deadPlayer);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                sendKilledPlayerMessage(deadPlayer);
 
+            }
+        }, 500);
         isGameStable();
     }
 

@@ -25,6 +25,7 @@ public class HomeController {
         workflow.startServer();
     }
 
-    public void start() {
+    public void start(String message) {
+        view.displayMessage(message);
     }
 }

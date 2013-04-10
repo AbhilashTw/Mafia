@@ -63,14 +63,14 @@ public class SocketServer {
 
     public boolean start() {
         stopWaiting = false;
-        if(startServerSocket()){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                waitForConnections();
-            }
-        }, "wait for connections").start();
-        return true;
+        if (startServerSocket()) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    waitForConnections();
+                }
+            }, "wait for connections").start();
+            return true;
         }
         return false;
     }

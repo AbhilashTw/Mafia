@@ -32,8 +32,8 @@ public class JoinedPlayersController implements ClientEngine {
     }
 
     public void goToHomeScreen() {
+        workflow.start("Welcome");
         clientPlayer.stop();
-        workflow.start();
     }
 
     @Override
@@ -53,8 +53,7 @@ public class JoinedPlayersController implements ClientEngine {
 
     @Override
     public void serverClosed() {
-        view.connectionClosed();
-        workflow.start();
+       workflow.start("Server Closed");
     }
 
     @Override

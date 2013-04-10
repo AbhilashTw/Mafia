@@ -43,8 +43,8 @@ public class MafiaController implements ClientEngine {
 
     @Override
     public void serverClosed() {
-        view.serverClosed();
-        workflow.start();
+//        view.serverClosed();
+//        workflow.start("");
     }
 
     @Override

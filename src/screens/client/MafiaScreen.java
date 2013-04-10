@@ -12,7 +12,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Enumeration;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MafiaScreen implements MafiaView {
 
@@ -32,6 +36,7 @@ public class MafiaScreen implements MafiaView {
 
     private GameStatus status;
 
+
     public MafiaScreen(IMainFrame mainFrame, MafiaController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
@@ -44,7 +49,7 @@ public class MafiaScreen implements MafiaView {
         JLabel votingPortalLabel = createLabel("Voting Portal", 150, -50);
         JLabel mafiaListLabel = createLabel("Mafians", 400, -50);
 
-        playerName=createLabel("Player Name: "+ controller.getClientName().toString(),400,600);
+        playerName = createLabel("Player Name: " + controller.getClientName(), 400, 600);
         panel.add(playerName);
         panel.add(statusList);
         panel.add(mafiaList);
@@ -124,6 +129,7 @@ public class MafiaScreen implements MafiaView {
             y += 60;
             voteList.add(button);
         }
+        panel.repaint();
 
     }
 
@@ -155,7 +161,9 @@ public class MafiaScreen implements MafiaView {
 
     @Override
     public void updateStatus(String status) {
-        defaultStatusList.addElement(status);
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        defaultStatusList.addElement(format.format(cal.getTime()) + " " + status);
         panel.revalidate();
         panel.repaint();
     }
@@ -188,7 +196,7 @@ public class MafiaScreen implements MafiaView {
         voteList.removeAll();
         confirmButton.setVisible(false);
 
-        updateStatus("Your Voting Time Ended");
+
         Enumeration<AbstractButton> allButtons = buttonGroup.getElements();
         while (allButtons.hasMoreElements()) {
             allButtons.nextElement().setVisible(false);

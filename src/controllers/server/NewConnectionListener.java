@@ -29,10 +29,6 @@ public class NewConnectionListener implements ConnectionListener {
 
     @Override
     public void onConnectionFailed(String serverAddress, int serverPort, Exception e) {
-        JOptionPane optionPane = new JOptionPane("Server Cant be Started", JOptionPane.ERROR_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Error Message");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
         controller.goToHomeScreen();
     }
 

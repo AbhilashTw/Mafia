@@ -2,7 +2,6 @@ package controllers.server;
 
 import controllers.Workflow;
 import entities.Players;
-import gameMessages.MafiaWinsMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +39,7 @@ public class GameEndControllerTest {
     public void goTOHomeScreen_invokes_workflow_start() {
         controller = new GameEndController(players, workflow, GameResult.MafiaWins);
         controller.goToHomeScreen();
-        verify(workflow).start();
+        verify(workflow).start("");
     }
 
 
