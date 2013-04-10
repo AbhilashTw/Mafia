@@ -32,7 +32,7 @@ public class PlayerDeadScreen implements PlayerDeadView {
         panel.add(log);
         mainFrame.setSize(400, 700);
         addListeners();
-        mainFrame.setSize(400,400);
+        mainFrame.setSize(400, 400);
     }
 
     @Override

@@ -87,8 +87,8 @@ public class VillagerController implements ClientEngine {
     }
 
     @Override
-    public void showDeadScreen() {
-        workflow.showDeadScreen();
+    public void showDeadScreen(String[] log) {
+        workflow.showDeadScreen(log);
     }
 
     public void sendMessage(VillagerVotedOutMafiaMessage message) {

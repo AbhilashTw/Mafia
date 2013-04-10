@@ -86,11 +86,16 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
 
 
     @Override
+    public String[] getLog() {
+        return view.getPresentStatusLog();
+
+    }
+
+    @Override
     public void removePlayer(Player killedPlayer) {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         view.status(format.format(cal.getTime()) + " " + killedPlayer.getName() + " is Killed");
-        sendLogMessage(killedPlayer);
         players.removePlayer(killedPlayer);
     }
 

@@ -67,8 +67,8 @@ public class MafiaController implements ClientEngine {
     }
 
     @Override
-    public void showDeadScreen() {
-        workflow.showDeadScreen();
+    public void showDeadScreen(String[] log) {
+        workflow.showDeadScreen(log);
     }
 
     @Override

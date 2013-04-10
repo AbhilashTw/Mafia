@@ -103,8 +103,8 @@ public class WorkflowManager implements Workflow {
 
     @Override
 
-    public void showDeadScreen() {
-        PlayerDeadController controller = new PlayerDeadController(this,clientPlayer);
+    public void showDeadScreen(String[] log) {
+        PlayerDeadController controller = new PlayerDeadController(this,clientPlayer,log);
         controller.bind(new PlayerDeadScreen(mainFrame, controller));
         controller.start();
     }
