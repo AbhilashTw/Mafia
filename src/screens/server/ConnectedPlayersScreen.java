@@ -69,11 +69,11 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
     }
 
     private JList createList(JList playersList, int x_bound, int y_bound) {
-        playersList.setSize(200, 850);
+        playersList.setSize(200, 550);
         playersList.setLocation(x_bound, y_bound);
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.BLACK);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
+        Font f = new Font("Monospaced", Font.BOLD, 20);
         playersList.setFont(f);
         return playersList;
     }
@@ -90,7 +90,7 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setFont(new Font("Verdana", Font.BOLD, 16));
         return button;
     }
 

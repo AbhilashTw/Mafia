@@ -49,7 +49,7 @@ public class VillagerScreen implements VillagerView {
     private void createList(int x_bound, int y_bound) {
         statusList.setSize(450, 450);
         statusList.setLocation(x_bound, y_bound);
-        statusList.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
         statusList.setBackground(Color.ORANGE);
         statusList.setForeground(Color.BLACK);
     }
@@ -57,14 +57,14 @@ public class VillagerScreen implements VillagerView {
     private void createVoteList(int xBound, int yBound) {
         voteList.setSize(200, 650);
         voteList.setLocation(xBound, yBound);
-        voteList.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        voteList.setFont(new Font("Monospaced", Font.BOLD, 20));
         voteList.setBackground(Color.BLACK);
         voteList.setForeground(Color.WHITE);
     }
 
     private JLabel createLabel(String labelName, int x_bound, int y_bound) {
         JLabel label = new JLabel(labelName);
-        Font font = new Font("Monospaced", Font.BOLD, 16);
+        Font font = new Font("Monospaced", Font.BOLD, 20);
         label.setFont(font);
         label.setForeground(Color.WHITE);
         label.setBackground(Color.BLACK);
@@ -118,7 +118,7 @@ public class VillagerScreen implements VillagerView {
     private void customizeButton(int x, int y, String player, AbstractButton button) {
         button.setLocation(x, y);
         button.setSize(145, 50);
-        button.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        button.setFont(new Font("Times New Roman", Font.BOLD, 20));
         button.setVisible(true);
         button.setBackground(Color.ORANGE);
         button.setForeground(Color.black);

@@ -59,7 +59,7 @@ public class MafiaScreen implements MafiaView {
         voteList.setLocation(xBound, yBound);
         voteList.setBackground(Color.BLACK);
         voteList.setForeground(Color.WHITE);
-        voteList.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        voteList.setFont(new Font("Monospaced", Font.BOLD, 20));
     }
 
     private void createList(int x_bound, int y_bound) {
@@ -75,12 +75,12 @@ public class MafiaScreen implements MafiaView {
         mafiaList.setLocation(x_bound, y_bound);
         mafiaList.setBackground(Color.ORANGE);
         mafiaList.setForeground(Color.BLACK);
-        mafiaList.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        mafiaList.setFont(new Font("Monospaced", Font.BOLD, 20));
     }
 
     private JLabel createLabel(String labelName, int x_bound, int y_bound) {
         JLabel label = new JLabel(labelName);
-        Font font = new Font("Monospaced", Font.BOLD, 16);
+        Font font = new Font("Monospaced", Font.BOLD, 20);
         label.setFont(font);
         label.setForeground(Color.WHITE);
         label.setBackground(Color.BLACK);
@@ -102,7 +102,7 @@ public class MafiaScreen implements MafiaView {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setFont(new Font("Verdana", Font.BOLD, 16));
         return button;
     }
 
@@ -188,7 +188,6 @@ public class MafiaScreen implements MafiaView {
         voteList.removeAll();
         confirmButton.setVisible(false);
 
-        updateStatus("Your Voting Time Ended");
         Enumeration<AbstractButton> allButtons = buttonGroup.getElements();
         while (allButtons.hasMoreElements()) {
             allButtons.nextElement().setVisible(false);

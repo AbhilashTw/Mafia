@@ -25,7 +25,6 @@ public class NewConnectionListener implements ConnectionListener {
     @Override
     public void connectionSuccessful() {
         controller.serverActive(true);
-        System.out.println("Iam here");
     }
 
     @Override

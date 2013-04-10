@@ -42,7 +42,7 @@ public class WorkflowManager implements Workflow {
     public void startServer() {
         StartGameController controller = new StartGameController(this, players);
         SocketServer server = new SocketServer(1234, new NewConnectionListener(controller));
-        if(controller.start(server))
+        if (controller.start(server))
             controller.bind(new StartGameScreen(mainFrame, controller));
 
     }

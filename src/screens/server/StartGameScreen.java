@@ -83,7 +83,7 @@ public class StartGameScreen implements StartGameView {
     }
 
     private void createList() {
-        playersList.setSize(200, 850);
+        playersList.setSize(200, 550);
         playersList.setBorder(BorderFactory.createLineBorder(SystemColor.WHITE));
         playersList.setLocation(100, 100);
         Font f = new Font("Monospaced", Font.PLAIN, 25);
