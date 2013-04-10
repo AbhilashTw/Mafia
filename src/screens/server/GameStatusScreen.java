@@ -35,20 +35,24 @@ public class GameStatusScreen implements GameStatusView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
         panel.add(statusList);
         panel.add(playersList);
+
         createList(100, 100);
-        createPlayersList(600, 100);
-        quit = createButton(700, 650, "Quit");
-        gameStatus = createLabel("Game Status", 50, 0, 150, 400);
-        playersIn = createLabel("Players", 250, 0, 150, 400);
+        createPlayersList(500, 100);
+
+        quit = createButton(500, 500, "Quit");
+        gameStatus = createLabel("Game Status", 100, 20, 200, 100);
+        playersIn = createLabel("Players", 250, 200, 20, 50);
+
         addDefaultCloseAction();
         addActionListeners();
         panel.add(quit);
         panel.repaint();
+        mainFrame.setSize(900, 700);
     }
 
     private JLabel createLabel(String labelName, int xBound, int yBound, int xSize, int ySize) {
         JLabel label = new JLabel(labelName);
-        label.setFont(new Font("Monospaced", Font.PLAIN, 90));
+        label.setFont(new Font("Monospaced", Font.BOLD, 90));
         label.setForeground(Color.WHITE);
         label.setSize(xSize, ySize);
         label.setLocation(xBound, yBound);
@@ -68,7 +72,7 @@ public class GameStatusScreen implements GameStatusView {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setFont(new Font("Verdana", Font.BOLD, 16));
         return button;
     }
 
@@ -82,24 +86,24 @@ public class GameStatusScreen implements GameStatusView {
     }
 
     private void createList(int x_bound, int y_bound) {
-        statusList.setSize(400, 600);
+        statusList.setSize(300, 400);
         statusList.setBackground(Color.ORANGE);
         statusList.setForeground(Color.BLACK);
         statusList.setLocation(x_bound, y_bound);
-        statusList.setFont(new Font("Monospaced", Font.BOLD, 16));
+        statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
     }
 
     private void createPlayersList(int x_bound, int y_bound) {
-        playersList.setSize(300, 500);
+        playersList.setSize(250, 350);
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.BLACK);
         playersList.setLocation(x_bound, y_bound);
-        playersList.setFont(new Font("Monospaced", Font.BOLD, 14));
+        playersList.setFont(new Font("Monospaced", Font.BOLD, 20));
     }
 
     @Override
     public void updateVoteStatus(String playerName, String votedPlayer, String format) {
-        defaultStatusList.addElement(format + "" + playerName + "Voted" + " " + votedPlayer);
+        defaultStatusList.addElement(format + " " + playerName + "Voted" + " " + votedPlayer);
     }
 
     @Override

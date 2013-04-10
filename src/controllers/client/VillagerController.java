@@ -44,12 +44,13 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void displayMafiaVotingChart(String[] playerNames) {
-        view.updateStatus("Night arrived. Good night");
+        view.updateStatus("Night arrived.");
+        view.updateStatus("Villagers go to sleep");
     }
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
-        view.updateStatus("Villagers Wake Up ! !" + "\n" + "Whom do you want to suspect?");
+        view.updateStatus("Villagers Wake Up ! !");
         view.display(playerNames);
     }
 
@@ -82,6 +83,7 @@ public class VillagerController implements ClientEngine {
     @Override
     public void PlayerKilled(String playerName) {
         view.updateStatus(playerName + " is Killed");
+        view.updateStatus("Whom do you want to suspect?");
     }
 
     @Override

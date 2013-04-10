@@ -34,14 +34,12 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
         panel.add(exitButton);
         panel.add(gameInfoLabel);
         addButtonHandlers();
-        mainFrame.setSize(720,600);
+        mainFrame.setSize(800, 600);
         panel.repaint();
     }
 
     private void createList(int x_bound, int y_bound) {
-
         playersList.setSize(200, 450);
-
         playersList.setLocation(x_bound, y_bound);
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.black);
@@ -69,8 +67,7 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     @Override
     public void connectedToServer(String serverName, String playerName) {
         JLabel connectedStatus = new JLabel("Connected to " + serverName + " as " + playerName);
-
-        connectedStatus.setSize(400, 400);
+        connectedStatus.setSize(500, 400);
         connectedStatus.setLocation(300, -75);
 
         connectedStatus.setForeground(Color.WHITE);

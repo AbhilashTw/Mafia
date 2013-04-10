@@ -15,9 +15,7 @@ public class MainFrame implements IMainFrame {
         frame.setVisible(true);
         frame.setBackground(Color.BLACK);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         frame.setResizable(false);
-        frame.setPreferredSize(new Dimension(1000, 1000));
 
     }
 

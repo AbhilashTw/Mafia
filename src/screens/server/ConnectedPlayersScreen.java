@@ -85,15 +85,14 @@ public class ConnectedPlayersScreen implements ConnectedPlayersView {
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.BLACK);
         playersList.setBorder(BorderFactory.createLineBorder(SystemColor.BLACK));
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
-
+        Font f = new Font("Monospaced", Font.BOLD, 20);
         playersList.setFont(f);
         return playersList;
     }
 
     private JLabel createLabel(String labelName, int xBound, int yBound, int xSize, int ySize) {
         JLabel label = new JLabel(labelName);
-        label.setFont(new Font("Monospaced", Font.PLAIN, 16));
+        label.setFont(new Font("Monospaced", Font.BOLD, 20));
         label.setForeground(Color.WHITE);
         label.setSize(xSize, ySize);
         label.setLocation(xBound, yBound);

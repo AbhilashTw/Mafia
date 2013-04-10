@@ -50,6 +50,7 @@ public class MafiaController implements ClientEngine {
     @Override
     public void PlayerKilled(String playerName) {
         view.updateStatus(playerName + " is killed");
+        view.updateStatus("Whom do you want to suspect?");
     }
 
     @Override
@@ -62,7 +63,6 @@ public class MafiaController implements ClientEngine {
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
         view.updateStatus("Villagers Wake Up ! !\n");
-        view.updateStatus("Whom do you want to suspect?");
         view.display(playerNames, GameStatus.DAY);
     }
 

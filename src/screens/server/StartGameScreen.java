@@ -42,15 +42,15 @@ public class StartGameScreen implements StartGameView {
         playersJoinedLabel = createLabel("Players Joined", 100, -50);
         minimumPlayersLabel = createLabel("Minimum players : 3", 350, -50);
         startServerButton = createButton("Start Game", 400, 150);
-        stopServerButton = createButton("Stop Server", 400, 250);
+        stopServerButton = createButton("Stop Game", 400, 250);
         createList();
-        panel.add(playersJoinedLabel, addGridConstraints(playersJoinedLabel.getAlignmentX(), playersJoinedLabel.getAlignmentY()));
-        panel.add(playersList, addGridConstraints(playersList.getAlignmentX() + playersList.getHeight(), playersList.getAlignmentY() + playersList.getWidth()));
-        panel.add(startServerButton, addGridConstraints(startServerButton.getX(), startServerButton.getY()));
-        panel.add(stopServerButton, addGridConstraints(stopServerButton.getX(), stopServerButton.getY()));
+        panel.add(playersJoinedLabel);
+        panel.add(playersList);
+        panel.add(startServerButton);
+        panel.add(stopServerButton);
         panel.add(minimumPlayersLabel);
         startServerButton.setEnabled(false);
-        mainFrame.setSize(600,600);
+        mainFrame.setSize(600, 600);
         setDefaultCloseAction(controller);
     }
 
@@ -63,15 +63,6 @@ public class StartGameScreen implements StartGameView {
         });
     }
 
-    private GridBagConstraints addGridConstraints(float xBound, float yBound) {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = (int) xBound;
-        gbc.gridy = (int) yBound;
-        gbc.fill = GridBagConstraints.VERTICAL;
-        gbc.insets = new Insets(30, 30, 30, 30);
-        return gbc;
-    }
-
     @Override
     public void updatePlayers(List<Player> players) {
         allPlayers.removeAllElements();
@@ -82,21 +73,20 @@ public class StartGameScreen implements StartGameView {
     }
 
     private void createList() {
-
-        playersList.setSize(200, 450);
-
-        playersList.setBorder(BorderFactory.createLineBorder(SystemColor.WHITE));
+        playersList.setSize(150, 450);
         playersList.setLocation(100, 100);
-        Font f = new Font("Monospaced", Font.PLAIN, 25);
+        playersList.setBackground(Color.ORANGE);
+        playersList.setForeground(Color.BLACK);
+        playersList.setBorder(BorderFactory.createLineBorder(SystemColor.BLACK));
+        Font f = new Font("Monospaced", Font.BOLD, 20);
         playersList.setFont(f);
-        playersList.setBackground(Color.orange);
     }
 
     private JButton createButton(String buttonName, int x_bound, int y_bound) {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_bound, y_bound);
-        button.setFont(new Font("Monospaced", Font.BOLD, 14));
+        button.setFont(new Font("Monospaced", Font.BOLD, 16));
         return button;
     }
 
