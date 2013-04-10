@@ -40,18 +40,17 @@ public class StartGameScreen implements StartGameView {
         panel = mainFrame.createImagePanel(BG_IMAGE);
 
         playersJoinedLabel = createLabel("Players Joined", 100, -50);
-        minimumPlayersLabel = createLabel("Minimum players : 3", 400, 400);
-        startServerButton = createButton("Start Game", 400, 600);
-        stopServerButton = createButton("Stop Server", 400, 700);
-
+        minimumPlayersLabel = createLabel("Minimum players : 3", 350, -50);
+        startServerButton = createButton("Start Game", 400, 150);
+        stopServerButton = createButton("Stop Server", 400, 250);
         createList();
-
         panel.add(playersJoinedLabel, addGridConstraints(playersJoinedLabel.getAlignmentX(), playersJoinedLabel.getAlignmentY()));
         panel.add(playersList, addGridConstraints(playersList.getAlignmentX() + playersList.getHeight(), playersList.getAlignmentY() + playersList.getWidth()));
         panel.add(startServerButton, addGridConstraints(startServerButton.getX(), startServerButton.getY()));
         panel.add(stopServerButton, addGridConstraints(stopServerButton.getX(), stopServerButton.getY()));
         panel.add(minimumPlayersLabel);
         startServerButton.setEnabled(false);
+        mainFrame.setSize(600,600);
         setDefaultCloseAction(controller);
     }
 
@@ -83,7 +82,7 @@ public class StartGameScreen implements StartGameView {
     }
 
     private void createList() {
-        playersList.setSize(200, 850);
+        playersList.setSize(200, 450);
         playersList.setBorder(BorderFactory.createLineBorder(SystemColor.WHITE));
         playersList.setLocation(100, 100);
         Font f = new Font("Monospaced", Font.PLAIN, 25);

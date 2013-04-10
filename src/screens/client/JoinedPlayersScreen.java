@@ -28,7 +28,7 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
 
 
         playersConnectedLabel = createLabel("Players Joined", 50, -50, 200, 250);
-        gameInfoLabel = createLabel("Wait for the game to start", 400, 200, 350, 400);
+        gameInfoLabel = createLabel("Wait for the game to start", 300, 0, 350, 400);
         createList(50, 100);
 
         exitButton = createButton(300, 300, "Exit");
@@ -37,11 +37,12 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
         panel.add(exitButton);
         panel.add(gameInfoLabel);
         addButtonHandlers();
+        mainFrame.setSize(720,600);
         panel.repaint();
     }
 
     private void createList(int x_bound, int y_bound) {
-        playersList.setSize(200, 850);
+        playersList.setSize(200, 450);
         playersList.setLocation(x_bound, y_bound);
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.black);
@@ -70,10 +71,11 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     public void connectedToServer(String serverName, String playerName) {
         JLabel connectedStatus = new JLabel("Connected to " + serverName + " as " + playerName);
         connectedStatus.setSize(400, 400);
-        connectedStatus.setLocation(300, 400);
+        connectedStatus.setLocation(300, -75);
         connectedStatus.setForeground(Color.WHITE);
         connectedStatus.setFont(new Font("Monospaced", Font.PLAIN, 18));
         panel.add(connectedStatus);
+        panel.repaint();
     }
 
     private JButton createButton(int x_axis, int y_axis, String buttonName) {

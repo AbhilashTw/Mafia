@@ -36,9 +36,9 @@ public class GameStatusScreen implements GameStatusView {
         panel.add(playersList);
         createList(100, 100);
         createPlayersList(600, 100);
-        quit = createButton(700, 900, "Quit");
-        gameStatus = createLabel("Game Status", 100, 20, 200, 50);
-        playersIn = createLabel("Players", 300, 200, 20, 50);
+        quit = createButton(700, 650, "Quit");
+        gameStatus = createLabel("Game Status", 50, 0, 150, 400);
+        playersIn = createLabel("Players", 250, 0, 150, 400);
         addDefaultCloseAction();
         addActionListeners();
         panel.add(quit);
@@ -47,7 +47,7 @@ public class GameStatusScreen implements GameStatusView {
 
     private JLabel createLabel(String labelName, int xBound, int yBound, int xSize, int ySize) {
         JLabel label = new JLabel(labelName);
-        label.setFont(new Font("Monospaced", Font.PLAIN, 28));
+        label.setFont(new Font("Monospaced", Font.PLAIN, 90));
         label.setForeground(Color.WHITE);
         label.setSize(xSize, ySize);
         label.setLocation(xBound, yBound);
@@ -85,7 +85,7 @@ public class GameStatusScreen implements GameStatusView {
         statusList.setBackground(Color.ORANGE);
         statusList.setForeground(Color.BLACK);
         statusList.setLocation(x_bound, y_bound);
-        statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
+        statusList.setFont(new Font("Monospaced", Font.BOLD, 16));
     }
 
     private void createPlayersList(int x_bound, int y_bound) {
@@ -93,7 +93,7 @@ public class GameStatusScreen implements GameStatusView {
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.BLACK);
         playersList.setLocation(x_bound, y_bound);
-        playersList.setFont(new Font("Monospaced", Font.BOLD, 20));
+        playersList.setFont(new Font("Monospaced", Font.BOLD, 14));
     }
 
     @Override

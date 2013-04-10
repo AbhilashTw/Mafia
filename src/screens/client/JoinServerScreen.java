@@ -26,6 +26,7 @@ public class JoinServerScreen implements JoinServerView {
     public IMainFrame mainFrame;
     private JPanel displayMessage;
     private boolean sentConnection = false;
+    private JLabel status;
 
     public JoinServerScreen(IMainFrame mainFrame, JoinServerController controller) {
         this.mainFrame = mainFrame;
@@ -36,7 +37,7 @@ public class JoinServerScreen implements JoinServerView {
         playerNameLabel = createLabel("Player Name", 50, 200);
         serverNameText = createTextField(150, 140);
         playerNameTextField = createTextField(150, 240);
-
+        status = createStatusLabel("", 100, 50);
         //todo: remove setText before pushing into production
         serverNameText.setText("localhost");
         connectButton = createButton("Connect", 300, 300);
@@ -46,7 +47,20 @@ public class JoinServerScreen implements JoinServerView {
         panel.add(serverNameText);
         panel.add(playerNameTextField);
         panel.add(connectButton);
+        panel.add(status);
+        mainFrame.setSize(500, 400);
         addButtonHandlers();
+    }
+
+    private JLabel createStatusLabel(String s, int i, int i1) {
+        JLabel label = new JLabel(s);
+        label.setForeground(Color.white);
+        label.setSize(400, 100);
+        label.setLocation(i, i1);
+        Font font = new Font("Monospaced", Font.BOLD, 14);
+        label.setFont(font);
+        label.setForeground(Color.WHITE);
+        return label;
     }
 
     private void addButtonHandlers() {
@@ -55,8 +69,7 @@ public class JoinServerScreen implements JoinServerView {
             public void actionPerformed(ActionEvent e) {
                 //todo :Work on if else
                 if (serverNameText.getText().equals("")) {
-                    displayMessage = new JPanel();
-                    JOptionPane.showMessageDialog(displayMessage, "Invalid Server Name", "Error", JOptionPane.ERROR_MESSAGE);
+                    status.setText("Invalid Server Name");
                 } else {
                     if (!sentConnection) {
                         controller.connectToServer();
@@ -87,9 +100,7 @@ public class JoinServerScreen implements JoinServerView {
 
     @Override
     public void connectionToServerFailed() {
-        displayMessage = new JPanel();
-        sentConnection = false;
-        JOptionPane.showMessageDialog(displayMessage, "Sorry , Unable to connect", "Error", JOptionPane.ERROR_MESSAGE);
+        status.setText("Sorry!! , Unable to Connect.");
     }
 
     private JLabel createLabel(String labelName, int x_bound, int y_bound) {
@@ -99,7 +110,7 @@ public class JoinServerScreen implements JoinServerView {
         label.setLocation(x_bound, y_bound);
         Font font = new Font("Monospaced", Font.BOLD, 14);
         label.setFont(font);
-        label.setForeground(Color.ORANGE);
+        label.setForeground(Color.WHITE);
         return label;
     }
 
