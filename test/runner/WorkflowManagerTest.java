@@ -31,8 +31,8 @@ public class WorkflowManagerTest {
         IMainFrame mockMainFrame = mock(IMainFrame.class);
         WorkflowManager workflowManager = new WorkflowManager(mockViewFactory, mockMainFrame);
         when(mockViewFactory.getHomeController(workflowManager, mockMainFrame)).thenReturn(mockController);
-        workflowManager.start();
-        verify(mockController).start();
+        workflowManager.start("");
+        verify(mockController).start("");
     }
 
 }

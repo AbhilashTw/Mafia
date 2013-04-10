@@ -1,12 +1,15 @@
 package screens.server;
 
 import controllers.server.GameStatusController;
+import entities.Player;
+import entities.Players;
 import screens.controls.IMainFrame;
 import screens.controls.ImagePanel;
 import views.server.GameStatusView;
 
 import javax.swing.*;
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -18,19 +21,37 @@ public class GameStatusScreen implements GameStatusView {
     private final GameStatusController controller;
     private DefaultListModel<String> defaultStatusList = new DefaultListModel<String>();
     private JList statusList = new JList(defaultStatusList);
+    private DefaultListModel<String> playersInGame = new DefaultListModel<String>();
+    private JList playersList = new JList(playersInGame);
     private ImagePanel panel;
     private JButton quit;
+    private JLabel gameStatus;
+    private JLabel playersIn;
 
     public GameStatusScreen(IMainFrame mainFrame, GameStatusController controller) {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
         panel.add(statusList);
+        panel.add(playersList);
         createList(100, 100);
-        quit = createButton(700, 700, "Quit");
+        createPlayersList(600, 100);
+        quit = createButton(700, 900, "Quit");
+        gameStatus = createLabel("Game Status", 100, 20, 200, 50);
+        playersIn = createLabel("Players", 300, 200, 20, 50);
         addDefaultCloseAction();
         addActionListeners();
         panel.add(quit);
+        panel.repaint();
+    }
+
+    private JLabel createLabel(String labelName, int xBound, int yBound, int xSize, int ySize) {
+        JLabel label = new JLabel(labelName);
+        label.setFont(new Font("Monospaced", Font.PLAIN, 28));
+        label.setForeground(Color.WHITE);
+        label.setSize(xSize, ySize);
+        label.setLocation(xBound, yBound);
+        return label;
     }
 
     private void addActionListeners() {
@@ -60,33 +81,50 @@ public class GameStatusScreen implements GameStatusView {
     }
 
     private void createList(int x_bound, int y_bound) {
-        statusList.setSize(400, 800);
+        statusList.setSize(400, 600);
         statusList.setBackground(Color.ORANGE);
         statusList.setForeground(Color.BLACK);
         statusList.setLocation(x_bound, y_bound);
         statusList.setFont(new Font("Monospaced", Font.BOLD, 20));
     }
 
+    private void createPlayersList(int x_bound, int y_bound) {
+        playersList.setSize(300, 500);
+        playersList.setBackground(Color.ORANGE);
+        playersList.setForeground(Color.BLACK);
+        playersList.setLocation(x_bound, y_bound);
+        playersList.setFont(new Font("Monospaced", Font.BOLD, 20));
+    }
+
     @Override
-    public void updateVoteStatus(String playerName, String killedPlayer) {
-        defaultStatusList.addElement(playerName + " " + "Voted" + " " + killedPlayer);
-        panel.revalidate();
-        panel.repaint();
+    public void updateVoteStatus(String playerName, String votedPlayer, String format) {
+        defaultStatusList.addElement(format + "" + playerName + "Voted" + " " + votedPlayer);
+    }
+
+    @Override
+    public void updateVillagerVotes(String name, String playerName, String killedPlayer) {
+        defaultStatusList.addElement(name + " " + playerName + "Voted" + " " + killedPlayer);
+
     }
 
     @Override
     public void updatePlayerKilledStatus(String name) {
-
         defaultStatusList.addElement("Player " + name + " Killed");
-        panel.revalidate();
-        panel.repaint();
 
     }
 
     @Override
     public void status(String s) {
         defaultStatusList.addElement(s);
-        panel.revalidate();
-        panel.repaint();
+
+    }
+
+    @Override
+    public void updatePlayersList(Players players) {
+        playersInGame.removeAllElements();
+        for (Player player : players.getPlayers()) {
+            playersInGame.addElement(player.getName() + " " + "(" + player.getRole() + ")");
+        }
+
     }
 }

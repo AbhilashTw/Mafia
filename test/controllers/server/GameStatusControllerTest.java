@@ -48,7 +48,7 @@ public class GameStatusControllerTest {
     @Test
     public void close_Invokes_workflow_start() {
         controller.close();
-        verify(workflow).start();
+        verify(workflow).start("");
     }
 
 }

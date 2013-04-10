@@ -54,7 +54,7 @@ public class ConnectedPlayersController {
     }
 
     public void close() {
-        workflow.start();
+        workflow.start("");
         players.quit();
     }
 }

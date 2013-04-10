@@ -3,8 +3,10 @@ package controllers.server;
 import controllers.Workflow;
 import entities.Player;
 import entities.Players;
-import gameMessages.KilledPlayerMessage;
 import views.server.GameStatusView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Job: Understands to Inform the Player about the routine.
@@ -16,6 +18,7 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
     private GameStatusView view;
     private GamePlay gamePlay;
     private NightController nightController;
+
     private DayController dayController;
 
 
@@ -32,14 +35,19 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
     }
 
     public void start() {
-        view.status("Night Arrived");
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        view.status(format.format(cal.getTime()) + " Night Arrived");
+        view.updatePlayersList(players);
         nightController = new NightController(players, gamePlay, this);
         nightController.start();
     }
 
     @Override
     public void updateMafiaVotes(String playerName, String votedPlayer) {
-        view.updateVoteStatus(playerName, votedPlayer);
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        view.updateVoteStatus(playerName, votedPlayer, format.format(cal.getTime()));
         nightController.pollPlayer(votedPlayer);
 
     }
@@ -64,8 +72,9 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
 
     @Override
     public void updateVillagerVotes(String playerName, String killedPlayer) {
-        System.out.println(playerName + " voted " + killedPlayer);
-        view.updateVoteStatus(playerName, killedPlayer);
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        view.updateVillagerVotes(format.format(cal.getTime()), playerName, killedPlayer);
         dayController.poll(killedPlayer);
     }
 
@@ -77,19 +86,24 @@ public class GameStatusController implements GameEngine, GamePlayEngine {
 
     @Override
     public void removePlayer(Player killedPlayer) {
-        view.status(killedPlayer.getName() + "is Killed");
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        view.status(format.format(cal.getTime()) + " " + killedPlayer.getName() + " is Killed");
         players.removePlayer(killedPlayer);
     }
 
     @Override
     public void startDay() {
-        view.status("Day Arrived");
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        view.status(format.format(cal.getTime()) + " Day Arrived");
+        view.updatePlayersList(players);
         dayController = new DayController(players, this, gamePlay);
         dayController.start();
     }
 
     public void close() {
         players.quit();
-        workflow.start();
+        workflow.start("");
     }
 }

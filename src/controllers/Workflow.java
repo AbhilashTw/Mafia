@@ -12,7 +12,7 @@ public interface Workflow {
 
     void connectedToServer(ClientPlayer clientPlayer);
 
-    void start();
+    void start(String message);
 
     void startVillagerScreen();
 

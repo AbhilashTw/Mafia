@@ -33,9 +33,9 @@ public class WorkflowManager implements Workflow {
     }
 
     @Override
-    public void start() {
+    public void start(String message) {
         HomeController controller = viewFactory.getHomeController(this, mainFrame);
-        controller.start();
+        controller.start(message);
     }
 
     @Override
@@ -104,10 +104,9 @@ public class WorkflowManager implements Workflow {
     @Override
 
     public void showDeadScreen() {
-        PlayerDeadController controller = new PlayerDeadController(this);
+        PlayerDeadController controller = new PlayerDeadController(this,clientPlayer);
         controller.bind(new PlayerDeadScreen(mainFrame, controller));
         controller.start();
-
     }
 
 }

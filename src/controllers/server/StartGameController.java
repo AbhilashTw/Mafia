@@ -67,7 +67,7 @@ public class StartGameController implements GameEngine {
             gamePlayers.quit();
             server.stop();
         }
-        workflow.start();
+        workflow.start("Welcome");
     }
 
     public void startGame() {
@@ -75,7 +75,7 @@ public class StartGameController implements GameEngine {
     }
 
     public void goToHomeScreen() {
-        workflow.start();
+        workflow.start("Server is Already Running");
     }
 
     public void serverActive(boolean b) {

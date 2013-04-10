@@ -25,23 +25,16 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
-
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-
-                playersConnectedLabel = createLabel("Players Joined", 50, -50, 200, 250);
-                gameInfoLabel = createLabel("Wait for the game to start", 300, 300, 350, 400);
-                createList(50, 100);
-
-                exitButton = createButton(300, 300, "Exit");
-                panel.add(playersList);
-                panel.add(playersConnectedLabel);
-                panel.add(exitButton);
-                panel.add(gameInfoLabel);
-                addButtonHandlers();
-            }
-        });
+        playersConnectedLabel = createLabel("Players Joined", 50, -50, 200, 250);
+        gameInfoLabel = createLabel("Wait for the game to start", 400, 200, 350, 400);
+        createList(50, 100);
+        exitButton = createButton(300, 300, "Exit");
+        panel.add(playersList);
+        panel.add(playersConnectedLabel);
+        panel.add(exitButton);
+        panel.add(gameInfoLabel);
+        addButtonHandlers();
+        panel.repaint();
     }
 
     private void createList(int x_bound, int y_bound) {
@@ -92,19 +85,12 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectedOption = JOptionPane.showConfirmDialog(null, "Do you really want to quit?", "", JOptionPane.YES_NO_OPTION);
-                if (selectedOption == JOptionPane.YES_OPTION) {
-                    controller.goToHomeScreen();
-                }
+                controller.goToHomeScreen();
             }
         });
     }
 
     @Override
     public void connectionClosed() {
-        JOptionPane optionPane = new JOptionPane("Server Closed", JOptionPane.ERROR_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Error Message");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
     }
 }

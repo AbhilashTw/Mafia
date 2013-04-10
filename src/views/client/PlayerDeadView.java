@@ -1,5 +1,5 @@
 package views.client;
 
 public interface PlayerDeadView {
-    void display();
+    void display(String playerName);
 }

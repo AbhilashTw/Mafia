@@ -62,7 +62,7 @@ public class ConnectedPlayersControllerTest {
     public void when_close_is_called_Workflow_start_is_invoked() {
         controller = new ConnectedPlayersController(players, workflow);
         controller.close();
-        verify(workflow).start();
+        verify(workflow).start("");
     }
 
 

@@ -28,13 +28,14 @@ public class PlayerDeadScreen implements PlayerDeadView {
     }
 
     @Override
-    public void display() {
-        deadLabel = new JLabel("You are dead...!!!");
-        deadLabel.setSize(300, 350);
-        deadLabel.setLocation(400, 600);
-        deadLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
+    public void display(String playerName) {
+        deadLabel = new JLabel(playerName + " You are dead...!!!");
+        deadLabel.setSize(900, 350);
+        deadLabel.setLocation(200, 400);
+        deadLabel.setFont(new Font("Monospaced", Font.PLAIN, 28));
         deadLabel.setForeground(Color.RED);
         panel.add(deadLabel);
+        panel.repaint();
     }
 
     private void addListeners() {
@@ -50,7 +51,7 @@ public class PlayerDeadScreen implements PlayerDeadView {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Verdana", Font.BOLD, 14));
+        button.setFont(new Font("Monospaced", Font.BOLD, 14));
         return button;
     }
 

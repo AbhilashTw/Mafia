@@ -19,6 +19,7 @@ public class HomeScreen implements HomeView {
     private final JButton startServerButton;
     private final JButton joinServerButton;
     private final JButton quitButton;
+    private JLabel messageLabel;
 
 
     public HomeScreen(IMainFrame mainFrame, HomeController controller) {
@@ -26,26 +27,30 @@ public class HomeScreen implements HomeView {
         this.controller = controller;
         ImagePanel panel = mainFrame.createImagePanel(BG_IMAGE);
 
-        startServerButton = createButton(100, 300, "StartServer");
-        joinServerButton = createButton(100, 400, "JoinServer");
-        quitButton = createButton(100, 500, "Quit");
+        startServerButton = createButton(20, 25, "StartServer");
+        joinServerButton = createButton(20, 100, "JoinServer");
+        quitButton = createButton(20, 175, "Quit");
+        messageLabel = createLabel(25, 250, "Welcome");
+        mainFrame.setSize(900, 900);
 
-        panel.add(startServerButton,addGridConstraints(100,100));
-        panel.add(joinServerButton,addGridConstraints(100,200));
-        panel.add(quitButton, addGridConstraints(100,300));
+        panel.add(startServerButton);
+        panel.add(joinServerButton);
+        panel.add(quitButton);
+        panel.add(messageLabel);
 
         addButtonHandlers();
     }
 
-    private GridBagConstraints addGridConstraints( int xBound, int yBound) {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = xBound;
-        gbc.gridy = yBound;
-        gbc.fill = GridBagConstraints.VERTICAL;
-        gbc.anchor=GridBagConstraints.NORTHEAST;
-        gbc.insets= new Insets(30,30,30,30);
-        return gbc;
+    private JLabel createLabel(int xBound, int yBound, String message) {
+        JLabel label = new JLabel(message);
+        label.setSize(500, 50);
+        label.setLocation(xBound, yBound);
+        label.setForeground(Color.WHITE);
+        label.setFont(new Font("Monospaced", Font.BOLD, 20));
+        label.setVisible(true);
+        return label;
     }
+
 
     private void addButtonHandlers() {
         startServerButton.addActionListener(new ActionListener() {
@@ -63,16 +68,18 @@ public class HomeScreen implements HomeView {
 
         quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int selectedOption = JOptionPane.showConfirmDialog(null, "Do you really want to quit?", "", JOptionPane.YES_NO_OPTION);
-                if (selectedOption == JOptionPane.YES_OPTION) {
                     System.exit(0);
-                }
             }
         });
     }
 
     @Override
     public void display() {
+    }
+
+    @Override
+    public void displayMessage(String message) {
+        messageLabel.setText(message);
     }
 
     private JButton createButton(int x_axis, int y_axis, String buttonName) {
