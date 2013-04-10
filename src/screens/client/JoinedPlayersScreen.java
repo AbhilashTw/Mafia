@@ -25,12 +25,9 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
         this.mainFrame = mainFrame;
         this.controller = controller;
         panel = mainFrame.createImagePanel(BG_IMAGE);
-
-
         playersConnectedLabel = createLabel("Players Joined", 50, -50, 200, 250);
         gameInfoLabel = createLabel("Wait for the game to start", 300, 0, 350, 400);
         createList(50, 100);
-
         exitButton = createButton(300, 300, "Exit");
         panel.add(playersList);
         panel.add(playersConnectedLabel);
@@ -42,17 +39,19 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     }
 
     private void createList(int x_bound, int y_bound) {
+
         playersList.setSize(200, 450);
+
         playersList.setLocation(x_bound, y_bound);
         playersList.setBackground(Color.ORANGE);
         playersList.setForeground(Color.black);
-        Font f = new Font("Monospaced", Font.PLAIN, 20);
+        Font f = new Font("Monospaced", Font.BOLD, 20);
         playersList.setFont(f);
     }
 
     private JLabel createLabel(String labelName, int xBound, int yBound, int xSize, int ySize) {
         JLabel label = new JLabel(labelName);
-        label.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        label.setFont(new Font("Monospaced", Font.BOLD, 20));
         label.setForeground(Color.WHITE);
         label.setSize(xSize, ySize);
         label.setLocation(xBound, yBound);
@@ -70,10 +69,12 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
     @Override
     public void connectedToServer(String serverName, String playerName) {
         JLabel connectedStatus = new JLabel("Connected to " + serverName + " as " + playerName);
+
         connectedStatus.setSize(400, 400);
         connectedStatus.setLocation(300, -75);
+
         connectedStatus.setForeground(Color.WHITE);
-        connectedStatus.setFont(new Font("Monospaced", Font.PLAIN, 18));
+        connectedStatus.setFont(new Font("Monospaced", Font.BOLD, 20));
         panel.add(connectedStatus);
         panel.repaint();
     }
@@ -82,7 +83,7 @@ public class JoinedPlayersScreen implements JoinedPlayersView {
         JButton button = new JButton(buttonName);
         button.setSize(145, 50);
         button.setLocation(x_axis, y_axis);
-        button.setFont(new Font("Monospaced", Font.BOLD, 14));
+        button.setFont(new Font("Monospaced", Font.BOLD, 16));
         return button;
     }
 

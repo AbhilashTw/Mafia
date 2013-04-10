@@ -15,14 +15,15 @@ public class MainFrame implements IMainFrame {
         frame.setVisible(true);
         frame.setBackground(Color.BLACK);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         frame.setResizable(false);
-        frame.setPreferredSize(new Dimension(1000,1000));
+        frame.setPreferredSize(new Dimension(1000, 1000));
+
     }
 
     @Override
     public ImagePanel createImagePanel(String imageFilePath) {
         frame.getContentPane().removeAll();
-        // ImagePanel imagePanel = new ImagePanel(new ImageIcon(getClass().getClassLoader().getResource(imageFilePath)).getImage());
         ImagePanel imagePanel = new ImagePanel(new ImageIcon(imageFilePath).getImage());
         frame.getContentPane().add(imagePanel);
         frame.pack();
@@ -33,6 +34,7 @@ public class MainFrame implements IMainFrame {
     public JFrame getFrame() {
         return frame;
     }
+
 
     @Override
     public void setSize(int x, int y) {

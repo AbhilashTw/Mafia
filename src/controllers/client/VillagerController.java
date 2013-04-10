@@ -44,12 +44,12 @@ public class VillagerController implements ClientEngine {
 
     @Override
     public void displayMafiaVotingChart(String[] playerNames) {
-        view.updateStatus("Night has arrived\n Good night");
+        view.updateStatus("Night arrived. Good night");
     }
 
     @Override
     public void displayVillagerVotingChart(String[] playerNames) {
-        view.updateStatus("Day Arrived");
+        view.updateStatus("Villagers Wake Up ! !" + "\n" + "Whom do you want to suspect?");
         view.display(playerNames);
     }
 

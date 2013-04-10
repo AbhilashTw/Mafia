@@ -26,7 +26,9 @@ public class JoinServerScreen implements JoinServerView {
     public IMainFrame mainFrame;
     private JPanel displayMessage;
     private boolean sentConnection = false;
+
     private JLabel status;
+
 
     public JoinServerScreen(IMainFrame mainFrame, JoinServerController controller) {
         this.mainFrame = mainFrame;
